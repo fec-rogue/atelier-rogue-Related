@@ -3,6 +3,7 @@
 - Project Summary
 - Overview
   - Contributor
+    Jessica: Related Items;
   - short video
 - Getting Started(steps such as npm install, set up .env, run webpack, run serve)
 - Technologies Used: - Setup and Workflow
@@ -12,11 +13,10 @@
       - Backend Development
       - Deployment
       - Testing
+        Jest
 
+// npm i axios, react, jest, dotenv, react-dom --save
 
-
-      // npm i axios, react, jest, dotenv, react-dom --save
-
-  // npm i webpack webpack-cli webpack-dev-server --save-dev
-  // npm i @babel/core babel-loader --save-dev
-  // npm i @babel/preset-env @babel/preset-react--save-dev
+// npm i webpack webpack-cli webpack-dev-server --save-dev
+// npm i @babel/core babel-loader --save-dev
+// npm i @babel/preset-env @babel/preset-react--save-dev
