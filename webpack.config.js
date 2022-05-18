@@ -28,4 +28,4 @@ module.exports = {
       template: path.join(__dirname, "/client/dist/index.html"),
     }),
   ],
-}
+};
