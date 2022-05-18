@@ -2,11 +2,14 @@ require("dotenv").config();
 const path = require('path');
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ENTRY_DIR = path.join(__dirname, "/client/src/index.jsx");
+const OUTPUT_DIR = path.join(__dirname, "/client/dist");
+const TEMPLATE_DIR = path.join(__dirname, "/client/src/index.html");
 
 module.exports = {
-  entry: path.join(__dirname, "/client/src/index.jsx"),
+  entry: ENTRY_DIR,
   output: {
-    path: path.resolve(__dirname, "/client/dist"),
+    path: OUTPUT_DIR,
     filename: "bundle.js"
   },
   module: {
@@ -25,7 +28,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "/client/dist/index.html"),
+      template: TEMPLATE_DIR,
     }),
   ],
 }
