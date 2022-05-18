@@ -1,4 +1,5 @@
 # rogue
+
 - Project Summary: TEST
 - Overview
   - Contributor
@@ -12,3 +13,5 @@
   // npm i webpack webpack-cli webpack-dev-server --save-dev
   // npm i @babel/core babel-loader --save-dev
   // npm i @babel/preset-env @babel/preset-react--save-dev
+  // npm install eslint-webpack-plugin --save-dev
+  // npm install --save-dev style-loader

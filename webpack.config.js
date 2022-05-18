@@ -5,9 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ENTRY_DIR = path.join(__dirname, "/client/src/index.jsx");
 const OUTPUT_DIR = path.join(__dirname, "/client/dist");
 const TEMPLATE_DIR = path.join(__dirname, "/client/src/index.html");
+const ESLintPlugin = require('eslint-webpack-plugin');
+
 //test
 
 module.exports = {
+  mode: 'development',
   entry: ENTRY_DIR,
   output: {
     path: OUTPUT_DIR,
@@ -25,11 +28,17 @@ module.exports = {
           }
         }
       },
+
+      {
+        test: /\.s[ac]ss$/i,
+        use: ["style-loader", "css-loader", "sass-loader"]
+      }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: TEMPLATE_DIR,
     }),
-  ],
-}
+    new ESLintPlugin(),
+  ]
+};
