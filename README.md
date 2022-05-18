@@ -1,5 +1,9 @@
 # rogue
+<<<<<<< HEAD
 - Project Summary: TEST
+=======
+- Project Summary: FEC
+>>>>>>> main
 - Overview
     - Contributor
     - short video
