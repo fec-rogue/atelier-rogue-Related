@@ -1,9 +1,9 @@
 # rogue
 
-- Project Summary: FEC
+- Project Summary: TEST
 - Overview
   - Contributor
-    Jessica Yu
+    Jessica
   - short video
 - Getting Started(steps such as npm install, set up .env, run webpack, run serve)
 - Technologies Used: - Setup and Workflow - Frontend Development - Backend Development - Deployment - Testing
