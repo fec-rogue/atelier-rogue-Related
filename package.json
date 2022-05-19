@@ -5,11 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
-    "start": "npx live-server",
-=======
     "start": "npx nodemon server/index.js -w",
->>>>>>> c07b64b7a32a740f0a84fa38f52526e1d6cf14e3
     "client-dev": "npx webpack --watch",
     "dev": "webpack serve",
     "build": "webpack"
