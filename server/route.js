@@ -9,7 +9,7 @@ exports.getProducts = (req, res) => {
 
 exports.getProductInfo = (req, res) => {
   var id = req.body.id;
-  models.getProductInfo((id, result) => {
+  models.getProductInfo(id, (result) => {
     res.json(result);
   });
 };

@@ -11,6 +11,7 @@ let options = {
 };
 
 exports.getProducts = (cb) => {
+
   axios.get(`${options.url}products`, {headers: options.headers})
     .then(cb)
     .catch((err) => {
@@ -20,7 +21,8 @@ exports.getProducts = (cb) => {
 };
 
 exports.getProductInfo = (id, cb) => {
-  axios.get(`${options.url}products/:${id}`, options.headers)
+  console.log('id: ', id)
+  axios.get(`${options.url}products/:${id}`, {headers: options.headers})
     .then((result) => {
       cb(result);
     })
@@ -31,7 +33,7 @@ exports.getProductInfo = (id, cb) => {
 };
 
 exports.getProductStyles = (id, cb) => {
-  axios.get(`${options.url}products/:${id}/styles`, options.headers)
+  axios.get(`${options.url}products/:${id}/styles`, {headers: options.headers})
     .then(result => {
       console.log('getProductStyles models result: ', result);
       cb(result);
@@ -42,7 +44,7 @@ exports.getProductStyles = (id, cb) => {
 };
 
 exports.getRelatedProducts = (id, cb) => {
-  axios.get(`${options.url}products/:${id}/related`, options.headers)
+  axios.get(`${options.url}products/:${id}/related`, {headers: options.headers})
     .then(result => {
       console.log('getRelatedProducts models result: ', result);
       cb(result);
