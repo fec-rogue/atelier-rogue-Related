@@ -20,6 +20,19 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 // routes
 app.get('/test', route.getImages);
 
+// product routes
+
+
+// review routes
+app.get('/reviews', )
+
+// cart routes
+app.get('/cart', route.getCart);
+app.post('/cart', route.createCart);
+
+// interaction routes
+app.post('/interations', route.createInterations);
+
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });
