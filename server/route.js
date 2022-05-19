@@ -6,9 +6,4 @@ exports.getImages = (req, res) => {
 
 exports.getItems = (req, res) => {
 
-}
-
-
-// module.exports = {
-
-// }
+};
