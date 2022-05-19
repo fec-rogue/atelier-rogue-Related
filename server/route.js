@@ -8,14 +8,16 @@ exports.getProducts = (req, res) => {
 };
 
 exports.getProductInfo = (req, res) => {
-  var id = req.body.id;
-  models.getProductInfo((id, result) => {
-    res.json(result);
+  var id = req.query.product_id;
+  // console.log(id);
+  models.getProductInfo(id, (result) => {
+    res.json(result.data);
   });
 };
 
+
 exports.getProductStyles = (req, res) => {
-  var id = req.body.id;
+  var id = req.params.id;
   models.getProductStyles((id, result) => {
     res.json(result);
   });
@@ -23,7 +25,7 @@ exports.getProductStyles = (req, res) => {
 
 
 exports.getRelatedProduct = (req, res) => {
-  var id = req.body.id;
+  var id = req.query.id;
   models.getRelatedProduct((id, result) => {
     res.json(result);
   });
@@ -32,8 +34,9 @@ exports.getRelatedProduct = (req, res) => {
 
 // Review routes
 exports.getReviews = (req, res) => {
-  models.getReviews((result) => {
-    res.json(result);
+  let id = req.query.id
+  models.getReviews(id, (result) => {
+    res.json(result.data);
   });
 };
 
