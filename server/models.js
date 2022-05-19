@@ -20,7 +20,7 @@ exports.getProducts = (cb) => {
 };
 
 exports.getProductInfo = (id, cb) => {
-  axios.get(`${options.url}products/${id}`, options.headers)
+  axios.get(`${options.url}products/:${id}`, options.headers)
     .then((result) => {
       cb(result);
     })
@@ -31,7 +31,7 @@ exports.getProductInfo = (id, cb) => {
 };
 
 exports.getProductStyles = (id, cb) => {
-  axios.get(`${options.url}products/${id}/styles`, options.headers)
+  axios.get(`${options.url}products/:${id}/styles`, options.headers)
     .then(result => {
       console.log('getProductStyles models result: ', result);
       cb(result);
@@ -42,7 +42,7 @@ exports.getProductStyles = (id, cb) => {
 };
 
 exports.getRelatedProducts = (id, cb) => {
-  axios.get(path.join(options.url, 'products', `:${id}`, 'related'), options.headers)
+  axios.get(`${options.url}products/:${id}/related`, options.headers)
     .then(result => {
       console.log('getRelatedProducts models result: ', result);
       cb(result);
@@ -54,7 +54,7 @@ exports.getRelatedProducts = (id, cb) => {
 };
 
 exports.getReviews = (cb) => {
-  axios.get(options.url + '/reviews/', options.headers)
+  axios.get(options.url + 'reviews/', options.headers)
     .then(cb)
     .catch((error) => {
       console.log('error at getReviews with,', error);
@@ -62,7 +62,7 @@ exports.getReviews = (cb) => {
 };
 
 exports.getMetaData = (cb) => {
-  axios.get(options.url + '/reviews/meta', options.headers)
+  axios.get(options.url + 'reviews/meta', options.headers)
     .then(cb)
     .catch((error) => {
       console.log('error at getMetaData with,', error);
@@ -70,7 +70,7 @@ exports.getMetaData = (cb) => {
 };
 
 exports.postReview = (data, cb) => {
-  axios.post(options.url + '/reviews', data, options.headers)
+  axios.post(options.url + 'reviews', data, options.headers)
     .then(cb)
     .catch((error) => {
       console.log('error posting at postReview,', error);
@@ -78,7 +78,7 @@ exports.postReview = (data, cb) => {
 };
 
 exports.helpfulReview = (id, data, cb) => {
-  axios.post(options.url + `/reviews/:${id}/helpful`, data, options.headers)
+  axios.post(options.url + `reviews/:${id}/helpful`, data, options.headers)
     .then(cb)
     .catch((error) => {
       console.log('error posting at postReview,', error);
