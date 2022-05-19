@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 // Product Routes
 app.get('/products', route.getProducts);
 
-app.get('/productInfo', route.getProductInfo);
+app.get('/product/info', route.getProductInfo);
 
 app.get('/productStyle', route.getProductStyles);
 

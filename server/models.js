@@ -21,14 +21,11 @@ exports.getProducts = (cb) => {
 };
 
 exports.getProductInfo = (id, cb) => {
-  console.log('id: ', id)
-  axios.get(`${options.url}products/:${id}`, {headers: options.headers})
-    .then((result) => {
-      cb(result);
-    })
+  console.log(options.url+'products/'+id)
+  axios.get(options.url+'products/'+id, {headers: options.headers})
+    .then(cb)
     .catch((err) => {
       console.log('getProductInfo err: ', err);
-      cb(err);
     });
 };
 
