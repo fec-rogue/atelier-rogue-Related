@@ -22,10 +22,17 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 // product routes
 app.get('/products', route.getProducts);
 app.get('/products/info', route.getProductInfo);
+<<<<<<< HEAD
+
+
+// review routes
+app.get('/reviews', route.getReviews);
+=======
 app.get('/products/:product_id/styles', route.getProductStyles);
 app.get('/products/:product_id/related', route.getRelatedProduct);
 
 // review routes
+>>>>>>> main
 
 // cart routes
 app.get('/cart', route.getCart);
