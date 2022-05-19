@@ -18,7 +18,20 @@ const PORT = 3000 || process.env.PORT;
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // routes
-app.get('/test', route.getImages);
+// app.get('/cart', route.getImages);
+
+// product routes
+app.get('/products', route.getProducts);
+
+// review routes
+// app.get('/reviews', )
+
+// cart routes
+app.get('/cart', route.getCart);
+app.post('/cart', route.createCart);
+
+// interaction routes
+app.post('/interations', route.createInterations);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
