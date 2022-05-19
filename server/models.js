@@ -11,11 +11,8 @@ let options = {
 };
 
 exports.getProducts = (cb) => {
-  axios.get(path.join(url, 'products'), options.headers)
-    .then(result => {
-      console.log('getProducts models result: ', result);
-      cb(result);
-    })
+  axios.get(`${options.url}products`, {headers: options.headers})
+    .then(cb)
     .catch((err) => {
       console.log('getProducts err: ', err);
       cb(err);
@@ -23,9 +20,8 @@ exports.getProducts = (cb) => {
 };
 
 exports.getProductInfo = (id, cb) => {
-  axios.get(path.join(url, 'products',`:${id}`), options.headers)
-    .then(result => {
-      console.log('getProductInfo models result: ', result);
+  axios.get(`${options.url}products/${id}`, options.headers)
+    .then((result) => {
       cb(result);
     })
     .catch((err) => {
@@ -35,7 +31,7 @@ exports.getProductInfo = (id, cb) => {
 };
 
 exports.getProductStyles = (id, cb) => {
-  axios.get(path.join(url, 'products', `:${id}`, 'styles'), options.headers)
+  axios.get(`${options.url}products/${id}/styles`, options.headers)
     .then(result => {
       console.log('getProductStyles models result: ', result);
       cb(result);
@@ -46,7 +42,7 @@ exports.getProductStyles = (id, cb) => {
 };
 
 exports.getRelatedProducts = (id, cb) => {
-  axios.get(path.join(url, 'products', `:${id}`, 'related'), options.headers)
+  axios.get(path.join(options.url, 'products', `:${id}`, 'related'), options.headers)
     .then(result => {
       console.log('getRelatedProducts models result: ', result);
       cb(result);
@@ -56,7 +52,6 @@ exports.getRelatedProducts = (id, cb) => {
       cb(err);
     });
 };
-
 
 exports.getReviews = (cb) => {
   axios.get(options.url + '/reviews/', options.headers)
@@ -87,7 +82,7 @@ exports.helpfulReview = (id, data, cb) => {
     .then(cb)
     .catch((error) => {
       console.log('error posting at postReview,', error);
-  });
+    });
 };
 
 exports.reportReview = (id, data, cb) => {
@@ -99,16 +94,15 @@ exports.reportReview = (id, data, cb) => {
 };
 
 exports.getCart = (cb) => {
-  axios.get(`${options.url}/cart`, options.headers)
+  axios.get(`${options.url}cart`, options.headers)
     .then(cb)
     .catch((err) => {
       console.log('error while getting Cart data', err);
     });
 };
 
-
 exports.createCart = (data, cb) => {
-  axios.post(`${options.url}/cart`, data, options.headers)
+  axios.post(`${options.url}cart`, data, options.headers)
     .then(cb)
     .catch((err) => {
       console.log('error while posting Cart data', err);
@@ -116,7 +110,7 @@ exports.createCart = (data, cb) => {
 };
 
 exports.createInterations = (data, cb) => {
-  axios.post(`${options.url}/interactions`, data, options.headers)
+  axios.post(`${options.url}interactions`, data, options.headers)
     .then(cb)
     .catch((err) => {
       console.log('error while posting Interaction data', err);

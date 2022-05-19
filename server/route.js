@@ -3,7 +3,7 @@ const models = require('./models.js');
 // Product Routes
 exports.getProducts = (req, res) => {
   models.getProducts((result) => {
-    res.json(result);
+    res.json(result.data);
   });
 };
 
@@ -75,7 +75,7 @@ exports.reportReview = (req, res) => {
 // Cart routes
 
 exports.getCart = (req, res) => {
-  console.log('getCart data', req.body);
+  // console.log('getCart data', req.body);
   models.getCart((result) => {
     res.json(result);
   });
