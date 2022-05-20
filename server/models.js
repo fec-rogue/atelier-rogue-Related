@@ -15,13 +15,15 @@ exports.getProducts = (cb) => {
     .then(cb)
     .catch((err) => {
       console.log('getProducts err: ', err);
-      cb(err);
     });
 };
 
 exports.getProductInfo = (id, cb) => {
-  axios.get(options.url + 'products/' + id, {headers: options.headers})
-    .then(cb)
+  axios.get(`${options.url}products/${id}`, { headers: options.headers })
+    .then((result) => {
+      console.log('succes getting productinfo by id!!');
+      cb(result.data);
+    })
     .catch((err) => {
       console.log('getProductInfo err: ', err);
       // cb(err);
@@ -29,38 +31,38 @@ exports.getProductInfo = (id, cb) => {
 };
 
 exports.getProductStyles = (id, cb) => {
-  axios.get(`${options.url}products/:${id}/styles`, {params: {product_id: id}, headers: options.headers})
-    .then(result => {
-      console.log('getProductStyles models result: ', result);
-      cb(result);
+  console.log()
+  axios.get(`${options.url}products/${id}/styles`, {headers: options.headers})
+    .then((result) => {
+      console.log('getProductStyles models result: ', result.data);
+      cb(result.data);
     })
     .catch((err) => {
-      console.log('getProductStyles err: ', err); cb(err);
+      console.log('getProductStyles err: ', err);
     });
 };
 
-exports.getRelatedProducts = (id, cb) => {
-  axios.get(`${options.url}products/:${id}/related`, {headers: options.headers})
+exports.getRelatedProduct = (id, cb) => {
+  axios.get(`${options.url}products/${id}/related`, {headers: options.headers})
     .then(result => {
       console.log('getRelatedProducts models result: ', result);
-      cb(result);
+      cb(result.data);
     })
     .catch((err) => {
       console.log('getRelatedProducts err: ', err);
-      cb(err);
     });
 };
 
 exports.getReviews = (id, cb) => {
-  axios.get(options.url + 'reviews/?product_id=' + id, {headers: options.headers})
+  axios.get(options.url + `reviews/`, {headers: options.headers, params: {product_id: id}})
     .then(cb)
     .catch((error) => {
       console.log('error at getReviews with,', error);
     });
 };
 
-exports.getMetaData = (cb) => {
-  axios.get(options.url + 'reviews/meta', {headers: options.headers})
+exports.getMetaData = (id, cb) => {
+  axios.get(options.url + 'reviews/meta', {headers: options.headers, params: {product_id: id}})
     .then(cb)
     .catch((error) => {
       console.log('error at getMetaData with,', error);
@@ -76,7 +78,7 @@ exports.postReview = (data, cb) => {
 };
 
 exports.helpfulReview = (id, data, cb) => {
-  axios.post(options.url + `reviews/:${id}/helpful`, data, {headers: options.headers})
+  axios.post(options.url + `reviews/${id}/helpful`, data, {headers: options.headers})
     .then(cb)
     .catch((error) => {
       console.log('error posting at postReview,', error);
@@ -84,7 +86,7 @@ exports.helpfulReview = (id, data, cb) => {
 };
 
 exports.reportReview = (id, data, cb) => {
-  axios.post(options.url + `/reviews/:${id}/report`, data, {headers: options.headers})
+  axios.post(options.url + `/reviews/${id}/report`, data, {headers: options.headers})
     .then(cb)
     .catch((error) => {
       console.log('error posting at postReview,', error);
