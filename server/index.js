@@ -22,10 +22,16 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 // product routes
 app.get('/products', route.getProducts);
 app.get('/products/info', route.getProductInfo);
-
+app.get('/products/:product_id/styles', route.getProductStyles);
+app.get('/products/:product_id/related', route.getRelatedProduct);
 
 // review routes
-app.get('/reviews', route.getReviews);
+app.get('/reviews/:product_id', route.getReviews);
+app.get('/reviews/meta/:product_id', route.getMetaData);
+app.post('/reviews', route.postReview);
+app.put('/reviews/:product_id/helpful', route.helpfulReview);
+app.put('/reviews/:product_id/report', route.reportReview);
+
 
 // cart routes
 app.get('/cart', route.getCart);
