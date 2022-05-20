@@ -1,7 +1,7 @@
 import React from 'react';
 import { lazy, Suspense, useState, createContext, useEffect } from "react";
 import Overview from "./Overview/Overview.jsx";
-import axios from 'Axios';
+import axios from 'axios';
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
 /*
 Example usage of lazy:
