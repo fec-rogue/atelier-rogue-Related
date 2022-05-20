@@ -22,16 +22,15 @@ exports.getProductInfo = (id, cb) => {
   axios.get(`${options.url}products/${id}`, { headers: options.headers })
     .then((result) => {
       console.log('succes getting productinfo by id!!');
+      console.log('result.data', result.data);
       cb(result.data);
     })
     .catch((err) => {
       console.log('getProductInfo err: ', err);
-      // cb(err);
     });
 };
 
 exports.getProductStyles = (id, cb) => {
-  console.log()
   axios.get(`${options.url}products/${id}/styles`, {headers: options.headers})
     .then((result) => {
       console.log('getProductStyles models result: ', result.data);
