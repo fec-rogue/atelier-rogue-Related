@@ -26,6 +26,12 @@ app.get('/products/:product_id/styles', route.getProductStyles);
 app.get('/products/:product_id/related', route.getRelatedProduct);
 
 // review routes
+app.get('/reviews/:product_id', route.getReviews);
+app.get('/reviews/meta', route.getMetaData);
+app.post('/reviews', route.postReview);
+app.post('/reviews/:product_id/helpful', route.helpfulReview);
+app.post('/reviews/:product_id/report', route.reportReview);
+
 
 // cart routes
 app.get('/cart', route.getCart);

@@ -15,7 +15,6 @@ exports.getProducts = (cb) => {
     .then(cb)
     .catch((err) => {
       console.log('getProducts err: ', err);
-      cb(err);
     });
 };
 
@@ -43,20 +42,19 @@ exports.getProductStyles = (id, cb) => {
     });
 };
 
-exports.getRelatedProducts = (id, cb) => {
-  axios.get(`${options.url}products/:${id}/related`, {headers: options.headers})
+exports.getRelatedProduct = (id, cb) => {
+  axios.get(`${options.url}products/${id}/related`, {headers: options.headers})
     .then(result => {
       console.log('getRelatedProducts models result: ', result);
-      cb(result);
+      cb(result.data);
     })
     .catch((err) => {
       console.log('getRelatedProducts err: ', err);
-      cb(err);
     });
 };
 
 exports.getReviews = (id, cb) => {
-  axios.get(options.url + 'reviews/?product_id=' + id, {headers: options.headers})
+  axios.get(options.url + `reviews/${id}`, {headers: options.headers})
     .then(cb)
     .catch((error) => {
       console.log('error at getReviews with,', error);
@@ -80,7 +78,7 @@ exports.postReview = (data, cb) => {
 };
 
 exports.helpfulReview = (id, data, cb) => {
-  axios.post(options.url + `reviews/:${id}/helpful`, data, {headers: options.headers})
+  axios.post(options.url + `reviews/${id}/helpful`, data, {headers: options.headers})
     .then(cb)
     .catch((error) => {
       console.log('error posting at postReview,', error);
@@ -88,7 +86,7 @@ exports.helpfulReview = (id, data, cb) => {
 };
 
 exports.reportReview = (id, data, cb) => {
-  axios.post(options.url + `/reviews/:${id}/report`, data, {headers: options.headers})
+  axios.post(options.url + `/reviews/${id}/report`, data, {headers: options.headers})
     .then(cb)
     .catch((error) => {
       console.log('error posting at postReview,', error);

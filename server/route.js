@@ -25,7 +25,7 @@ exports.getProductStyles = (req, res) => {
 
 exports.getRelatedProduct = (req, res) => {
   var id = req.params.product_id;
-  models.getRelatedProduct((id, result) => {
+  models.getRelatedProduct(id, (result) => {
     res.json(result);
   });
 };
