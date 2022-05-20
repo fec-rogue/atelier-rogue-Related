@@ -46,7 +46,7 @@ exports.getProductStyles = (id, cb) => {
 exports.getRelatedProducts = (id, cb) => {
   axios.get(`${options.url}products/${id}/related`, {headers: options.headers})
     .then(result => {
-      console.log('getRelatedProducts models result: ', result);
+      // console.log('getRelatedProducts models result: ', result);
       cb(result.data);
     })
     .catch((err) => {
