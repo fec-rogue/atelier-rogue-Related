@@ -11,7 +11,6 @@ let options = {
 };
 
 exports.getProducts = (cb) => {
-
   axios.get(`${options.url}products`, {headers: options.headers})
     .then(cb)
     .catch((err) => {
@@ -21,36 +20,19 @@ exports.getProducts = (cb) => {
 };
 
 exports.getProductInfo = (id, cb) => {
-<<<<<<< HEAD
-  console.log(options.url+'products/'+id)
-  axios.get(options.url+'products/'+id, {headers: options.headers})
-    .then(cb)
-    .catch((err) => {
-      console.log('getProductInfo err: ', err);
-=======
-<<<<<<< HEAD
-  axios.get(options.url + 'products/' + id, {headers: options.headers})
-    .then(cb)
-=======
   axios.get(`${options.url}products/${id}`, { headers: options.headers })
     .then((result) => {
       console.log('succes getting productinfo by id!!', result);
       cb(result.data);
     })
->>>>>>> main
     .catch((err) => {
       console.log('getProductInfo err: ', err);
       // cb(err);
->>>>>>> main
     });
 };
 
 exports.getProductStyles = (id, cb) => {
-<<<<<<< HEAD
-  axios.get(`${options.url}products/:${id}/styles`, {headers: options.headers})
-=======
   axios.get(`${options.url}products/:${id}/styles`, {params: {product_id: id}, headers: options.headers})
->>>>>>> main
     .then(result => {
       console.log('getProductStyles models result: ', result);
       cb(result);
