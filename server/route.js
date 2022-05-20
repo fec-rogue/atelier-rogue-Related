@@ -9,8 +9,9 @@ exports.getProducts = (req, res) => {
 
 exports.getProductInfo = (req, res) => {
   var id = req.query.product_id;
+  console.log('getProductInfo id', id);
   models.getProductInfo(id, (result) => {
-    res.status(200).send(result.data);
+    res.send(result);
   });
 };
 

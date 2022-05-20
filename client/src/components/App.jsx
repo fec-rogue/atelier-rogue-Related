@@ -1,7 +1,7 @@
 import React from 'react';
-import { lazy, Suspense, useState, createContext, useEffect } from "react";
+import { lazy, Suspense, useState, createContext } from "react";
 import Overview from "./Overview/Overview.jsx";
-import axios from 'Axios';
+import axios from 'axios';
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
 /*
 Example usage of lazy:
@@ -19,9 +19,9 @@ export const PropIdContext = createContext();
 const App = () => {
   const [id, setId] = useState('40344');
   return (
-    <PropIdContext.Provider value={id, setId}>
+    <PropIdContext.Provider value={{id, setId}}>
       <div>
-        Hello World
+        {/* Hello World */}
         <RelatedProducts/>
       </div>
     </PropIdContext.Provider>
