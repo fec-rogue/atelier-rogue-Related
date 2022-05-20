@@ -1,6 +1,6 @@
 import React from 'react';
 import { lazy, Suspense, useState } from "react";
-import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
+import Overview from "./Overview/Overview.jsx"
 /*
 Example usage of lazy:
 const Detail = lazy(() => import("./Detail.jsx"));
@@ -13,8 +13,9 @@ const FourOhFour = lazy(() => import("./404.jsx"));
 const App = () => {
   return (
     <div>
-    <RelatedProducts />
-    </div>
+      Hello World
+      <Overview></Overview>
+      </div>
   )
 }
 

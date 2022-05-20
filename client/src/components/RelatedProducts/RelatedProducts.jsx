@@ -32,9 +32,7 @@ const RelatedProducts = () => {
       axios.get(`products/related?product_id=40344`)
         .then((res) => {
           console.log('response from API', res.data)
-          // setRelatedProducts(res.data);
          return axios.get(`products/info?product_id=${res.data[1]}`)
-        //  return axios.get(`products/styles?product_id=${res.data[2]}`)
         })
         .then((res) => {
           console.log('category data', res.data);
@@ -46,6 +44,7 @@ const RelatedProducts = () => {
           console.log('error while getting the data', err)
         })
   }, []);
+
   return(
     <div>
      <img src={image} width='250' height='300'/>

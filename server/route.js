@@ -8,28 +8,23 @@ exports.getProducts = (req, res) => {
 };
 
 exports.getProductInfo = (req, res) => {
-  console.log('getproduct', req.query);
   var id = req.query.product_id;
-  console.log('id', id);
   models.getProductInfo(id, (result) => {
-    res.status(200).send(result);
+    res.status(200).send(result.data);
   });
 };
 
+
 exports.getProductStyles = (req, res) => {
-  console.log('getProductStyles', req.query);
-  var id = req.query.product_id;
-  console.log('id', id);
+  var id = req.params.product_id;
   models.getProductStyles(id, (result) => {
     res.json(result);
   });
 };
 
 exports.getRelatedProduct = (req, res) => {
-  console.log('getProductRelated', req.query);
-  var id = req.query.product_id;
-  console.log('id', id);
-  models.getRelatedProducts(id, (result) => {
+  var id = req.params.product_id;
+  models.getRelatedProduct(id, (result) => {
     res.json(result);
   });
 };
@@ -37,14 +32,16 @@ exports.getRelatedProduct = (req, res) => {
 
 // Review routes
 exports.getReviews = (req, res) => {
-  models.getReviews((result) => {
-    res.json(result);
+  let id = req.params.product_id;
+  models.getReviews(id, (result) => {
+    res.json(result.data);
   });
 };
 
 exports.getMetaData = (req, res) => {
-  models.getMetaData((result) => {
-    res.json(result);
+  let id = req.params.product_id;
+  models.getMetaData(id, (result) => {
+    res.json(result.data);
   });
 };
 
@@ -66,12 +63,14 @@ exports.postReview = (req, res) => {
 };
 
 exports.helpfulReview = (req, res) => {
+  let id = req.params.product_id;
   models.helpfulReview(id, data, (result) => {
     res.json('updated successfully');
   });
 };
 
 exports.reportReview = (req, res) => {
+  let id = req.params.product_id;
   models.reportReview(data, (result) => {
     res.json('reported successfully');
   });
