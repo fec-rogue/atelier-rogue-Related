@@ -20,16 +20,8 @@ exports.getProducts = (cb) => {
 };
 
 exports.getProductInfo = (id, cb) => {
-<<<<<<< HEAD
   axios.get(options.url + 'products/' + id, {headers: options.headers})
     .then(cb)
-=======
-  axios.get(`${options.url}products/${id}`, { headers: options.headers })
-    .then((result) => {
-      console.log('succes getting productinfo by id!!', result);
-      cb(result.data);
-    })
->>>>>>> main
     .catch((err) => {
       console.log('getProductInfo err: ', err);
       // cb(err);
