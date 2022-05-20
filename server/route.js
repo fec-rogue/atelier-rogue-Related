@@ -33,15 +33,16 @@ exports.getRelatedProduct = (req, res) => {
 
 // Review routes
 exports.getReviews = (req, res) => {
-  let id = req.query.id
+  let id = req.params.product_id;
   models.getReviews(id, (result) => {
     res.json(result.data);
   });
 };
 
 exports.getMetaData = (req, res) => {
-  models.getMetaData((result) => {
-    res.json(result);
+  let id = req.params.product_id;
+  models.getMetaData(id, (result) => {
+    res.json(result.data);
   });
 };
 
@@ -63,12 +64,14 @@ exports.postReview = (req, res) => {
 };
 
 exports.helpfulReview = (req, res) => {
+  let id = req.params.product_id;
   models.helpfulReview(id, data, (result) => {
     res.json('updated successfully');
   });
 };
 
 exports.reportReview = (req, res) => {
+  let id = req.params.product_id;
   models.reportReview(data, (result) => {
     res.json('reported successfully');
   });

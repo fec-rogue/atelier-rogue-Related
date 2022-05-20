@@ -54,15 +54,15 @@ exports.getRelatedProduct = (id, cb) => {
 };
 
 exports.getReviews = (id, cb) => {
-  axios.get(options.url + `reviews/${id}`, {headers: options.headers})
+  axios.get(options.url + `reviews/`, {headers: options.headers, params: {product_id: id}})
     .then(cb)
     .catch((error) => {
       console.log('error at getReviews with,', error);
     });
 };
 
-exports.getMetaData = (cb) => {
-  axios.get(options.url + 'reviews/meta', {headers: options.headers})
+exports.getMetaData = (id, cb) => {
+  axios.get(options.url + 'reviews/meta', {headers: options.headers, params: {product_id: id}})
     .then(cb)
     .catch((error) => {
       console.log('error at getMetaData with,', error);
