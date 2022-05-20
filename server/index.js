@@ -26,11 +26,11 @@ app.get('/products/styles', route.getProductStyles);
 app.get('/products/related', route.getRelatedProduct);
 
 // review routes
-app.get('/reviews/:product_id', route.getReviews);
-app.get('/reviews/meta/:product_id', route.getMetaData);
+app.get('/reviews', route.getReviews);
+app.get('/reviews/meta/product_id', route.getMetaData);
 app.post('/reviews', route.postReview);
-app.put('/reviews/:product_id/helpful', route.helpfulReview);
-app.put('/reviews/:product_id/report', route.reportReview);
+app.put('/reviews/product_id/helpful', route.helpfulReview);
+app.put('/reviews/product_id/report', route.reportReview);
 
 
 // cart routes
