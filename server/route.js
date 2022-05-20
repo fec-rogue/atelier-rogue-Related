@@ -17,16 +17,19 @@ exports.getProductInfo = (req, res) => {
 };
 
 exports.getProductStyles = (req, res) => {
-  var id = req.params.product_id;
-  models.getProductStyles((id, result) => {
+  console.log('getProductStyles', req.query);
+  var id = req.query.product_id;
+  console.log('id', id);
+  models.getProductStyles(id, (result) => {
     res.json(result);
   });
 };
 
-
 exports.getRelatedProduct = (req, res) => {
-  var id = req.params.product_id;
-  models.getRelatedProduct((id, result) => {
+  console.log('getProductRelated', req.query);
+  var id = req.query.product_id;
+  console.log('id', id);
+  models.getRelatedProducts(id, (result) => {
     res.json(result);
   });
 };

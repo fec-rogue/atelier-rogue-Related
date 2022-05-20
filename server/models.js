@@ -32,21 +32,22 @@ exports.getProductInfo = (id, cb) => {
 };
 
 exports.getProductStyles = (id, cb) => {
-  axios.get(`${options.url}products/:${id}/styles`, {params: {product_id: id}, headers: options.headers})
+  axios.get(`${options.url}products/${id}/styles`, { headers: options.headers})
     .then(result => {
       console.log('getProductStyles models result: ', result);
-      cb(result);
+      cb(result.data);
     })
     .catch((err) => {
-      console.log('getProductStyles err: ', err); cb(err);
+      // console.log('getProductStyles err: ', err);
+      cb(err);
     });
 };
 
 exports.getRelatedProducts = (id, cb) => {
-  axios.get(`${options.url}products/:${id}/related`, {headers: options.headers})
+  axios.get(`${options.url}products/${id}/related`, {headers: options.headers})
     .then(result => {
       console.log('getRelatedProducts models result: ', result);
-      cb(result);
+      cb(result.data);
     })
     .catch((err) => {
       console.log('getRelatedProducts err: ', err);
