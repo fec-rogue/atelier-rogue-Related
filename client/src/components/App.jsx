@@ -17,14 +17,12 @@ const App = () => {
   return (
     <div>
       <Reviews />
+      <Overview></Overview>
     </div>
     // Overview
     // reviews
     // related products
     // <Overview />
-      Hello World
-      <Overview></Overview>
-      </div>
   )
 }
 
