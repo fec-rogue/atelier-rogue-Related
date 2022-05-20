@@ -18,17 +18,25 @@ const PORT = 3000 || process.env.PORT;
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // routes
-// app.get('/cart', route.getImages);
 
 // Product Routes
 app.get('/products', route.getProducts);
+app.get('/products/info', route.getProductInfo);
+<<<<<<< HEAD
+
+
+// review routes
+app.get('/reviews', route.getReviews);
+=======
+app.get('/products/:product_id/styles', route.getProductStyles);
+app.get('/products/:product_id/related', route.getRelatedProduct);
 
 app.get('/product/info', route.getProductInfo);
 
 app.get('/productStyle', route.getProductStyles);
 
 // review routes
-// app.get('/reviews', )
+>>>>>>> main
 
 // cart routes
 app.get('/cart', route.getCart);
