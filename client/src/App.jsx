@@ -10,10 +10,8 @@ const FourOhFour = lazy(() => import("./404.jsx"));
 // IMPORT overviews, relatedProducts and Reviews
 
 const App = () => {
-
-
   return (
-    <div>Hello World</div>
+    <div>Hello World YESSS</div>
     // Overview
     // reviews
     // related products
