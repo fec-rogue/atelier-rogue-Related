@@ -7,4 +7,3 @@ function ProductDetails() {
 
 export default ProductDetails;
 
-// return( <gallery/> ... <productPic>)
