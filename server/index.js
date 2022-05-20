@@ -19,15 +19,11 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // routes
 
-// Product Routes
+// product routes
 app.get('/products', route.getProducts);
 app.get('/products/info', route.getProductInfo);
 app.get('/products/:product_id/styles', route.getProductStyles);
 app.get('/products/:product_id/related', route.getRelatedProduct);
-
-app.get('/product/info', route.getProductInfo);
-
-app.get('/productStyle', route.getProductStyles);
 
 // review routes
 
