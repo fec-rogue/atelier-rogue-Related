@@ -16,14 +16,14 @@ exports.getProductInfo = (req, res) => {
 
 
 exports.getProductStyles = (req, res) => {
-  var id = req.params.product_id;
+  var id = req.query.product_id;
   models.getProductStyles(id, (result) => {
     res.json(result);
   });
 };
 
 exports.getRelatedProduct = (req, res) => {
-  var id = req.params.product_id;
+  var id = req.query.product_id;
   models.getRelatedProduct(id, (result) => {
     res.json(result);
   });
@@ -32,14 +32,14 @@ exports.getRelatedProduct = (req, res) => {
 
 // Review routes
 exports.getReviews = (req, res) => {
-  let id = req.params.product_id;
+  let id = req.query.product_id;
   models.getReviews(id, (result) => {
     res.json(result.data);
   });
 };
 
 exports.getMetaData = (req, res) => {
-  let id = req.params.product_id;
+  let id = req.query.product_id;
   models.getMetaData(id, (result) => {
     res.json(result.data);
   });
@@ -63,14 +63,14 @@ exports.postReview = (req, res) => {
 };
 
 exports.helpfulReview = (req, res) => {
-  let id = req.params.product_id;
+  let id = req.query.product_id;
   models.helpfulReview(id, data, (result) => {
     res.json('updated successfully');
   });
 };
 
 exports.reportReview = (req, res) => {
-  let id = req.params.product_id;
+  let id = req.query.product_id;
   models.reportReview(data, (result) => {
     res.json('reported successfully');
   });
@@ -87,8 +87,8 @@ exports.getCart = (req, res) => {
 
 exports.createCart = (req, res) => {
   console.log('create Cart data', req.body);
-  var params = {'sku_id': req.body.sku_id};
-  models.createCart(params, (err, data) => {
+  var query = {'sku_id': req.body.sku_id};
+  models.createCart(query, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {
@@ -100,12 +100,12 @@ exports.createCart = (req, res) => {
 // Interactions routes
 exports.createInterations = (req, res) => {
   console.log('create interation data', req.body);
-  var params = {
+  var query = {
     'element': req.body.element,
     'widget': req.body.widget,
     'time': req.body.time
   };
-  models.createInterations(params, (err, data) => {
+  models.createInterations(query, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {
