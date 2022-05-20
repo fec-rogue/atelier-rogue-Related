@@ -15,7 +15,6 @@ exports.getProducts = (cb) => {
     .then(cb)
     .catch((err) => {
       console.log('getProducts err: ', err);
-      cb(err);
     });
 };
 

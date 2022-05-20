@@ -8,34 +8,17 @@ exports.getProducts = (req, res) => {
 };
 
 exports.getProductInfo = (req, res) => {
-<<<<<<< HEAD
-  var id = req.body.id;
-  models.getProductInfo(id, (result) => {
-    res.json(result);
-=======
-<<<<<<< HEAD
-  var id = req.query.product_id;
-  // console.log(id);
-  models.getProductInfo(id, (result) => {
-    res.json(result.data);
-=======
   console.log('getproduct', req.query);
   var id = req.query.product_id;
   console.log('id', id);
   models.getProductInfo(id, (result) => {
     res.status(200).send(result);
->>>>>>> main
->>>>>>> main
   });
 };
 
 
 exports.getProductStyles = (req, res) => {
-<<<<<<< HEAD
-  var id = req.params.id;
-=======
   var id = req.params.product_id;
->>>>>>> main
   models.getProductStyles((id, result) => {
     res.json(result);
   });
@@ -43,11 +26,7 @@ exports.getProductStyles = (req, res) => {
 
 
 exports.getRelatedProduct = (req, res) => {
-<<<<<<< HEAD
-  var id = req.query.id;
-=======
   var id = req.params.product_id;
->>>>>>> main
   models.getRelatedProduct((id, result) => {
     res.json(result);
   });
