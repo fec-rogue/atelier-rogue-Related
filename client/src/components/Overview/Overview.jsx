@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from "react";
-import axios from 'Axios';
+import axios from 'axios';
 
 function Overview() {
   const [products, setProducts] = useState({productsList: [], displayedProd: {}});
@@ -32,3 +32,6 @@ export default Overview;
 
 // pass productsList to carosal to render out each picture
 // pass displayedProduct to ProductPic and ProductDetails
+// get product info and product styles in productDetails
+// get product info in productPic to display stlye pics
+
