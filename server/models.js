@@ -22,7 +22,7 @@ exports.getProductInfo = (id, cb) => {
   axios.get(`${options.url}products/${id}`, { headers: options.headers })
     .then((result) => {
       console.log('succes getting productinfo by id!!');
-      console.log('result.data', result.data);
+      //console.log('result.data', result.data);
       cb(result.data);
     })
     .catch((err) => {
@@ -33,7 +33,8 @@ exports.getProductInfo = (id, cb) => {
 exports.getProductStyles = (id, cb) => {
   axios.get(`${options.url}products/${id}/styles`, {headers: options.headers})
     .then((result) => {
-      console.log('getProductStyles models result: ', result.data);
+      console.log('succes getting productStyles by id!!');
+      //console.log('getProductStyles models result: ', result.data);
       cb(result.data);
     })
     .catch((err) => {
@@ -44,7 +45,8 @@ exports.getProductStyles = (id, cb) => {
 exports.getRelatedProduct = (id, cb) => {
   axios.get(`${options.url}products/${id}/related`, {headers: options.headers})
     .then(result => {
-      console.log('getRelatedProducts models result: ', result);
+      //console.log('getRelatedProducts models result: ', result);
+      console.log('succes getting relatedProducts by id!!');
       cb(result.data);
     })
     .catch((err) => {

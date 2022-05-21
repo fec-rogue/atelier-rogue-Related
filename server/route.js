@@ -2,6 +2,7 @@ const models = require('./models.js');
 
 // Product Routes
 exports.getProducts = (req, res) => {
+  console.log('gettingProducts')
   models.getProducts((result) => {
     res.json(result.data);
   });
