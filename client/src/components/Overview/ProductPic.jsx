@@ -1,25 +1,43 @@
-import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+import React, { useEffect, useState, useContext } from 'react';
 import {DisplayedPhotoContext} from './Overview.jsx'
 import {PropIdContext} from '../App.jsx';
+
+
+const MainPicture = styled.img`
+  display: flex;
+  flex-wrap: wrap;
+  width: 35%;
+  heigh: 35%;
+  object-fit: contain;
+`;
+
+const SidePic = styled.img`
+  flex: 33.33%;
+  padding: 5px;
+  width: 10%;
+  heigh: 10%;
+  object-fit: contain;
+`;
 
 function ProductPic() {
 
   const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
   const [curPhoto, setCurPhoto] = useState([]);
   const {id, setId} = useContext(PropIdContext);
-  //const [change, setChange] = useState('false');
 
-  // only want to re-render whenever a new picture is selected for this product
   useEffect(() => {
     console.log('curPhoto: ', curPhoto);
+
+    // find better conditions for if statement
     if (!Array.isArray(displayed) && curPhoto.length === 0) {
       setCurPhoto(displayed.photos[0])
     }
   }, [displayed, curPhoto])
 
   // conditionally render info if displayed is empty
-  // when there's no data, consider what image/error page should be displayed
+  // when there's no data, image/error page should be displayed
   // show an image placeholder when there's no data
 
   if (curPhoto.length === 0 || Array.isArray(displayed)) {
@@ -32,10 +50,10 @@ function ProductPic() {
   } else {
     return(
       <div>
-        <img src={curPhoto.url}></img>
+        <MainPicture src={curPhoto.url}></MainPicture>
         {displayed.photos.map((thumbnails, key) => {
           if (thumbnails !== curPhoto) {
-            return <img key={key} src={thumbnails.thumbnail_url} onClick={() => {setCurPhoto(thumbnails)}}></img>
+            return <SidePic key={key} src={thumbnails.thumbnail_url} onClick={() => {setCurPhoto(thumbnails)}}></SidePic>
           }
         })}
       </div>
@@ -44,42 +62,3 @@ function ProductPic() {
 }
 
 export default ProductPic;
-
-/*
-import React from 'react';
-import { useEffect, useState, useContext } from "react";
-import axios from 'axios';
-import {GalleryContext} from './Overview.jsx'
-
-function ProductPic() {
-  const {gallery, setGallery} = useContext(GalleryContext);
-  const [curPhoto, setCurPhoto] = useState([]);
-
-
-  useEffect(() => {
-    setCurPhoto(gallery[0]);
-  })
-
-  // conditionally render info if gallery is empty
-  // when there's no data, consider what image/error page should be displayed
-  // show an image placeholder when there's no data
-
-  if (!curPhoto) {
-    return (
-      <h1>Loading</h1>
-    )
-  } else {
-    console.log(gallery)
-    return (
-      <div>
-        <p>ProductPic here</p>
-        <img src={curPhoto.thumbnail_url}></img>
-        {gallery.map((pic, key) => {
-        })}
-      </div>
-    )
-  }
-}
-
-export default ProductPic;
-*/

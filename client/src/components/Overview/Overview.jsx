@@ -8,9 +8,9 @@ export const DisplayedPhotoContext = createContext();
 
 function Overview() {
 
-  const [styles, setProductStyles] = useState([]) // for product details
-  const [displayed, setDisplayed] = useState([]) // for product pic
-  const {id, setId} = useContext(PropIdContext); // for product details ((if user clicks on diff stlye, update id))
+  const [styles, setProductStyles] = useState([])
+  const [displayed, setDisplayed] = useState([])
+  const {id, setId} = useContext(PropIdContext);
 
   useEffect(() => {
     axios.get('/products/styles', {params:{product_id:id}})
