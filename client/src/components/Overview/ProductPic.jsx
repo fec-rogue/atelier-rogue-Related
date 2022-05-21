@@ -8,13 +8,15 @@ function ProductPic() {
   const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
   const [curPhoto, setCurPhoto] = useState([]);
   const {id, setId} = useContext(PropIdContext);
+  //const [change, setChange] = useState('false');
 
-
+  // only want to re-render whenever a new picture is selected for this product
   useEffect(() => {
-    if (!Array.isArray(displayed)) {
+    console.log('curPhoto: ', curPhoto);
+    if (!Array.isArray(displayed) && curPhoto.length === 0) {
       setCurPhoto(displayed.photos[0])
     }
-  })
+  }, [displayed, curPhoto])
 
   // conditionally render info if displayed is empty
   // when there's no data, consider what image/error page should be displayed
@@ -24,17 +26,16 @@ function ProductPic() {
     console.log('loading')
     return (
       <div>
-        <h2>Loading</h2>
+        <h2>Loading...</h2>
       </div>
     )
   } else {
-    console.log(displayed);
     return(
       <div>
         <img src={curPhoto.url}></img>
         {displayed.photos.map((thumbnails, key) => {
           if (thumbnails !== curPhoto) {
-            return <img key={key} src={thumbnails.thumbnail_url} onClick={() => {console.log('photo change')}}></img>
+            return <img key={key} src={thumbnails.thumbnail_url} onClick={() => {setCurPhoto(thumbnails)}}></img>
           }
         })}
       </div>
