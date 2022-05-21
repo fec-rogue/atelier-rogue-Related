@@ -6,11 +6,14 @@ import {PropIdContext} from '../App.jsx';
 function ProductPic() {
 
   const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
-  const [curPhoto, setCurPhoto] = useState(displayed.photos[0]);
+  const [curPhoto, setCurPhoto] = useState([]);
   const {id, setId} = useContext(PropIdContext);
 
 
   useEffect(() => {
+    if (!Array.isArray(displayed)) {
+      setCurPhoto(displayed.photos[0])
+    }
   })
 
   // conditionally render info if displayed is empty
