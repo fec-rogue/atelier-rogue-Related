@@ -22,16 +22,12 @@ const App = () => {
   return (
     <PropIdContext.Provider value={{id, setId}}>
       <div>
-<<<<<<< HEAD
-        Hello World
-        <Overview/>
-=======
         {/* Hello World */}
         {/* <RelatedProducts/> */}
+        <Overview/>
       </div>
       <div>
-        <Reviews />
->>>>>>> main
+         {/*<Reviews />*/}
       </div>
     </PropIdContext.Provider>
   )

@@ -43,7 +43,6 @@ export default ProductPic;
 
 /*
 import React from 'react';
-<<<<<<< HEAD
 import { useEffect, useState, useContext } from "react";
 import axios from 'axios';
 import {GalleryContext} from './Overview.jsx'
@@ -80,7 +79,3 @@ function ProductPic() {
 
 export default ProductPic;
 */
-=======
-import { useEffect, useState } from "react";
-import axios from 'axios';
->>>>>>> main
