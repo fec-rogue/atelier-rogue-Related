@@ -22,8 +22,8 @@ const App = () => {
   return (
     <PropIdContext.Provider value={id, setId}>
       <div>
-        Hello World
-        <RelatedProducts/>
+        {/* Hello World
+        <RelatedProducts/> */}
       </div>
       <div>
         <Reviews />
