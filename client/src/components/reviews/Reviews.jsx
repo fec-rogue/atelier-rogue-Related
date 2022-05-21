@@ -36,7 +36,15 @@ const Recommend = styled.div`
 padding: 0 0 20px 0;
 `;
 
+const ResponseBlock = styled.div`
+
+`;
+
 const Response = styled.div`
+
+`;
+
+const ResponseWord = styled.div`
 
 `;
 
@@ -88,7 +96,13 @@ const Reviews = () => {
           <Title onClick={handleMore}>{review.summary === '' ? 'No Title' : review.summary}</Title>
           <Body>{review.body}</Body>
           {review.recommend ? <Recommend>&#10004; I recommend this product</Recommend> : null }
-          {review.response ? <Response /> : null}
+          {review.response ?
+           <ResponseBlock>
+             <ResponseWord>Response:</ResponseWord>
+             <Response>{review.response}</Response>
+           </ResponseBlock> :
+            null
+          }
           <Interactables>
             <HelpfulTag>Was this review helpful?  </HelpfulTag>
             <YesTag>Yes</YesTag>
