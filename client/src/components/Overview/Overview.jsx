@@ -20,6 +20,7 @@ const OverviewComps = styled.div`
 `;
 
 export const DisplayedPhotoContext = createContext();
+export const StyledProductsContext = createContext();
 
 function Overview() {
 
@@ -49,6 +50,7 @@ function Overview() {
         <DisplayedPhotoContext.Provider value={{displayed, setDisplayed}}>
           <ProductPic/>
         </DisplayedPhotoContext.Provider>
+
         <ProductDetails/>
       </OverviewComps>
     </div>

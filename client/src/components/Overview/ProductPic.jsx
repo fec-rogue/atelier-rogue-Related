@@ -12,22 +12,24 @@ const PictureContainer = styled.div `
 const CarouselContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 20%;
-  margin-right: -10%;
+  margin-left: 15%;
+  margin-right: -15%;
 `;
 
 const MainPicture = styled.img`
   display: flex;
   flex-wrap: wrap;
-  width: 30%;
-  heigh: 30%;
+  width: 70%;
+  height: 70%;
+  max-height: 1000px;
+  max-width: 800px;
   object-fit: contain;
 `;
 
 const SidePic = styled.img`
   padding: 3px;
   width: 40%;
-  heigh: 40%;
+  height: 40%;
   object-fit: contain;
 `;
 

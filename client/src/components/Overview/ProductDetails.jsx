@@ -1,7 +1,5 @@
-import React from 'react';
-import { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-//import {displayedProductContext} from './Overview.jsx'
 import {PropIdContext} from '../App.jsx';
 
 function ProductDetails() {
