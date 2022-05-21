@@ -3,6 +3,7 @@ import { lazy, Suspense, useState, createContext, useEffect } from "react";
 import Overview from "./Overview/Overview.jsx";
 import axios from 'axios';
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
+import Reviews from "./reviews/Reviews.jsx";
 /*
 Example usage of lazy:
 const Detail = lazy(() => import("./Detail.jsx"));
@@ -21,8 +22,16 @@ const App = () => {
   return (
     <PropIdContext.Provider value={{id, setId}}>
       <div>
+<<<<<<< HEAD
         Hello World
         <Overview/>
+=======
+        {/* Hello World */}
+        {/* <RelatedProducts/> */}
+      </div>
+      <div>
+        <Reviews />
+>>>>>>> main
       </div>
     </PropIdContext.Provider>
   )

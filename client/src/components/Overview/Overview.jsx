@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState, useContext, createContext } from 'react';
 import axios from 'axios';
 import {PropIdContext} from '../App.jsx';
@@ -6,6 +7,11 @@ import ProductDetails from './ProductDetails.jsx';
 
 
 export const DisplayedPhotoContext = createContext();
+=======
+import React from 'react';
+import { useEffect, useState } from "react";
+import axios from 'axios';
+>>>>>>> main
 
 function Overview() {
 
