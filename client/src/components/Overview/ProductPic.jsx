@@ -4,20 +4,30 @@ import React, { useEffect, useState, useContext } from 'react';
 import {DisplayedPhotoContext} from './Overview.jsx'
 import {PropIdContext} from '../App.jsx';
 
+const PictureContainer = styled.div `
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const CarouselContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 20%;
+  margin-right: -10%;
+`;
 
 const MainPicture = styled.img`
   display: flex;
   flex-wrap: wrap;
-  width: 35%;
-  heigh: 35%;
+  width: 30%;
+  heigh: 30%;
   object-fit: contain;
 `;
 
 const SidePic = styled.img`
-  flex: 33.33%;
-  padding: 5px;
-  width: 10%;
-  heigh: 10%;
+  padding: 3px;
+  width: 40%;
+  heigh: 40%;
   object-fit: contain;
 `;
 
@@ -28,7 +38,6 @@ function ProductPic() {
   const {id, setId} = useContext(PropIdContext);
 
   useEffect(() => {
-    console.log('curPhoto: ', curPhoto);
 
     // find better conditions for if statement
     if (!Array.isArray(displayed) && curPhoto.length === 0) {
@@ -49,16 +58,19 @@ function ProductPic() {
     )
   } else {
     return(
-      <div>
+      <PictureContainer>
+        <CarouselContainer>
+          {displayed.photos.map((thumbnails, key) => {
+            if (thumbnails !== curPhoto) {
+              return <SidePic key={key} src={thumbnails.thumbnail_url} onClick={() => {setCurPhoto(thumbnails)}}></SidePic>
+            }
+          })}
+        </CarouselContainer>
         <MainPicture src={curPhoto.url}></MainPicture>
-        {displayed.photos.map((thumbnails, key) => {
-          if (thumbnails !== curPhoto) {
-            return <SidePic key={key} src={thumbnails.thumbnail_url} onClick={() => {setCurPhoto(thumbnails)}}></SidePic>
-          }
-        })}
-      </div>
+      </PictureContainer>
     )
   }
+
 }
 
 export default ProductPic;

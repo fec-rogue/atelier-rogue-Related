@@ -1,8 +1,23 @@
 import React, { useEffect, useState, useContext, createContext } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import {PropIdContext} from '../App.jsx';
 import ProductPic from './ProductPic.jsx';
 import ProductDetails from './ProductDetails.jsx';
+
+const WebsiteHeader = styled.h1`
+  display: flex;
+  justify-content: center;
+`;
+
+const AnnouncementHeader = styled.h2`
+  display: flex;
+  justify-content: center;
+`;
+
+const OverviewComps = styled.div`
+  display: flex;
+`;
 
 export const DisplayedPhotoContext = createContext();
 
@@ -27,13 +42,16 @@ function Overview() {
   }, [])
 
   return(
-      <div>
-        <h2>OVERVIEW</h2>
+    <div>
+      <WebsiteHeader>OVERVIEW</WebsiteHeader>
+      <AnnouncementHeader>SITE-WIDE ANNOUNCEMENT</AnnouncementHeader>
+      <OverviewComps>
         <DisplayedPhotoContext.Provider value={{displayed, setDisplayed}}>
           <ProductPic/>
         </DisplayedPhotoContext.Provider>
         <ProductDetails/>
-      </div>
+      </OverviewComps>
+    </div>
   )
 }
 
