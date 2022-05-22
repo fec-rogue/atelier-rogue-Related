@@ -2,7 +2,8 @@ import React from 'react';
 import { lazy, Suspense, useState, createContext } from "react";
 import Overview from "./Overview/Overview.jsx";
 import axios from 'axios';
-import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
+import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx";
+
 /*
 Example usage of lazy:
 const Detail = lazy(() => import("./Detail.jsx"));
