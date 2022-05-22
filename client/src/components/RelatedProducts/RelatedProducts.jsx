@@ -4,41 +4,87 @@ import axios from 'axios';
 import {PropIdContext} from '../App.jsx';
 
 const RelatedProducts = () => {
-    const [image, setImage] = useState([]);
-    const [category, setCategory] = useState([]);
-    const [price, setPrice] = useState([]);
-    const [name, setName] = useState([]);
+    const [relatedProductsData, setRelatedProductsData] = useState([]);
     const {id, setId} = useContext(PropIdContext);
-    console.log('id', id);
 
     useEffect(() => {
-      if(id) {
         axios.get(`products/related?product_id=${id}`)
           .then((res) => {
-            console.log('response from API', res.data)
-           var allRelatedRequst= res.data.map((eachRelated) => {
-              console.log('eachRelated', eachRelated);
+            // console.log('response from API', res.data)
+           let allRelatedRequest= res.data.map((eachRelated) => {
+              // console.log('eachRelated', eachRelated);
               return axios.get(`products/styles?product_id=${eachRelated}`)
-            })
-            console.log('allRelatedRequst', allRelatedRequst);
-            return axios.get(`products/styles?product_id=40344`)
-          })
-          .then((res) => {
-            console.log('res.data.results', res.data);
-           res.data.results.forEach((style) => {
-             if(style["default?"] === true) {
-              setImage(style.photos[4].url)
-             }
-           });
-          })
+            });
+            // console.log('allRelatedRequest', allRelatedRequest);
+            return axios.all(allRelatedRequest)
+              .then(axios.spread((...result) => {
+              console.log('result', result);
+              setRelatedProductsData(result);
+              // result.forEach((style) => {
+              //   const eachStyleArr = style.data.results;
+              //   // console.log('eachStyleArr', eachStyleArr);
+
+              //   let imageURLArr = [];
+              //   eachStyleArr.forEach((eachObj) => {
+              //     // console.log('eachObj', eachObj)
+              //     if(eachObj["default?"] === true) {
+              //       var defaultImgURL = eachObj.photos[0].url;
+              //       // console.log('defaultImgURL', defaultImgURL)
+              //       imageURLArr.push(defaultImgURL);
+              //       // setImage(defaultImgURL);
+              //     }
+              //     // console.log('imageURLArr', imageURLArr);
+              //     setImage(imageURLArr);
+              //   // console.log('imageURLArr', imageURLArr);
+
+              //     // eachStyleArr.forEach((styleObj) => {
+              //     //   // console.log('styleObj', styleObj);
+              //     //   if(styleObj["default?"] === true && styleObj.photos[0].url !== null) {
+              //     //      setImage(styleObj.photos[0].url)
+              //     //  }
+              //     // })
+              // })
+              // })
+          }))
+        })
           .catch((err) => {
             console.log('error while getting the data', err)
           })
-        }
     }, []);
 
+  return(
+    <div>
+      {relatedProductsData.map((eachProduct) => {
+       var defaults = eachProduct.data.results.filter((eachStyle) => eachStyle['default?'] === true);
+        return(
+        <div>
+          {defaults[0] && <img src={defaults[0].photos[0].url}/>}
+        </div>
+          )
+      })}
 
-  //   useEffect(() => {
+    </div>
+  )
+
+}
+
+export default RelatedProducts;
+
+
+
+
+
+  // return axios.get(`products/styles?product_id=40344`)
+   // .then((res) => {
+          //   console.log('res.data.results', res.data);
+          //  res.data.results.forEach((style) => {
+          //    if(style["default?"] === true) {
+          //     setImage(style.photos[4].url)
+          //    }
+          //  });
+          // })
+
+            //   useEffect(() => {
   //     axios.get(`products/related?product_id=40344`)
   //       .then((res) => {
   //         console.log('response from API', res.data)
@@ -54,18 +100,3 @@ const RelatedProducts = () => {
   //         console.log('error while getting the data', err)
   //       })
   // }, []);
-
-  return(
-    <div>
-        <img src={image} width='250' height='300'/>
-        <div>{category}</div>
-        <div>{name}</div>
-        <div>{price}</div>
-
-    </div>
-  )
-
-}
-
-
-export default RelatedProducts;
