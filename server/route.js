@@ -11,7 +11,7 @@ exports.getProducts = (req, res) => {
 exports.getProductInfo = (req, res) => {
   var id = req.query.product_id;
   models.getProductInfo(id, (result) => {
-    res.status(200).send(result.data);
+    res.status(200).send(result);
   });
 };
 

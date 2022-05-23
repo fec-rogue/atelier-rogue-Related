@@ -31,16 +31,15 @@ function Overview() {
   useEffect(() => {
     axios.get('/products/styles', {params:{product_id:id}})
     .then((response) => {
+      setProductStyles(response.data.results);
       for (let i = 0; i < response.data.results.length; i++) {
         if (response.data.results[i]["default?"]) {
           setDisplayed(response.data.results[i]);
-          response.data.results.splice(i, 1)
-          setProductStyles(response.data.results);
           break;
         }
       }
     })
-  }, [])
+  }, [id])
 
   return(
     <div>
@@ -49,9 +48,10 @@ function Overview() {
       <OverviewComps>
         <DisplayedPhotoContext.Provider value={{displayed, setDisplayed}}>
           <ProductPic/>
+          <StyledProductsContext.Provider value={{styles, setProductStyles}}>
+            <ProductDetails/>
+          </StyledProductsContext.Provider>
         </DisplayedPhotoContext.Provider>
-
-        <ProductDetails/>
       </OverviewComps>
     </div>
   )
@@ -59,8 +59,4 @@ function Overview() {
 
 export default Overview;
 
-// pass productsList to carosal to render out each picture
-// pass gallery to ProductPic and ProductDetails
-// get product info and product styles in productDetails
-// get product info in productPic to display stlye pics
 

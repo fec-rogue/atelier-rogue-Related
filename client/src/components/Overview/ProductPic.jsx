@@ -21,9 +21,10 @@ const MainPicture = styled.img`
   flex-wrap: wrap;
   width: 70%;
   height: 70%;
-  max-height: 1000px;
-  max-width: 800px;
+  max-height: 700px;
+  max-width: 400px;
   object-fit: contain;
+  margin-right: 40px;
 `;
 
 const SidePic = styled.img`
@@ -62,6 +63,7 @@ function ProductPic() {
     return(
       <PictureContainer>
         <CarouselContainer>
+        <SidePic src={curPhoto.thumbnail_url} ></SidePic>
           {displayed.photos.map((thumbnails, key) => {
             if (thumbnails !== curPhoto) {
               return <SidePic key={key} src={thumbnails.thumbnail_url} onClick={() => {setCurPhoto(thumbnails)}}></SidePic>
