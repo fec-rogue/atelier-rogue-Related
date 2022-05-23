@@ -28,6 +28,9 @@ function ProductDetails() {
     })
   }, [styles]);
 
+  // on click we will tag a checkmark on the icon
+  // if the default.id === icon.id, no change in render
+  // otherwise setId to new id selected and re-render display pics
 
 
   if (productInfo.length === 0) {
@@ -52,7 +55,7 @@ function ProductDetails() {
                 return rows.map((icon, key) => {
                   return <StyleCircle key={key}>
                     <label data-variant='image-circle' data-type='image'>
-                      <input type='radio' name='color' value={icon.name} id={icon.name} />
+                      <RadioButtons type='radio' name='color' value={icon.name} id={icon.name} />
                         <StyleColor src={icon.photos[0].thumbnail_url}></StyleColor>
                       </label>
                   </StyleCircle>
@@ -93,9 +96,15 @@ const StyleCircle = styled.li`
 
 const StyleColor = styled.img`
   border-radius: 100px;
+  border: 1px solid;
+  padding: 3px;
   width: 50px;
   height: 50px;
   object-fit: cover;
+`;
+
+const RadioButtons = styled.input`
+  opacity: 0;
 `;
 
 const Field = styled.fieldset`
