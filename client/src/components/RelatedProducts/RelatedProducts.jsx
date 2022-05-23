@@ -9,7 +9,7 @@ const RelatedProducts = () => {
     const [relatedProductsStyles, setRelatedProductsStyles] = useState([]);
     const [relatedProductsDetail, setRelatedProductsDetail] = useState([]);
     //use local storage to set up outfit
-    const [outfitData, setOutfitData] = useState([]);
+    // const [outfitData, setOutfitData] = useState([]);
 
     const {id, setId} = useContext(PropIdContext);
 
@@ -48,6 +48,7 @@ const RelatedProducts = () => {
          relatedProductsStyles.length > 0 && relatedProductsDetail.length > 0 &&
         <Cards relatedProductsStyles={relatedProductsStyles} relatedProductsDetail={relatedProductsDetail}/>
       }
+      <Outfits />
     </div>
   )
 }
