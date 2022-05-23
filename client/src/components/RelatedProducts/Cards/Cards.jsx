@@ -7,6 +7,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail}) => {
   console.log('relatedProductsDetail', relatedProductsDetail);
   return (
     <div>
+       <h1>Related Products</h1>
     {relatedProductsStyles.map((eachProduct) => {
         //filter the styles photos default;
         const id = Number(eachProduct.product_id);

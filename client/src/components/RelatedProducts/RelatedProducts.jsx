@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import {PropIdContext} from '../App.jsx';
 import Cards from './Cards/Cards.jsx';
+import Outfits from './Outfits/Outfits.jsx';
 
 const RelatedProducts = () => {
     const [relatedProductsStyles, setRelatedProductsStyles] = useState([]);
