@@ -16,14 +16,14 @@ function ProductPic() {
     if (!Array.isArray(displayed)) {
       setCurPhoto(displayed.photos[0])
     }
-  }, [displayed, curPhoto])
+  }, [displayed])
 
   // conditionally render info if displayed is empty
   // when there's no data, image/error page should be displayed
   // show an image placeholder when there's no data
 
   if (curPhoto.length === 0 || Array.isArray(displayed)) {
-    console.log('loading in productPic')
+    console.log('loading')
     return (
       <div>
         <h2>Loading...</h2>

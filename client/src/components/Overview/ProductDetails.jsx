@@ -13,10 +13,9 @@ function ProductDetails() {
   const [price, setPrice] = useState('0');
 
   useEffect(() => {
-    console.log('before get: ', styles)
     axios.get('/products/info', {params:{product_id: id}})
     .then((response) => {
-      console.log('after; styles: ', styles);
+      console.log('styles: ', styles);
       console.log('displayed: ', displayed);
       setProductInfo(response.data);
       if (displayed.sale_price) {
@@ -36,28 +35,27 @@ function ProductDetails() {
   };
 
   var renderStylesComp = function() {
-
+    // on click tag a checkmark on the icon
       return (
-        <StyleDiv>
-        {styles.map((rows) => {
-          return rows.map((icon, key) => {
-            return <StyleCircle key={key}>
-              <label data-variant='image-circle' data-type='image'>
-                {icon.style_id === displayed.style_id ? <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} checked onChange={() => {handleStyleChange(icon)}}/>
-                 : <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} onChange={() => {handleStyleChange(icon)}}/>}
-                  <StyleColor src={icon.photos[0].thumbnail_url}></StyleColor>
-                </label>
-            </StyleCircle>
-          })
-        })}
-      </StyleDiv>
+        <Field>
+          <StyleDiv>
+          {styles.map((rows) => {
+            return rows.map((icon, key) => {
+              return <StyleCircle key={key}>
+                <label data-variant='image-circle' data-type='image'>
+                  {icon.style_id === displayed.style_id ? <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} checked onChange={() => {handleStyleChange(icon)}}/>
+                  : <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} onChange={() => {handleStyleChange(icon)}}/>}
+                    <StyleColor src={icon.photos[0].thumbnail_url}></StyleColor>
+                  </label>
+              </StyleCircle>
+            })
+          })}
+        </StyleDiv>
+      </Field>
       )
 
   };
 
-  // on click we will tag a checkmark on the icon
-  // if the default.id === icon.id, no change in render
-  // otherwise setId to new id selected and re-render display pics
 
   if (productInfo.length === 0) {
     return (
@@ -75,9 +73,7 @@ function ProductDetails() {
         </TitleBlock>
         <SizeAndColor>
           <p><strong>Color: </strong>{displayed.name}</p>
-          <Field>
-            {renderStylesComp()}
-          </Field>
+          {renderStylesComp()}
         </SizeAndColor>
       </div>
     )
