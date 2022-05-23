@@ -8,6 +8,8 @@ import Outfits from './Outfits/Outfits.jsx';
 const RelatedProducts = () => {
     const [relatedProductsStyles, setRelatedProductsStyles] = useState([]);
     const [relatedProductsDetail, setRelatedProductsDetail] = useState([]);
+    //use local storage to set up outfit
+    const [outfitData, setOutfitData] = useState([]);
 
     const {id, setId} = useContext(PropIdContext);
 
@@ -25,12 +27,12 @@ const RelatedProducts = () => {
             });
             Promise.all(allRelatedRequestStyles)
               .then(result => {
-                console.log('resultStyles', result.map((eachProduct) => eachProduct.data));
+                // console.log('resultStyles', result.map((eachProduct) => eachProduct.data));
                 setRelatedProductsStyles(result.map((eachProduct) => eachProduct.data));
               })
             Promise.all(allRelatedRequestInfo)
               .then(result => {
-                console.log('resultCategory', result.map((eachProduct) => eachProduct.data));
+                // console.log('resultCategory', result.map((eachProduct) => eachProduct.data));
                 setRelatedProductsDetail(result.map((eachProduct) => eachProduct.data));
             })
     })
