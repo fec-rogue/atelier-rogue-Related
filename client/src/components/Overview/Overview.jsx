@@ -31,13 +31,19 @@ function Overview() {
   useEffect(() => {
     axios.get('/products/styles', {params:{product_id:id}})
     .then((response) => {
-      setProductStyles(response.data.results);
+      let result = [];
+      let temp = [];
       for (let i = 0; i < response.data.results.length; i++) {
         if (response.data.results[i]["default?"]) {
           setDisplayed(response.data.results[i]);
-          break;
         }
+        if (i !== 0 && i % 4 === 0) {
+          result.push(temp);
+          temp = [];
+        }
+        temp.push(response.data.results[i]);
       }
+      setProductStyles(result);
     })
   }, [id])
 
