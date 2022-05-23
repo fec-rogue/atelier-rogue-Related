@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import {PropIdContext} from '../App.jsx';
 import {StyledProductsContext, DisplayedPhotoContext} from './Overview.jsx'
 
-
 function ProductDetails() {
 
   const {id, setId} = useContext(PropIdContext);
@@ -13,11 +12,11 @@ function ProductDetails() {
   const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
   const [price, setPrice] = useState('0');
 
-
   useEffect(() => {
+    console.log('before get: ', styles)
     axios.get('/products/info', {params:{product_id: id}})
     .then((response) => {
-      console.log('styles: ', styles);
+      console.log('after; styles: ', styles);
       console.log('displayed: ', displayed);
       setProductInfo(response.data);
       if (displayed.sale_price) {
@@ -28,10 +27,37 @@ function ProductDetails() {
     })
   }, [styles]);
 
+  var handleStyleChange = function(e) {
+
+    if (e.style_id !== displayed.style_id) {
+      setDisplayed(e);
+    }
+
+  };
+
+  var renderStylesComp = function() {
+
+      return (
+        <StyleDiv>
+        {styles.map((rows) => {
+          return rows.map((icon, key) => {
+            return <StyleCircle key={key}>
+              <label data-variant='image-circle' data-type='image'>
+                {icon.style_id === displayed.style_id ? <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} checked onChange={() => {handleStyleChange(icon)}}/>
+                 : <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} onChange={() => {handleStyleChange(icon)}}/>}
+                  <StyleColor src={icon.photos[0].thumbnail_url}></StyleColor>
+                </label>
+            </StyleCircle>
+          })
+        })}
+      </StyleDiv>
+      )
+
+  };
+
   // on click we will tag a checkmark on the icon
   // if the default.id === icon.id, no change in render
   // otherwise setId to new id selected and re-render display pics
-
 
   if (productInfo.length === 0) {
     return (
@@ -50,18 +76,7 @@ function ProductDetails() {
         <SizeAndColor>
           <p><strong>Color: </strong>{displayed.name}</p>
           <Field>
-            <StyleDiv>
-              {styles.map((rows) => {
-                return rows.map((icon, key) => {
-                  return <StyleCircle key={key}>
-                    <label data-variant='image-circle' data-type='image'>
-                      <RadioButtons type='radio' name='color' value={icon.name} id={icon.name} />
-                        <StyleColor src={icon.photos[0].thumbnail_url}></StyleColor>
-                      </label>
-                  </StyleCircle>
-                })
-              })}
-            </StyleDiv>
+            {renderStylesComp()}
           </Field>
         </SizeAndColor>
       </div>
@@ -69,6 +84,7 @@ function ProductDetails() {
   }
 }
 
+// export to a separate style page lol....
 const ProductDetailDiv = styled.div`
   display: flex;
 `;
@@ -104,14 +120,13 @@ const StyleColor = styled.img`
 `;
 
 const RadioButtons = styled.input`
-  opacity: 0;
+
 `;
 
 const Field = styled.fieldset`
   display: block;
   border: 0;
 `;
-
 
 
 export default ProductDetails;
