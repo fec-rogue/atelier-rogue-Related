@@ -7,27 +7,23 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail}) => {
   console.log('relatedProductsDetail', relatedProductsDetail);
   return (
     <div>
-    {/* {relatedProductsStyles.map((eachProduct) => {
+    {relatedProductsStyles.map((eachProduct) => {
         //filter the styles photos default;
-        var defaultsStyles = eachProduct.data.results.filter((eachStyle) => eachStyle['default?'] === true);
-        // var defaultsStyles = eachProduct.data.results;
-        console.log('defaultsStyles', defaultsStyles);
+        const id = Number(eachProduct.product_id);
+        const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
+        console.log('detailProduct',detailProduct);
+        const category = detailProduct.category;
+        const name = detailProduct.name;
+        const price= detailProduct.default_price;
+        const defaultsStyles = eachProduct.results.filter((eachStyle) => eachStyle['default?'] === true);
         return(
-        <div>
-          <CardEntry defaultsStyles={defaultsStyles} />
+        <div key={id}>
+          <CardEntry defaultsStyles={defaultsStyles}  category={category} name={name} price={price} />
         </div>
           )
-      })} */}
+      })}
 
-   {relatedProductsDetail.map((eachProduct) => {
-          //filter the styles photos default;
-          // var defaults = eachProduct.data.results.filter((eachStyle) => eachStyle['default?'] === true);
-          return(
-          <div>
-            <CardEntry productDetail={eachProduct} />
-          </div>
-            )
-        })}
+
     </div>
   )
 }

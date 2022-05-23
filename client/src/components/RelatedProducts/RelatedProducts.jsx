@@ -18,41 +18,33 @@ const RelatedProducts = () => {
               // console.log('eachRelated', eachRelated);
               return axios.get(`products/styles?product_id=${eachRelated}`)
             });
-            // console.log('allRelatedRequestStyles', allRelatedRequestStyles);
-            return axios.all(allRelatedRequestStyles)
-              .then(axios.spread((...result) => {
-              // console.log('resultStyle', result);
-              setRelatedProductsStyles(result);
-          }))
-        })
+            let allRelatedRequestInfo= res.data.map((eachRelated) => {
+              // console.log('eachRelated', eachRelated);
+              return axios.get(`products/info?product_id=${eachRelated}`)
+            });
+            Promise.all(allRelatedRequestStyles)
+              .then(result => {
+                console.log('resultStyles', result.map((eachProduct) => eachProduct.data));
+                setRelatedProductsStyles(result.map((eachProduct) => eachProduct.data));
+              })
+            Promise.all(allRelatedRequestInfo)
+              .then(result => {
+                console.log('resultCategory', result.map((eachProduct) => eachProduct.data));
+                setRelatedProductsDetail(result.map((eachProduct) => eachProduct.data));
+            })
+    })
         .catch((err) => {
           console.log('error while getting the data', err)
         })
     }, []);
 
-    useEffect(() => {
-      axios.get(`products/related?product_id=${id}`)
-        .then((res) => {
-          // console.log('response from API', res.data)
-         let allRelatedRequestInfo= res.data.map((eachRelated) => {
-            // console.log('eachRelated', eachRelated);
-            return axios.get(`products/info?product_id=${eachRelated}`)
-          });
-          // console.log('allRelatedRequestCategory', allRelatedRequest);
-          return axios.all(allRelatedRequestInfo)
-            .then(axios.spread((...result) => {
-            // console.log('resultCategory', result);
-            setRelatedProductsDetail(result);
-        }))
-      })
-      .catch((err) => {
-        console.log('error while getting the data', err)
-      })
-  }, []);
 
   return(
     <div>
-      <Cards relatedProductsStyles={relatedProductsStyles} relatedProductsDetail={relatedProductsDetail}/>
+      {
+         relatedProductsStyles.length > 0 && relatedProductsDetail.length > 0 &&
+        <Cards relatedProductsStyles={relatedProductsStyles} relatedProductsDetail={relatedProductsDetail}/>
+      }
     </div>
   )
 }
