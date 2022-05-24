@@ -25,52 +25,45 @@ function ProductSizes() {
     )
   } else {
     return (
-      <Field>
-        <StyleDiv>
-          {Object.keys(sizeAndQty).map((size, key) => {
-            return <SizeList key={key}>
-              <RadioButtons type='radio' value={size} name='size'/>
-              <label><span>{size}</span></label>
-            </SizeList>
-          })}
-        </StyleDiv>
-      </Field>
+      <div>
+        {Object.keys(sizeAndQty).map((size, key) => {
+          return (
+            <label value={key} name={size}>
+              <input id={key} type='radio'/>{size}
+            </label>
+          )
+        })}
+      </div>
     )
   }
 }
 
-const ProductDetailDiv = styled.div`
-  display: flex;
+/*
+<Field>
+  <StyleDiv>
+    {Object.keys(sizeAndQty).map((size, key) => {
+      return <SizeList key={key}>
+        <RadioButtons type='radio' value={size} name='size'/>
+        <SizeBox><span>{size}</span></SizeBox>
+      </SizeList>
+    })}
+  </StyleDiv>
+</Field>
+*/
+
+const GridDiv = styled.div`
+    display: grid;
+    justify-content: flex-start;
+    grid-template-columns: repeat(auto-fill, 52px);
+    grid-gap: 0;
+    gap: 0;
+    align-items: center;
+    margin: -5px;
+    position: relative;
 `;
 
-const TitleBlock = styled.div`
-  display: block;
-  border-bottom: 0.5px solid;
-`;
-
-const SizeAndColor = styled.div`
-  display: block;
-  border-bottom: 0.5px solid;
-`;
-
-const StyleDiv = styled.ul`
-  list-style-type: none;
-  padding-left: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-`;
 const SizeList = styled.li`
   flex-direction: row;
-`;
-
-const StyleColor = styled.img`
-  border-radius: 100px;
-  border: 1px solid;
-  padding: 3px;
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
 `;
 
 const RadioButtons = styled.input`
@@ -80,6 +73,13 @@ const RadioButtons = styled.input`
 const Field = styled.fieldset`
   display: block;
   border: 0;
+`;
+
+const SizeBox = styled.label`
+  text-align: center;
+  background-color: transparent;
+  font-family: DS Trade Gothic,Trade Gothic,sans-serif;
+  letter-spacing: .6px;
 `;
 
 
