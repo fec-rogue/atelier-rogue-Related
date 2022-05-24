@@ -9,10 +9,23 @@ import Outfits from './Outfits/Outfits.jsx';
 const RelatedProducts = () => {
     const [relatedProductsStyles, setRelatedProductsStyles] = useState([]);
     const [relatedProductsDetail, setRelatedProductsDetail] = useState([]);
+
     //use local storage to set up outfit
     // const [outfitData, setOutfitData] = useState([]);
 
     const {id, setId} = useContext(PropIdContext);
+    const [defaultidinfo, setDefaultIdinfo] = useState([]);
+
+    useEffect(() => {
+      axios.get(`products/info?product_id=${id}`)
+        .then((res) => {
+          // console.log('default info', res.data)
+          setDefaultIdinfo(res.data)
+        })
+        .catch((err) => {
+          console.log('error while getting the data', err)
+        })
+    }, [])
 
     useEffect(() => {
         axios.get(`products/related?product_id=${id}`)
@@ -33,10 +46,10 @@ const RelatedProducts = () => {
                 // console.log('resultCategory', result.map((eachProduct) => eachProduct.data));
                 setRelatedProductsDetail(result.map((eachProduct) => eachProduct.data));
             })
-    })
-        .catch((err) => {
-          console.log('error while getting the data', err)
-        })
+          })
+          .catch((err) => {
+            console.log('error while getting the data', err)
+          })
     }, []);
 
 
@@ -44,9 +57,11 @@ const RelatedProducts = () => {
     <div>
       {
          relatedProductsStyles.length > 0 && relatedProductsDetail.length > 0 &&
-        <Cards relatedProductsStyles={relatedProductsStyles} relatedProductsDetail={relatedProductsDetail}/>
+        <Cards
+        relatedProductsStyles={relatedProductsStyles}
+        relatedProductsDetail={relatedProductsDetail}
+        defaultInfo={defaultidinfo}/>
       }
-      <Outfits />
     </div>
   )
 }

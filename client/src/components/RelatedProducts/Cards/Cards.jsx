@@ -5,7 +5,8 @@ import CardEntry from './CardEntry.jsx';
 import { FcPrevious,  FcNext } from "react-icons/fc";
 
 
-const Cards = ({relatedProductsStyles, relatedProductsDetail}) => {
+const Cards = ({relatedProductsStyles, relatedProductsDetail, defaultInfo}) => {
+  // console.log('defaultidinfo', defaultInfo);
   // console.log('relatedProductsStyles', relatedProductsStyles);
   // console.log('relatedProductsDetail', relatedProductsDetail);
   const [current, setCurrent] = useState(0);
@@ -23,8 +24,8 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail}) => {
   return (
     <div>
        <CardsWrapper>
-       <FcPrevious onClick={prevArrow}/>
-       <FcNext onClick={nextArrow}/>
+       { current !== 0 ? <FcPrevious onClick={prevArrow}/> : null }
+       {  current !== length -1 ?  <FcNext onClick={nextArrow}/> : null }
       {relatedProductsStyles.map((eachProduct, index) => {
           // console.log('eachProduct', eachProduct);
           const id = Number(eachProduct.product_id);
@@ -32,6 +33,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail}) => {
           // console.log('detailProduct',detailProduct);
           const category = detailProduct.category;
           const name = detailProduct.name;
+          const features = detailProduct.features;
           const defaultsStyles = eachProduct.results.filter((eachStyle) => eachStyle['default?'] === true);
           // console.log('defaultsStyles', defaultsStyles)
 
@@ -44,7 +46,17 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail}) => {
 
           return(
             <Cardscontainer key={id}>
-              <CardEntry defaultsStyles={defaultsStyles}  category={category} name={name} price={price} index={index} current={current}/>
+              {defaultInfo.id &&
+                <CardEntry
+                defaultsStyles={defaultsStyles}
+                detailProduct = {detailProduct}
+                defaultInfo={defaultInfo}
+                id={id}
+                category={category}
+                name={name}
+                price={price}
+                index={index}
+                current={current} />}
             </Cardscontainer>
             )
         })}

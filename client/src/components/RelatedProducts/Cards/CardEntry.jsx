@@ -1,18 +1,41 @@
 import React from 'react';
+import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
+import Comparison from './ComparisonModal.jsx';
 
 
-const CardEntry = ({defaultsStyles, category, name, price, index, current}) => {
+const CardEntry = ({defaultsStyles, detailProduct, defaultInfo, id, category, name, price, index, current}) => {
   // console.log('defaultsStylesURL', defaultsStyles[0] && defaultsStyles[0].photos[0].url);
   // console.log('defaultprice', defaultsStyles[0] )
+  // console.log('detailProduct',detailProduct);
+  // console.log('defaultidinfo', defaultidinfo);
+  const imageNotFound = "http://placecorgi.com/260/180";
+
+  const [data, setData] = useState({
+    showModal: false,
+    twoCardsArray: []
+  });
+
+  const defaultid = defaultInfo.id;
+  const defautidfeatures = defaultInfo;
   return(
       <Carditem>
-        {defaultsStyles[0] && index === current ? <Cardimage src={defaultsStyles[0].photos[0].url}/> : <Cardimage src="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg" />}
+        {(defaultsStyles[0] && index === current) ? <Cardimage src={defaultsStyles[0].photos[0].url}/> : <Cardimage src={imageNotFound} />}
+        <ModalButton onClick={() => {
+          setData({
+            showModal: true,
+            twoCardsArray: [defautidfeatures, detailProduct]
+          })
+        }}> Compare
+        </ModalButton>
+
+        {data.showModal && data.twoCardsArray.length > 0 &&
+        <Comparison twoCards={data.twoCardsArray} closeModal={setData} />}
+
         <CardInfo>
-          Category: {category}
-          Name: {name}
-          Price: {price}
-          {/* Price: { defaultsStyles[0] !== undefined && defaultsStyles[0].sale_price === null ? defaultsStyles[0].original_price : defaultsStyles[0].sale_price } */}
+          <p>Category: {category}</p>
+          <p>Name: {name}</p>
+          <p>Price: {price}</p>
         </CardInfo>
       </Carditem>
   )
@@ -31,4 +54,11 @@ const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
 `
+
+
+const ModalButton = styled.button`
+
+`
+
+
 export default CardEntry;
