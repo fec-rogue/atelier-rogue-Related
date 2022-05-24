@@ -15,7 +15,7 @@ Project Summary: Related Items & Comparison
         - Product Name
         - Price
         - Start Ratings (# of Reviews)
-    - A feature of comparison Modal
+    - A pull up feature of comparison Modal
     - Conditionally rendered scroll buttons
 
   - Outfit cards allow users to save and track individual products based on their interest.This component includes:

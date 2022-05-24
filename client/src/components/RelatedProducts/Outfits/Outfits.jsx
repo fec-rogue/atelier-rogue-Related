@@ -11,7 +11,7 @@ const Outfits = () => {
   // console.log(Object.keys(localItems));
 
   return (
-    <div>Hello from Outfits</div>
+    <div></div>
   )
 }
 

@@ -22,7 +22,6 @@ const App = () => {
   return (
     <PropIdContext.Provider value={{id, setId}}>
       <div>
-        {/* Hello World */}
         <RelatedProducts/>
       </div>
     </PropIdContext.Provider>
