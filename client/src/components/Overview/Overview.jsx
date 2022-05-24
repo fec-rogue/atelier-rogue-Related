@@ -17,6 +17,7 @@ const AnnouncementHeader = styled.h2`
 
 const OverviewComps = styled.div`
   display: flex;
+  justify-content: center;
 `;
 
 export const DisplayedPhotoContext = createContext();

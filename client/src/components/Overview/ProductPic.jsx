@@ -57,7 +57,7 @@ const CarouselContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 15%;
-  margin-right: -15%;
+  margin-right: -10%;
 `;
 
 const MainPicture = styled.img`
