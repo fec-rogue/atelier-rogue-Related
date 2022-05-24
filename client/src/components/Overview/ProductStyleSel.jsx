@@ -17,10 +17,9 @@ function ProductStyleSel () {
   return (
     <Field>
       <Block>
-        {styles.map((rows) => {
-
+        {styles.map((rows, key) => {
           return (
-            <StyleDiv>
+            <StyleDiv key={key}>
               {rows.map((icon, key) => {
               return (
                 <StyleCircle key={key}>

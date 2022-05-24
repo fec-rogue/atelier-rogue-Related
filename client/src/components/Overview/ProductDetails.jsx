@@ -50,6 +50,7 @@ function ProductDetails() {
       <div>
         <TitleBlock>
           <h2>{productInfo.name}</h2>
+          <p>{productInfo.category}</p>
           {renderPrice()}
           <p>* * * * * (46)</p>
         </TitleBlock>

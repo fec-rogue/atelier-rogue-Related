@@ -36,14 +36,14 @@ function SizeSelection () {
       max = 15;
     }
     return (sizeSelected === '') ?
-    (<Selector name='qty' value={qtySelected} >
+    (<Selector id='qty' name='qty' value={qtySelected} onChange={handleQtyChange}>
       <option value='' disabled hidden>-</option>
     </Selector>)
     : (sizeAndQty[sizeSelected] === 0) ?
-    (<Selector name='qty' value={qtySelected} disabled>
+    (<Selector id='qty' name='qty' value={qtySelected} disabled>
       <option value='' disabled hidden>OUT OF STOCK</option>
     </Selector>)
-    : (<Selector name='qty' required value={qtySelected} onChange={handleQtyChange}>
+    : (<Selector id='qty' name='qty'required value={qtySelected} onChange={handleQtyChange}>
         <option value='' disabled hidden>-</option>
         {(() => {
         const options = [];
@@ -55,12 +55,48 @@ function SizeSelection () {
       </Selector>)
   }
 
+  /*
+  If the default ‘Select Size’ is currently selected: Clicking this button should open the size dropdown, and a message should appear above the dropdown stating “Please select size”
+  If there is no stock: This button should be hidden
+  If both a valid size and valid quantity are selected: Clicking this button will add the product to the user’s cart.
+  */
+
+  // if size isnt selected yet
+    // guide users to qty box
+  // if size IS selected:
+    // if no item in stock --> hide button
+    // if addCart is clicked without qty being set --> guid user to qty
+    // if valid --> add item
+  var handleCart = function() {
+
+    var elem = '';
+    if (sizeSelected === '') {
+      elem = document.getElementById('sizes');
+      elem.scrollIntoView({
+        behavior: "smooth",
+      })
+      alert('Select a size and qty');
+    } else {
+      if (qtySelected === '') {
+        elem = document.getElementById('qty');
+        elem.scrollIntoView({
+          behavior: "smooth",
+        })
+        alert('Select a qty');
+      } else {
+        console.log('added');
+      }
+    }
+
+
+  }
+
 
 
   return(
     <SizeQtyDiv>
       <p><strong>Size: {sizeSelected}</strong></p>
-      <Selector name='sizes' onChange={handleSizeChange} required value={sizeSelected}>
+      <Selector id ='sizes' name='sizes' onChange={handleSizeChange} required value={sizeSelected}>
         <option value='' disabled hidden>Select Size</option>
         {Object.keys(sizeAndQty).map((size, key) => {
           if (sizeAndQty[size] === 0) {
@@ -73,12 +109,26 @@ function SizeSelection () {
           })}
       </Selector>
       {renderQty()}
+      <CartDiv>
+        <CartBtn onClick={handleCart}>ADD TO CART</CartBtn>
+      </CartDiv>
     </SizeQtyDiv>
   )
 }
 
 // export on separate css page
+const CartBtn = styled.button`
 
+`;
+
+const CartDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  margin-left: 0px;
+  margin-top: 35px;
+
+`;
 const SizeQtyDiv = styled.div`
   display: flex
   justify-content: space-between;
@@ -88,6 +138,7 @@ const Selector = styled.select`
   padding: 7px;
   margin: 5px;
   margin-top: 0px;
+  margin-left: 0px;
 `;
 
 export default SizeSelection;
