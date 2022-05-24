@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import ProductSizes from './ProductSizes.jsx';
+import ProductStyleSel from './ProductStyleSel.jsx'
 import {PropIdContext} from '../App.jsx';
 import {StyledProductsContext, DisplayedPhotoContext} from './Overview.jsx'
 
@@ -11,6 +13,7 @@ function ProductDetails() {
   const [productInfo, setProductInfo] = useState([]);
   const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
   const [price, setPrice] = useState('0');
+  const [sizeAndQty, setSizeAndQty] = useState({});
 
   useEffect(() => {
     axios.get('/products/info', {params:{product_id: id}})
@@ -18,42 +21,20 @@ function ProductDetails() {
       console.log('styles: ', styles);
       console.log('displayed: ', displayed);
       setProductInfo(response.data);
-      if (displayed.sale_price) {
-        setPrice(displayed.sale_price);
-      } else {
-        setPrice(displayed.original_price);
-      }
     })
   }, [styles]);
 
-  var handleStyleChange = function(e) {
-
-    if (e.style_id !== displayed.style_id) {
-      setDisplayed(e);
-    }
-
-  };
-
-  var renderStylesComp = function() {
-    // on click tag a checkmark on the icon
-      return (
-        <Field>
-          <StyleDiv>
-          {styles.map((rows) => {
-            return rows.map((icon, key) => {
-              return <StyleCircle key={key}>
-                <label data-variant='image-circle' data-type='image'>
-                  {icon.style_id === displayed.style_id ? <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} checked onChange={() => {handleStyleChange(icon)}}/>
-                  : <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} onChange={() => {handleStyleChange(icon)}}/>}
-                    <StyleColor src={icon.photos[0].thumbnail_url}></StyleColor>
-                  </label>
-              </StyleCircle>
-            })
-          })}
-        </StyleDiv>
-      </Field>
+  let renderPrice = () => {
+    if (displayed.sale_price) {
+      return(
+        // make the sale price red
+        <p><strike>${displayed.original_price}</strike> ${displayed.sale_price}</p>
       )
-
+    } else {
+      return(
+        <p>${displayed.original_price}</p>
+      )
+    }
   };
 
 
@@ -68,12 +49,14 @@ function ProductDetails() {
       <div>
         <TitleBlock>
           <h2>{productInfo.name}</h2>
-          <p>${price}</p>
+          {renderPrice()}
           <p>* * * * * (46)</p>
         </TitleBlock>
         <SizeAndColor>
           <p><strong>Color: </strong>{displayed.name}</p>
-          {renderStylesComp()}
+          <ProductStyleSel/>
+          <p><strong>Size:</strong></p>
+          <ProductSizes/>
         </SizeAndColor>
       </div>
     )
@@ -116,7 +99,7 @@ const StyleColor = styled.img`
 `;
 
 const RadioButtons = styled.input`
-
+  opacity: 0;
 `;
 
 const Field = styled.fieldset`
