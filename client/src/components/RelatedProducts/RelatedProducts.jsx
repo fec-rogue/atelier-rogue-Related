@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
+import styled from 'styled-components';
 import {PropIdContext} from '../App.jsx';
 import Cards from './Cards/Cards.jsx';
 import Outfits from './Outfits/Outfits.jsx';
@@ -16,13 +17,10 @@ const RelatedProducts = () => {
     useEffect(() => {
         axios.get(`products/related?product_id=${id}`)
           .then((res) => {
-            // console.log('response from API', res.data)
            let allRelatedRequestStyles= res.data.map((eachRelated) => {
-              // console.log('eachRelated', eachRelated);
               return axios.get(`products/styles?product_id=${eachRelated}`)
             });
             let allRelatedRequestInfo= res.data.map((eachRelated) => {
-              // console.log('eachRelated', eachRelated);
               return axios.get(`products/info?product_id=${eachRelated}`)
             });
             Promise.all(allRelatedRequestStyles)
