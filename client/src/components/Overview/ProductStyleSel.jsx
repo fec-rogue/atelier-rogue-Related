@@ -8,6 +8,7 @@ function ProductStyleSel () {
   const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
 
   var handleStyleChange = function(e) {
+    console.log(styles);
     if (e.style_id !== displayed.style_id) {
       setDisplayed(e);
     }
@@ -15,23 +16,34 @@ function ProductStyleSel () {
 
   return (
     <Field>
-      <StyleDiv>
-      {styles.map((rows) => {
-        return rows.map((icon, key) => {
-          return <StyleCircle key={key}>
-            <label data-variant='image-circle' data-type='image'>
-              {icon.style_id === displayed.style_id ? <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} checked onChange={() => {handleStyleChange(icon)}}/>
-              : <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} onChange={() => {handleStyleChange(icon)}}/>}
-                <StyleColor src={icon.photos[0].thumbnail_url}></StyleColor>
-              </label>
-          </StyleCircle>
-        })
-      })}
-    </StyleDiv>
+      <Block>
+        {styles.map((rows) => {
+
+          return (
+            <StyleDiv>
+              {rows.map((icon, key) => {
+              return (
+                <StyleCircle key={key}>
+                  <label data-variant='image-circle' data-type='image'>
+                    {icon.style_id === displayed.style_id ? <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} checked onChange={() => {handleStyleChange(icon)}}/>
+                    : <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} onChange={() => {handleStyleChange(icon)}}/>}
+                      <StyleColor src={icon.photos[0].thumbnail_url}></StyleColor>
+                    </label>
+                </StyleCircle>
+                )
+              })}
+            </StyleDiv>
+          )
+          })}
+      </Block>
   </Field>
   )
 
 }
+
+const Block = styled.div`
+  displaye: block;
+`;
 const ProductDetailDiv = styled.div`
   display: flex;
 `;
@@ -55,6 +67,7 @@ const StyleDiv = styled.ul`
 `;
 const StyleCircle = styled.li`
   flex-direction: row;
+  margin: 5px;
 `;
 
 const StyleColor = styled.img`

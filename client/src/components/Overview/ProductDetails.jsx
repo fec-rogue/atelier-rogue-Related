@@ -45,6 +45,7 @@ function ProductDetails() {
       </div>
     )
   } else {
+    console.log('product info: ', productInfo);
     return(
       <div>
         <TitleBlock>
@@ -57,6 +58,7 @@ function ProductDetails() {
           <ProductStyleSel/>
           <SizeSelection/>
         </SizeAndColor>
+
       </div>
     )
   }
