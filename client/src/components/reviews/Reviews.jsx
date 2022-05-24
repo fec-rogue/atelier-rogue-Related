@@ -2,13 +2,15 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import Stars from '../stars/Stars.jsx';
+
 
 const Test = styled.div`
   font-size: 16px;
+  overflow: auto;
   max-height: 600px;
   max-width: 650px;
-  overflow: auto;
-`;
+  `;
 
 const StarDate = styled.div`
   display: flex;
@@ -90,7 +92,7 @@ const Reviews = () => {
       {reviews.map((review) =>
         <ReviewBox>
           <StarDate>
-            <section>{review.rating}</section>
+            {Stars(review.rating)}
             <section>{review.reviewer_name}, {review.date}></section>
           </StarDate>
           <Title onClick={handleMore}>{review.summary === '' ? 'No Title' : review.summary}</Title>
@@ -100,8 +102,8 @@ const Reviews = () => {
            <ResponseBlock>
              <ResponseWord>Response:</ResponseWord>
              <Response>{review.response}</Response>
-           </ResponseBlock> :
-            null
+           </ResponseBlock>
+           : null
           }
           <Interactables>
             <HelpfulTag>Was this review helpful?  </HelpfulTag>
