@@ -16,20 +16,27 @@ function ProductSizes() {
         sizeQty[displayed.skus[props].size] = displayed.skus[props].quantity;
       }
     };
-    console.log('sizeQty: ',sizeQty);
     setSizeAndQty(sizeQty);
-
   }, [displayed]);
 
-  return (
-    <Field>
-      <StyleDiv>
-        {Object.keys(sizeAndQty).map((size, key) => {
-          <li>test</li>
-        })}
-      </StyleDiv>
-    </Field>
-  )
+  if (Object.keys(sizeAndQty).length === 0) {
+    return (
+      <div>Loading...</div>
+    )
+  } else {
+    return (
+      <Field>
+        <StyleDiv>
+          {Object.keys(sizeAndQty).map((size, key) => {
+            return <SizeList key={key}>
+              <RadioButtons type='radio' value={size} name='size'/>
+              <label><span>{size}</span></label>
+            </SizeList>
+          })}
+        </StyleDiv>
+      </Field>
+    )
+  }
 }
 
 const ProductDetailDiv = styled.div`
@@ -53,7 +60,7 @@ const StyleDiv = styled.ul`
   flex-wrap: wrap;
   justify-content: space-evenly;
 `;
-const StyleCircle = styled.li`
+const SizeList = styled.li`
   flex-direction: row;
 `;
 
@@ -77,51 +84,3 @@ const Field = styled.fieldset`
 
 
 export default ProductSizes;
-/*
-let renderSizeComp = function() {
-    // loop through default.skus.size for size text and create a box for each size
-    // if quantity of each size is 0, put sikethrough the box and don't let users select
-    var sizeQty = {};
-    for (var props in displayed.skus) {
-      if (sizeQty.hasOwnProperty(displayed.skus[props].size)) {
-        sizeQty[displayed.skus[props].size] += displayed.skus[props].quantity;
-      } else {
-        sizeQty[displayed.skus[props].size] = displayed.skus[props].quantity;
-      }
-    };
-    setSizeAndQty(sizeQty);
-
-    /*
-    for (var props in displayed.skus) {
-      sizes.push(default.skus[props][size]);
-      qty.push(default.skus[props][quantity]);
-    }
-    console.log('size arr: ',sizes);
-    console.log('qty arr: ',qty);
-    /*
-    return (
-      <Field>
-        <StyleDiv>
-          {Object.keys(sizeAndQty).map((size, key) => {
-            if (sizeAndQty.size === 0) {
-              return (
-                <input key={key} type='radio' value={sizeAndQty.size} disabled='disabled'>
-                  <label>
-                    <span>{sizeAndQty.size}</span>
-                  </label>
-                </input>
-              )
-            } else {
-              <input key={key} type='radio' value={sizeAndQty.size}>
-                <label>
-                  <span>{sizeAndQty.size}</span>
-                </label>
-              </input>
-            }
-          })}
-        </StyleDiv>
-      </Field>
-    )
-
-  }
-*/
