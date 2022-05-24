@@ -67,7 +67,7 @@ const GridDiv = styled.div`
     position: relative;
 `;
 
-
+// create hover function for size box, and change box color when a box is selected
 const RadioButtons = styled.input`
   position: absolute;
   opacity: 0;

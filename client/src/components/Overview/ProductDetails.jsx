@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import ProductSizes from './ProductSizes.jsx';
+import SizeSelection from './SizeSelection.jsx';
 import ProductStyleSel from './ProductStyleSel.jsx'
 import {PropIdContext} from '../App.jsx';
 import {StyledProductsContext, DisplayedPhotoContext} from './Overview.jsx'
@@ -55,7 +55,7 @@ function ProductDetails() {
         <SizeAndColor>
           <p><strong>Color: </strong>{displayed.name}</p>
           <ProductStyleSel/>
-          <ProductSizes/>
+          <SizeSelection/>
         </SizeAndColor>
       </div>
     )
