@@ -67,7 +67,9 @@ const StyleColor = styled.img`
 `;
 
 const RadioButtons = styled.input`
+  position: absolute;
   opacity: 0;
+  width: 0;
 `;
 
 const Field = styled.fieldset`

@@ -6,6 +6,7 @@ import {DisplayedPhotoContext} from './Overview.jsx'
 function ProductSizes() {
   const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
   const [sizeAndQty, setSizeAndQty] = useState({});
+  const [sizeSelected, setSizeSelected] = useState('');
 
   useEffect(() => {
     var sizeQty = {};
@@ -17,7 +18,20 @@ function ProductSizes() {
       }
     };
     setSizeAndQty(sizeQty);
+    clearInputs();
+    setSizeSelected('');
   }, [displayed]);
+
+  var handleSizeChange = function(e) {
+    setSizeSelected(e.target.value.split(' ').join(''));
+  };
+
+  var clearInputs = function() {
+    var sizeInputs = document.getElementsByName('size');
+    sizeInputs.forEach((elem) => {
+      elem.checked = false;
+    })
+  }
 
   if (Object.keys(sizeAndQty).length === 0) {
     return (
@@ -26,30 +40,22 @@ function ProductSizes() {
   } else {
     return (
       <div>
-        {Object.keys(sizeAndQty).map((size, key) => {
-          return (
-            <label value={key} name={size}>
-              <input id={key} type='radio'/>{size}
-            </label>
-          )
-        })}
+      <p><strong>Size: {sizeSelected}</strong></p>
+        <GridDiv>
+          {Object.keys(sizeAndQty).map((size, key) => {
+            return (
+              <SizeBox key={key} name={size}>
+                <RadioButtons type='radio' name='size' value={size} onChange={handleSizeChange}/> {` ${size} `}
+              </SizeBox>
+            )
+          })}
+        </GridDiv>
       </div>
+
     )
   }
 }
 
-/*
-<Field>
-  <StyleDiv>
-    {Object.keys(sizeAndQty).map((size, key) => {
-      return <SizeList key={key}>
-        <RadioButtons type='radio' value={size} name='size'/>
-        <SizeBox><span>{size}</span></SizeBox>
-      </SizeList>
-    })}
-  </StyleDiv>
-</Field>
-*/
 
 const GridDiv = styled.div`
     display: grid;
@@ -58,16 +64,14 @@ const GridDiv = styled.div`
     grid-gap: 0;
     gap: 0;
     align-items: center;
-    margin: -5px;
     position: relative;
 `;
 
-const SizeList = styled.li`
-  flex-direction: row;
-`;
 
 const RadioButtons = styled.input`
+  position: absolute;
   opacity: 0;
+  width: 0;
 `;
 
 const Field = styled.fieldset`
@@ -76,10 +80,18 @@ const Field = styled.fieldset`
 `;
 
 const SizeBox = styled.label`
+  display: inline-block;
   text-align: center;
   background-color: transparent;
   font-family: DS Trade Gothic,Trade Gothic,sans-serif;
-  letter-spacing: .6px;
+  margin-bottom: 30px;
+  margin: 5px;
+  height: 40px;
+  line-height: 44px;
+  box-sizing: content-box;
+  border-width: 1px;
+  border: 0.5px solid #7e858b;
+
 `;
 
 

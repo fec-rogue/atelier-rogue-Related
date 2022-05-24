@@ -55,7 +55,6 @@ function ProductDetails() {
         <SizeAndColor>
           <p><strong>Color: </strong>{displayed.name}</p>
           <ProductStyleSel/>
-          <p><strong>Size:</strong></p>
           <ProductSizes/>
         </SizeAndColor>
       </div>
