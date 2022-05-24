@@ -6,6 +6,7 @@ import { FcPrevious,  FcNext } from "react-icons/fc";
 
 
 const Cards = ({relatedProductsStyles, relatedProductsDetail}) => {
+  // console.log('relatedProductsStyles', relatedProductsStyles);
   // console.log('relatedProductsDetail', relatedProductsDetail);
   const [current, setCurrent] = useState(0);
   const length = relatedProductsStyles.length;
@@ -25,19 +26,27 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail}) => {
        <FcPrevious onClick={prevArrow}/>
        <FcNext onClick={nextArrow}/>
       {relatedProductsStyles.map((eachProduct, index) => {
+          // console.log('eachProduct', eachProduct);
           const id = Number(eachProduct.product_id);
           const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
           // console.log('detailProduct',detailProduct);
           const category = detailProduct.category;
           const name = detailProduct.name;
-          const price= detailProduct.default_price;
           const defaultsStyles = eachProduct.results.filter((eachStyle) => eachStyle['default?'] === true);
-        // console.log('defaultsStyles', defaultsStyles)
-        return(
-          <Cardscontainer key={id}>
-            <CardEntry defaultsStyles={defaultsStyles}  category={category} name={name} price={price} index={index} current={current}/>
-          </Cardscontainer>
-          )
+          // console.log('defaultsStyles', defaultsStyles)
+
+          const defaultPrice = detailProduct.default_price;
+          // console.log('defaultPrice', defaultPrice);
+          const saleprice = defaultsStyles[0] && defaultsStyles[0].sale_price;
+          // console.log('saleprice', saleprice);
+          const price = saleprice === null ? defaultPrice : saleprice;
+          // console.log('price', price )
+
+          return(
+            <Cardscontainer key={id}>
+              <CardEntry defaultsStyles={defaultsStyles}  category={category} name={name} price={price} index={index} current={current}/>
+            </Cardscontainer>
+            )
         })}
     </CardsWrapper>
     </div>
