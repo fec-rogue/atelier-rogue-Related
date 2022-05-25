@@ -23,7 +23,7 @@ function ProductPic() {
   // show an image placeholder when there's no data
 
   if (curPhoto.length === 0 || Array.isArray(displayed)) {
-    console.log('loading')
+    //console.log('loading')
     return (
       <div>
         <h2>Loading...</h2>

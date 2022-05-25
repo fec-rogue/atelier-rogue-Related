@@ -18,8 +18,8 @@ function ProductDetails() {
   useEffect(() => {
     axios.get('/products/info', {params:{product_id: id}})
     .then((response) => {
-      console.log('styles: ', styles);
-      console.log('displayed: ', displayed);
+      //console.log('styles: ', styles);
+      //console.log('displayed: ', displayed);
       setProductInfo(response.data);
     })
   }, [styles]);
@@ -45,7 +45,7 @@ function ProductDetails() {
       </div>
     )
   } else {
-    console.log('product info: ', productInfo);
+    //console.log('product info: ', productInfo);
     return(
       <div>
         <TitleBlock>
