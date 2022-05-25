@@ -3,14 +3,22 @@ import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Stars from '../stars/Stars.jsx';
-
+import Ratings from './Ratings.jsx';
 
 const Test = styled.div`
+  display: flex;
+  flex-direction: row;
   font-size: 16px;
   overflow: auto;
-  max-height: 600px;
-  max-width: 650px;
+  max-height: 1000px;
+  max-width: 1250px;
   `;
+
+const ReviewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 
 const StarDate = styled.div`
   display: flex;
@@ -67,52 +75,85 @@ const Count = styled.span`
 
 `;
 
+const AddMore = styled.button`
+  height: 50px;
+  width: 100px;
+  margin-left: 690px;
+  margin-right: 10px;
+  margin-top: 20px;
+`;
+
+const AddReview = styled.button`
+  height: 50px;
+  width: 100px;
+  margin-top: 20px;
+`;
+
+const Container = styled.div`
+  margin: auto;
+  width: 60%;
+`;
+
+
+
 const Reviews = () => {
 
   const [reviews, setReviews] = useState([]);
-  const [count, setCount] = useState(2);
+  const [count, setCount] = useState(1000);
+  const [displayCount, setDisplayCount] = useState(2);
 
 
   useEffect(() => {
     axios.get('http://localhost:3000/reviews', {params: {id: 40344, count: count}})
       .then((results) => {
-        console.log(results.data.results);
+        // console.log(results.data.results);
         setReviews(results.data.results);
       })
   }, [count]);
 
   const handleMore = (e) => {
-    console.log('clicked')
-    setCount(count + 2);
+    setDisplayCount(displayCount + 2);
   }
 
 
   return (
-    <Test>
-      {reviews.map((review) =>
-        <ReviewBox>
-          <StarDate>
-            {Stars(review.rating)}
-            <section>{review.reviewer_name}, {review.date}></section>
-          </StarDate>
-          <Title onClick={handleMore}>{review.summary === '' ? 'No Title' : review.summary}</Title>
-          <Body>{review.body}</Body>
-          {review.recommend ? <Recommend>&#10004; I recommend this product</Recommend> : null }
-          {review.response ?
-           <ResponseBlock>
-             <ResponseWord>Response:</ResponseWord>
-             <Response>{review.response}</Response>
-           </ResponseBlock>
-           : null
-          }
-          <Interactables>
-            <HelpfulTag>Was this review helpful?  </HelpfulTag>
-            <YesTag>Yes</YesTag>
-            <Count>  ({review.helpfulness})</Count>
-          </Interactables>
-        </ReviewBox>
-      )}
-    </Test>
+      <Container>
+        <Test>
+          <Ratings />
+          <ReviewContainer>
+            {reviews.map((review, index) => {
+              if (index < displayCount) {
+                return (
+                  <ReviewBox>
+                    <StarDate>
+                      {Stars(review.rating)}
+                      <section>{review.reviewer_name}, {review.date}></section>
+                  </StarDate>
+                  <Title>{review.summary === '' ? 'No Title' : review.summary}</Title>
+                    <Body>{review.body}</Body>
+                    {review.recommend ? <Recommend>&#10004; I recommend this product</Recommend> : null }
+                    {review.response ?
+                    <ResponseBlock>
+                      <ResponseWord>Response:</ResponseWord>
+                      <Response>{review.response}</Response>
+                    </ResponseBlock>
+                    : null}
+                    <Interactables>
+                      <HelpfulTag>Was this review helpful?  </HelpfulTag>
+                      <YesTag>Yes</YesTag>
+                      <Count>  ({review.helpfulness})</Count>
+                    </Interactables>
+                  </ReviewBox>
+                )
+              } else {
+                return null;
+              }
+            })}
+          </ReviewContainer>
+        </Test>
+        <AddMore onClick={handleMore}>See More</AddMore>
+        <AddReview>Add a review</AddReview>
+      </Container>
   )
 }
 
