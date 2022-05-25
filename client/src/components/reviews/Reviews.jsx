@@ -124,7 +124,7 @@ const Reviews = () => {
             {reviews.map((review, index) => {
               if (index < displayCount) {
                 return (
-                  <ReviewBox>
+                  <ReviewBox key={index}>
                     <StarDate>
                       {Stars(review.rating)}
                       <section>{review.reviewer_name}, {review.date}></section>

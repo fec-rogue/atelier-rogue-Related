@@ -8,6 +8,7 @@ function Dropdowns () {
   const [sizeAndQty, setSizeAndQty] = useState({});
   const [sizeSelected, setSizeSelected] = useState('');
   const [qtySelected, setQtySelected] = useState('');
+  const [cartValid, setCartValid] = useState(true);
 
   useEffect(() => {
     var sizeQty = {};
@@ -19,11 +20,11 @@ function Dropdowns () {
       }
     };
     setSizeAndQty(sizeQty);
-    setSizeSelected('');
   }, [displayed]);
 
   var handleSizeChange = function(e) {
     setSizeSelected(e.target.value);
+    setQtySelected(1);
   };
 
   var handleQtyChange = function(e) {
@@ -32,9 +33,11 @@ function Dropdowns () {
 
   var renderQty = function() {
     let max = sizeAndQty[sizeSelected];
+
     if (sizeAndQty[sizeSelected] >= 15) {
       max = 15;
-    }
+    };
+
     return (sizeSelected === '') ?
     (<Selector id='qty' name='qty' value={qtySelected} onChange={handleQtyChange}>
       <option value='' disabled hidden>-</option>
@@ -44,7 +47,6 @@ function Dropdowns () {
       <option value='' disabled hidden>OUT OF STOCK</option>
     </Selector>)
     : (<Selector id='qty' name='qty'required value={qtySelected} onChange={handleQtyChange}>
-        <option value='' disabled hidden>-</option>
         {(() => {
         const options = [];
         for (let i = 1; i <= max; i++) {
@@ -56,66 +58,68 @@ function Dropdowns () {
   }
 
   /*
-  If the default ‘Select Size’ is currently selected: Clicking this button should open the size dropdowns, and a message should appear above the dropdowns stating “Please select size”
-  If there is no stock: This button should be hidden
-  If both a valid size and valid quantity are selected: Clicking this button will add the product to the user’s cart.
+  If the default ‘Select Size’ is currently selected: Clicking this button should open the size dropdowns
   */
 
-  // if size isnt selected yet
-    // guide users to qty box
-  // if size IS selected:
-    // if no item in stock --> hide button
-    // if addCart is clicked without qty being set --> guid user to qty
-    // if valid --> add item
   var handleCart = function() {
-
     var elem = '';
     if (sizeSelected === '') {
-      elem = document.getElementById('sizes');
-      elem.scrollIntoView({
-        behavior: "smooth",
-      })
-      alert('Select a size and qty');
+      setCartValid(false);
     } else {
-      if (qtySelected === '') {
-        elem = document.getElementById('qty');
-        elem.scrollIntoView({
-          behavior: "smooth",
-        })
-        alert('Select a qty');
-      } else {
-        console.log('added');
-      }
+      setCartValid(true);
+      console.log('added to cart');
+    }
+  }
+
+  var handleDrops = function(event) {
+    console.log('running')
+    if (!cartValid) {
+      event.stopPropagation();
     }
   }
 
 
   return(
     <SizeQtyDiv>
+      {cartValid === false ?
+      <ErrorDiv>
+        <ErrMsg role='alert'>Please Select A Size</ErrMsg>
+      </ErrorDiv>
+      : null}
       <p><strong>Size: {sizeSelected}</strong></p>
       <Selector id ='sizes' name='sizes' onChange={handleSizeChange} required value={sizeSelected}>
         <option value='' disabled hidden>Select Size</option>
         {Object.keys(sizeAndQty).map((size, key) => {
-          if (sizeAndQty[size] === 0) {
-            return (null)
-          } else {
-            return (
+          return (
               <option value={size} key={key}>{size}</option>
-            )
-          }
+          )
           })}
       </Selector>
       {renderQty()}
       <CartDiv>
-        <CartBtn onClick={handleCart}>ADD TO CART</CartBtn>
+        {sizeAndQty[sizeSelected] === 0 ?
+        <NoStockMsg>The items with the selected options is out of stock.</NoStockMsg>
+        :<CartBtn onClick={handleCart}>ADD TO CART</CartBtn>
+        }
       </CartDiv>
     </SizeQtyDiv>
   )
 }
 
+
 // export on separate css page
 const CartBtn = styled.button`
-
+  background-color: #000;
+  color: #fff;
+  font-weight: 400;
+  border: 1px solid #2B2E34;
+  padding: 0;
+  line-height: 0;
+  font-size: 14px;
+  height: 46px;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
 `;
 
 const CartDiv = styled.div`
@@ -138,4 +142,39 @@ const Selector = styled.select`
   margin-left: 0px;
 `;
 
+const ErrorDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 0px;
+`
+
+const ErrMsg = styled.p`
+  display: block;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  background-color: #c00;
+  border-radius: 0;
+  color: #fff;
+  font-family: DS Trade Gothic,Trade Gothic,sans-serif;
+  font-weight: 700;
+  padding: 10px 20px;
+  font-weight: 400;
+`;
+
+const NoStockMsg = styled.p`
+  color: #aa2525;
+  display: inline-block;
+  font-size: 11px;
+  margin-bottom: 15px;
+  background: 0 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background-clip: padding-box;
+
+`;
 export default Dropdowns;

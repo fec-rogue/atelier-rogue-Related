@@ -47,11 +47,11 @@ const PercentageBars = () => {
 
   return (
     <BarContainer>
-      {ratings.map((rating) => {
+      {ratings.map((rating, index) => {
         if (rating.count === highest) {
-          return (<ComparisonBar percent={100}>&nbsp;</ComparisonBar>)
+          return (<ComparisonBar key={index} percent={100}>&nbsp;</ComparisonBar>)
         } else {
-          return (<ComparisonBar percent={(rating.count / highest) * 100}>&nbsp;</ComparisonBar>)
+          return (<ComparisonBar key={index} percent={(rating.count / highest) * 100}>&nbsp;</ComparisonBar>)
         }
       }
       )}
