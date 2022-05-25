@@ -1,10 +1,7 @@
 # rogue
 
-- Project Summary: TEST
-- Overview
-  - Contributor: Peggy Tran
-  - short video
--
+- - short video
+
 - Getting Started
   (steps such as npm install, set up .env, run webpack, run serve)
 - Technologies Used:
