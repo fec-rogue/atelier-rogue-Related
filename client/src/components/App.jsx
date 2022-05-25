@@ -22,7 +22,6 @@ const App = () => {
 
   return (
     <PropIdContext.Provider value={{id, setId}}>
-<<<<<<< HEAD
       <div>
         <Overview />
       </div>
@@ -32,11 +31,6 @@ const App = () => {
       <div>
         <Reviews />
       </div>
-=======
-      <Overview />
-      <RelatedProducts />
-      <Reviews />
->>>>>>> main
     </PropIdContext.Provider>
   )
 }
