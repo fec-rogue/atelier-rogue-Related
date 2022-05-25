@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import {PropIdContext} from '../App.jsx';
 import Cards from './Cards/Cards.jsx';
-import Comparison from './Cards/ComparisonModal.jsx';
+// import Comparison from './Cards/ComparisonModal.jsx';
 import Outfits from './Outfits/Outfits.jsx';
 
 const RelatedProducts = () => {
@@ -14,8 +14,8 @@ const RelatedProducts = () => {
     const [relatedProductsDetail, setRelatedProductsDetail] = useState([]);
     const [defaultidinfo, setDefaultIdinfo] = useState([]);
 
-    const [showModal, setShowModal] = useState(false);
-    const [twoCardsArray, setTwoCardsArray] = useState([]);
+    // const [showModal, setShowModal] = useState(false);
+    // const [twoCardsArray, setTwoCardsArray] = useState([]);
 
     useEffect(() => {
       axios.get(`products/info?product_id=${id}`)
@@ -28,16 +28,16 @@ const RelatedProducts = () => {
         })
     }, [])
 
-    const handleSelectedOnClick = (e) => {
-      e.preventDefault();
-      setShowModal(!showModal);
-      axios.get(`products/info?product_id={e}`)
+    // const handleSelectedOnClick = (e) => {
+    //   e.preventDefault();
+    //   setShowModal(!showModal);
+    //   axios.get(`products/info?product_id={e}`)
 
-        .then((res) => {
-          console.log('selecting id', res.data)
-          setTwoCardsArray([defaultInfo, res.data])
-        });
-    }
+    //     .then((res) => {
+    //       console.log('selecting id', res.data)
+    //       setTwoCardsArray([defaultInfo, res.data])
+    //     });
+    // }
 
 
     useEffect(() => {
@@ -79,7 +79,7 @@ const RelatedProducts = () => {
         />
       }
 
-    <ComparisonWrapper>
+    {/* <ComparisonWrapper>
       <button onClick={() =>
         setShowModal(true)
         }></button>
@@ -89,7 +89,7 @@ const RelatedProducts = () => {
         open={showModal}
         close={()=> setShowModal(false)}
         twoCards={twoCardsArray} /> }
-    </ComparisonWrapper>
+    </ComparisonWrapper> */}
 
     <RelatedHeader>Your Outfit</RelatedHeader>
 

@@ -1,9 +1,9 @@
 import React  from 'react';
 import styled from 'styled-components';
 
-const Comparison = ({ open, twoCards, onClick, close }) => {
+const Comparison = ({ twoCards, closeModal }) => {
 
-  if(!open) return null;
+  // if(!open) return null;
 
   // console.log('closeModal', closeModal);
   let card1;

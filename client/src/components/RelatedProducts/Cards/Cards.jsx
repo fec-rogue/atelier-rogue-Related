@@ -3,12 +3,9 @@ import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
 import CardEntry from './CardEntry.jsx';
 import { FcPrevious,  FcNext } from "react-icons/fc";
-// import Comparison from './ComparisonModal.jsx';
+
 
 const Cards = ({relatedProductsStyles, relatedProductsDetail, defaultInfo}) => {
-  // console.log('defaultidinfo', defaultInfo);
-  // console.log('relatedProductsStyles', relatedProductsStyles);
-  // console.log('relatedProductsDetail', relatedProductsDetail);
   const [current, setCurrent] = useState(0);
   const length = relatedProductsStyles.length;
   const [showModal, setShowModal] = useState(false);
@@ -102,13 +99,23 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, defaultInfo}) => {
       `
 
       const NextButton = styled.button`
-      right:32px;
-      position: absolute;
-      top: 50%;
-      bottom: 0;
-      z-index: 1;
-      cursor:pointer;
-      user-select:none;
+        right:32px;
+        position: absolute;
+        top: 50%;
+        bottom: 0;
+        z-index: 1;
+        cursor:pointer;
+        user-select:none;
+      `
+
+      const ComparisonWrapper = styled.div`
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        backgroundColor: #FFF;
+        padding: 50px;
+        zIndex: 1000
       `
 
       export default Cards;
