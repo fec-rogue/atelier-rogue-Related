@@ -7,14 +7,15 @@ import '@testing-library/jest-dom';
 import * as ReactDOMClient from 'react-dom/client';
 
 it('renders overview without crashing', async () => {
-  // act(() => {
-  //   const div = document.createElement('div');
-  //   ReactDOMClient.createRoot(div).render(<App />);
-  // })
-  try {
+
+  act(() => {
     const div = document.createElement('div');
-    ReactDOMClient.createRoot(div).render(<Overview/>);
-  } catch (e) {
-    console.log(e);
-  }
+    ReactDOMClient.createRoot(div).render(<Overview />);
+  })
+  // try {
+  //   const div = document.createElement('div');
+  //   ReactDOMClient.createRoot(div).render(<Overview/>);
+  // } catch (e) {
+  //   console.log(e);
+  // }
 })
