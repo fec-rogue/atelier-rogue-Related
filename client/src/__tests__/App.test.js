@@ -7,20 +7,20 @@ import '@testing-library/jest-dom';
 import * as ReactDOMClient from 'react-dom/client';
 
 
+it('renders app without crashing', async () => {
+  // act(() => {
+  //   const div = document.createElement('div');
+  //   ReactDOMClient.createRoot(div).render(<App />);
+  // })
 
+  try {
+    const div = document.createElement('div');
+    ReactDOMClient.createRoot(div).render(<App />);
+  } catch (e) {
+    console.log(e);
+  }
 
-// it('renders app without crashing', async () => {
-//   // act(() => {
-//   //   const div = document.createElement('div');
-//   //   ReactDOMClient.createRoot(div).render(<App />);
-//   // })
-//   try {
-//     const div = document.createElement('div');
-//     ReactDOMClient.createRoot(div).render(<App />);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// })
+})
 
 // test('has header OVERVIEW', async () => {
 //   try {
