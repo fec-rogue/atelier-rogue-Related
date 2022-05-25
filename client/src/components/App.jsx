@@ -1,5 +1,5 @@
 import React from 'react';
-import { lazy, Suspense, useState, createContext, useEffect } from "react";
+import { lazy, Suspense, useState, createContext } from "react";
 import Overview from "./Overview/Overview.jsx";
 import axios from 'axios';
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
@@ -22,6 +22,7 @@ const App = () => {
 
   return (
     <PropIdContext.Provider value={{id, setId}}>
+<<<<<<< HEAD
       <div>
         <Overview />
       </div>
@@ -31,6 +32,11 @@ const App = () => {
       <div>
         <Reviews />
       </div>
+=======
+      <Overview />
+      <RelatedProducts />
+      <Reviews />
+>>>>>>> main
     </PropIdContext.Provider>
   )
 }

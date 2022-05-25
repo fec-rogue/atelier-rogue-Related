@@ -10,8 +10,13 @@ exports.getProducts = (req, res) => {
 
 exports.getProductInfo = (req, res) => {
   var id = req.query.product_id;
+  // console.log('getProductInfo id', id);
   models.getProductInfo(id, (result) => {
+<<<<<<< HEAD
     res.status(200).send(result);
+=======
+    res.send(result);
+>>>>>>> main
   });
 };
 
