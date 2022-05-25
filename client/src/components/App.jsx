@@ -20,7 +20,7 @@ export const PropIdContext = createContext();
 const App = () => {
   const [id, setId] = useState('40344');
   return (
-    <PropIdContext.Provider value={id, setId}>
+    <PropIdContext.Provider value={{id, setId}}>
       <Overview />
       <RelatedProducts />
       <Reviews />
