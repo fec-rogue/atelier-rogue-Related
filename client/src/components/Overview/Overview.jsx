@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext, createContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import {PropIdContext} from '../App.jsx';
-import ProductPic from './ProductPic.jsx';
-import ProductDetails from './ProductDetails.jsx';
+import Gallery from './Gallery.jsx';
+import Descriptions from './Descriptions.jsx';
 
 const WebsiteHeader = styled.h1`
   display: flex;
@@ -54,9 +54,9 @@ function Overview() {
       <AnnouncementHeader>SITE-WIDE ANNOUNCEMENT</AnnouncementHeader>
       <OverviewComps>
         <DisplayedPhotoContext.Provider value={{displayed, setDisplayed}}>
-          <ProductPic/>
+          <Gallery/>
           <StyledProductsContext.Provider value={{styles, setProductStyles}}>
-            <ProductDetails/>
+            <Descriptions/>
           </StyledProductsContext.Provider>
         </DisplayedPhotoContext.Provider>
       </OverviewComps>
