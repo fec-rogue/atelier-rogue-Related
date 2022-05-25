@@ -27,7 +27,7 @@ app.get('/products/related', route.getRelatedProduct);
 
 // review routes
 app.get('/reviews', route.getReviews);
-app.get('/reviews/meta/product_id', route.getMetaData);
+app.get('/reviews/meta', route.getMetaData);
 app.post('/reviews', route.postReview);
 app.put('/reviews/product_id/helpful', route.helpfulReview);
 app.put('/reviews/product_id/report', route.reportReview);

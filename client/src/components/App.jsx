@@ -21,13 +21,9 @@ const App = () => {
   const [id, setId] = useState('40344');
   return (
     <PropIdContext.Provider value={id, setId}>
-      <div>
-        {/* Hello World */}
-        {/* <RelatedProducts/> */}
-      </div>
-      <div>
-        <Reviews />
-      </div>
+      <Overview />
+      <RelatedProducts />
+      <Reviews />
     </PropIdContext.Provider>
   )
 }
