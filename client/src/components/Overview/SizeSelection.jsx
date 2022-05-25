@@ -87,10 +87,7 @@ function SizeSelection () {
         console.log('added');
       }
     }
-
-
   }
-
 
 
   return(

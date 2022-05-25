@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, createContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import {PropIdContext} from '../App.jsx';
-import ProductPic from './ProductPic.jsx';
+import Gallery from './Gallery.jsx';
 import ProductDetails from './ProductDetails.jsx';
 
 const WebsiteHeader = styled.h1`
@@ -54,7 +54,7 @@ function Overview() {
       <AnnouncementHeader>SITE-WIDE ANNOUNCEMENT</AnnouncementHeader>
       <OverviewComps>
         <DisplayedPhotoContext.Provider value={{displayed, setDisplayed}}>
-          <ProductPic/>
+          <Gallery/>
           <StyledProductsContext.Provider value={{styles, setProductStyles}}>
             <ProductDetails/>
           </StyledProductsContext.Provider>
