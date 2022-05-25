@@ -8,7 +8,7 @@ const CardEntry = ({defaultsStyles, detailProduct, defaultInfo, id, category, na
   // console.log('defaultsStylesURL', defaultsStyles[0] && defaultsStyles[0].photos[0].url);
   // console.log('defaultprice', defaultsStyles[0] )
   // console.log('detailProduct',detailProduct);
-  // console.log('defaultidinfo', defaultidinfo);
+  // console.log('defaultinfo', defaultInfo);
   const imageNotFound = "http://placecorgi.com/260/180";
 
   const [data, setData] = useState({
@@ -17,17 +17,18 @@ const CardEntry = ({defaultsStyles, detailProduct, defaultInfo, id, category, na
   });
 
   const defaultid = defaultInfo.id;
-  const defautidfeatures = defaultInfo;
   return(
       <Carditem>
         {(defaultsStyles[0] && index === current) ? <Cardimage src={defaultsStyles[0].photos[0].url}/> : <Cardimage src={imageNotFound} />}
         <ModalButton onClick={() => {
           setData({
             showModal: true,
-            twoCardsArray: [defautidfeatures, detailProduct]
+            twoCardsArray: [defaultInfo, detailProduct]
           })
         }}> Compare
         </ModalButton>
+
+        {/* {console.log('twocardsarr', data.twoCardsArray)} */}
 
         {data.showModal && data.twoCardsArray.length > 0 &&
         <Comparison twoCards={data.twoCardsArray} closeModal={setData} />}

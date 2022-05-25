@@ -1,4 +1,4 @@
-import { React , useState, useEffect } from 'react';
+import React  from 'react';
 import styled from 'styled-components';
 
 const Comparison = ({ twoCards, closeModal }) => {
@@ -7,9 +7,9 @@ const Comparison = ({ twoCards, closeModal }) => {
   let card2;
   if(twoCards) {
     card1 = twoCards[0];
-    console.log('card1', card1);
+    // console.log('card1', card1);
     card2 = twoCards[1];
-    console.log('card2', card2);
+    // console.log('card2', card2);
     // console.log('twoCards', twoCards);
   }
   const featureArr = card1.features.concat(card2.features);
@@ -21,87 +21,93 @@ const Comparison = ({ twoCards, closeModal }) => {
       features.push(eachFeacture.feature);
     }
   })
-  console.log('features', features);
+  // console.log('features', features);
 
   const card1Arr = [];
   card1.features.map((item) => card1Arr.push(item));
-  console.log('card1Arr', card1Arr);
+  // console.log('card1Arr', card1Arr);
 
   const card2Arr = [];
   card2.features.map((item) => card2Arr.push(item));
 
-  console.log('card2Arr', card2Arr);
+  // console.log('card2Arr', card2Arr);
 
   return(
-    <div>
-    HIIII Comparison!!
-  </div>
-    // <table>
-    //   <thead>
-    //     <tr>
-    //       <HeadL>{card1.name}</HeadL>
-    //       <th></th>
-    //       <HeadR>{card2.name}</HeadR>
-    //     </tr>
-    //   </thead>
+    <TableWrapper>
+    <table>
+      <thead>
+        <tr>
+          <HeadL>{card1.name}</HeadL>
+          <th></th>
+          <HeadR>{card2.name}</HeadR>
+        </tr>
+      </thead>
 
-    //   <tbody>
-    //     {features.map((item, index) => {
-    //        console.log('HIT TABLE!!')
-    //       return(
-    //       <tr key={index}>
-    //         <featureL>
-    //           {card1Arr.map((item1) => (
-    //             (item1.feature === item) ? `${item1.value} ✓` : item1.value
-    //           ))}
-    //         </featureL>
-    //         <Value>{item}</Value>
+      <tbody>
+        {features.map((item, index) => {
+          //  console.log('HIT TABLE!!')
+          return(
+          <tr key={index}>
+            <FeatureL>
+              {card1Arr.map((item1) => (
+                (item1.feature === item) ? `${item1.value} ✓` : item1.value
+              ))}
+            </FeatureL>
+            <Value>{item}</Value>
 
-    //         <featureR>
-    //           {card2Arr.map((item2) => (
-    //             (item2.feature === item) ? `${item2.value} ✓` : item2.value
-    //           ))}
-    //         </featureR>
-    //       </tr>
-    //     )
-    //     })}
-    //   </tbody>
-    //   <button onClick={() => closeModal(false)}></button>
-    // </table>
+            <FeatureR>
+              {card2Arr.map((item2) => (
+                (item2.feature === item) ? `${item2.value} ✓` : item2.value
+              ))}
+            </FeatureR>
+          </tr>
+        )
+        })}
+      </tbody>
+      {/* <button onClick={() => closeModal(false)}></button> */}
+     </table>
+    </TableWrapper>
   )
 }
-
-
-const featureL = styled.td`
+const TableWrapper = styled.div`
+  width:1000px;
+   height:200px;
+   font-size:12px;
+   z-index:12;
+   border-radius:12px;
+   border:3px solid red;
+   background-color:white;
+   box-shadow:rgba(0, 0, 0, 0.35) 0px 5px 15px;
+   display:flex;
+   padding:15px;
+`
+const FeatureL = styled.td`
   position: flex;
   text-align: center;
   padding-left: 20px;
   padding-right: 20px;
   font-style: italic;
-  color: ${(props) => props.theme.colors.primary};
 `;
 
-const featureR = styled.td`
+const FeatureR = styled.td`
   position: flex;
   text-align: center;
   padding-right: 20px;
   padding-left: 20px;
   font-style: italic;
-  color: ${(props) => props.theme.colors.primary};
 `;
 
 const Value = styled.td`
   text-align: center;
-  color: ${(props) => props.theme.colors.primary};
   `;
 
 const HeadL = styled.th`
   padding-left: 20px;
-  color: ${(props) => props.theme.colors.primary};
 `;
 
 const HeadR = styled.th`
   padding-right: 20px;
-  color: ${(props) => props.theme.colors.primary};
 `;
+
+
 export default Comparison;
