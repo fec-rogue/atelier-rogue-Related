@@ -1,0 +1,32 @@
+{
+  "presets": [
+    "@babel/preset-env",
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic"
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "babel-plugin-styled-components"
+      ]
+    },
+    "production": {
+      "plugins": [
+        ["babel-plugin-styled-components",
+        {
+          "fileName": false,
+          "displayName": false,
+          "pure": true
+        }],
+        ["babel-plugin-react-remove-properties", {"properties": ["data-testid"]}]
+      ]
+    }
+  }
+}
