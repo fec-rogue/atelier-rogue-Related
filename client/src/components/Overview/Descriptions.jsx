@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import SizeSelection from './SizeSelection.jsx';
-import ProductStyleSel from './ProductStyleSel.jsx'
+import Dropdowns from './Dropdowns.jsx';
+import StyleSelection from './StyleSelection.jsx'
 import {PropIdContext} from '../App.jsx';
 import {StyledProductsContext, DisplayedPhotoContext} from './Overview.jsx'
 
-function ProductDetails() {
+function Descriptions() {
 
   const {id, setId} = useContext(PropIdContext);
   const {styles, setProductStyles} = useContext(StyledProductsContext);
@@ -56,8 +56,8 @@ function ProductDetails() {
         </TitleBlock>
         <SizeAndColor>
           <p><strong>Color: </strong>{displayed.name}</p>
-          <ProductStyleSel/>
-          <SizeSelection/>
+          <StyleSelection/>
+          <Dropdowns/>
         </SizeAndColor>
 
       </div>
@@ -110,5 +110,5 @@ const Field = styled.fieldset`
 `;
 
 
-export default ProductDetails;
+export default Descriptions;
 
