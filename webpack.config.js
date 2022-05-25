@@ -32,11 +32,11 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: ["style-loader", "css-loader", "sass-loader"]
       },
-      {
-        presets: [
-        ['@babel/preset-env', {targets: {node: 'current'}}],
-        ['@babel/preset-react', {targets: {node: 'current'}}]]
-      }
+      // {
+      //   presets: [
+      //   ['@babel/preset-env', {targets: {node: 'current'}}],
+      //   ['@babel/preset-react', {targets: {node: 'current'}}]]
+      // }
     ]
   },
   plugins: [
