@@ -5,7 +5,7 @@ import {DisplayedPhotoContext} from './Overview.jsx'
 import {PropIdContext} from '../App.jsx';
 
 
-function ProductPic() {
+function Gallery() {
 
   const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
   const [curPhoto, setCurPhoto] = useState([]);
@@ -79,4 +79,4 @@ const SidePic = styled.img`
 `;
 
 
-export default ProductPic;
+export default Gallery;
