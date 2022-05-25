@@ -1,5 +1,5 @@
 import React from 'react';
-import { lazy, Suspense, useState, createContext, useEffect } from "react";
+import { lazy, Suspense, useState, createContext } from "react";
 import Overview from "./Overview/Overview.jsx";
 import axios from 'axios';
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
@@ -20,7 +20,7 @@ export const PropIdContext = createContext();
 const App = () => {
   const [id, setId] = useState('40344');
   return (
-    <PropIdContext.Provider value={id, setId}>
+    <PropIdContext.Provider value={{id, setId}}>
       <Overview />
       <RelatedProducts />
       <Reviews />
