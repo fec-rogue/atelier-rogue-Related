@@ -3,12 +3,12 @@ import axios from 'axios';
 import styled from 'styled-components';
 import {StyledProductsContext, DisplayedPhotoContext} from './Overview.jsx'
 
-function ProductStyleSel () {
+function StyleSelection() {
   const {styles, setProductStyles} = useContext(StyledProductsContext);
   const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
 
   var handleStyleChange = function(e) {
-    console.log(styles);
+    //console.log(styles);
     if (e.style_id !== displayed.style_id) {
       setDisplayed(e);
     }
@@ -90,4 +90,4 @@ const Field = styled.fieldset`
 `;
 
 
-export default ProductStyleSel;
+export default StyleSelection
