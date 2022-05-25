@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import {DisplayedPhotoContext} from './Overview.jsx'
 
-function SizeSelection () {
+function Dropdowns () {
   const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
   const [sizeAndQty, setSizeAndQty] = useState({});
   const [sizeSelected, setSizeSelected] = useState('');
@@ -56,7 +56,7 @@ function SizeSelection () {
   }
 
   /*
-  If the default ‘Select Size’ is currently selected: Clicking this button should open the size dropdown, and a message should appear above the dropdown stating “Please select size”
+  If the default ‘Select Size’ is currently selected: Clicking this button should open the size dropdowns, and a message should appear above the dropdowns stating “Please select size”
   If there is no stock: This button should be hidden
   If both a valid size and valid quantity are selected: Clicking this button will add the product to the user’s cart.
   */
@@ -87,10 +87,7 @@ function SizeSelection () {
         console.log('added');
       }
     }
-
-
   }
-
 
 
   return(
@@ -141,4 +138,4 @@ const Selector = styled.select`
   margin-left: 0px;
 `;
 
-export default SizeSelection;
+export default Dropdowns;
