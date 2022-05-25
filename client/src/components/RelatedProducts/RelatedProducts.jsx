@@ -28,6 +28,7 @@ const RelatedProducts = () => {
     }, [])
 
     useEffect(() => {
+
         axios.get(`products/related?product_id=${id}`)
           .then((res) => {
            let allRelatedRequestStyles= res.data.map((eachRelated) => {

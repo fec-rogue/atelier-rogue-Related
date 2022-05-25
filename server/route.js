@@ -9,7 +9,7 @@ exports.getProducts = (req, res) => {
 
 exports.getProductInfo = (req, res) => {
   var id = req.query.product_id;
-  console.log('getProductInfo id', id);
+  // console.log('getProductInfo id', id);
   models.getProductInfo(id, (result) => {
     res.send(result);
   });
@@ -33,14 +33,15 @@ exports.getRelatedProduct = (req, res) => {
 
 // Review routes
 exports.getReviews = (req, res) => {
-  let id = req.query.product_id;
-  models.getReviews(id, (result) => {
+  let id = req.query.id;
+  let count = req.query.count
+  models.getReviews(id, count, (result) => {
     res.json(result.data);
   });
 };
 
 exports.getMetaData = (req, res) => {
-  let id = req.query.product_id;
+  let id = req.query.id;
   models.getMetaData(id, (result) => {
     res.json(result.data);
   });
