@@ -1,11 +1,8 @@
 import React  from 'react';
 import styled from 'styled-components';
 
-const Comparison = ({ twoCards, closeModal }) => {
-
-  // if(!open) return null;
-
-  // console.log('closeModal', closeModal);
+const Comparison = ({ twoCards, close }) => {
+  console.log('twocards', twoCards)
   let card1;
   let card2;
   if(twoCards) {
@@ -37,7 +34,7 @@ const Comparison = ({ twoCards, closeModal }) => {
 
   return(
     <TableWrapper>
-       <button onClick={() => close}>Close</button>
+       <button onClick={() => close(false)}>Close</button>
     <table>
       <thead>
         <tr>

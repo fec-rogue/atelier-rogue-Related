@@ -5,11 +5,9 @@ import CardEntry from './CardEntry.jsx';
 import { FcPrevious,  FcNext } from "react-icons/fc";
 
 
-const Cards = ({relatedProductsStyles, relatedProductsDetail, defaultInfo}) => {
+const Cards = ({relatedProductsStyles, relatedProductsDetail, defaultInfo, setShowModal, setSelectedid}) => {
   const [current, setCurrent] = useState(0);
   const length = relatedProductsStyles.length;
-  const [showModal, setShowModal] = useState(false);
-
   const prevArrow = () => {
     setCurrent(current === 0 ? length -1 : current -1)
   };
@@ -17,8 +15,6 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, defaultInfo}) => {
   const nextArrow = () => {
     setCurrent(current === length - 1 ? 0 : current + 1)
   };
-  // console.log('current', current)
-
   const max = current + 3;
   const min = current;
 
@@ -60,8 +56,10 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, defaultInfo}) => {
           index={index}
           current={current}
           length={length}
+          setShowModal={setShowModal}
+          setSelectedid={setSelectedid}
           />}
-          </Cardscontainer>
+        </Cardscontainer>
           )
         })}
         </CardsWrapper>

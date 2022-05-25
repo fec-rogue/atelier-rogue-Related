@@ -1,22 +1,30 @@
 import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
-import Comparison from './ComparisonModal.jsx';
+// import Comparison from './ComparisonModal.jsx';
+import {AiFillStar} from "react-icons/Ai";
 
 
-const CardEntry = ({defaultsStyles, detailProduct, defaultInfo, id, category, name, price, length}) => {
+const CardEntry = ({defaultsStyles, detailProduct, defaultInfo, id, category, name, price, length, setShowModal, setSelectedid}) => {
 
   const imageNotFound = "http://placecorgi.com/260/180";
-
-  const [data, setData] = useState({
-    showModal: Array(length).fill(false),
-    twoCardsArray: []
-  });
+  // console.log('detailProduct', detailProduct);
+  // const [data, setData] = useState({
+  //   showModal: Array(length).fill(false),
+  //   twoCardsArray: []
+  // });
 
   return(
       <Carditem>
+        <StarButton onClick={() => {
+          setShowModal(true)
+          setSelectedid(detailProduct)}}>
+          <AiFillStar/>
+        </StarButton>
+
         {(defaultsStyles[0] ) ? <Cardimage src={defaultsStyles[0].photos[0].url}/> : <Cardimage src={imageNotFound} />}
-        <ModalButton onClick={() => {
+
+        {/* <ModalButton onClick={() => {
           setData({
             showModal: true,
             twoCardsArray: [defaultInfo, detailProduct]
@@ -25,7 +33,7 @@ const CardEntry = ({defaultsStyles, detailProduct, defaultInfo, id, category, na
         </ModalButton>
 
         {data.showModal && data.twoCardsArray.length > 0 &&
-        <Comparison twoCards={data.twoCardsArray} closeModal={setData} />}
+        <Comparison twoCards={data.twoCardsArray} closeModal={setData} />} */}
 
         <CardInfo>
           <p>Category: {category}</p>
@@ -51,7 +59,7 @@ const CardInfo = styled.div`
 `
 
 
-const ModalButton = styled.button`
+const StarButton = styled.button`
 
 `
 
