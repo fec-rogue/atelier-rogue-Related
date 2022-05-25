@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import {PropIdContext} from '../App.jsx';
 import Gallery from './Gallery.jsx';
-import ProductDetails from './ProductDetails.jsx';
+import Descriptions from './Descriptions.jsx';
 
 const WebsiteHeader = styled.h1`
   display: flex;
@@ -56,7 +56,7 @@ function Overview() {
         <DisplayedPhotoContext.Provider value={{displayed, setDisplayed}}>
           <Gallery/>
           <StyledProductsContext.Provider value={{styles, setProductStyles}}>
-            <ProductDetails/>
+            <Descriptions/>
           </StyledProductsContext.Provider>
         </DisplayedPhotoContext.Provider>
       </OverviewComps>
