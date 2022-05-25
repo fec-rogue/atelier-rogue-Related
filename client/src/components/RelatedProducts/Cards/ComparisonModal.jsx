@@ -1,7 +1,10 @@
 import React  from 'react';
 import styled from 'styled-components';
 
-const Comparison = ({ twoCards, closeModal }) => {
+const Comparison = ({ open, twoCards, onClick, close }) => {
+
+  if(!open) return null;
+
   // console.log('closeModal', closeModal);
   let card1;
   let card2;
@@ -34,6 +37,7 @@ const Comparison = ({ twoCards, closeModal }) => {
 
   return(
     <TableWrapper>
+       <button onClick={() => close}>Close</button>
     <table>
       <thead>
         <tr>
@@ -50,21 +54,31 @@ const Comparison = ({ twoCards, closeModal }) => {
           <tr key={index}>
             <FeatureL>
               {card1Arr.map((item1) => (
-                (item1.feature === item) ? `${item1.value} ✓` : item1.value
+                // (item1.feature === item) ? `${item1.value} ✓` : item1.value
+                (item1.feature === item)
+                ? (item1.value)
+                  ? `${item1.value}`
+                  : '✓'
+                : ' '
               ))}
             </FeatureL>
             <Value>{item}</Value>
 
             <FeatureR>
               {card2Arr.map((item2) => (
-                (item2.feature === item) ? `${item2.value} ✓` : item2.value
+                // (item2.feature === item) ? `${item2.value} ✓` : item2.value
+                (item2.feature === item)
+                ? (item2.value)
+                  ? `${item2.value}`
+                  : '✓'
+                : ' '
               ))}
             </FeatureR>
           </tr>
         )
         })}
       </tbody>
-      {/* <button onClick={() => closeModal(false)}></button> */}
+
      </table>
     </TableWrapper>
   )
@@ -73,10 +87,10 @@ const TableWrapper = styled.div`
   width:1000px;
    height:200px;
    font-size:12px;
-   z-index:12;
+   z-index:1;
    border-radius:12px;
    border:3px solid red;
-   background-color:white;
+   background-color:grey;
    box-shadow:rgba(0, 0, 0, 0.35) 0px 5px 15px;
    display:flex;
    padding:15px;
