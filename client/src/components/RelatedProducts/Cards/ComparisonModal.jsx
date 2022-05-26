@@ -53,10 +53,10 @@ const Comparison = ({ twoCards, close }) => {
               {card1Arr.map((item1) => (
                 // (item1.feature === item) ? `${item1.value} ✓` : item1.value
                 (item1.feature === item)
-                ? (item1.value)
-                  ? `${item1.value}`
-                  : '✓'
-                : ' '
+                  ? (item1.value)
+                    ? `${item1.value}`
+                      : '✓'
+                      : ' '
               ))}
             </FeatureL>
             <Value>{item}</Value>
@@ -65,10 +65,10 @@ const Comparison = ({ twoCards, close }) => {
               {card2Arr.map((item2) => (
                 // (item2.feature === item) ? `${item2.value} ✓` : item2.value
                 (item2.feature === item)
-                ? (item2.value)
-                  ? `${item2.value}`
-                  : '✓'
-                : ' '
+                  ? (item2.value)
+                    ? `${item2.value}`
+                    : '✓'
+                    : ' '
               ))}
             </FeatureR>
           </tr>

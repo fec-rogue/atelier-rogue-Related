@@ -6,7 +6,6 @@ import { FcPrevious,  FcNext } from "react-icons/fc";
 
 
 const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRatings, defaultInfo, setShowModal, setSelectedid}) => {
-  console.log('relatedProductsRatingsId', Number(relatedProductsRatings[0].product_id));
   const [current, setCurrent] = useState(0);
   const length = relatedProductsStyles.length;
   const prevArrow = () => {
@@ -32,7 +31,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
       // console.log('detailProduct',detailProduct);
       const detailRatings = relatedProductsRatings.find(detail => Number(detail.product_id) === id);
-      console.log('detailRatings', detailRatings);
+      // console.log('detailRatings', detailRatings);
 
       const category = detailProduct.category;
       const name = detailProduct.name;
@@ -81,7 +80,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       display: flex;
       justify-content: space-around;
       align-items: center;
-      overflow: auto;
+      overflow: hidden;
       position: relative;
       `
       const Cardscontainer = styled.div`

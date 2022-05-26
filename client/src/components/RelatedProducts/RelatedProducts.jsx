@@ -11,17 +11,13 @@ import Outfits from './Outfits/Outfits.jsx';
 const RelatedProducts = () => {
 
     const {id, setId} = useContext(PropIdContext);
-
     const [relatedProductsStyles, setRelatedProductsStyles] = useState([]);
     const [relatedProductsDetail, setRelatedProductsDetail] = useState([]);
     const [relatedProductsRatings, setRelatedProductsRatings] = useState([]);
-
     const [defaultidinfo, setDefaultIdinfo] = useState([]);
-
     const [showModal, setShowModal] = useState(false);
     const [selectedid, setSelectedid] = useState({});
     const [twoCardsArray, setTwoCardsArray] = useState([]);
-
     useEffect(() => {
       axios.get(`products/info?product_id=${id}`)
         .then((res) => {

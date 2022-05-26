@@ -3,16 +3,31 @@ import { useState, useEffect, useContext } from "react";
 import {PropIdContext} from '../../App.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
+import AverageStars from '../../stars/AverageStars.jsx';
 import OutfitCarousel from './OutfitCarousel.jsx';
+import { FcPrevious,  FcNext } from "react-icons/fc";
 
 const Outfits = () => {
   const {id, setId} = useContext(PropIdContext);
+  const {allRatings, setAllRatings} = useContext(PropIdContext);
+
   const [overviewData, setOverviewData] = useState([]);
   const [overviewStyles, setOverviewStyles] = useState([]);
-  const [outfit, setOutfit] = useState(() => {
-    let saved = JSON.parse(localStorage.getItem('outfit'));
-    return saved || [];
-  });
+
+  const [outfit, setOutfit] = useState(JSON.parse(localStorage.getItem('outfit')) ?
+  JSON.parse(localStorage.getItem('outfit')) : [])
+
+  const [current, setCurrent] = useState(0);
+  const length = outfit.length;
+  const prevArrow = () => {
+    setCurrent(current === 0 ? length -1 : current -1)
+  };
+
+  const nextArrow = () => {
+    setCurrent(current === length - 1 ? 0 : current + 1)
+  };
+  const max = current + 1;
+  const min = current;
 
   useEffect(() => {
     axios.get(`products/info?product_id=${id}`)
@@ -35,58 +50,88 @@ const Outfits = () => {
   }, [])
 
   const addOutfit = () => {
-    const imageNotFound = "http://placecorgi.com/260/180";
-    let newOutfit = {};
-    newOutfit.id = overviewData.id;
-    newOutfit.name = overviewData.name;
-    newOutfit.category = overviewData.category;
-    newOutfit.default_price = overviewData.default_price;
-    newOutfit.image = overviewStyles.url || imageNotFound;
+    var count = 0;
+    for(var i = 0; i < outfit.length; i++) {
+      if(outfit[i].url === overviewStyles.url) {
+        count ++;
+        return;
+      }
+    }
+    if(count === 0) {
+      const imageNotFound = "http://placecorgi.com/260/180";
+      let newOutfit = {};
+        newOutfit.id = overviewData.id;
+        newOutfit.name = overviewData.name;
+        newOutfit.category = overviewData.category;
+        newOutfit.default_price = overviewData.default_price
+        newOutfit.image = overviewStyles.url || imageNotFound;
+        // newOutfit.ratings = {AverageStars(allRatings.ratings)};
 
-    localStorage.setItem('outfit', JSON.stringify(newOutfit));
-    setOutfit(outfit);
-
-    // if(outfit.indexOf(`"id": ${newOutfit.id}`) === -1) {
-    //   console.log('outfit', outfit)
-    //   outfit = JSON.parse(outfit);
-    //   outfit.push(newOutfit);
-    //   localStorage.setItem('outfit', JSON.stringify(outfit));
-    //   setOutfit(outfit);
-    //   return;
-    // }
+      var currentOutfit = outfit.slice();
+      currentOutfit.push(newOutfit);
+      localStorage.setItem('outfit', JSON.stringify(currentOutfit));
+      setOutfit(prev => [...prev, newOutfit])
+    }
   }
 
-  let handleUpdate = () => {
-    let outfit = JSON.parse(localStorage.getItem('outfit'));
-    setOutfit([outfit]);
-  }
 
-
-
-   useEffect(() => {
-     let outfit = JSON.parse(localStorage.getItem('outfit'));
-     setOutfit([outfit]);
-   }, []);
-
-  //  console.log('outfit', outfit)
   return (
-    <div>
-      <h1>My Collection</h1>
-      <div>
-        <button onClick={addOutfit}>Add outfit</button>
-
-      </div>
+    <OutfitsWrapper>
+      <button onClick={addOutfit}>Add outfit</button>
+      { current !== 0 ? <FcPrevious onClick={prevArrow}/> : null }
+      { max !== length -1 ?  <FcNext onClick={nextArrow}/> : null }
 
       {outfit.length > 0 ?
-        outfit.map((item) => (
+        outfit.map((item, index) => (
+          index <= max && index >= min &&
           <OutfitCarousel
-            key={item.id}
+            key={index}
             item={item}
-            handleUpdate={handleUpdate} />
+            setOutfit={setOutfit}
+            />
          ))
         : ''}
-    </div>
+    </OutfitsWrapper>
   )
 }
+
+const OutfitsWrapper = styled.ul`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+`
+
+
+const Outfitscontainer = styled.div`
+position: relative;
+width: 200px;
+height: 415px;
+margin: 0px;
+padding: 0px;
+transitions: .5s;
+scroll-behavior: smooth;
+`;
+
+const PrevButton = styled.button`
+position: absolute;
+top: 0;
+bottom: 0;
+z-index: 1;
+cursor:pointer;
+user-select:none;
+`
+
+const NextButton = styled.button`
+  right:32px;
+  position: absolute;
+  top: 50%;
+  bottom: 0;
+  z-index: 1;
+  cursor:pointer;
+  user-select:none;
+`
+
 
 export default Outfits;

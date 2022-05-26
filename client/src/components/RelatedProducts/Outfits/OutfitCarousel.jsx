@@ -3,12 +3,12 @@ import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
 import {AiOutlineDelete} from "react-icons/Ai";
 
-const OutfitCarousel = ({item, handleUpdate}) => {
+const OutfitCarousel = ({item, setOutfit}) => {
   let handleDelete = () => {
     let outfit = JSON.parse(localStorage.getItem('outfit'));
     let newOutfit = outfit.filter((eachOutfit) => item.id !== eachOutfit.id)
     localStorage.setItem('outfit', JSON.stringify(newOutfit));
-    handleUpdate();
+    setOutfit(newOutfit);
   }
 
 
@@ -21,12 +21,11 @@ const OutfitCarousel = ({item, handleUpdate}) => {
       <OutfitInfo>
           <p>Category: {item.category}</p>
           <p>Name: {item.name}</p>
-          <p>Price: {item.price}</p>
+          <p>Price: {item.default_price}</p>
       </OutfitInfo>
     </Outfititem>
   )
 }
-
 
 
 const Outfititem = styled.div`
