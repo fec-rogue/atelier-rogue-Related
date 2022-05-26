@@ -81,7 +81,7 @@ const Comparison = ({ twoCards, close }) => {
   )
 }
 const TableWrapper = styled.div`
-  width:1000px;
+  width:300px;
    height:200px;
    font-size:12px;
    z-index:1;

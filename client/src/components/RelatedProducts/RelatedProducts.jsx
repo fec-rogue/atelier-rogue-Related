@@ -20,7 +20,7 @@ const RelatedProducts = () => {
 
 
     useEffect(() => {
-      console.log('hiiiitttt itt ')
+      // console.log('hiiiitttt itt ')
       axios.get(`products/info?product_id=${id}`)
         .then((res) => {
           // console.log('default info', res.data)
@@ -39,10 +39,10 @@ const RelatedProducts = () => {
     // })
 
     useEffect(() => {
-      console.log('related use effect hiiit')
+      // console.log('related use effect hiiit')
       //HARD CODE ONE PRODUCT HAS MORE THAN 4 RELATED PRODUCTS TO TEST OUT CAROUSEL
-        // axios.get(`products/related?product_id=40346`)
-        axios.get(`products/related?product_id=${id}`)
+        axios.get(`products/related?product_id=40346`)
+        // axios.get(`products/related?product_id=${id}`)
           .then((res) => {
            let allRelatedRequestStyles= res.data.map((eachRelated) => {
               return axios.get(`products/styles?product_id=${eachRelated}`)
@@ -67,7 +67,7 @@ const RelatedProducts = () => {
     }, []);
 
     useEffect(() => {
-      console.log('test selected id', selectedid)
+      // console.log('test selected id', selectedid)
       if(selectedid.features) {
         setTwoCardsArray([defaultidinfo, selectedid]);
         console.log('twocardsarr', twoCardsArray);
@@ -120,6 +120,7 @@ const RelatedProductsSection = styled.section`
 
 const ComparisonWrapper = styled.div`
   position: fixed;
+  width: 300px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
