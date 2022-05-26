@@ -3,17 +3,17 @@ import axios from 'axios';
 import styled from 'styled-components';
 import {StyledProductsContext, DisplayedPhotoContext} from './Overview.jsx'
 
+// TODO: checkmark overlaid on selected style, hover function for user readability
 function StyleSelection() {
   const {styles, setProductStyles} = useContext(StyledProductsContext);
   const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
 
   var handleStyleChange = function(e) {
-    //console.log(styles);
     if (e.style_id !== displayed.style_id) {
       setDisplayed(e);
     }
   };
-
+   // react doesn't like that setDisplayed is being set with the "icon" variable from the styles array
   return (
     <Field>
       <Block>

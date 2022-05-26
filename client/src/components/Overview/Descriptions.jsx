@@ -8,6 +8,7 @@ import {StyledProductsContext, DisplayedPhotoContext, RatingsContext} from './Ov
 import AverageStars from '../stars/AverageStars.jsx'
 import Stars from '../stars/Stars.jsx'
 
+// TODO: Share on social media buttons, description of products (toggle box)
 function Descriptions() {
 
   const {id, setId} = useContext(PropIdContext);
@@ -41,7 +42,7 @@ function Descriptions() {
       <h2>{productInfo.name}</h2>
       <p>{productInfo.category}</p>
       {renderPrice()}
-
+      {AverageStars(ratings)}
     </TitleBlock>
     <SizeAndColor>
       <p><strong>Color: </strong>{displayed.name}</p>

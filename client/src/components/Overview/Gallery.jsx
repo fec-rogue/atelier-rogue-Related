@@ -4,6 +4,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import {DisplayedPhotoContext} from './Overview.jsx'
 import {PropIdContext} from '../App.jsx';
 
+// TODO: Carousel overlaid on main pic,, make all pictures uniform
 
 function Gallery() {
 

@@ -5,25 +5,12 @@ import {PropIdContext} from '../App.jsx';
 import Gallery from './Gallery.jsx';
 import Descriptions from './Descriptions.jsx';
 
-const WebsiteHeader = styled.h1`
-  display: flex;
-  justify-content: center;
-`;
-
-const AnnouncementHeader = styled.h2`
-  display: flex;
-  justify-content: center;
-`;
-
-const OverviewComps = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 export const DisplayedPhotoContext = createContext();
 export const StyledProductsContext = createContext();
 export const RatingsContext = createContext();
 
+
+// TODO: Create cart, announcement header, website header
 function Overview() {
 
   const [styles, setProductStyles] = useState([])
@@ -60,7 +47,7 @@ function Overview() {
       <WebsiteHeader>OVERVIEW</WebsiteHeader>
       <AnnouncementHeader>SITE-WIDE ANNOUNCEMENT</AnnouncementHeader>
       <OverviewComps>
-        <DisplayedPhotoContext.Provider value={{displayed, setDisplayed}}>
+        <DisplayedPhotoContext.Provider value={{displayed, setDisplayed, styles, setProductStyles, ratings, setRatings}}>
           <Gallery/>
           <StyledProductsContext.Provider value={{styles, setProductStyles}}>
             <RatingsContext.Provider value ={{ratings, setRatings}}>
@@ -75,4 +62,18 @@ function Overview() {
 
 export default Overview;
 
+const WebsiteHeader = styled.h1`
+  display: flex;
+  justify-content: center;
+`;
+
+const AnnouncementHeader = styled.h2`
+  display: flex;
+  justify-content: center;
+`;
+
+const OverviewComps = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 

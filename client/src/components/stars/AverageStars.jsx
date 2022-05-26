@@ -25,8 +25,12 @@ const currentStars = (ratings) => {
 
 
   return (
-    <Stars average={currentStars(ratings)} />
-  )
-}
-
+    <div>
+      {Stars(currentStars(ratings))}
+    </div>
+    )
+  }
+  /*
+  <Stars average={currentStars(ratings)} />
+ */
 export default AverageStars;
