@@ -16,18 +16,22 @@ const FourOhFour = lazy(() => import("./404.jsx"));
 // useContext to set default product_id across all pages
 
 export const PropIdContext = createContext();
+export const FavoriteContext = createContext();
 
 const App = () => {
   const [id, setId] = useState('40344');
+  const [fave, setFave] = useState([]);
 
   return (
     <PropIdContext.Provider value={{id, setId}}>
-      <div>
-        <Overview />
-      </div>
-      <div>
-        <RelatedProducts />
-      </div>
+      <FavoriteContext.Provider value={{fave, setFave}}>
+        <div>
+          <Overview />
+        </div>
+        <div>
+          <RelatedProducts />
+        </div>
+      </FavoriteContext.Provider>
       <div>
         <Reviews />
       </div>

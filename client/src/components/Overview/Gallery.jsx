@@ -33,11 +33,10 @@ function Gallery() {
     return(
       <PictureContainer>
         <CarouselContainer>
-        <SidePic src={curPhoto.thumbnail_url} ></SidePic>
           {displayed.photos.map((thumbnails, key) => {
-            if (thumbnails !== curPhoto) {
-              return <SidePic key={key} src={thumbnails.thumbnail_url} onClick={() => {setCurPhoto(thumbnails)}}></SidePic>
-            }
+            return (thumbnails === curPhoto) ?
+            <CurSidePic key={key} src={thumbnails.thumbnail_url} onClick={() => {setCurPhoto(thumbnails)}}></CurSidePic>
+            : <SidePic key={key} src={thumbnails.thumbnail_url} onClick={() => {setCurPhoto(thumbnails)}}></SidePic>
           })}
         </CarouselContainer>
         <MainPicture src={curPhoto.url}></MainPicture>
@@ -47,6 +46,9 @@ function Gallery() {
 
 }
 
+// if (thumbnails !== curPhoto) {
+//   return <SidePic key={key} src={thumbnails.thumbnail_url} onClick={() => {setCurPhoto(thumbnails)}}></SidePic>
+// }
 // export to a separate style page lol....
 const PictureContainer = styled.div `
   display: flex;
@@ -76,6 +78,14 @@ const SidePic = styled.img`
   width: 40%;
   height: 40%;
   object-fit: contain;
+`;
+
+const CurSidePic = styled.img`
+padding: 3px;
+width: 40%;
+height: 40%;
+object-fit: contain;
+border: 2px solid;
 `;
 
 

@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import Dropdowns from './Dropdowns.jsx';
 import StyleSelection from './StyleSelection.jsx'
 import {PropIdContext} from '../App.jsx';
-import {StyledProductsContext, DisplayedPhotoContext} from './Overview.jsx'
+import {StyledProductsContext, DisplayedPhotoContext, RatingsContext} from './Overview.jsx';
+import AverageStars from '../stars/AverageStars.jsx'
+import Stars from '../stars/Stars.jsx'
 
 function Descriptions() {
 
@@ -14,55 +16,41 @@ function Descriptions() {
   const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
   const [price, setPrice] = useState('0');
   const [sizeAndQty, setSizeAndQty] = useState({});
+  const {ratings, setRatings} = useContext(RatingsContext);
 
   useEffect(() => {
     axios.get('/products/info', {params:{product_id: id}})
     .then((response) => {
-      //console.log('styles: ', styles);
-      //console.log('displayed: ', displayed);
       setProductInfo(response.data);
-    })
+    });
   }, [styles]);
 
   let renderPrice = () => {
-    if (displayed.sale_price) {
-      return(
-        // make the sale price red
-        <p><strike>${displayed.original_price}</strike> ${displayed.sale_price}</p>
-      )
-    } else {
-      return(
-        <p>${displayed.original_price}</p>
-      )
-    }
+    return (displayed.sale_price) ?
+    (<p>
+      <strike>${displayed.original_price}</strike>
+      <strong style={{ color: 'red' }}>${displayed.sale_price}</strong>
+    </p>) :
+    (<p>${displayed.original_price}</p>)
   };
 
+  return (productInfo.length === 0) ?
+  <div>Loading...</div> :
+  (<div>
+    <TitleBlock>
+      <h2>{productInfo.name}</h2>
+      <p>{productInfo.category}</p>
+      {renderPrice()}
 
-  if (productInfo.length === 0) {
-    return (
-      <div>
-        Loading...
-      </div>
-    )
-  } else {
-    //console.log('product info: ', productInfo);
-    return(
-      <div>
-        <TitleBlock>
-          <h2>{productInfo.name}</h2>
-          <p>{productInfo.category}</p>
-          {renderPrice()}
-          <p>* * * * * (46)</p>
-        </TitleBlock>
-        <SizeAndColor>
-          <p><strong>Color: </strong>{displayed.name}</p>
-          <StyleSelection/>
-          <Dropdowns/>
-        </SizeAndColor>
+    </TitleBlock>
+    <SizeAndColor>
+      <p><strong>Color: </strong>{displayed.name}</p>
+      <StyleSelection/>
+      <Dropdowns/>
+    </SizeAndColor>
+  </div>)
 
-      </div>
-    )
-  }
+
 }
 
 // export to a separate style page lol....

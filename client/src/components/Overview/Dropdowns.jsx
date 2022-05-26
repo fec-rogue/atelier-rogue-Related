@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import {DisplayedPhotoContext} from './Overview.jsx'
+import {DisplayedPhotoContext} from './Overview.jsx';
+import {FavoriteContext} from '../App.jsx';
+import { BsHeartFill } from "react-icons/bs";
 
 function Dropdowns () {
   const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
@@ -9,6 +11,8 @@ function Dropdowns () {
   const [sizeSelected, setSizeSelected] = useState('');
   const [qtySelected, setQtySelected] = useState('');
   const [cartValid, setCartValid] = useState(true);
+  // going to need a cache/local storage to keep track of which items have already been faved
+  const {fave, setFave} = useContext(FavoriteContext);
 
   useEffect(() => {
     var sizeQty = {};
@@ -20,6 +24,9 @@ function Dropdowns () {
       }
     };
     setSizeAndQty(sizeQty);
+    setQtySelected('');
+    setSizeSelected('');
+    setFave('');
   }, [displayed]);
 
   var handleSizeChange = function(e) {
@@ -31,13 +38,30 @@ function Dropdowns () {
     setQtySelected(e.target.value);
   }
 
+  /*
+  If the default ‘Select Size’ is currently selected: Clicking this button should open the size dropdowns
+  */
+
+ var handleCart = function() {
+   var elem = '';
+   if (sizeSelected === '') {
+     setCartValid(false);
+    } else {
+      setCartValid(true);
+      console.log('added to cart');
+    }
+  }
+
+  var handleFave = function() {
+    console.log('clicked');
+    setFave(displayed);
+  }
+
   var renderQty = function() {
     let max = sizeAndQty[sizeSelected];
-
     if (sizeAndQty[sizeSelected] >= 15) {
       max = 15;
     };
-
     return (sizeSelected === '') ?
     (<Selector id='qty' name='qty' value={qtySelected} onChange={handleQtyChange}>
       <option value='' disabled hidden>-</option>
@@ -56,29 +80,6 @@ function Dropdowns () {
         })()}
       </Selector>)
   }
-
-  /*
-  If the default ‘Select Size’ is currently selected: Clicking this button should open the size dropdowns
-  */
-
-  var handleCart = function() {
-    var elem = '';
-    if (sizeSelected === '') {
-      setCartValid(false);
-    } else {
-      setCartValid(true);
-      console.log('added to cart');
-    }
-  }
-
-  var handleDrops = function(event) {
-    console.log('running')
-    if (!cartValid) {
-      event.stopPropagation();
-    }
-  }
-
-
   return(
     <SizeQtyDiv>
       {cartValid === false ?
@@ -101,6 +102,10 @@ function Dropdowns () {
         <NoStockMsg>The items with the selected options is out of stock.</NoStockMsg>
         :<CartBtn onClick={handleCart}>ADD TO CART</CartBtn>
         }
+        <FaveBtn onClick={handleFave}>
+          <BsHeartFill />
+        </FaveBtn>
+
       </CartDiv>
     </SizeQtyDiv>
   )
@@ -108,6 +113,19 @@ function Dropdowns () {
 
 
 // export on separate css page
+const FaveBtn = styled.button`
+  background-color: #000;
+  color: #fff;
+  font-weight: 400;
+  border: 1px solid #2B2E34;
+  padding: 0;
+  line-height: 0;
+  font-size: 14px;
+  height: 46px;
+  text-transform: uppercase;
+  text-align: center;
+  width: 25%;
+`;
 const CartBtn = styled.button`
   background-color: #000;
   color: #fff;
@@ -119,7 +137,7 @@ const CartBtn = styled.button`
   height: 46px;
   text-transform: uppercase;
   text-align: center;
-  width: 100%;
+  width: 70%;
 `;
 
 const CartDiv = styled.div`

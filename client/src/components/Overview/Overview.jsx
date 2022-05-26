@@ -22,12 +22,15 @@ const OverviewComps = styled.div`
 
 export const DisplayedPhotoContext = createContext();
 export const StyledProductsContext = createContext();
+export const RatingsContext = createContext();
 
 function Overview() {
 
   const [styles, setProductStyles] = useState([])
   const [displayed, setDisplayed] = useState([])
   const {id, setId} = useContext(PropIdContext);
+  const [ratings, setRatings] = useState({});
+
 
   useEffect(() => {
     axios.get('/products/styles', {params:{product_id:id}})
@@ -45,6 +48,10 @@ function Overview() {
         temp.push(response.data.results[i]);
       }
       setProductStyles(result);
+    });
+    axios.get('/reviews/meta', {params:{id}})
+    .then((response) => {
+      setRatings(response.data.ratings);
     })
   }, [id])
 
@@ -56,7 +63,9 @@ function Overview() {
         <DisplayedPhotoContext.Provider value={{displayed, setDisplayed}}>
           <Gallery/>
           <StyledProductsContext.Provider value={{styles, setProductStyles}}>
+            <RatingsContext.Provider value ={{ratings, setRatings}}>
             <Descriptions/>
+            </RatingsContext.Provider>
           </StyledProductsContext.Provider>
         </DisplayedPhotoContext.Provider>
       </OverviewComps>
