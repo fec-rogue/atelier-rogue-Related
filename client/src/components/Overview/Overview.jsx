@@ -5,10 +5,7 @@ import {PropIdContext} from '../App.jsx';
 import Gallery from './Gallery.jsx';
 import Descriptions from './Descriptions.jsx';
 
-export const DisplayedPhotoContext = createContext();
-export const StyledProductsContext = createContext();
-export const RatingsContext = createContext();
-
+export const DescriptionsContext = createContext();
 
 // TODO: Create cart, announcement header, website header
 function Overview() {
@@ -16,7 +13,7 @@ function Overview() {
   const [styles, setProductStyles] = useState([])
   const [displayed, setDisplayed] = useState([])
   const {id, setId} = useContext(PropIdContext);
-  const [ratings, setRatings] = useState({});
+  const {allRatings, setAllRatings} = useContext(PropIdContext);
 
 
   useEffect(() => {
@@ -47,14 +44,10 @@ function Overview() {
       <WebsiteHeader>OVERVIEW</WebsiteHeader>
       <AnnouncementHeader>SITE-WIDE ANNOUNCEMENT</AnnouncementHeader>
       <OverviewComps>
-        <DisplayedPhotoContext.Provider value={{displayed, setDisplayed, styles, setProductStyles, ratings, setRatings}}>
+        <DescriptionsContext.Provider value={{displayed, setDisplayed, styles, setProductStyles, styles, setProductStyles}}>
           <Gallery/>
-          <StyledProductsContext.Provider value={{styles, setProductStyles}}>
-            <RatingsContext.Provider value ={{ratings, setRatings}}>
-            <Descriptions/>
-            </RatingsContext.Provider>
-          </StyledProductsContext.Provider>
-        </DisplayedPhotoContext.Provider>
+          <Descriptions/>
+        </DescriptionsContext.Provider>
       </OverviewComps>
     </div>
   )

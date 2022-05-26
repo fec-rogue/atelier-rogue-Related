@@ -1,14 +1,14 @@
 import axios from 'axios';
 import styled from 'styled-components';
 import React, { useEffect, useState, useContext } from 'react';
-import {DisplayedPhotoContext} from './Overview.jsx'
+import {DescriptionsContext} from './Overview.jsx'
 import {PropIdContext} from '../App.jsx';
 
 // TODO: Carousel overlaid on main pic,, make all pictures uniform
 
 function Gallery() {
 
-  const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
+  const {displayed, setDisplayed} = useContext(DescriptionsContext);
   const [curPhoto, setCurPhoto] = useState([]);
   const {id, setId} = useContext(PropIdContext);
 

@@ -4,20 +4,21 @@ import styled from 'styled-components';
 import Dropdowns from './Dropdowns.jsx';
 import StyleSelection from './StyleSelection.jsx'
 import {PropIdContext} from '../App.jsx';
-import {StyledProductsContext, DisplayedPhotoContext, RatingsContext} from './Overview.jsx';
+import {DescriptionsContext} from './Overview.jsx';
 import AverageStars from '../stars/AverageStars.jsx'
-import Stars from '../stars/Stars.jsx'
+
 
 // TODO: Share on social media buttons, description of products (toggle box)
 function Descriptions() {
 
   const {id, setId} = useContext(PropIdContext);
-  const {styles, setProductStyles} = useContext(StyledProductsContext);
+  const {styles, setProductStyles} = useContext(DescriptionsContext);
   const [productInfo, setProductInfo] = useState([]);
-  const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
+  const {displayed, setDisplayed} = useContext(DescriptionsContext);
   const [price, setPrice] = useState('0');
   const [sizeAndQty, setSizeAndQty] = useState({});
-  const {ratings, setRatings} = useContext(RatingsContext);
+  const {allRatings, setallRatings} = useContext(PropIdContext);
+
 
   useEffect(() => {
     axios.get('/products/info', {params:{product_id: id}})
@@ -35,14 +36,14 @@ function Descriptions() {
     (<p>${displayed.original_price}</p>)
   };
 
-  return (productInfo.length === 0) ?
+  return (productInfo.length === 0 || Object.keys(allRatings).length === 0) ?
   <div>Loading...</div> :
   (<div>
     <TitleBlock>
       <h2>{productInfo.name}</h2>
       <p>{productInfo.category}</p>
       {renderPrice()}
-      {AverageStars(ratings)}
+      {AverageStars(allRatings.ratings)}
     </TitleBlock>
     <SizeAndColor>
       <p><strong>Color: </strong>{displayed.name}</p>

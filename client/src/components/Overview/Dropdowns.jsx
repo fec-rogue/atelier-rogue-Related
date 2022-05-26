@@ -1,18 +1,17 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import {DisplayedPhotoContext} from './Overview.jsx';
+import {DescriptionsContext} from './Overview.jsx';
 import {FavoriteContext} from '../App.jsx';
 import { BsHeartFill } from "react-icons/bs";
 
 function Dropdowns () {
-  const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
+  const {displayed, setDisplayed} = useContext(DescriptionsContext);
   const [sizeAndQty, setSizeAndQty] = useState({});
   const [sizeSelected, setSizeSelected] = useState('');
   const [qtySelected, setQtySelected] = useState('');
   const [cartValid, setCartValid] = useState(true);
   // going to need a cache/local storage to keep track of which items have already been faved
-  const {fave, setFave} = useContext(FavoriteContext);
 
   useEffect(() => {
     var sizeQty = {};
@@ -26,7 +25,6 @@ function Dropdowns () {
     setSizeAndQty(sizeQty);
     setQtySelected('');
     setSizeSelected('');
-    setFave('');
   }, [displayed]);
 
   var handleSizeChange = function(e) {
@@ -51,12 +49,12 @@ function Dropdowns () {
       console.log('added to cart');
     }
   }
-
+/*
   var handleFave = function() {
     console.log('clicked');
     setFave(displayed);
   }
-
+*/
   var renderQty = function() {
     let max = sizeAndQty[sizeSelected];
     if (sizeAndQty[sizeSelected] >= 15) {
@@ -102,16 +100,17 @@ function Dropdowns () {
         <NoStockMsg>The items with the selected options is out of stock.</NoStockMsg>
         :<CartBtn onClick={handleCart}>ADD TO CART</CartBtn>
         }
-        <FaveBtn onClick={handleFave}>
-          <BsHeartFill />
-        </FaveBtn>
 
       </CartDiv>
     </SizeQtyDiv>
   )
 }
 
-
+/*
+        <FaveBtn onClick={handleFave}>
+          <BsHeartFill />
+        </FaveBtn>
+        */
 // export on separate css page
 const FaveBtn = styled.button`
   background-color: #000;
