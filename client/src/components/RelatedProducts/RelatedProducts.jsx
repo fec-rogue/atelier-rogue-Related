@@ -2,25 +2,27 @@ import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import styled from 'styled-components';
-import {PropIdContext} from '../App.jsx';
+import { PropIdContext } from '../App.jsx';
 import Cards from './Cards/Cards.jsx';
 import Comparison from './Cards/ComparisonModal.jsx';
 import Outfits from './Outfits/Outfits.jsx';
 
+
 const RelatedProducts = () => {
 
     const {id, setId} = useContext(PropIdContext);
+
     const [relatedProductsStyles, setRelatedProductsStyles] = useState([]);
     const [relatedProductsDetail, setRelatedProductsDetail] = useState([]);
+    const [relatedProductsRatings, setRelatedProductsRatings] = useState([]);
+
     const [defaultidinfo, setDefaultIdinfo] = useState([]);
 
     const [showModal, setShowModal] = useState(false);
     const [selectedid, setSelectedid] = useState({});
     const [twoCardsArray, setTwoCardsArray] = useState([]);
 
-
     useEffect(() => {
-      // console.log('hiiiitttt itt ')
       axios.get(`products/info?product_id=${id}`)
         .then((res) => {
           // console.log('default info', res.data)
@@ -31,18 +33,10 @@ const RelatedProducts = () => {
         })
     }, [])
 
-
-    // useEffect( ()=> {
-    //   document.addEventListener( 'mousedown', ()=>{
-    //     setShowModal({selectedid:{},status:false})
-    //   })
-    // })
-
     useEffect(() => {
-      // console.log('related use effect hiiit')
       //HARD CODE ONE PRODUCT HAS MORE THAN 4 RELATED PRODUCTS TO TEST OUT CAROUSEL
-        axios.get(`products/related?product_id=40346`)
-        // axios.get(`products/related?product_id=${id}`)
+        // axios.get(`products/related?product_id=40346`)
+        axios.get(`products/related?product_id=${id}`)
           .then((res) => {
            let allRelatedRequestStyles= res.data.map((eachRelated) => {
               return axios.get(`products/styles?product_id=${eachRelated}`)
@@ -50,6 +44,10 @@ const RelatedProducts = () => {
             let allRelatedRequestInfo= res.data.map((eachRelated) => {
               return axios.get(`products/info?product_id=${eachRelated}`)
             });
+            let allRelatedRequestRatings = res.data.map((eachRelated) => {
+              return axios.get(`reviews/meta/?id=${eachRelated}`)
+            });
+
             Promise.all(allRelatedRequestStyles)
               .then(result => {
                 // console.log('resultStyles', result.map((eachProduct) => eachProduct.data));
@@ -60,6 +58,11 @@ const RelatedProducts = () => {
                 // console.log('resultCategory', result.map((eachProduct) => eachProduct.data));
                 setRelatedProductsDetail(result.map((eachProduct) => eachProduct.data));
             })
+            Promise.all(allRelatedRequestRatings)
+            .then(result => {
+              console.log('resultRatings', result.map((eachProduct) => eachProduct.data));
+              setRelatedProductsRatings(result.map((eachProduct) => eachProduct.data));
+          })
           })
           .catch((err) => {
             console.log('error while getting the data', err)
@@ -76,12 +79,14 @@ const RelatedProducts = () => {
 
   return(
     <RelatedProductsSection>
+
       <RelatedHeader>Related Products</RelatedHeader>
       {
         relatedProductsStyles.length > 0 && relatedProductsDetail.length > 0 &&
         <Cards
           relatedProductsStyles={relatedProductsStyles}
           relatedProductsDetail={relatedProductsDetail}
+          relatedProductsRatings={relatedProductsRatings}
           setShowModal={setShowModal}
           setSelectedid={setSelectedid}
         />

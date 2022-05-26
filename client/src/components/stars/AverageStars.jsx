@@ -23,7 +23,6 @@ const currentStars = (ratings) => {
   return average;
 }
 
-
   return (
     <Stars average={currentStars(ratings)} />
   )

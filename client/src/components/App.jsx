@@ -23,15 +23,15 @@ const App = () => {
   //need to grab overview data
   return (
     <PropIdContext.Provider value={{id, setId}}>
-      <div>
+      {/* <div>
         <Overview />
-      </div>
+      </div> */}
       <div>
         <RelatedProducts />
       </div>
-      <div>
+      {/* <div>
         <Reviews />
-      </div>
+      </div> */}
     </PropIdContext.Provider>
   )
 }
