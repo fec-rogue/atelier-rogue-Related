@@ -6,6 +6,7 @@ import { FcPrevious,  FcNext } from "react-icons/fc";
 
 
 const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRatings, defaultInfo, setShowModal, setSelectedid}) => {
+  console.log('relatedProductsRatingsId', Number(relatedProductsRatings[0].product_id));
   const [current, setCurrent] = useState(0);
   const length = relatedProductsStyles.length;
   const prevArrow = () => {
@@ -25,10 +26,14 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
     { max !== length -1 ?  <FcNext onClick={nextArrow}/> : null }
 
     {relatedProductsStyles.map((eachProduct, index) => {
-      // console.log('eachProduct', eachProduct);
+
       const id = Number(eachProduct.product_id);
+
       const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
       // console.log('detailProduct',detailProduct);
+      const detailRatings = relatedProductsRatings.find(detail => Number(detail.product_id) === id);
+      console.log('detailRatings', detailRatings);
+
       const category = detailProduct.category;
       const name = detailProduct.name;
       const features = detailProduct.features;
@@ -42,12 +47,14 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       const price = saleprice === null ? defaultPrice : saleprice;
       // console.log('price', price )
 
+
       return(
         <Cardscontainer key={id}>
         {index <= max && index >= min &&
           <CardEntry
           defaultsStyles={defaultsStyles}
           detailProduct = {detailProduct}
+          detailRatings={detailRatings}
           defaultInfo={defaultInfo}
           id={id}
           category={category}
@@ -74,7 +81,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       display: flex;
       justify-content: space-around;
       align-items: center;
-      overflow: hidden;
+      overflow: auto;
       position: relative;
       `
       const Cardscontainer = styled.div`

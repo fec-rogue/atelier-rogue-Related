@@ -45,7 +45,7 @@ const RelatedProducts = () => {
               return axios.get(`products/info?product_id=${eachRelated}`)
             });
             let allRelatedRequestRatings = res.data.map((eachRelated) => {
-              return axios.get(`reviews/meta/?id=${eachRelated}`)
+              return axios.get(`reviews/meta/?product_id=${eachRelated}`)
             });
 
             Promise.all(allRelatedRequestStyles)
@@ -60,7 +60,7 @@ const RelatedProducts = () => {
             })
             Promise.all(allRelatedRequestRatings)
             .then(result => {
-              console.log('resultRatings', result.map((eachProduct) => eachProduct.data));
+              // console.log('resultRatings', result.map((eachProduct) => eachProduct.data));
               setRelatedProductsRatings(result.map((eachProduct) => eachProduct.data));
           })
           })
@@ -70,10 +70,8 @@ const RelatedProducts = () => {
     }, []);
 
     useEffect(() => {
-      // console.log('test selected id', selectedid)
       if(selectedid.features) {
         setTwoCardsArray([defaultidinfo, selectedid]);
-        // console.log('twocardsarr', twoCardsArray);
       }
     }, [selectedid])
 
@@ -82,7 +80,8 @@ const RelatedProducts = () => {
 
       <RelatedHeader>Related Products</RelatedHeader>
       {
-        relatedProductsStyles.length > 0 && relatedProductsDetail.length > 0 &&
+        relatedProductsStyles.length > 0 && relatedProductsDetail.length > 0
+        && relatedProductsRatings.length > 0 &&
         <Cards
           relatedProductsStyles={relatedProductsStyles}
           relatedProductsDetail={relatedProductsDetail}
