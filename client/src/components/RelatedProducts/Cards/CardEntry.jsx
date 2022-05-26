@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
-// import Comparison from './ComparisonModal.jsx';
 import {AiFillStar} from "react-icons/Ai";
 
 
@@ -9,10 +8,6 @@ const CardEntry = ({defaultsStyles, detailProduct, defaultInfo, id, category, na
 
   const imageNotFound = "http://placecorgi.com/260/180";
   // console.log('detailProduct', detailProduct);
-  // const [data, setData] = useState({
-  //   showModal: Array(length).fill(false),
-  //   twoCardsArray: []
-  // });
 
   return(
       <Carditem>
@@ -22,18 +17,9 @@ const CardEntry = ({defaultsStyles, detailProduct, defaultInfo, id, category, na
           <AiFillStar/>
         </StarButton>
 
-        {(defaultsStyles[0] ) ? <Cardimage src={defaultsStyles[0].photos[0].url}/> : <Cardimage src={imageNotFound} />}
-
-        {/* <ModalButton onClick={() => {
-          setData({
-            showModal: true,
-            twoCardsArray: [defaultInfo, detailProduct]
-          })
-        }}> Compare
-        </ModalButton>
-
-        {data.showModal && data.twoCardsArray.length > 0 &&
-        <Comparison twoCards={data.twoCardsArray} closeModal={setData} />} */}
+        {(defaultsStyles[0] )
+        ? <Cardimage src={defaultsStyles[0].photos[0].url}/>
+        : <Cardimage src={imageNotFound} />}
 
         <CardInfo>
           <p>Category: {category}</p>

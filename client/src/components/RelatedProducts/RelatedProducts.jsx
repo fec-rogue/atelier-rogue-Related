@@ -70,7 +70,7 @@ const RelatedProducts = () => {
       // console.log('test selected id', selectedid)
       if(selectedid.features) {
         setTwoCardsArray([defaultidinfo, selectedid]);
-        console.log('twocardsarr', twoCardsArray);
+        // console.log('twocardsarr', twoCardsArray);
       }
     }, [selectedid])
 
@@ -94,7 +94,6 @@ const RelatedProducts = () => {
         close={ setShowModal}
       /> }
     </ComparisonWrapper>
-
 
 
     <RelatedHeader>Your Outfit</RelatedHeader>

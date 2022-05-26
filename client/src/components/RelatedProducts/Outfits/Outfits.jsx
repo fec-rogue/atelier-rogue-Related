@@ -10,15 +10,13 @@ const Outfits = () => {
   const [overviewData, setOverviewData] = useState([]);
   const [overviewStyles, setOverviewStyles] = useState([]);
   const [outfit, setOutfit] = useState(() => {
-    let saved = localStorage.getItem('outfit');
-    let initialVal = JSON.parse(saved);
-    return initialVal || [];
+    let saved = JSON.parse(localStorage.getItem('outfit'));
+    return saved || [];
   });
 
   useEffect(() => {
     axios.get(`products/info?product_id=${id}`)
       .then((res) => {
-        // console.log('overview info', res.data)
         setOverviewData(res.data)
       })
       .catch((err) => {
@@ -29,7 +27,6 @@ const Outfits = () => {
   useEffect(() => {
     axios.get(`products/styles?product_id=${id}`)
       .then((res) => {
-        // console.log('overview styles', res.data.results[0].photos[0])
         setOverviewStyles(res.data.results[0].photos[0])
       })
       .catch((err) => {
@@ -46,47 +43,48 @@ const Outfits = () => {
     newOutfit.default_price = overviewData.default_price;
     newOutfit.image = overviewStyles.url || imageNotFound;
 
-    if(localStorage.getItem('outfit') === null) {
-      let outfit = [];
-      outfit.push(newOutfit);
-      localStorage.setItem('outfit', JSON.stringify(outfit));
-      setOutfit(outfit);
-    }
+    localStorage.setItem('outfit', JSON.stringify(newOutfit));
+    setOutfit(outfit);
 
-    if(outfit.indexOf(`"id": ${newOutfit.id}`) === -1) {
-      outfit = JSON.parse(outfit);
-      outfit.push(newOutfit);
-      localStorage.setItem('outfit', JSON.stringify(outfit));
-      setOutfit(outfit);
-      return;
-    }
+    // if(outfit.indexOf(`"id": ${newOutfit.id}`) === -1) {
+    //   console.log('outfit', outfit)
+    //   outfit = JSON.parse(outfit);
+    //   outfit.push(newOutfit);
+    //   localStorage.setItem('outfit', JSON.stringify(outfit));
+    //   setOutfit(outfit);
+    //   return;
+    // }
   }
 
   let handleUpdate = () => {
     let outfit = JSON.parse(localStorage.getItem('outfit'));
-    setOutfit(outfit);
+    setOutfit([outfit]);
   }
+
+
+
    useEffect(() => {
      let outfit = JSON.parse(localStorage.getItem('outfit'));
-     setOutfit(outfit);
+     setOutfit([outfit]);
    }, []);
 
+  //  console.log('outfit', outfit)
   return (
     <div>
       <h1>My Collection</h1>
       <div>
-        <button onClick={addOutfit}></button>
-        <button onClick={addOutfit}></button>
-          <strong></strong>
+        <button onClick={addOutfit}>Add outfit</button>
+
       </div>
 
-      {outfit ? outfit.map((item) => (
-        <OutfitCarousel
-          key={item.id}
-          item={item}
-          handleUpdate={handleUpdate} />
-      ))
-      : ''}
+      {outfit.length > 0 ?
+        outfit.map((item) => (
+          <OutfitCarousel
+            key={item.id}
+            item={item}
+            handleUpdate={handleUpdate} />
+         ))
+        : ''}
     </div>
   )
 }
