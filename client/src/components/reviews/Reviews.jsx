@@ -78,20 +78,29 @@ const Count = styled.span`
 const AddMore = styled.button`
   height: 50px;
   width: 100px;
-  margin-left: 690px;
-  margin-right: 10px;
-  margin-top: 20px;
-`;
+  margin-bottom: 10px;
+  `;
+  // margin-left: 690px;
+  // margin-right: 10px;
+  // margin-top: 20px;
 
 const AddReview = styled.button`
   height: 50px;
   width: 100px;
-  margin-top: 20px;
-`;
+  `;
+  // margin-top: 20px;
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: row;
   margin: auto;
   width: 60%;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
 `;
 
 
@@ -101,6 +110,13 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(1000);
   const [displayCount, setDisplayCount] = useState(2);
+  const [filters, setFilters] = useState({
+    '1': false,
+    '2': false,
+    '3': false,
+    '4': false,
+    '5': false
+  });
 
 
   useEffect(() => {
@@ -108,8 +124,31 @@ const Reviews = () => {
       .then((results) => {
         // console.log(results.data.results);
         setReviews(results.data.results);
+        return results.data.results
       })
-  }, [count]);
+      .then((result) => {
+        const filter = Object.keys(filters);
+        let filterExists = false;
+        let filterArray = [];
+        let results = [];
+        for (let value of filter) {
+          if (filters[value] === true) {
+            filterArray.push(value);
+            filterExists = true;
+          }
+        }
+        if (filterExists) {
+          result.forEach((review) => {
+            for (let value of filterArray) {
+              if (review.rating === Number(value)) {
+                results.push(review);
+              }
+            }
+          })
+          setReviews(results);
+        }
+      })
+  }, [filters]);
 
   const handleMore = (e) => {
     setDisplayCount(displayCount + 2);
@@ -118,8 +157,8 @@ const Reviews = () => {
 
   return (
       <Container>
+          <Ratings reviews={reviews} setReviews={setReviews} filters={filters} setFilters={setFilters} />
         <Test>
-          <Ratings />
           <ReviewContainer>
             {reviews.map((review, index) => {
               if (index < displayCount) {
@@ -151,8 +190,10 @@ const Reviews = () => {
             })}
           </ReviewContainer>
         </Test>
-        <AddMore onClick={handleMore}>See More</AddMore>
-        <AddReview>Add a review</AddReview>
+        <ButtonContainer>
+          <AddMore onClick={handleMore}>See More</AddMore>
+          <AddReview>Add a review</AddReview>
+        </ButtonContainer>
       </Container>
   )
 }
