@@ -42,7 +42,7 @@ exports.getReviews = (req, res) => {
 };
 
 exports.getMetaData = (req, res) => {
-  let id = req.query.id;
+  let id = req.query.product_id;
   models.getMetaData(id, (result) => {
     res.json(result.data);
   });
