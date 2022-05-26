@@ -16,7 +16,7 @@ const PercentageBars = () => {
   const [highest, setHighest] = useState(0);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/reviews/meta', {params: {id: 40344}})
+    axios.get('http://localhost:3000/reviews/meta', {params: {product_id: 40344}})
       .then((results) => {
         let high = 0;
         let index = 0;
@@ -49,9 +49,9 @@ const PercentageBars = () => {
     <BarContainer>
       {ratings.map((rating, index) => {
         if (rating.count === highest) {
-          return (<ComparisonBar key={index} percent={100}>&nbsp;</ComparisonBar>)
+          return (<ComparisonBar percent={100} key={index}>&nbsp;</ComparisonBar>)
         } else {
-          return (<ComparisonBar key={index} percent={(rating.count / highest) * 100}>&nbsp;</ComparisonBar>)
+          return (<ComparisonBar percent={(rating.count / highest) * 100} key={index}>&nbsp;</ComparisonBar>)
         }
       }
       )}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { lazy, Suspense, useState, createContext } from "react";
+import { lazy, Suspense, useState, createContext, useEffect} from "react";
 import Overview from "./Overview/Overview.jsx";
 import axios from 'axios';
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
@@ -20,18 +20,27 @@ export const FavoriteContext = createContext();
 
 const App = () => {
   const [id, setId] = useState('40344');
-  const [fave, setFave] = useState([]);
+  const [allRatings, setAllRatings] = useState(0);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/reviews/meta', {params: {product_id: 40344}})
+    .then((results) => {
+      const recommends = results.data.recommended;
+      const percentage = (Number(recommends.true) / (Number(recommends.false) + Number(recommends.true)) * 100)
+      setAllRatings({ratings: results.data.ratings, percentage: Math.round(percentage) + '%'});
+      return results.data.ratings
+    })
+    }, [id]);
+
 
   return (
-    <PropIdContext.Provider value={{id, setId}}>
-      <FavoriteContext.Provider value={{fave, setFave}}>
-        <div>
-          <Overview />
-        </div>
-        <div>
-          <RelatedProducts />
-        </div>
-      </FavoriteContext.Provider>
+    <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings}}>
+      <div>
+        <Overview />
+      </div>
+      <div>
+        <RelatedProducts />
+      </div>
       <div>
         <Reviews />
       </div>

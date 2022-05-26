@@ -32,6 +32,14 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: ["style-loader", "css-loader", "sass-loader"]
       },
+<<<<<<< HEAD
+=======
+      // {
+      //   presets: [
+      //   ['@babel/preset-env', {targets: {node: 'current'}}],
+      //   ['@babel/preset-react', {targets: {node: 'current'}}]]
+      // }
+>>>>>>> main
     ]
   },
   plugins: [

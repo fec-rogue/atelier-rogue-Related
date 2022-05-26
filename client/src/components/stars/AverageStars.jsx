@@ -7,6 +7,9 @@ import Stars from './Stars.jsx';
 // StaticStars expects an object
 // Returns the average ratings of all reviews
 const AverageStars = (ratings) => {
+  console.log('this shoud show')
+  console.log(ratings)
+
 
 const currentStars = (ratings) => {
 
@@ -28,9 +31,7 @@ const currentStars = (ratings) => {
     <div>
       {Stars(currentStars(ratings))}
     </div>
-    )
-  }
-  /*
-  <Stars average={currentStars(ratings)} />
- */
+  )
+}
+
 export default AverageStars;
