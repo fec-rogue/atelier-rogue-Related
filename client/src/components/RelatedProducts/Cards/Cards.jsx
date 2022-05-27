@@ -29,6 +29,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
 
     <Cardscontainer style={{ transform: `translateX(-${current * 100}%)`}}>
       {relatedProductsStyles.map((eachProduct, index) => {
+        console.log('eachProduct', eachProduct);
         const id = Number(eachProduct.product_id);
         const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
         // console.log('detailProduct',detailProduct);
@@ -37,10 +38,27 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
         const category = detailProduct.category;
         const name = detailProduct.name;
         const features = detailProduct.features;
-        const defaultsStyles = eachProduct.results.filter((eachStyle) => eachStyle['default?'] === true);
+
+
+          let isDefault = false;
+          let defaultsStyles = [];
+          let stylesResults = eachProduct.results;
+          stylesResults.forEach((eachStyle) => {
+              if(eachStyle['default?'] === true) {
+                isDefault = true;
+                defaultsStyles.push(eachStyle);
+              }
+          })
+          if(isDefault === false) {
+            defaultsStyles.push(stylesResults[0])
+          }
+        // const defaultsStyles = eachProduct.results.filter((eachStyle) => eachStyle['default?'] === true);
+        console.log('defaultStyles', defaultsStyles);
+
         const defaultPrice = detailProduct.default_price;
         const saleprice = defaultsStyles[0] && defaultsStyles[0].sale_price;
         const price = saleprice === null ? defaultPrice : saleprice;
+
         return(
 
         <Individualcard key={id}>
@@ -75,17 +93,13 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
         // display: flex;
         // justify-content: space-around;
         // align-items: center;
-        // overflow: hidden;
+        overflow: hidden;
         position: relative;
       `
       const Cardscontainer = styled.div`
         display: flex;
         gap: 60px;
         position: relative;
-        // width: 200px;
-        // height: 415px;
-        // margin: 0px;
-        // padding: 0px;
         transitions: .5s;
         scroll-behavior: smooth;
       `;

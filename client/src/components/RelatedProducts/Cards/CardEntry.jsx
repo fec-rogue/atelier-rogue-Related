@@ -7,13 +7,15 @@ import AverageStars from "../../stars/AverageStars.jsx"
 const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  defaultInfo, id, category, name, price, length, setShowModal, setSelectedid}) => {
 
   const imageNotFound = "http://placecorgi.com/260/180";
-
+  console.log('defaultImage', defaultsStyles[0])
   return(
       <Carditem>
         <CardImageBox>
-          {(defaultsStyles[0] )
-          ? <Cardimage src={defaultsStyles[0].photos[0].url}/>
-          : <Cardimage src={imageNotFound} />}
+          { defaultsStyles[0].photos[0].url === null
+          ? <Cardimage src={imageNotFound} />
+          : <Cardimage src={defaultsStyles[0].photos[0].url}/>}
+
+
         </CardImageBox>
 
         <StarButton onClick={() => {

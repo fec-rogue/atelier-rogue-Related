@@ -32,8 +32,8 @@ const RelatedProducts = () => {
 
     useEffect(() => {
       //HARD CODE ONE PRODUCT HAS MORE THAN 4 RELATED PRODUCTS TO TEST OUT CAROUSEL
-        axios.get(`products/related?product_id=40347`)
-        // axios.get(`products/related?product_id=${id}`)
+        // axios.get(`products/related?product_id=40346`)
+        axios.get(`products/related?product_id=${id}`)
           .then((res) => {
            let allRelatedRequestStyles= res.data.map((eachRelated) => {
               return axios.get(`products/styles?product_id=${eachRelated}`)

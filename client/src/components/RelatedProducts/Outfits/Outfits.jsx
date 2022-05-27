@@ -88,7 +88,7 @@ const Outfits = () => {
             item={item}
             setOutfit={setOutfit}
             ratings = {AverageStars(allRatings.ratings)}
-            />
+          />
          ))
         : ''}
     </OutfitsWrapper>
