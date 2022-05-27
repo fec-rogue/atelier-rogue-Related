@@ -180,7 +180,7 @@ const ErrMsg = styled.p`
   margin-block-end: 1em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-  background-color: #c00;
+  background-color: #9e3533;
   border-radius: 0;
   color: #fff;
   font-family: DS Trade Gothic,Trade Gothic,sans-serif;

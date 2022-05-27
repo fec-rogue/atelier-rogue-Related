@@ -30,7 +30,7 @@ function Descriptions() {
     return (displayed.sale_price) ?
     (<p>
       <strike>${displayed.original_price}</strike>
-      <strong style={{ color: 'red' }}>${displayed.sale_price}</strong>
+      <strong style={{ color: '#9e3533' }}> ${displayed.sale_price}</strong>
     </p>) :
     (<p>${displayed.original_price}</p>)
   };
@@ -52,7 +52,6 @@ function Descriptions() {
       <Dropdowns/>
     </SizeAndColor>
   </div>)
-
 
 }
 

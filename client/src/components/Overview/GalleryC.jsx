@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import React, { useEffect, useState, useContext } from 'react';
 import {DescriptionsContext} from './Overview.jsx'
 import {PropIdContext} from '../App.jsx';
-import Carousel from './Carousel.jsx'
+import CarouselB from './CarouselB.jsx'
 
-// TODO: Carousel overlaid on main pic,, make all pictures uniform
+// TODO: CarouselB overlaid on main pic,, make all pictures uniform
 
 function Gallery() {
 
@@ -14,8 +14,8 @@ function Gallery() {
   const {id, setId} = useContext(PropIdContext);
 
   useEffect(() => {
-    // find better conditions for if statement
     if (!Array.isArray(displayed)) {
+      console.log('displayed: ', displayed)
       setCurPhoto(displayed.photos[0])
     }
   }, [displayed])
@@ -23,33 +23,35 @@ function Gallery() {
   return (curPhoto.length === 0 || Array.isArray(displayed)) ?
   null :
   <PictureContainer>
-      <Carousel/>
-    <MainPicture src={curPhoto.url}></MainPicture>
+    <CarouselB/>
+    <MainPicDiv>
+      <MainPicture src={curPhoto.url}></MainPicture>
+    </MainPicDiv>
   </PictureContainer>
 
 }
 
 const PictureContainer = styled.div `
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   width: 100%;
 `;
 
-const CarouselContainer = styled.div`
+const CarouselBContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 40%;
 `;
 
-const MainPicture = styled.img`
+const MainPicDiv = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`;
+const MainPicture = styled.img`
   width: 70%;
-  height: 70%;
-  max-height: 700px;
-  max-width: 400px;
-  object-fit: contain;
-  margin-right: 40px;
+  height: 90%;
+  object-fit: cover;
 `;
 
 const SidePic = styled.img`

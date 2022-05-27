@@ -19,7 +19,7 @@ export const PropIdContext = createContext();
 export const FavoriteContext = createContext();
 
 const App = () => {
-  const [id, setId] = useState('40344');
+  const [id, setId] = useState('40348');
   const [allRatings, setAllRatings] = useState(0);
 
   useEffect(() => {

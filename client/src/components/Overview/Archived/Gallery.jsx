@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import React, { useEffect, useState, useContext } from 'react';
 import {DescriptionsContext} from './Overview.jsx'
 import {PropIdContext} from '../App.jsx';
-import Carousel from './Carousel.jsx'
+import CarouselB from './CarouselB.jsx'
 
 // TODO: Carousel overlaid on main pic,, make all pictures uniform
 
@@ -17,7 +17,6 @@ function Gallery() {
     // find better conditions for if statement
     if (!Array.isArray(displayed)) {
       setCurPhoto(displayed.photos[0])
-      console.log('displayed: ', displayed);
     }
   }, [displayed])
 

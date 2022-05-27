@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext, createContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import {PropIdContext} from '../App.jsx';
-import Gallery from './Gallery.jsx';
 import GalleryC from './GalleryC.jsx';
 import Descriptions from './Descriptions.jsx';
 
@@ -29,6 +28,9 @@ function Overview() {
           temp = [];
         }
         temp.push(response.data.results[i]);
+      }
+      if (temp.length > 0) {
+        result.push(temp);
       }
       setProductStyles(result);
     });
