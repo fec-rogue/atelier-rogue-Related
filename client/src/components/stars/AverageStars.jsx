@@ -10,7 +10,6 @@ const AverageStars = (ratings) => {
   // console.log('this shoud show')
   // console.log(ratings)
 
-
 const currentStars = (ratings) => {
   let average = 0;
   let count = 0;

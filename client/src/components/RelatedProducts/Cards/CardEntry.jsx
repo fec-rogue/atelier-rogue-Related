@@ -10,15 +10,17 @@ const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  defaultInfo, 
 
   return(
       <Carditem>
+        <CardImageBox>
+          {(defaultsStyles[0] )
+          ? <Cardimage src={defaultsStyles[0].photos[0].url}/>
+          : <Cardimage src={imageNotFound} />}
+        </CardImageBox>
+
         <StarButton onClick={() => {
           setShowModal(true)
           setSelectedid(detailProduct)}}>
           <AiFillStar/>
         </StarButton>
-
-        {(defaultsStyles[0] )
-        ? <Cardimage src={defaultsStyles[0].photos[0].url}/>
-        : <Cardimage src={imageNotFound} />}
 
         <CardInfo>
           <p>Category: {category}</p>
@@ -31,24 +33,35 @@ const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  defaultInfo, 
 }
 
 const Carditem = styled.div`
+  width: 250px;
   height: 400px;
-  width: 200px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
 `
 //uniform the photos size
+const CardImageBox = styled.div`
+  width: 100%;
+  height: 50%;
+`
 const Cardimage = styled.img`
   width: 100%;
-
+  height: 100%;
+  object-fit: cover;
 `
 
 const CardInfo = styled.div`
+  padding: 0 16px;
   display: flex;
   flex-direction: column;
 `
 
-
 const StarButton = styled.button`
-
+  position:absolute;
+  top:10px;
+  right: 10px;
 `
 const Ratings = styled.div`
   display:inline-block

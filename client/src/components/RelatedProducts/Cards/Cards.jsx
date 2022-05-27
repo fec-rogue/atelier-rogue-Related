@@ -8,6 +8,7 @@ import { FcPrevious,  FcNext } from "react-icons/fc";
 const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRatings, defaultInfo, setShowModal, setSelectedid}) => {
   const [current, setCurrent] = useState(0);
   const length = relatedProductsStyles.length;
+
   const prevArrow = () => {
     setCurrent(current === 0 ? length -1 : current -1)
   };
@@ -15,91 +16,100 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
   const nextArrow = () => {
     setCurrent(current === length - 1 ? 0 : current + 1)
   };
-  const max = current + 2;
+
+  const max = current + 3;
   const min = current;
 
   return (
-    <div>
     <CardsWrapper>
-    { current !== 0 ? <FcPrevious onClick={prevArrow}/> : null }
-    { max !== length -1 ?  <FcNext onClick={nextArrow}/> : null }
+      <Indicators>
+        { current !== 0 ? <FcPrevious onClick={prevArrow}/> : null }
+        { max !== length -1 ?  <FcNext onClick={nextArrow}/> : null }
+      </Indicators>
 
-    {relatedProductsStyles.map((eachProduct, index) => {
+    <Cardscontainer style={{ transform: `translateX(-${current * 100}%)`}}>
+      {relatedProductsStyles.map((eachProduct, index) => {
+        const id = Number(eachProduct.product_id);
+        const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
+        // console.log('detailProduct',detailProduct);
+        const detailRatings = relatedProductsRatings.find(detail => Number(detail.product_id) === id);
+        // console.log('detailRatings', detailRatings);
+        const category = detailProduct.category;
+        const name = detailProduct.name;
+        const features = detailProduct.features;
+        const defaultsStyles = eachProduct.results.filter((eachStyle) => eachStyle['default?'] === true);
+        const defaultPrice = detailProduct.default_price;
+        const saleprice = defaultsStyles[0] && defaultsStyles[0].sale_price;
+        const price = saleprice === null ? defaultPrice : saleprice;
+        return(
 
-      const id = Number(eachProduct.product_id);
-
-      const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
-      // console.log('detailProduct',detailProduct);
-      const detailRatings = relatedProductsRatings.find(detail => Number(detail.product_id) === id);
-      // console.log('detailRatings', detailRatings);
-
-      const category = detailProduct.category;
-      const name = detailProduct.name;
-      const features = detailProduct.features;
-      const defaultsStyles = eachProduct.results.filter((eachStyle) => eachStyle['default?'] === true);
-      // console.log('defaultsStyles', defaultsStyles)
-
-      const defaultPrice = detailProduct.default_price;
-      // console.log('defaultPrice', defaultPrice);
-      const saleprice = defaultsStyles[0] && defaultsStyles[0].sale_price;
-      // console.log('saleprice', saleprice);
-      const price = saleprice === null ? defaultPrice : saleprice;
-      // console.log('price', price )
-
-
-      return(
-        <Cardscontainer key={id}>
-        {index <= max && index >= min &&
-          <CardEntry
-          defaultsStyles={defaultsStyles}
-          detailProduct = {detailProduct}
-          detailRatings={detailRatings}
-          defaultInfo={defaultInfo}
-          id={id}
-          category={category}
-          name={name}
-          price={price}
-          index={index}
-          current={current}
-          length={length}
-          setShowModal={setShowModal}
-          setSelectedid={setSelectedid}
-          />}
-        </Cardscontainer>
-          )
-        })}
+        <Individualcard key={id}>
+          {index <= max && index >= min &&
+            <CardEntry
+              defaultsStyles={defaultsStyles}
+              detailProduct = {detailProduct}
+              detailRatings={detailRatings}
+              defaultInfo={defaultInfo}
+              id={id}
+              category={category}
+              name={name}
+              price={price}
+              index={index}
+              current={current}
+              length={length}
+              setShowModal={setShowModal}
+              setSelectedid={setSelectedid}
+            />}
+          </Individualcard>
+            )
+          })}
+         </Cardscontainer>
         </CardsWrapper>
-
-
-        </div>
         )
       }
 
-
       const CardsWrapper = styled.ul`
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      overflow: hidden;
-      position: relative;
+        width:1200px;
+        padding: 40px 0;
+        // height: 600px;
+        // display: flex;
+        // justify-content: space-around;
+        // align-items: center;
+        // overflow: hidden;
+        position: relative;
       `
       const Cardscontainer = styled.div`
-      position: relative;
-      width: 200px;
-      height: 415px;
-      margin: 0px;
-      padding: 0px;
-      transitions: .5s;
-      scroll-behavior: smooth;
+        display: flex;
+        gap: 60px;
+        position: relative;
+        // width: 200px;
+        // height: 415px;
+        // margin: 0px;
+        // padding: 0px;
+        transitions: .5s;
+        scroll-behavior: smooth;
       `;
 
+      const Individualcard = styled.div`
+        width:300px;
+        height: 400px;
+        box-shadow: 0 0 24px 8px rgba(0,0,0,0.05);
+      `
+      const Indicators = styled.div`
+        top:50%;
+        display:flex;
+        justify-content: center;
+        position: absolute;
+        z-index: 1;
+        cursor:pointer;
+      `
       const PrevButton = styled.button`
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      z-index: 1;
-      cursor:pointer;
-      user-select:none;
+        // position: absolute;
+        // top: 0;
+        // bottom: 0;
+        // z-index: 1;
+        // cursor:pointer;
+        user-select:none;
       `
 
       const NextButton = styled.button`

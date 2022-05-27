@@ -47,28 +47,29 @@ const Comparison = ({ twoCards, close }) => {
       <tbody>
         {features.map((item, index) => {
           //  console.log('HIT TABLE!!')
+          console.log('item', item)
           return(
           <tr key={index}>
             <FeatureL>
               {card1Arr.map((item1) => (
-                // (item1.feature === item) ? `${item1.value} ✓` : item1.value
-                (item1.feature === item)
-                  ? (item1.value)
-                    ? `${item1.value}`
-                      : '✓'
-                      : ' '
+                (item1.feature === item) ? `✓` : null
+                // (item1.feature === item)
+                //   ? (item1.value)
+                //     ? `${item1.value}`
+                //       : '✓'
+                //       : ' '
               ))}
             </FeatureL>
             <Value>{item}</Value>
 
             <FeatureR>
               {card2Arr.map((item2) => (
-                // (item2.feature === item) ? `${item2.value} ✓` : item2.value
-                (item2.feature === item)
-                  ? (item2.value)
-                    ? `${item2.value}`
-                    : '✓'
-                    : ' '
+                (item2.feature === item) ? `✓` : null
+                // (item2.feature === item)
+                //   ? (item2.value)
+                //     ? `${item2.value}`
+                //     : '✓'
+                //     : ' '
               ))}
             </FeatureR>
           </tr>

@@ -4,13 +4,12 @@ import {PropIdContext} from '../../App.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
 import AverageStars from '../../stars/AverageStars.jsx';
-import OutfitCarousel from './OutfitCarousel.jsx';
+import OutfitEntry from './OutfitEntry.jsx';
 import { FcPrevious,  FcNext } from "react-icons/fc";
 
 const Outfits = () => {
   const {id, setId} = useContext(PropIdContext);
   const {allRatings, setAllRatings} = useContext(PropIdContext);
-
   const [overviewData, setOverviewData] = useState([]);
   const [overviewStyles, setOverviewStyles] = useState([]);
 
@@ -26,6 +25,7 @@ const Outfits = () => {
   const nextArrow = () => {
     setCurrent(current === length - 1 ? 0 : current + 1)
   };
+
   const max = current + 1;
   const min = current;
 
@@ -65,7 +65,6 @@ const Outfits = () => {
         newOutfit.category = overviewData.category;
         newOutfit.default_price = overviewData.default_price
         newOutfit.image = overviewStyles.url || imageNotFound;
-        // newOutfit.ratings = {AverageStars(allRatings.ratings)};
 
       var currentOutfit = outfit.slice();
       currentOutfit.push(newOutfit);
@@ -81,13 +80,14 @@ const Outfits = () => {
       { current !== 0 ? <FcPrevious onClick={prevArrow}/> : null }
       { max !== length -1 ?  <FcNext onClick={nextArrow}/> : null }
 
-      {outfit.length > 0 ?
+      {outfit.length > 0 && allRatings ?
         outfit.map((item, index) => (
           index <= max && index >= min &&
-          <OutfitCarousel
+          <OutfitEntry
             key={index}
             item={item}
             setOutfit={setOutfit}
+            ratings = {AverageStars(allRatings.ratings)}
             />
          ))
         : ''}
@@ -99,7 +99,7 @@ const OutfitsWrapper = styled.ul`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
 `
 
