@@ -29,7 +29,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
 
     <Cardscontainer style={{ transform: `translateX(-${current * 100}%)`}}>
       {relatedProductsStyles.map((eachProduct, index) => {
-        console.log('eachProduct', eachProduct);
+        // console.log('eachProduct', eachProduct);
         const id = Number(eachProduct.product_id);
         const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
         // console.log('detailProduct',detailProduct);
@@ -38,8 +38,6 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
         const category = detailProduct.category;
         const name = detailProduct.name;
         const features = detailProduct.features;
-
-
           let isDefault = false;
           let defaultsStyles = [];
           let stylesResults = eachProduct.results;
@@ -53,14 +51,13 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
             defaultsStyles.push(stylesResults[0])
           }
         // const defaultsStyles = eachProduct.results.filter((eachStyle) => eachStyle['default?'] === true);
-        console.log('defaultStyles', defaultsStyles);
+        // console.log('defaultStyles', defaultsStyles);
 
         const defaultPrice = detailProduct.default_price;
         const saleprice = defaultsStyles[0] && defaultsStyles[0].sale_price;
         const price = saleprice === null ? defaultPrice : saleprice;
 
         return(
-
         <Individualcard key={id}>
           {index <= max && index >= min &&
             <CardEntry
@@ -89,10 +86,6 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       const CardsWrapper = styled.ul`
         width:1200px;
         padding: 40px 0;
-        // height: 600px;
-        // display: flex;
-        // justify-content: space-around;
-        // align-items: center;
         overflow: hidden;
         position: relative;
       `

@@ -65,7 +65,6 @@ const Outfits = () => {
         newOutfit.category = overviewData.category;
         newOutfit.default_price = overviewData.default_price
         newOutfit.image = overviewStyles.url || imageNotFound;
-
       var currentOutfit = outfit.slice();
       currentOutfit.push(newOutfit);
       localStorage.setItem('outfit', JSON.stringify(currentOutfit));
@@ -73,12 +72,15 @@ const Outfits = () => {
     }
   }
 
-
   return (
     <OutfitsWrapper>
-      <button onClick={addOutfit}>Add outfit</button>
+      <indicators>
       { current !== 0 ? <FcPrevious onClick={prevArrow}/> : null }
       { max !== length -1 ?  <FcNext onClick={nextArrow}/> : null }
+      </indicators>
+      <button onClick={addOutfit}>Add outfit</button>
+
+      <Outfitscontainer>
 
       {outfit.length > 0 && allRatings ?
         outfit.map((item, index) => (
@@ -91,36 +93,49 @@ const Outfits = () => {
           />
          ))
         : ''}
+
+      </Outfitscontainer>
     </OutfitsWrapper>
   )
 }
 
 const OutfitsWrapper = styled.ul`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  overflow: auto;
+  width:1200px;
+  padding: 40px 0;
+  overflow: hidden;
   position: relative;
 `
 
-
 const Outfitscontainer = styled.div`
-position: relative;
-width: 200px;
-height: 415px;
-margin: 0px;
-padding: 0px;
-transitions: .5s;
-scroll-behavior: smooth;
+  display: flex;
+  gap: 60px;
+  position: relative;
+  transitions: .5s;
+  scroll-behavior: smooth;
 `;
 
+const IndividualOutfit = styled.div`
+  width:300px;
+  height: 400px;
+  box-shadow: 0 0 24px 8px rgba(0,0,0,0.05);
+`
+
+const Indicators = styled.div`
+  top:50%;
+  display:flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 1;
+  cursor:pointer;
+`
+
 const PrevButton = styled.button`
-position: absolute;
-top: 0;
-bottom: 0;
-z-index: 1;
-cursor:pointer;
-user-select:none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  cursor:pointer;
+  user-select:none;
 `
 
 const NextButton = styled.button`
@@ -132,6 +147,5 @@ const NextButton = styled.button`
   cursor:pointer;
   user-select:none;
 `
-
 
 export default Outfits;
