@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Stars from '../stars/Stars.jsx';
 import Ratings from './Ratings.jsx';
+import Relevance from './Relevance.jsx';
+
 
 const Test = styled.div`
   display: flex;
@@ -18,7 +20,6 @@ const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 
 const StarDate = styled.div`
   display: flex;
@@ -104,7 +105,6 @@ const ButtonContainer = styled.div`
 `;
 
 
-
 const Reviews = () => {
 
   const [reviews, setReviews] = useState([]);
@@ -117,12 +117,16 @@ const Reviews = () => {
     '4': false,
     '5': false
   });
-
+  const [filterState, setFilterState] = useState(false);
+  const [sort, setSort] = useState("Helpfulness");
 
   useEffect(() => {
     axios.get('http://localhost:3000/reviews', {params: {id: 40344, count: count}})
       .then((results) => {
         // console.log(results.data.results);
+        if (sort === "Newest") {
+          results.data.results.sort((a, b) => new Date(b.date) - new Date(a.date));
+        }
         setReviews(results.data.results);
         return results.data.results
       })
@@ -131,6 +135,7 @@ const Reviews = () => {
         let filterExists = false;
         let filterArray = [];
         let results = [];
+        let object = {};
         for (let value of filter) {
           if (filters[value] === true) {
             filterArray.push(value);
@@ -147,8 +152,14 @@ const Reviews = () => {
           })
           setReviews(results);
         }
+        object.filterArray = filterArray;
+        object.filterState= filterExists;
+        return object;
       })
-  }, [filters]);
+      .then((object) => {
+        setFilterState(object);
+      })
+  }, [filters, sort]);
 
   const handleMore = (e) => {
     setDisplayCount(displayCount + 2);
@@ -156,8 +167,10 @@ const Reviews = () => {
 
 
   return (
-      <Container>
-          <Ratings reviews={reviews} setReviews={setReviews} filters={filters} setFilters={setFilters} />
+    <Container>
+      <Ratings reviews={reviews} setReviews={setReviews} filters={filters} setFilters={setFilters} filterState={filterState} />
+      <div>
+        <Relevance sort={sort} setSort={setSort} />
         <Test>
           <ReviewContainer>
             {reviews.map((review, index) => {
@@ -165,18 +178,18 @@ const Reviews = () => {
                 return (
                   <ReviewBox key={index}>
                     <StarDate>
-                      {Stars(review.rating)}
-                      <section>{review.reviewer_name}, {review.date}></section>
-                  </StarDate>
-                  <Title>{review.summary === '' ? 'No Title' : review.summary}</Title>
+                    {Stars(review.rating)}
+                    <section>{review.reviewer_name}, {review.date}></section>
+                    </StarDate>
+                    <Title>{review.summary === '' ? 'No Title' : review.summary}</Title>
                     <Body>{review.body}</Body>
                     {review.recommend ? <Recommend>&#10004; I recommend this product</Recommend> : null }
                     {review.response ?
-                    <ResponseBlock>
-                      <ResponseWord>Response:</ResponseWord>
-                      <Response>{review.response}</Response>
-                    </ResponseBlock>
-                    : null}
+                      <ResponseBlock>
+                        <ResponseWord>Response:</ResponseWord>
+                        <Response>{review.response}</Response>
+                      </ResponseBlock>
+                      : null}
                     <Interactables>
                       <HelpfulTag>Was this review helpful?  </HelpfulTag>
                       <YesTag>Yes</YesTag>
@@ -184,17 +197,16 @@ const Reviews = () => {
                     </Interactables>
                   </ReviewBox>
                 )
-              } else {
-                return null;
               }
             })}
           </ReviewContainer>
         </Test>
-        <ButtonContainer>
-          <AddMore onClick={handleMore}>See More</AddMore>
-          <AddReview>Add a review</AddReview>
-        </ButtonContainer>
-      </Container>
+      </div>
+      <ButtonContainer>
+        <AddMore onClick={handleMore}>See More</AddMore>
+        <AddReview>Add a review</AddReview>
+      </ButtonContainer>
+    </Container>
   )
 }
 
