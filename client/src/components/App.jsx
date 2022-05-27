@@ -23,7 +23,7 @@ const App = () => {
   const [allRatings, setAllRatings] = useState(0);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/reviews/meta', {params: {product_id: 40344}})
+    axios.get('/reviews/meta', {params: {product_id: 40344}})
     .then((results) => {
       const recommends = results.data.recommended;
       const percentage = (Number(recommends.true) / (Number(recommends.false) + Number(recommends.true)) * 100)

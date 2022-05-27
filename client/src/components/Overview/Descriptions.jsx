@@ -11,13 +11,11 @@ import AverageStars from '../stars/AverageStars.jsx'
 // TODO: Share on social media buttons, description of products (toggle box)
 function Descriptions() {
 
-  const {id, setId} = useContext(PropIdContext);
-  const {styles, setProductStyles} = useContext(DescriptionsContext);
-  const [productInfo, setProductInfo] = useState([]);
-  const {displayed, setDisplayed} = useContext(DescriptionsContext);
+  const {styles, setProductStyles, displayed, setDisplayed} = useContext(DescriptionsContext);
+  const {id, setId, allRatings, setallRatings} = useContext(PropIdContext);
   const [price, setPrice] = useState('0');
+  const [productInfo, setProductInfo] = useState([]);
   const [sizeAndQty, setSizeAndQty] = useState({});
-  const {allRatings, setallRatings} = useContext(PropIdContext);
 
 
   useEffect(() => {
@@ -27,6 +25,7 @@ function Descriptions() {
     });
   }, [styles]);
 
+  // render price of product, marking price as red if on sale
   let renderPrice = () => {
     return (displayed.sale_price) ?
     (<p>
@@ -43,7 +42,9 @@ function Descriptions() {
       <h2>{productInfo.name}</h2>
       <p>{productInfo.category}</p>
       {renderPrice()}
-      {AverageStars(allRatings.ratings)}
+      <StarsDiv>
+        {AverageStars(allRatings.ratings)}
+      </StarsDiv>
     </TitleBlock>
     <SizeAndColor>
       <p><strong>Color: </strong>{displayed.name}</p>
@@ -55,9 +56,15 @@ function Descriptions() {
 
 }
 
+
 // export to a separate style page lol....
 const ProductDetailDiv = styled.div`
   display: flex;
+`;
+
+const StarsDiv = styled.div`
+  display: flex;
+  margin: 5px;
 `;
 
 const TitleBlock = styled.div`

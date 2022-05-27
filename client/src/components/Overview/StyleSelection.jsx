@@ -5,10 +5,11 @@ import {DescriptionsContext} from './Overview.jsx'
 
 // TODO: checkmark overlaid on selected style, hover function for user readability
 function StyleSelection() {
-  const {styles, setProductStyles} = useContext(DescriptionsContext);
-  const {displayed, setDisplayed} = useContext(DescriptionsContext);
 
-  var handleStyleChange = function(e) {
+  const {styles, setProductStyles, displayed, setDisplayed} = useContext(DescriptionsContext);
+
+  // updates style beind displayed
+  const handleStyleChange = (e) => {
     if (e.style_id !== displayed.style_id) {
       setDisplayed(e);
     }
@@ -76,6 +77,10 @@ const StyleColor = styled.img`
   width: 50px;
   height: 50px;
   object-fit: cover;
+  &:hover {
+    padding: 5px;
+    border: 3px solid;
+  }
 `;
 
 const RadioButtons = styled.input`

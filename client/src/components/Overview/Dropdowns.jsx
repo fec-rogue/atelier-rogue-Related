@@ -11,6 +11,7 @@ function Dropdowns () {
   const [sizeSelected, setSizeSelected] = useState('');
   const [qtySelected, setQtySelected] = useState('');
   const [cartValid, setCartValid] = useState(true);
+  const [fave, setFave] = useState([]);
   // going to need a cache/local storage to keep track of which items have already been faved
 
   useEffect(() => {
@@ -27,12 +28,14 @@ function Dropdowns () {
     setSizeSelected('');
   }, [displayed]);
 
-  var handleSizeChange = function(e) {
+  // updates size selected by user in size dropdown
+  const handleSizeChange = (e) => {
     setSizeSelected(e.target.value);
     setQtySelected(1);
   };
 
-  var handleQtyChange = function(e) {
+  // updates qty selected by user in qty dropdown
+  const handleQtyChange = (e) => {
     setQtySelected(e.target.value);
   }
 
@@ -40,7 +43,8 @@ function Dropdowns () {
   If the default ‘Select Size’ is currently selected: Clicking this button should open the size dropdowns
   */
 
- var handleCart = function() {
+  // adds items to cart when "Add To Cart" is clicked
+ const handleCart = () => {
    var elem = '';
    if (sizeSelected === '') {
      setCartValid(false);
@@ -49,13 +53,15 @@ function Dropdowns () {
       console.log('added to cart');
     }
   }
-/*
-  var handleFave = function() {
+
+  // adds product to saved outfits in RelatedProducts section
+  const handleFave = () => {
     console.log('clicked');
     setFave(displayed);
   }
-*/
-  var renderQty = function() {
+
+  // conditionally renders quanitiy of product in qty dropdown based on SKU
+  const renderQty = () => {
     let max = sizeAndQty[sizeSelected];
     if (sizeAndQty[sizeSelected] >= 15) {
       max = 15;
@@ -78,6 +84,7 @@ function Dropdowns () {
         })()}
       </Selector>)
   }
+
   return(
     <SizeQtyDiv>
       {cartValid === false ?
@@ -100,17 +107,16 @@ function Dropdowns () {
         <NoStockMsg>The items with the selected options is out of stock.</NoStockMsg>
         :<CartBtn onClick={handleCart}>ADD TO CART</CartBtn>
         }
-
+        <FaveBtn onClick={handleFave}>
+          <BsHeartFill />
+        </FaveBtn>
       </CartDiv>
     </SizeQtyDiv>
   )
 }
 
-/*
-        <FaveBtn onClick={handleFave}>
-          <BsHeartFill />
-        </FaveBtn>
-        */
+
+
 // export on separate css page
 const FaveBtn = styled.button`
   background-color: #000;

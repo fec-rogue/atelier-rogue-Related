@@ -17,36 +17,28 @@ function Gallery() {
     // find better conditions for if statement
     if (!Array.isArray(displayed)) {
       setCurPhoto(displayed.photos[0])
-      console.log('displayed: ', displayed);
     }
   }, [displayed])
 
   return (curPhoto.length === 0 || Array.isArray(displayed)) ?
   null :
   <PictureContainer>
-    <CarouselContainer>
-      {displayed.photos.map((thumbnails, key) => {
-        return (thumbnails === curPhoto) ?
-        <CurSidePic key={key} src={thumbnails.thumbnail_url} onClick={() => {setCurPhoto(thumbnails)}}></CurSidePic>
-        : <SidePic key={key} src={thumbnails.thumbnail_url} onClick={() => {setCurPhoto(thumbnails)}}></SidePic>
-      })}
-    </CarouselContainer>
+      <Carousel/>
     <MainPicture src={curPhoto.url}></MainPicture>
   </PictureContainer>
 
 }
 
-/*
- */
 const PictureContainer = styled.div `
   display: flex;
   justify-content: flex-start;
+  width: 100%;
 `;
 
 const CarouselContainer = styled.div`
+  display: flex;
   flex-direction: column;
-  margin-left: 15%;
-  margin-right: -10%;
+  width: 40%;
 `;
 
 const MainPicture = styled.img`
@@ -68,11 +60,11 @@ const SidePic = styled.img`
 `;
 
 const CurSidePic = styled.img`
-  padding: 3px;
-  width: 40%;
-  height: 40%;
-  object-fit: contain;
-  border: 2px solid;
+padding: 3px;
+width: 40%;
+height: 40%;
+object-fit: contain;
+border: 2px solid;
 `;
 
 
