@@ -59,7 +59,7 @@ const CardInfo = styled.div`
 `
 
 const StarButton = styled.button`
-  // background: transparent;
+
   position:absolute;
   top:10px;
   right: 10px;

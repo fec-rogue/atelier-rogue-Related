@@ -2,7 +2,7 @@ import React  from 'react';
 import styled from 'styled-components';
 
 const Comparison = ({ twoCards, close }) => {
-  console.log('twocards', twoCards)
+  // console.log('twocards', twoCards)
   let card1;
   let card2;
   if(twoCards) {
@@ -47,17 +47,12 @@ const Comparison = ({ twoCards, close }) => {
       <tbody>
         {features.map((item, index) => {
           //  console.log('HIT TABLE!!')
-          console.log('item', item)
+          // console.log('item', item)
           return(
           <tr key={index}>
             <FeatureL>
               {card1Arr.map((item1) => (
                 (item1.feature === item) ? `✓` : null
-                // (item1.feature === item)
-                //   ? (item1.value)
-                //     ? `${item1.value}`
-                //       : '✓'
-                //       : ' '
               ))}
             </FeatureL>
             <Value>{item}</Value>
@@ -65,11 +60,7 @@ const Comparison = ({ twoCards, close }) => {
             <FeatureR>
               {card2Arr.map((item2) => (
                 (item2.feature === item) ? `✓` : null
-                // (item2.feature === item)
-                //   ? (item2.value)
-                //     ? `${item2.value}`
-                //     : '✓'
-                //     : ' '
+
               ))}
             </FeatureR>
           </tr>

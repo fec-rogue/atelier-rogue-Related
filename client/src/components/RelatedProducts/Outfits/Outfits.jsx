@@ -71,6 +71,7 @@ const Outfits = () => {
           outfit.push(newOutfit);
           localStorage.setItem("outfit", JSON.stringify(outfit));
           setOutfit(outfit);
+          return;
         }
   }
 

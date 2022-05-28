@@ -9,7 +9,6 @@ import Outfits from './Outfits/Outfits.jsx';
 
 
 const RelatedProducts = () => {
-
     const {id, setId} = useContext(PropIdContext);
     const [relatedProductsStyles, setRelatedProductsStyles] = useState([]);
     const [relatedProductsDetail, setRelatedProductsDetail] = useState([]);
