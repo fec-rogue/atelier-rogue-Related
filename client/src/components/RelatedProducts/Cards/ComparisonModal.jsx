@@ -89,7 +89,7 @@ const TableWrapper = styled.div`
    border-radius:12px;
    border:3px solid red;
    background-color:grey;
-   box-shadow:rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  //  box-shadow:rgba(0, 0, 0, 0.35) 0px 5px 15px;
    display:flex;
    padding:15px;
 `

@@ -75,7 +75,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       `
       const Cardscontainer = styled.div`
         display: flex;
-        gap: 40px;
+        gap: 10px;
         position: relative;
         transitions: .5s;
         scroll-behavior: smooth;
@@ -84,7 +84,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       const Individualcard = styled.div`
         width:300px;
         height: 400px;
-        box-shadow: 0 0 24px 8px rgba(0,0,0,0.05);
+        box-shadow: 0 0 24px 8px rgba(0,0,0,0.01);
       `
       const Indicators = styled.div`
         top:50%;
@@ -99,6 +99,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       `
 
       const NextButton = styled.button`
+
       `
 
       const ComparisonWrapper = styled.div`

@@ -49,15 +49,8 @@ const Outfits = () => {
       })
   }, [])
 
+
   const addOutfit = () => {
-    var count = 0;
-    for(var i = 0; i < outfit.length; i++) {
-      if(outfit[i].url === overviewStyles.url) {
-        count ++;
-        return;
-      }
-    }
-    if(count === 0) {
       const imageNotFound = "http://placecorgi.com/260/180";
       let newOutfit = {};
         newOutfit.id = overviewData.id;
@@ -65,11 +58,20 @@ const Outfits = () => {
         newOutfit.category = overviewData.category;
         newOutfit.default_price = overviewData.default_price
         newOutfit.image = overviewStyles.url || imageNotFound;
-      var currentOutfit = outfit.slice();
-      currentOutfit.push(newOutfit);
-      localStorage.setItem('outfit', JSON.stringify(currentOutfit));
-      setOutfit(prev => [...prev, newOutfit])
-    }
+
+        if (localStorage.getItem("outfit") === null) {
+          let outfit = [];
+          outfit.push(newOutfit);
+          localStorage.setItem("outfit", JSON.stringify(outfit));
+          setOutfit(outfit);
+        }
+        let outfit = localStorage.getItem("outfit");
+        if (outfit.indexOf(`"id":${newOutfit.id}`) === -1) {
+          outfit = JSON.parse(outfit);
+          outfit.push(newOutfit);
+          localStorage.setItem("outfit", JSON.stringify(outfit));
+          setOutfit(outfit);
+        }
   }
 
   return (
