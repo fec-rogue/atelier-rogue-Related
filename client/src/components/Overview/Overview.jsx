@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, createContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import {PropIdContext} from '../App.jsx';
-import GalleryC from './GalleryC.jsx';
+import Gallery from './Gallery.jsx';
 import Descriptions from './Descriptions.jsx';
 
 export const DescriptionsContext = createContext();
@@ -42,9 +42,9 @@ function Overview() {
       <AnnouncementHeader>SITE-WIDE ANNOUNCEMENT</AnnouncementHeader>
       <OverviewComps>
         <DescriptionsContext.Provider value={{displayed, setDisplayed, styles, setProductStyles}}>
-          <GalleryCDiv>
-            <GalleryC/>
-          </GalleryCDiv>
+          <GalleryDiv>
+            <Gallery/>
+          </GalleryDiv>
           <DescriptionsDiv>
             <Descriptions/>
           </DescriptionsDiv>
@@ -73,7 +73,7 @@ const OverviewComps = styled.div`
   margin: 0;
 `;
 
-const GalleryCDiv = styled.div`
+const GalleryDiv = styled.div`
   width: 60%;
 `;
 const DescriptionsDiv = styled.div`

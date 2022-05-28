@@ -9,6 +9,8 @@ function MainCarousel({cur, setCur}) {
   const [index, setIndex] = useState(cur);
   const [height, setHeight] = useState(0);
   const [width, setWidth] = useState(0);
+  const [winDim, setWinDim] = useState({width: window.innerWidth})
+
 
   const updateIndex = (indx) => {
     if (indx < 0) {
@@ -46,7 +48,7 @@ function MainCarousel({cur, setCur}) {
        <InnerDiv>
           {displayed.photos.map((img, indx) => {
             return (indx === cur) ?
-            (<CarouselItem key={indx} src={img.url}></CarouselItem>)
+            (<CarouselItem key={indx} img={img.url} height={getHeight(img.url)} width={getWidth(img.url)} winW={winDim.width}></CarouselItem>)
             : null
           })}
         </InnerDiv>
@@ -74,12 +76,19 @@ const InnerDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
 `;
 
-
-const CarouselItem = styled.img`
-  max-height: auto;
-  max-width: 100%;
+// make height and width proportional to the screen size....
+const CarouselItem = styled.div`
+  min-height: ${(props) => (props.winW * .5 * props.height/props.width)}px;
+  min-width: ${(props) => (props.winW * .4)}px;
+  background-image: url(${(props) => props.img || ''});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  object-fit: contain;
+  transition: all ease-in-out 0.03s;
 `;
 
 const UpDownDiv = styled.div`

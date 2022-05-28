@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import React, { useEffect, useState, useContext, createContext } from 'react';
 import {DescriptionsContext} from './Overview.jsx'
 import {PropIdContext} from '../App.jsx';
-import ThumbnailCarousel from './ThumbnailCarousel.jsx'
+import ThumbnailCarousel from './ThumbnailCarousel.jsx';
+import MainCarousel from './MainCarousel.jsx';
 
 
 function Gallery() {
@@ -23,7 +24,7 @@ function Gallery() {
   <PictureContainer>
       <ThumbnailCarousel cur={curPhoto} setCur={setCurPhoto}/>
       <MainPicDiv>
-        <MainPicture src={displayed.photos[curPhoto].url}></MainPicture>
+        <MainCarousel cur={curPhoto} setCur={setCurPhoto}/>
       </MainPicDiv>
   </PictureContainer>
 
