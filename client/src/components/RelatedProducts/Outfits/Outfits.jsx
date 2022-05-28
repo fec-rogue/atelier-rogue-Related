@@ -74,10 +74,10 @@ const Outfits = () => {
 
   return (
     <OutfitsWrapper>
-      <indicators>
+      <Indicators>
       { current !== 0 ? <FcPrevious onClick={prevArrow}/> : null }
       { max !== length -1 ?  <FcNext onClick={nextArrow}/> : null }
-      </indicators>
+      </Indicators>
       <button onClick={addOutfit}>Add outfit</button>
 
       <Outfitscontainer>

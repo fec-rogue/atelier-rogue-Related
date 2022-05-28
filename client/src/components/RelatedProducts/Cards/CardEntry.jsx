@@ -4,10 +4,9 @@ import styled from 'styled-components';
 import {AiFillStar} from "react-icons/Ai";
 import AverageStars from "../../stars/AverageStars.jsx"
 
-const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  defaultInfo, id, category, name, price, length, setShowModal, setSelectedid}) => {
+const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  setShowModal, setSelectedid}) => {
 
   const imageNotFound = "http://placecorgi.com/260/180";
-  // console.log('defaultImage', defaultsStyles[0])
   return(
       <Carditem>
         <CardImageBox>
@@ -23,10 +22,10 @@ const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  defaultInfo, 
         </StarButton>
 
         <CardInfo>
-          <p>Category: {category}</p>
-          <p>Name: {name}</p>
-          <p>Price: {price}</p>
-          <Ratings>{AverageStars(detailRatings.ratings)}</Ratings>
+          <p>Category: {detailProduct.category}</p>
+          <p>Name: {detailProduct.name}</p>
+          <p>Price: { defaultsStyles[0].sale_price === null ?  defaultsStyles[0].original_price :  defaultsStyles[0].sale_price }</p>
+          <Ratings>{ AverageStars(detailRatings.ratings) }</Ratings>
         </CardInfo>
       </Carditem>
   )
@@ -50,12 +49,15 @@ const Cardimage = styled.img`
   height: 100%;
   object-fit: cover;
 `
+
 const CardInfo = styled.div`
   padding: 0 16px;
   display: flex;
   flex-direction: column;
 `
+
 const StarButton = styled.button`
+  // background: transparent;
   position:absolute;
   top:10px;
   right: 10px;

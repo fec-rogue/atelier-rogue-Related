@@ -5,7 +5,7 @@ import CardEntry from './CardEntry.jsx';
 import { FcPrevious,  FcNext } from "react-icons/fc";
 
 
-const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRatings, defaultInfo, setShowModal, setSelectedid}) => {
+const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRatings,setShowModal, setSelectedid}) => {
   const [current, setCurrent] = useState(0);
   const length = relatedProductsStyles.length;
 
@@ -19,6 +19,8 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
 
   const max = current + 3;
   const min = current;
+  console.log('current', current);
+
 
   return (
     <CardsWrapper>
@@ -29,15 +31,10 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
 
     <Cardscontainer style={{ transform: `translateX(-${current * 100}%)`}}>
       {relatedProductsStyles.map((eachProduct, index) => {
-        // console.log('eachProduct', eachProduct);
         const id = Number(eachProduct.product_id);
         const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
-        // console.log('detailProduct',detailProduct);
         const detailRatings = relatedProductsRatings.find(detail => Number(detail.product_id) === id);
-        // console.log('detailRatings', detailRatings);
-        const category = detailProduct.category;
-        const name = detailProduct.name;
-        const features = detailProduct.features;
+
           let isDefault = false;
           let defaultsStyles = [];
           let stylesResults = eachProduct.results;
@@ -50,12 +47,6 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
           if(isDefault === false) {
             defaultsStyles.push(stylesResults[0])
           }
-        // const defaultsStyles = eachProduct.results.filter((eachStyle) => eachStyle['default?'] === true);
-        // console.log('defaultStyles', defaultsStyles);
-
-        const defaultPrice = detailProduct.default_price;
-        const saleprice = defaultsStyles[0] && defaultsStyles[0].sale_price;
-        const price = saleprice === null ? defaultPrice : saleprice;
 
         return(
         <Individualcard key={id}>
@@ -64,14 +55,6 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
               defaultsStyles={defaultsStyles}
               detailProduct = {detailProduct}
               detailRatings={detailRatings}
-              defaultInfo={defaultInfo}
-              id={id}
-              category={category}
-              name={name}
-              price={price}
-              index={index}
-              current={current}
-              length={length}
               setShowModal={setShowModal}
               setSelectedid={setSelectedid}
             />}
