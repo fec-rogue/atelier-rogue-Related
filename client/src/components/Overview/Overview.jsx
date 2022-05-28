@@ -42,9 +42,9 @@ function Overview() {
       <AnnouncementHeader>SITE-WIDE ANNOUNCEMENT</AnnouncementHeader>
       <OverviewComps>
         <DescriptionsContext.Provider value={{displayed, setDisplayed, styles, setProductStyles}}>
-          <GalleryDiv>
+          <GalleryCDiv>
             <GalleryC/>
-          </GalleryDiv>
+          </GalleryCDiv>
           <DescriptionsDiv>
             <Descriptions/>
           </DescriptionsDiv>
@@ -73,7 +73,7 @@ const OverviewComps = styled.div`
   margin: 0;
 `;
 
-const GalleryDiv = styled.div`
+const GalleryCDiv = styled.div`
   width: 60%;
 `;
 const DescriptionsDiv = styled.div`

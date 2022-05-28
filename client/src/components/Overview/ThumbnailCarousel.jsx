@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import React, { useEffect, useState, useContext } from 'react';
 import {DescriptionsContext} from './Overview.jsx'
 
-function Carousel() {
+
+function ThumbnailCarousel({cur, setCur}) {
   // change displayed to an index to make life easier
-  const {displayed, setDisplayed} = useContext(DescriptionsContext);
+  const {displayed} = useContext(DescriptionsContext);
   const [range, setRange] = useState({min: 0, max:6});
 
   useEffect(() => {
@@ -21,7 +22,7 @@ function Carousel() {
   }
 
   const next = () => {
-    if (range.max < displayed.photos.length) {
+    if (range.max < displayed.photos.length - 1) {
       setRange({min: range.min +1, max: range.max+1});
     }
   }
@@ -30,31 +31,31 @@ function Carousel() {
 
   return (Object.keys(displayed).length === 0) ?
   (null) :
-  (<CarouselDiv>
+  (<ThumbnailCarouselDiv>
       <UpDownDiv>
         <UpDownBtns onClick={prev} >Prev</UpDownBtns>
       </UpDownDiv>
-      <PicDiv>
+      <div>
         <InnerDiv>
           {displayed.photos.map((img, indx) => {
             return (indx >= range.min && indx <= range.max) ?
-            (<CarouselItem className={img === displayed ? 'selected' : ''}key={indx}
-              img={img.thumbnail_url}>
-              </CarouselItem>)
+            (<ThumbnailCarouselItem className={indx === cur ? 'selected' : ''}key={indx}
+              img={img.thumbnail_url} onClick={() => {setCur(indx)}}>
+              </ThumbnailCarouselItem>)
             : null
           })}
         </InnerDiv>
-      </PicDiv>
+      </div>
       <UpDownDiv>
         <UpDownBtns onClick={next}>Next</UpDownBtns>
       </UpDownDiv>
-    </CarouselDiv>
+    </ThumbnailCarouselDiv>
   )
 
 };
 
 
-const CarouselDiv = styled.div`
+const ThumbnailCarouselDiv = styled.div`
   cursor: default;
   display: flex;
   flex-direction: column;
@@ -65,23 +66,18 @@ const CarouselDiv = styled.div`
   background-color: white;
   transition: all ease-in-out 0.05s;
   .selected {
-    border-bottom: 6px solid red;
+    border-bottom: 6px solid #D3D3D3;
     transition: all ease-in-out 0.05s;
   }
 `;
 const InnerDiv = styled.div`
   overflow: hidden;
-
 `;
 
-const PicDiv = styled.div`
 
-`;
-
-const CarouselItem = styled.div`
+const ThumbnailCarouselItem = styled.div`
   display: flex;
   flex: 1;
-  border: 1px solid black;
   min-width: 75px;
   min-height: 75px;
   max-height: 75px;
@@ -101,7 +97,6 @@ const CarouselItem = styled.div`
   }
 `;
 
-
 const UpDownDiv = styled.div`
   display: flex;
   flex: 8%;
@@ -115,4 +110,4 @@ const UpDownDiv = styled.div`
 const UpDownBtns = styled.button`
 `;
 
-export default Carousel;
+export default ThumbnailCarousel;

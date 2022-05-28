@@ -19,11 +19,11 @@ export const PropIdContext = createContext();
 export const FavoriteContext = createContext();
 
 const App = () => {
-  const [id, setId] = useState('40348');
+  const [id, setId] = useState('40351');
   const [allRatings, setAllRatings] = useState(0);
 
   useEffect(() => {
-    axios.get('/reviews/meta', {params: {product_id: 40344}})
+    axios.get('/reviews/meta', {params: {product_id: id}})
     .then((results) => {
       const recommends = results.data.recommended;
       const percentage = (Number(recommends.true) / (Number(recommends.false) + Number(recommends.true)) * 100)
