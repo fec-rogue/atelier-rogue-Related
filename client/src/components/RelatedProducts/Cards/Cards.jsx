@@ -5,7 +5,8 @@ import CardEntry from './CardEntry.jsx';
 import { FcPrevious,  FcNext } from "react-icons/fc";
 
 
-const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRatings,setShowModal, setSelectedid}) => {
+const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRatings,
+  setShowModal, setSelectedid}) => {
   const [current, setCurrent] = useState(0);
   const length = relatedProductsStyles.length;
 
@@ -74,7 +75,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       `
       const Cardscontainer = styled.div`
         display: flex;
-        gap: 60px;
+        gap: 40px;
         position: relative;
         transitions: .5s;
         scroll-behavior: smooth;
@@ -92,24 +93,12 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
         position: absolute;
         z-index: 1;
         cursor:pointer;
+        user-select:none;
       `
       const PrevButton = styled.button`
-        // position: absolute;
-        // top: 0;
-        // bottom: 0;
-        // z-index: 1;
-        // cursor:pointer;
-        user-select:none;
       `
 
       const NextButton = styled.button`
-        right:32px;
-        position: absolute;
-        top: 50%;
-        bottom: 0;
-        z-index: 1;
-        cursor:pointer;
-        user-select:none;
       `
 
       const ComparisonWrapper = styled.div`

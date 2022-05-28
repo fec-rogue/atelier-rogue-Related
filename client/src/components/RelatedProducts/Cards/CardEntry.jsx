@@ -24,7 +24,9 @@ const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  setShowModal,
         <CardInfo>
           <p>Category: {detailProduct.category}</p>
           <p>Name: {detailProduct.name}</p>
-          <p>Price: { defaultsStyles[0].sale_price === null ?  defaultsStyles[0].original_price :  defaultsStyles[0].sale_price }</p>
+          <p>Price: { defaultsStyles[0].sale_price === null
+          ?  defaultsStyles[0].original_price
+          :  defaultsStyles[0].sale_price }</p>
           <Ratings>{ AverageStars(detailRatings.ratings) }</Ratings>
         </CardInfo>
       </Carditem>
@@ -38,7 +40,7 @@ const Carditem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 20px;
+  gap: 10px;
 `
 const CardImageBox = styled.div`
   width: 100%;
