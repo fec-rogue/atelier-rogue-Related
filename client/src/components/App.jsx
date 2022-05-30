@@ -34,12 +34,12 @@ const App = () => {
 
   return (
     <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings}}>
-      <div>
+      {/* <div>
         <Overview />
       </div>
       <div>
         <RelatedProducts />
-      </div>
+      </div> */}
       <div>
         <Reviews />
       </div>

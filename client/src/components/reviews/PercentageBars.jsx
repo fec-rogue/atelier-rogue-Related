@@ -14,50 +14,36 @@ const PercentageBars = () => {
 
   const [ratings, setRatings] = useState([]);
   const [highest, setHighest] = useState(0);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     axios.get('http://localhost:3000/reviews/meta', {params: {product_id: 40344}})
-      .then((results) => {
-        let high = 0;
-        let index = 0;
-        let array = [];
-        let copy = {...results.data.ratings}
-        Object.keys(copy).forEach((rating, i) => {
-          array.push(Number(copy[rating]));
-          if (Number(copy[rating]) > high) {
-            high = Number(copy[rating]);
-            index = i;
-          }
-        })
-        array.forEach((rating, i) => {
-          let object = {}
-          object.count = rating;
-          array[i] = object;
-          if (rating === high) {
-            array[i].high = true;
-          }
-        })
-        setRatings(array);
-        return high;
-      })
-      .then((high) => {
-        setHighest(high);
-      })
+         .then((results) => {
+           let total = 0;
+           let array = [];
+           let copy = {...results.data.ratings};
+           Object.keys(copy).forEach((rating) => {
+             total += Number(copy[rating]);
+             array.push(Number(copy[rating]));
+           })
+           setRatings(array);
+           return total;
+         })
+         .then((total) => {
+           setTotal(total);
+         })
   }, [])
 
   return (
     <BarContainer>
       {ratings.map((rating, index) => {
-        if (rating.count === highest) {
-          return (<ComparisonBar percent={100} key={index}>&nbsp;</ComparisonBar>)
-        } else {
-          return (<ComparisonBar percent={(rating.count / highest) * 100} key={index}>&nbsp;</ComparisonBar>)
-        }
+        return (
+          <ComparisonBar percent={(rating/total) * 100} key={index}>&nbsp;</ComparisonBar>
+        )
       }
       )}
     </BarContainer>
   )
-
 }
 
 export default PercentageBars;

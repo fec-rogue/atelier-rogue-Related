@@ -66,14 +66,14 @@ exports.postReview = (req, res) => {
 };
 
 exports.helpfulReview = (req, res) => {
-  let id = req.query.product_id;
-  models.helpfulReview(id, data, (result) => {
+  let id = req.query.review_id;
+  models.helpfulReview(id, (result) => {
     res.json('updated successfully');
   });
 };
 
 exports.reportReview = (req, res) => {
-  let id = req.query.product_id;
+  let id = req.query.review_id;
   models.reportReview(data, (result) => {
     res.json('reported successfully');
   });

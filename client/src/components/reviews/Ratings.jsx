@@ -80,6 +80,21 @@ const Ratings = ({reviews, setReviews, filters, setFilters, filterState}) => {
     return average;
   }
 
+  const displayAverage = (ratings) => {
+    let average = 0;
+    let count = 0;
+    const keys = Object.keys(ratings);
+
+    keys.forEach((rating) => {
+      average += Number(rating) * Number(ratings[rating]);
+      count += Number(ratings[rating]);
+    })
+
+    average = (Math.round((average / count) * 4) / 4).toFixed(1);
+
+    return average;
+  }
+
   const click1Star = (e) => {
     let newState = {...filters};
     newState['1'] = !newState['1'];
@@ -118,7 +133,7 @@ const Ratings = ({reviews, setReviews, filters, setFilters, filterState}) => {
     return (
       <RatingsContainer>
         <Title>Ratings & Reviews</Title>
-        <AverageRating>{average(allRatings.ratings)}</AverageRating>
+        <AverageRating>{displayAverage(allRatings.ratings)}</AverageRating>
         <AverageStar>
           {AverageStars(allRatings.ratings)}
         </AverageStar>
