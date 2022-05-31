@@ -28,7 +28,6 @@ const YesButton = ({id, count}) => {
   };
 
   if (clicked === false) {
-    console.log('this should show up first')
     return (
       <span>
       <YesTag onClick={(e) => {handleClick(e, reviewId)}}>Yes</YesTag>
@@ -36,7 +35,6 @@ const YesButton = ({id, count}) => {
     </span>
    )
  } else {
-   console.log('this should show up later')
    return (
      <span>
        <span>Yes</span>

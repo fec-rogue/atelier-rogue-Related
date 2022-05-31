@@ -92,6 +92,7 @@ const AddReview = styled.button`
 
 const Container = styled.div`
   display: flex;
+  justify-content: center;
   flex-direction: row;
   margin: auto;
   width: 60%;
@@ -118,6 +119,7 @@ const Reviews = () => {
   });
   const [filterState, setFilterState] = useState(false);
   const [sort, setSort] = useState("Helpfulness");
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:3000/reviews', {params: {id: 40344, count: count}})
@@ -177,9 +179,14 @@ const Reviews = () => {
     //   })
   }
 
+  const handleAdd = (e) => {
+    setModal(true);
+  }
+
 
   return (
     <Container>
+      {modal ? <ReviewModal setModal={setModal} /> : null}
       <Ratings reviews={reviews} setReviews={setReviews} filters={filters} setFilters={setFilters} filterState={filterState} />
       <div>
         <Relevance sort={sort} setSort={setSort} />
@@ -216,7 +223,7 @@ const Reviews = () => {
       </div>
       <ButtonContainer>
         <AddMore onClick={handleMore}>See More</AddMore>
-        <AddReview>Add a review</AddReview>
+        <AddReview onClick={handleAdd}>Add a review</AddReview>
       </ButtonContainer>
     </Container>
   )
