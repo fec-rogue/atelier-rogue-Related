@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {PropIdContext} from '../App.jsx';
 import Gallery from './Gallery.jsx';
 import Descriptions from './Descriptions.jsx';
+import ExpandedView from './ExpandedView.jsx';
 
 export const DescriptionsContext = createContext();
 
@@ -12,6 +13,8 @@ function Overview() {
 
   const [styles, setProductStyles] = useState([])
   const [displayed, setDisplayed] = useState([])
+  const [expanded, setExpanded] = useState(false);
+  const [curPhoto, setCurPhoto] = useState('');
   const {id, setId, allRatings, setAllRatings} = useContext(PropIdContext);
 
   useEffect(() => {
@@ -40,17 +43,20 @@ function Overview() {
     <div>
       <WebsiteHeader>OVERVIEW</WebsiteHeader>
       <AnnouncementHeader>SITE-WIDE ANNOUNCEMENT</AnnouncementHeader>
+      <DescriptionsContext.Provider
+      value={{displayed, setDisplayed, styles, setProductStyles, expanded, setExpanded, curPhoto, setCurPhoto}}>
+      {expanded ?
+      <ExpandedView/> :
       <OverviewComps>
-        <DescriptionsContext.Provider
-        value={{displayed, setDisplayed, styles, setProductStyles}}>
           <GalleryDiv>
             <Gallery/>
           </GalleryDiv>
           <DescriptionsDiv>
             <Descriptions/>
           </DescriptionsDiv>
-        </DescriptionsContext.Provider>
       </OverviewComps>
+      }
+      </DescriptionsContext.Provider>
     </div>
   )
 }

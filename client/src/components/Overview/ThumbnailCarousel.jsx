@@ -8,25 +8,26 @@ import {DescriptionsContext} from './Overview.jsx'
 function ThumbnailCarousel({cur, setCur}) {
 
   const {displayed} = useContext(DescriptionsContext);
+
   const [range, setRange] = useState({min: 0, max:6});
 
   useEffect(() => {
     if (Object.keys(displayed).length > 0) {
       setRange((displayed.photos.length > 7) ? {min: 0, max: 6} : {min:0, max: displayed.photos.length -1})
     }
-  }, [displayed])
+  }, [displayed]);
 
   const prev = () => {
     if (range.min > 0) {
       setRange({min: range.min -1, max: range.max-1});
     }
-  }
+  };
 
   const next = () => {
     if (range.max < displayed.photos.length - 1) {
       setRange({min: range.min +1, max: range.max+1});
     }
-  }
+  };
 
   return (Object.keys(displayed).length === 0) ?
   (null) :
@@ -38,7 +39,9 @@ function ThumbnailCarousel({cur, setCur}) {
         <InnerDiv>
           {displayed.photos.map((img, indx) => {
             return (indx >= range.min && indx <= range.max) ?
-            (<ThumbnailCarouselItem className={indx === cur ? 'selected' : ''}key={indx}
+            (<ThumbnailCarouselItem
+              className={indx === cur ? 'selected' : ''}
+              key={indx}
               img={img.thumbnail_url} onClick={() => {setCur(indx)}}>
               </ThumbnailCarouselItem>)
             : null

@@ -87,8 +87,10 @@ const StyleColor = styled.div`
     cursor: pointer;
     transition: all ease-in-out 0.03s;
     transform: scale(0.96);
-    cursor: pointer;
   }
+  .selected {
+  }
+
 `;
 
 const RadioButtons = styled.input`

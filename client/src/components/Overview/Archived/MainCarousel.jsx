@@ -1,24 +1,23 @@
 import styled from 'styled-components';
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import {DescriptionsContext} from './Overview.jsx';
-import {BiFullscreen} from "react-icons/bi";
+
 
 //TODO:
 // hovering over item with magnifying glass will magnify image
 // clicking expanding will expand image
 // expanded image will still be able to scroll through image gallery
 
-function MainCarousel({cur, setCur}) {
+function MainCarouselC({cur, setCur, expanded, setExpanded}) {
 
   const {displayed} = useContext(DescriptionsContext);
   const [index, setIndex] = useState(cur);
 
-  // if i were to redo this project, i would not have done this, but im in too deep
-  const [height, setHeight] = useState(0);
-  const [width, setWidth] = useState(0);
-  const [winDim, setWinDim] = useState({width: window.innerWidth})
-
-  const [expanded, setExpanded] = useState(false);
+  // zoom in zoom out
+  const [isZoomed, setZoom] = useState(false);
+  const [[x, y], setPosition] = useState([0,0]);
+  const [[w, h], setZoomSize] = useState([0,0]);
+  const zoomRef = useRef(null);
 
   // buttons should disappear when last img is reached// first img is reached
   // buttons should work with left and right arrow keys
@@ -35,26 +34,27 @@ function MainCarousel({cur, setCur}) {
     }
   };
 
-  const expandImg = () => {
-    console.log('clicked expand');
-    setModal(true);
+  const handleMouseEnter = (e) => {
+    const elem = e.currentTarget;
+    const { width, height } = elem.getBoundingClientRect();
+    setZoomSize([width, height]);
+    setZoom(true);
   };
 
-  const getHeight = (url) => {
-    const img = new Image();
-    img.src = url;
-    img.onload = function() {setHeight(this.height)};
-    return height;
+  const handleMouseLeave = () => {
+    setZoom(false);
   };
 
-  const getWidth = (url) => {
-    const img = new Image();
-    img.src = url;
-    img.onload = function() {setWidth(this.width)};
-    return width;
+  const handleMouseMove = (e) => {
+    const {top, left} = e.currentTarget.getBoundingClientRect();
+    const x = e.pageX - left - window.pageXOffset;
+    const y = e.pageY - top - window.pageYOffset;
+    setPosition([x,y]);
   };
 
-
+  const handleExpanded = () => {
+    setExpanded(!expanded);
+  }
 
   return (Object.keys(displayed).length === 0) ?
   (null) :
@@ -65,20 +65,29 @@ function MainCarousel({cur, setCur}) {
             <UpDownBtns onClick={() => {updateIndex(index-1)}} >Prev</UpDownBtns>
           </UpDownDiv>
          </div>
-         <ImgContainer>
-          {displayed.photos.map((img, indx) => {
-            return (indx === cur) ?
-            ( <CarouselItem
-                key={indx}
-                src={img.url}>
-                </CarouselItem> )
-            : null
-          })}
-         </ImgContainer>
+          <ImgContainer
+            ref={zoomRef}
+            onMouseEnter={(e) => handleMouseEnter(e)}
+            onMouseLeave={handleMouseLeave}
+            onMouseMove={(e) => {handleMouseMove(e)}}
+          >
+            {isZoomed ?
+            <ZoomedImg
+            img={displayed.photos[cur].url}
+            height={h}
+            width={w}
+            style={{
+              backgroundSize: `${w * 2.5}px ${h * 2.5}px`,
+              backgroundPositionX: `${-x * 2.5 / (1.68)}px`,
+              backgroundPositionY: `${-y * 2.5 / (1.68)}px`
+            }}>
+            </ZoomedImg> :
+            <CarouselItem
+              src={displayed.photos[cur].url}>
+            </CarouselItem>
+            }
+          </ImgContainer>
          <RightImgDiv>
-           <FullBtn>
-             <BiFullscreen onClick={expandImg}/>
-           </FullBtn>
           <UpDownDiv>
             <UpDownBtns onClick={() => {updateIndex(index+1)}}>Next</UpDownBtns>
           </UpDownDiv>
@@ -89,7 +98,19 @@ function MainCarousel({cur, setCur}) {
 
 };
 
-
+const ZoomedImg = styled.div`
+  pointerEvents: none;
+  height: ${(props) => `${props.height}px`};
+  width: ${(props) => `${props.width}px`};
+  opacity: ${props => props.opacity};
+  border: 1px solid lightgray;
+  background-color: white;
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  &:hover {
+    cursor: zoom-in;
+  }
+`;
 const ImgContainer = styled.div`
   position: relative;
   overflow: hidden;
@@ -98,35 +119,24 @@ const ImgContainer = styled.div`
     box-shadow: 0 14px 24px rgba(0, 0, 0, 0.55), 0 14px 18px rgba(0, 0, 0, 0.55);
   }
 `;
-
 const CarouselDiv = styled.div`
   display: inline-flex;
   max-width: 100%;
   height: auto;
   background-color: white;
   transition: all ease-in-out 0.5s;
-  .magnify {
-    cursor: zoom-in;
-  }
 `;
 const InnerDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-
-// make height and width proportional to the screen size....
 const CarouselItem = styled.img`
   position: relative;
   width: 100%;
   height: auto;
   transition: all ease-in-out 0.03s;
-  &:hover {
-    cursor: zoom-in;
-  }
-
 `;
-
 const UpDownDiv = styled.div`
   display: flex;
   height: 100%;
@@ -135,15 +145,12 @@ const UpDownDiv = styled.div`
   color: gray;
   transition: all ease-in-out 0.1s;
 `;
-
 const RightImgDiv = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const FullBtn = styled.button`
-  align-self: flex-start;
-`;
+
 const UpDownBtns = styled.button`
 `;
 
-export default MainCarousel;
+export default MainCarouselC;

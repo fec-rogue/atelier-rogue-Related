@@ -5,27 +5,29 @@ import {DescriptionsContext} from './Overview.jsx'
 import {PropIdContext} from '../App.jsx';
 import ThumbnailCarousel from './ThumbnailCarousel.jsx';
 import MainCarouselC from './MainCarouselC.jsx';
+import ExpandedView from './ExpandedView.jsx';
 
 
 function Gallery() {
 
   const {displayed, setDisplayed} = useContext(DescriptionsContext);
+  const {expanded, setExpanded} = useContext(DescriptionsContext);
   const {id, setId} = useContext(PropIdContext);
-  const [curPhoto, setCurPhoto] = useState('');
+  const {curPhoto, setCurPhoto} = useContext(DescriptionsContext);
 
   useEffect(() => {
     if (!Array.isArray(displayed)) {
       setCurPhoto(0)
     }
-  }, [displayed])
+  }, [displayed]);
 
   return (curPhoto === '' || Array.isArray(displayed)) ?
   null :
   <PictureContainer>
+    <MainPicDiv>
       <ThumbnailCarousel cur={curPhoto} setCur={setCurPhoto}/>
-      <MainPicDiv>
-        <MainCarouselC cur={curPhoto} setCur={setCurPhoto}/>
-      </MainPicDiv>
+      <MainCarouselC expanded={expanded} setExpanded={setExpanded} cur={curPhoto} setCur={setCurPhoto}/>
+    </MainPicDiv>
   </PictureContainer>
 
 }
