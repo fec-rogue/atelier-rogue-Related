@@ -114,6 +114,8 @@ const RelatedProductsSection = styled.section`
   left: 50%;
   position: relative;
   transform: translateX(-50%);
+  // background-color: #ded3c5;
+  // font-family: 'Abel', sans-serif;
 `;
 
 

@@ -7,34 +7,44 @@ import AverageStars from "../../stars/AverageStars.jsx"
 const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  setShowModal, setSelectedid}) => {
   const [hover, setHover] = useState(false);
   const imageNotFound = "http://placecorgi.com/260/180";
-
   const imagesArr = defaultsStyles[0].photos;
   const defaultImage = imagesArr[0].url === null ? imageNotFound : imagesArr[0].url;
-  // const defaultHover =  imagesArr[1].url === null ? imageNotFound : imagesArr[1].url
+  const defaultHoverImg = (imagesArr[1].url === null || imagesArr[1] === undefined) ? imageNotFound : imagesArr[1].url;
+  // console.log('defaultHoverImg', defaultHoverImg);
 
   let imgSrc;
   const onMouseEnter = () => {
     setHover(true)
-    imgSrc = defaultHover;
   }
 
   const onMouseLeave = () => {
     setHover(false)
-    imgSrc = defaultImage;
+  }
+
+  // const changeImages = () => {
+
+  // }
+
+  const defaultHover = () => {
+   if(hover) {
+    return imagesArr[1].url;
+   } else {
+     return defaultImage;
+   }
   }
 
   return(
       <Carditem  >
         <CardImageBox onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-          <Cardimage src={defaultImage}/>
-        <MultiImages >
-
+          <Cardimage src={defaultHover()}/>
+          {/* <Cardimage src={ imagesArr[0].url === null ? imageNotFound : imagesArr[0].url}/> */}
+        {/* <MultiImages >
         { hover &&
           imagesArr.slice(1).map((eachImage,index) => (
             eachImage.url === null ? <MultiImage src={imageNotFound} /> : <MultiImage src = {eachImage.url} />
-          ))}
-
-        </MultiImages>
+          ))
+          }
+        </MultiImages> */}
 
 
         </CardImageBox>
