@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import React, { useEffect, useState, useContext } from 'react';
 import {DescriptionsContext} from './Overview.jsx'
 
-
+//TODO:
+// thumbnail should scroll to make current selection visible
 function ThumbnailCarousel({cur, setCur}) {
-  // change displayed to an index to make life easier
+
   const {displayed} = useContext(DescriptionsContext);
   const [range, setRange] = useState({min: 0, max:6});
 
@@ -26,8 +27,6 @@ function ThumbnailCarousel({cur, setCur}) {
       setRange({min: range.min +1, max: range.max+1});
     }
   }
-
-  // make a range
 
   return (Object.keys(displayed).length === 0) ?
   (null) :
@@ -93,7 +92,6 @@ const ThumbnailCarouselItem = styled.div`
     cursor: pointer;
     transition: all ease-in-out 0.03s;
     transform: scale(0.96);
-    cursor: pointer;
   }
 `;
 

@@ -4,7 +4,7 @@ import React, { useEffect, useState, useContext, createContext } from 'react';
 import {DescriptionsContext} from './Overview.jsx'
 import {PropIdContext} from '../App.jsx';
 import ThumbnailCarousel from './ThumbnailCarousel.jsx';
-import MainCarousel from './MainCarousel.jsx';
+import MainCarouselC from './MainCarouselC.jsx';
 
 
 function Gallery() {
@@ -24,7 +24,7 @@ function Gallery() {
   <PictureContainer>
       <ThumbnailCarousel cur={curPhoto} setCur={setCurPhoto}/>
       <MainPicDiv>
-        <MainCarousel cur={curPhoto} setCur={setCurPhoto}/>
+        <MainCarouselC cur={curPhoto} setCur={setCurPhoto}/>
       </MainPicDiv>
   </PictureContainer>
 

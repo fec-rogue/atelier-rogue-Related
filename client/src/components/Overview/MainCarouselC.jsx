@@ -8,17 +8,17 @@ import {BiFullscreen} from "react-icons/bi";
 // clicking expanding will expand image
 // expanded image will still be able to scroll through image gallery
 
-function MainCarousel({cur, setCur}) {
+function MainCarouselC({cur, setCur}) {
 
   const {displayed} = useContext(DescriptionsContext);
   const [index, setIndex] = useState(cur);
-
-  // if i were to redo this project, i would not have done this, but im in too deep
-  const [height, setHeight] = useState(0);
-  const [width, setWidth] = useState(0);
-  const [winDim, setWinDim] = useState({width: window.innerWidth})
-
   const [expanded, setExpanded] = useState(false);
+
+  // zoom in zoom out
+  const [opacity, setOpacity] = useState(0);
+  const [[x, y], setPosition] = useState([0,0]);
+  const [[w, h], setZoomSize] = useState([0,0]);
+  const zoomRef = useRef(null);
 
   // buttons should disappear when last img is reached// first img is reached
   // buttons should work with left and right arrow keys
@@ -40,21 +40,23 @@ function MainCarousel({cur, setCur}) {
     setModal(true);
   };
 
-  const getHeight = (url) => {
-    const img = new Image();
-    img.src = url;
-    img.onload = function() {setHeight(this.height)};
-    return height;
-  };
+  const handleMouseEnter = (e) => {
+    const elem = e.currentTarget;
+    const { width, height } = elem.getBoundingClientRect();
+    setZoomSize([width, height]);
+    setOpacity(1);
+  }
+  const handleMouseLeave = () => {
+    setOpacity(0);
+  }
 
-  const getWidth = (url) => {
-    const img = new Image();
-    img.src = url;
-    img.onload = function() {setWidth(this.width)};
-    return width;
-  };
+  const handleMouseMove = (e) => {
+    const {top, left} = e.currentTarget.getBoundingClientRect();
+    const x = e.pageX - left - window.pageXOffset;
+    const y = e.pageY - top - window.pageYOffset;
 
-
+    setPosition([x,y]);
+   }
 
   return (Object.keys(displayed).length === 0) ?
   (null) :
@@ -65,16 +67,28 @@ function MainCarousel({cur, setCur}) {
             <UpDownBtns onClick={() => {updateIndex(index-1)}} >Prev</UpDownBtns>
           </UpDownDiv>
          </div>
-         <ImgContainer>
-          {displayed.photos.map((img, indx) => {
-            return (indx === cur) ?
-            ( <CarouselItem
-                key={indx}
-                src={img.url}>
-                </CarouselItem> )
-            : null
-          })}
-         </ImgContainer>
+        <ImgContainer
+          ref={zoomRef}
+          onMouseEnter={(e) => handleMouseEnter(e)}
+          onMouseLeave={handleMouseLeave}
+          onMouseMove={(e) => {handleMouseMove(e)}}
+        >
+            <CarouselItem
+              src={displayed.photos[cur].url}>
+            </CarouselItem>
+            <ZoomedImg
+            img={displayed.photos[cur].url}
+            opacity={opacity}
+            height={h}
+            width={w}
+            style={{
+              backgroundSize: `${w * 2}px ${h * 2}px`,
+              backgroundPositionX: `${-x * 2 / (1.68)}px`,
+              backgroundPositionY: `${-y * 2 / (1.68)}px`
+            }}
+            >
+            </ZoomedImg>
+          </ImgContainer>
          <RightImgDiv>
            <FullBtn>
              <BiFullscreen onClick={expandImg}/>
@@ -89,6 +103,16 @@ function MainCarousel({cur, setCur}) {
 
 };
 
+const ZoomedImg = styled.div`
+  pointerEvents: none;
+  height: ${(props) => `${props.height}px` || '0px'};
+  width: ${(props) => `${props.width}px` || '0px'};
+  opacity: ${props => props.opacity};
+  border: 1px solid lightgray;
+  background-color: white;
+  background-image: url(${(props) => props.img || '/dist/images/NPA.jpeg'});
+  background-repeat: no-repeat;
+`;
 
 const ImgContainer = styled.div`
   position: relative;
@@ -115,7 +139,6 @@ const InnerDiv = styled.div`
   align-items: center;
 `;
 
-// make height and width proportional to the screen size....
 const CarouselItem = styled.img`
   position: relative;
   width: 100%;
@@ -124,7 +147,6 @@ const CarouselItem = styled.img`
   &:hover {
     cursor: zoom-in;
   }
-
 `;
 
 const UpDownDiv = styled.div`
@@ -146,4 +168,4 @@ const FullBtn = styled.button`
 const UpDownBtns = styled.button`
 `;
 
-export default MainCarousel;
+export default MainCarouselC;

@@ -24,9 +24,24 @@ function StyleSelection() {
               {rows.map((icon, key) => {
               return (
                 <StyleCircle key={key}>
-                  <label data-variant='image-circle' data-type='image'>
-                    {icon.style_id === displayed.style_id ? <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} checked onChange={() => {handleStyleChange(icon)}}/>
-                    : <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} onChange={() => {handleStyleChange(icon)}}/>}
+                  <label
+                  data-variant='image-circle'
+                  data-type='image'>
+                    {icon.style_id === displayed.style_id ?
+                    <RadioButtons
+                    type='radio'
+                    name='color'
+                    value={icon.style_id}
+                    id={icon.name}
+                    className={'selected'}
+                    checked
+                    onChange={() => {handleStyleChange(icon)}}/> :
+                    <RadioButtons
+                    type='radio'
+                    name='color'
+                    value={icon.style_id}
+                    id={icon.name}
+                    onChange={() => {handleStyleChange(icon)}}/>}
                       <StyleColor img={icon.photos[0].thumbnail_url}></StyleColor>
                     </label>
                 </StyleCircle>
@@ -43,19 +58,6 @@ function StyleSelection() {
 
 const Block = styled.div`
   displaye: block;
-`;
-const ProductDetailDiv = styled.div`
-  display: flex;
-`;
-
-const TitleBlock = styled.div`
-  display: block;
-  border-bottom: 0.5px solid;
-`;
-
-const SizeAndColor = styled.div`
-  display: block;
-  border-bottom: 0.5px solid;
 `;
 
 const StyleDiv = styled.ul`

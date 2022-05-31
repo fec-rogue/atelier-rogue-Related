@@ -41,7 +41,8 @@ function Overview() {
       <WebsiteHeader>OVERVIEW</WebsiteHeader>
       <AnnouncementHeader>SITE-WIDE ANNOUNCEMENT</AnnouncementHeader>
       <OverviewComps>
-        <DescriptionsContext.Provider value={{displayed, setDisplayed, styles, setProductStyles}}>
+        <DescriptionsContext.Provider
+        value={{displayed, setDisplayed, styles, setProductStyles}}>
           <GalleryDiv>
             <Gallery/>
           </GalleryDiv>

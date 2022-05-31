@@ -93,7 +93,12 @@ function Dropdowns () {
       </ErrorDiv>
       : null}
       <p><strong>Size: {sizeSelected}</strong></p>
-      <Selector id ='sizes' name='sizes' onChange={handleSizeChange} required value={sizeSelected}>
+      <Selector
+        id ='sizes'
+        name='sizes'
+        onChange={handleSizeChange}
+        required
+        value={sizeSelected}>
         <option value='' disabled hidden>Select Size</option>
         {Object.keys(sizeAndQty).map((size, key) => {
           return (
