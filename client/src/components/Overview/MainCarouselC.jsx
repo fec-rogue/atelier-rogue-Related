@@ -15,7 +15,7 @@ function MainCarouselC({cur, setCur}) {
   const [expanded, setExpanded] = useState(false);
 
   // zoom in zoom out
-  const [opacity, setOpacity] = useState(0);
+  const [isZoomed, setZoom] = useState(false);
   const [[x, y], setPosition] = useState([0,0]);
   const [[w, h], setZoomSize] = useState([0,0]);
   const zoomRef = useRef(null);
@@ -44,10 +44,10 @@ function MainCarouselC({cur, setCur}) {
     const elem = e.currentTarget;
     const { width, height } = elem.getBoundingClientRect();
     setZoomSize([width, height]);
-    setOpacity(1);
+    setZoom(true);
   }
   const handleMouseLeave = () => {
-    setOpacity(0);
+    setZoom(false);
   }
 
   const handleMouseMove = (e) => {
@@ -67,27 +67,27 @@ function MainCarouselC({cur, setCur}) {
             <UpDownBtns onClick={() => {updateIndex(index-1)}} >Prev</UpDownBtns>
           </UpDownDiv>
          </div>
-        <ImgContainer
-          ref={zoomRef}
-          onMouseEnter={(e) => handleMouseEnter(e)}
-          onMouseLeave={handleMouseLeave}
-          onMouseMove={(e) => {handleMouseMove(e)}}
-        >
-            <CarouselItem
-              src={displayed.photos[cur].url}>
-            </CarouselItem>
+          <ImgContainer
+            ref={zoomRef}
+            onMouseEnter={(e) => handleMouseEnter(e)}
+            onMouseLeave={handleMouseLeave}
+            onMouseMove={(e) => {handleMouseMove(e)}}
+          >
+            {isZoomed ?
             <ZoomedImg
             img={displayed.photos[cur].url}
-            opacity={opacity}
             height={h}
             width={w}
             style={{
               backgroundSize: `${w * 2}px ${h * 2}px`,
               backgroundPositionX: `${-x * 2 / (1.68)}px`,
               backgroundPositionY: `${-y * 2 / (1.68)}px`
-            }}
-            >
-            </ZoomedImg>
+            }}>
+            </ZoomedImg> :
+            <CarouselItem
+              src={displayed.photos[cur].url}>
+            </CarouselItem>
+            }
           </ImgContainer>
          <RightImgDiv>
            <FullBtn>
