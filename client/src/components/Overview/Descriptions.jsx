@@ -16,6 +16,7 @@ function Descriptions() {
   const [price, setPrice] = useState('0');
   const [productInfo, setProductInfo] = useState([]);
   const [sizeAndQty, setSizeAndQty] = useState({});
+  const [isCol, setCol] = useState(false);
 
 
   useEffect(() => {
@@ -23,59 +24,78 @@ function Descriptions() {
     .then((response) => {
       setProductInfo(response.data);
     });
+
   }, [styles]);
 
-  // render price of product, marking price as red if on sale
-  let renderPrice = () => {
-    return (displayed.sale_price) ?
-    (<p>
-      <strike>${displayed.original_price}</strike>
-      <strong style={{ color: '#9e3533' }}> ${displayed.sale_price}</strong>
-    </p>) :
-    (<p>${displayed.original_price}</p>)
-  };
 
   return (productInfo.length === 0 || Object.keys(allRatings).length === 0) ?
   <div>Loading...</div> :
   (<div>
     <TitleBlock>
       <h2>{productInfo.name}</h2>
-      <p>{productInfo.category}</p>
-      {renderPrice()}
       <StarsDiv>
         {AverageStars(allRatings.ratings)}
+        <p>({allRatings.avg})</p>
       </StarsDiv>
+      <p>{productInfo.category}</p>
+      {(displayed.sale_price) ?
+        <p>
+          <strike>${displayed.original_price}</strike>
+          <strong style={{ color: '#9e3533' }}> ${displayed.sale_price}</strong>
+        </p>:
+        <p>${displayed.original_price}</p>
+       }
     </TitleBlock>
     <SizeAndColor>
       <p><strong>Color: </strong>{displayed.name}</p>
       <StyleSelection/>
       <Dropdowns/>
     </SizeAndColor>
+    <DescAccordion>
+      <div>
+        <DescTitle onClick={() => {setCol(!isCol)}}>
+          <div>DESCRIPTION</div>
+          <div>{isCol ? '-' : '+'}</div>
+        </DescTitle>
+        {isCol && <div>
+          <p><strong>{productInfo.slogan}</strong></p>
+          <p>{productInfo.description}</p>
+        </div>}
+      </div>
+    </DescAccordion>
   </div>)
 
 }
 
 
 // export to a separate style page lol....
+
+const DescAccordion = styled.div`
+  border-bottom: 0.5px solid;
+  padding: 15px;
+  font-family: "Neuzeit-Grotesk","Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+`;
+const DescTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+`;
 const ProductDetailDiv = styled.div`
   display: flex;
 `;
-
 const StarsDiv = styled.div`
   display: flex;
   margin: 5px;
 `;
-
 const TitleBlock = styled.div`
   display: block;
   border-bottom: 0.5px solid;
-`;
 
+`;
 const SizeAndColor = styled.div`
   display: block;
   border-bottom: 0.5px solid;
 `;
-
 const StyleDiv = styled.ul`
   list-style-type: none;
   padding-left: 0;
@@ -86,7 +106,6 @@ const StyleDiv = styled.ul`
 const StyleCircle = styled.li`
   flex-direction: row;
 `;
-
 const StyleColor = styled.img`
   border-radius: 100px;
   border: 1px solid;
@@ -95,11 +114,9 @@ const StyleColor = styled.img`
   height: 50px;
   object-fit: cover;
 `;
-
 const RadioButtons = styled.input`
   opacity: 0;
 `;
-
 const Field = styled.fieldset`
   display: block;
   border: 0;

@@ -27,7 +27,11 @@ const App = () => {
     .then((results) => {
       const recommends = results.data.recommended;
       const percentage = (Number(recommends.true) / (Number(recommends.false) + Number(recommends.true)) * 100)
-      setAllRatings({ratings: results.data.ratings, percentage: Math.round(percentage) + '%'});
+      let sum = 0;
+      for (var props in results.data.ratings) {
+        sum+= parseInt(results.data.ratings[props]);
+      }
+      setAllRatings({ratings: results.data.ratings, percentage: Math.round(percentage) + '%', avg: sum});
       return results.data.ratings
     })
     }, [id]);

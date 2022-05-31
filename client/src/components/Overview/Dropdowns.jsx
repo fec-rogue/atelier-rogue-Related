@@ -153,10 +153,10 @@ const CartBtn = styled.button`
 const CartDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 10px;
+  margin-top: 5px;
   margin-left: 0px;
   margin-top: 35px;
-
+  margin-bottom: 15px;
 `;
 const SizeQtyDiv = styled.div`
   display: flex
