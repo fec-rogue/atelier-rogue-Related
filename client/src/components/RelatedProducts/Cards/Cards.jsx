@@ -27,7 +27,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       { max !== length -1 ?  <NextButton onClick={nextArrow}> <FcNext/> </NextButton>: null }
     </Indicators>
 
-    <Cardscontainer style={{ transform: `translateX(-${currentIndex * 25}%)`}}>
+    <Cardscontainer style={{ transform: `translateX(-${currentIndex * 15}%)`}}>
     {display.map((eachProduct, index) => {
       const id = Number(eachProduct.product_id);
       const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
@@ -80,9 +80,9 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       `;
 
       const Individualcard = styled.div`
-      width:300px;
-      height: 400px;
-      box-shadow: 0 0 24px 8px rgba(0,0,0,0.01);
+        width:300px;
+        height: 400px;
+        box-shadow: 0 0 24px 8px rgba(0,0,0,0.01);
       `
       const Indicators = styled.div`
         top:50%;
@@ -96,20 +96,18 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       const PrevButton = styled.button`
         left:0;
       `
-
       const NextButton = styled.button`
         right:0
-
       `
 
       const ComparisonWrapper = styled.div`
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      backgroundColor: #FFF;
-      padding: 50px;
-      zIndex: 1000
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        backgroundColor: #FFF;
+        padding: 50px;
+        zIndex: 1000;
       `
 
       export default Cards;

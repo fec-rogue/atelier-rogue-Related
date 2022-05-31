@@ -84,10 +84,13 @@ const TableWrapper = styled.div`
    height:200px;
    font-size:12px;
    z-index:1;
+   y-overflow: hidden;
    border-radius:12px;
    border:3px solid black;
    background-color:#dee2e6;
    display:flex;
+   align-items: center;
+   justify-content: center;
    padding:15px;
 
 `
@@ -96,6 +99,7 @@ const FeatureL = styled.td`
   text-align: center;
   padding-left: 20px;
   padding-right: 20px;
+  overflow-y:auto;
 `;
 
 const FeatureR = styled.td`
@@ -103,6 +107,7 @@ const FeatureR = styled.td`
   text-align: center;
   padding-right: 20px;
   padding-left: 20px;
+  overflow-y:auto;
 `;
 
 const Value = styled.td`

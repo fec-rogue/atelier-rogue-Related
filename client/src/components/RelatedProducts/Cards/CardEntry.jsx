@@ -5,42 +5,44 @@ import {AiFillStar} from "react-icons/Ai";
 import AverageStars from "../../stars/AverageStars.jsx"
 
 const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  setShowModal, setSelectedid}) => {
-  // const [hover, setHover] = useState(false);
+  const [hover, setHover] = useState(false);
   const imageNotFound = "http://placecorgi.com/260/180";
 
   const imagesArr = defaultsStyles[0].photos;
+  const defaultImage = imagesArr[0].url === null ? imageNotFound : imagesArr[0].url;
+  // const defaultHover =  imagesArr[1].url === null ? imageNotFound : imagesArr[1].url
 
-  // const onMouseEnter = () => {
-  //   setHover(true)
-  // }
+  let imgSrc;
+  const onMouseEnter = () => {
+    setHover(true)
+    imgSrc = defaultHover;
+  }
 
-  // const onMouseLeave = () => {
-  //   setHover(false)
-  // }
-
+  const onMouseLeave = () => {
+    setHover(false)
+    imgSrc = defaultImage;
+  }
 
   return(
       <Carditem  >
-        {/* <CardImageBox onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}> */}
-        <CardImageBox>
+        <CardImageBox onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+          <Cardimage src={defaultImage}/>
+        <MultiImages >
 
-          { imagesArr[0].url === null
-          ? <Cardimage src={imageNotFound} />
-          : <Cardimage src={imagesArr[0].url} />}
-{/*
-      { hover &&
+        { hover &&
           imagesArr.slice(1).map((eachImage,index) => (
-            eachImage.url === null ? <MultiImages src={imageNotFound} /> : <MultiImages src = {eachImage.url} />
-          ))} */}
+            eachImage.url === null ? <MultiImage src={imageNotFound} /> : <MultiImage src = {eachImage.url} />
+          ))}
+
+        </MultiImages>
+
 
         </CardImageBox>
-
         <StarButton onClick={() => {
           setShowModal(true)
           setSelectedid(detailProduct)}}>
           <AiFillStar/>
         </StarButton>
-
         <CardInfo>
           <p>{detailProduct.category}</p>
           <h3><b>{detailProduct.name}</b></h3>
@@ -61,15 +63,12 @@ const Carditem = styled.div`
   flex-direction: column;
   align-items: start;
   gap: 10px;
-
 `
 
 const CardImageBox = styled.div`
   width: 100%;
   height: 50%;
-
 `
-
 
 const Cardimage = styled.img`
   width: 100%;
@@ -77,6 +76,19 @@ const Cardimage = styled.img`
   object-fit: cover;
 `
 
+const MultiImages = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  position: relative;
+  transitions: .5s;
+  scroll-behavior: smooth;
+`
+const MultiImage = styled.img`
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+`
 const CardInfo = styled.div`
   padding: 0 16px;
   display: flex;
@@ -84,8 +96,6 @@ const CardInfo = styled.div`
   justify-content: space-between;
 `
 const Price = styled.p`
-
-
 `
 const StarButton = styled.button`
   position:absolute;
@@ -95,27 +105,19 @@ const StarButton = styled.button`
 const Ratings = styled.div`
   display:inline-block
 `
-const MultiImages = styled.img`
-  width: 100%;
-  height: 50%;
-
+const Indicators = styled.div`
+top:50%;
+display:flex;
+justify-content: center;
+position: absolute;
+z-index: 500;
+cursor:pointer;
+user-select:none;
 `
-
+const PrevButton = styled.button`
+left:0;
+`
+const NextButton = styled.button`
+right:0
+`
 export default CardEntry;
-
-
-// style={hover? HoverStyle : NormalStyle}
-// const NormalStyle = styled.div`
-// width: 250px;
-// height: 400px;
-// position: relative;
-// display: flex;
-// flex-direction: column;
-// align-items: start;
-// gap: 10px;
-
-// `
-
-// const HoverStyle = styled.div`
-
-// `
