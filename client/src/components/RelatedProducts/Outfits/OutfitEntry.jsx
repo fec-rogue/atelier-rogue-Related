@@ -20,9 +20,9 @@ const OutfitEntry = ({item, setOutfit, ratings}) => {
         <AiOutlineDelete/>
         </DeleteButton>
       <OutfitInfo>
-          <p>Category: {item.category}</p>
-          <p>Name: {item.name}</p>
-          <p>Price: {item.default_price}</p>
+          <p>{item.category}</p>
+          <p><b>{item.name}</b></p>
+          <p>${item.default_price}</p>
           <Ratings>{ratings}</Ratings>
       </OutfitInfo>
     </Outfititem>

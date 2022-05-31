@@ -75,6 +75,7 @@ const Outfits = () => {
         }
   }
 
+
   return (
     <OutfitsWrapper>
       <Indicators>
@@ -133,22 +134,12 @@ const Indicators = styled.div`
 `
 
 const PrevButton = styled.button`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 1;
-  cursor:pointer;
-  user-select:none;
+  left: 0;
 `
 
 const NextButton = styled.button`
-  right:32px;
-  position: absolute;
-  top: 50%;
-  bottom: 0;
-  z-index: 1;
-  cursor:pointer;
-  user-select:none;
+  right: 0;
+
 `
 
 export default Outfits;

@@ -1,5 +1,7 @@
 import React  from 'react';
+import { useEffect  } from "react";
 import styled from 'styled-components';
+import {AiOutlineClose} from "react-icons/Ai";
 
 const Comparison = ({ twoCards, close }) => {
   // console.log('twocards', twoCards)
@@ -32,9 +34,16 @@ const Comparison = ({ twoCards, close }) => {
 
   // console.log('card2Arr', card2Arr);
 
+  useEffect( ()=> {
+    document.addEventListener( 'mousedown', ()=>{
+      close(false)
+    })
+  })
+
+
   return(
     <TableWrapper>
-       <button onClick={() => close(false)}>Close</button>
+       {/* <button onClick={() => close(false)}><AiOutlineClose /></button> */}
     <table>
       <thead>
         <tr>
@@ -46,8 +55,6 @@ const Comparison = ({ twoCards, close }) => {
 
       <tbody>
         {features.map((item, index) => {
-          //  console.log('HIT TABLE!!')
-          // console.log('item', item)
           return(
           <tr key={index}>
             <FeatureL>
@@ -78,18 +85,17 @@ const TableWrapper = styled.div`
    font-size:12px;
    z-index:1;
    border-radius:12px;
-   border:3px solid red;
-   background-color:grey;
-  //  box-shadow:rgba(0, 0, 0, 0.35) 0px 5px 15px;
+   border:3px solid black;
+   background-color:#dee2e6;
    display:flex;
    padding:15px;
+
 `
 const FeatureL = styled.td`
   position: flex;
   text-align: center;
   padding-left: 20px;
   padding-right: 20px;
-  font-style: italic;
 `;
 
 const FeatureR = styled.td`
@@ -97,7 +103,6 @@ const FeatureR = styled.td`
   text-align: center;
   padding-right: 20px;
   padding-left: 20px;
-  font-style: italic;
 `;
 
 const Value = styled.td`
@@ -106,10 +111,12 @@ const Value = styled.td`
 
 const HeadL = styled.th`
   padding-left: 20px;
+  text-align: center;
 `;
 
 const HeadR = styled.th`
   padding-right: 20px;
+  text-align: center;
 `;
 
 

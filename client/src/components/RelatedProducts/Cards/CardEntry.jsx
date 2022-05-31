@@ -22,9 +22,9 @@ const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  setShowModal,
         </StarButton>
 
         <CardInfo>
-          <p>Category: {detailProduct.category}</p>
-          <p>Name: {detailProduct.name}</p>
-          <p>Price: { defaultsStyles[0].sale_price === null
+          <p>{detailProduct.category}</p>
+          <h3><b>{detailProduct.name}</b></h3>
+          <p>${ defaultsStyles[0].sale_price === null
           ?  defaultsStyles[0].original_price
           :  defaultsStyles[0].sale_price }</p>
           <Ratings>{ AverageStars(detailRatings.ratings) }</Ratings>
@@ -56,10 +56,10 @@ const CardInfo = styled.div`
   padding: 0 16px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `
 
 const StarButton = styled.button`
-
   position:absolute;
   top:10px;
   right: 10px;

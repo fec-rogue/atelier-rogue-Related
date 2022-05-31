@@ -7,34 +7,35 @@ import { FcPrevious,  FcNext } from "react-icons/fc";
 const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRatings,
   setShowModal, setSelectedid}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const display = relatedProductsStyles.slice(currentIndex, (currentIndex + 4));
     const length = relatedProductsStyles.length;
+    const max = currentIndex + 3;
+    const min = currentIndex;
 
     const prevArrow = () => {
-      setCurrentIndex(currentIndex === 0 ? length -1 : currentIndex -1)
+      setCurrentIndex(currentIndex === 0 ? max : currentIndex -1)
     };
 
     const nextArrow = () => {
-      setCurrentIndex(currentIndex === length - 1 ? 0 : currentIndex + 1)
+      setCurrentIndex(currentIndex === max ? 0 : currentIndex + 1)
     };
-
-    const max = currentIndex + 3;
-    const min = currentIndex;
-    console.log('currentIndex', currentIndex);
 
     return (
       <CardsWrapper>
       <Indicators>
-      { currentIndex !== 0 ? <FcPrevious onClick={prevArrow}/> : null }
-      { max !== length -1 ?  <FcNext onClick={nextArrow}/> : null }
+      { currentIndex !== 0 ? < PrevButton onClick={prevArrow}> <FcPrevious/> </PrevButton> : null }
+      { max !== length -1 ?  <NextButton onClick={nextArrow}> <FcNext/> </NextButton>: null }
     </Indicators>
 
-    <Cardscontainer style={{ transform: `translateX(-${currentIndex * 100}%)`}}>
-    {relatedProductsStyles.map((eachProduct, index) => {
+    <Cardscontainer style={{ transform: `translateX(-${currentIndex * 25}%)`}}>
+    {display.map((eachProduct, index) => {
+      console.log('eachP', eachProduct)
       const id = Number(eachProduct.product_id);
       const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
       const detailRatings = relatedProductsRatings.find(detail => Number(detail.product_id) === id);
 
       let isDefault = false;
+
       let defaultsStyles = [];
       let stylesResults = eachProduct.results;
       stylesResults.forEach((eachStyle) => {
@@ -49,13 +50,13 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
 
       return(
         <Individualcard key={id}>
-        {index <= max && index >= min &&
+        {index <= max && index >= min && display.length > 0 &&
           <CardEntry
-          defaultsStyles={defaultsStyles}
-          detailProduct = {detailProduct}
-          detailRatings={detailRatings}
-          setShowModal={setShowModal}
-          setSelectedid={setSelectedid}
+            defaultsStyles={defaultsStyles}
+            detailProduct = {detailProduct}
+            detailRatings={detailRatings}
+            setShowModal={setShowModal}
+            setSelectedid={setSelectedid}
           />}
           </Individualcard>
           )
@@ -85,18 +86,20 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       box-shadow: 0 0 24px 8px rgba(0,0,0,0.01);
       `
       const Indicators = styled.div`
-      top:50%;
-      display:flex;
-      justify-content: center;
-      position: absolute;
-      z-index: 1;
-      cursor:pointer;
-      user-select:none;
+        top:50%;
+        display:flex;
+        justify-content: center;
+        position: absolute;
+        z-index: 500;
+        cursor:pointer;
+        user-select:none;
       `
       const PrevButton = styled.button`
+        left:0;
       `
 
       const NextButton = styled.button`
+        right:0
 
       `
 
