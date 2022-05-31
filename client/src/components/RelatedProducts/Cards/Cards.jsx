@@ -29,7 +29,6 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
 
     <Cardscontainer style={{ transform: `translateX(-${currentIndex * 25}%)`}}>
     {display.map((eachProduct, index) => {
-      console.log('eachP', eachProduct)
       const id = Number(eachProduct.product_id);
       const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
       const detailRatings = relatedProductsRatings.find(detail => Number(detail.product_id) === id);
