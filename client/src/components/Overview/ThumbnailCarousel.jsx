@@ -76,7 +76,6 @@ const InnerDiv = styled.div`
   overflow: hidden;
 `;
 
-
 const ThumbnailCarouselItem = styled.div`
   display: flex;
   flex: 1;

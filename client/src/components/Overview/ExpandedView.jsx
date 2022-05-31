@@ -12,6 +12,7 @@ function ExpandedView() {
   const [[x, y], setPosition] = useState([0,0]);
   const [[w, h], setZoomSize] = useState([0,0]);
   const [isZoomed, setZoom] = useState(false);
+  const [range, setRange] = useState({min: 0, max:6});
   const zoomRef = useRef(null);
 
   const prev = () => {
@@ -61,7 +62,6 @@ function ExpandedView() {
             {isZoomed ?
             <ZoomedImg
             img={displayed.photos[curPhoto].url}
-            cursor={AiOutlinePlus}
             height={h}
             width={w}
             style={{
@@ -76,9 +76,27 @@ function ExpandedView() {
             }
           </ImgContainer>
         </div>
-        <ThummbnailContainer>
-
-        </ThummbnailContainer>
+          <ThumbnailCarouselDiv>
+            <PrevDiv>
+              <UpDownBtns onClick={prev} >Prev</UpDownBtns>
+            </PrevDiv>
+            <div>
+              <InnerDiv>
+                {displayed.photos.map((img, indx) => {
+                  return (indx >= range.min && indx <= range.max) ?
+                  (<ThumbnailCarouselItem
+                    className={indx === curPhoto ? 'selected' : ''}
+                    key={indx}
+                    img={img.thumbnail_url} onClick={() => {setCurPhoto(indx)}}>
+                    </ThumbnailCarouselItem>)
+                  : null
+                })}
+              </InnerDiv>
+            </div>
+            <NextDiv>
+              <UpDownBtns onClick={next}>Next</UpDownBtns>
+            </NextDiv>
+          </ThumbnailCarouselDiv>
       </div>
   </FullContainer>)
 
@@ -89,11 +107,7 @@ const ExitContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `
-const ThummbnailContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-`;
+
 const FullContainer = styled.div`
   display: flex;
   background-color: #fafafa;
@@ -124,5 +138,61 @@ const ImgContainer = styled.div`
   position: relative;
   overflow: hidden;
   display: block;
+`;
+
+const ThumbnailCarouselDiv = styled.div`
+  cursor: default;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-width: 130px;
+  max-height: 800px;
+  background-color: #fafafa;
+  transition: all ease-in-out 0.05s;
+  .selected {
+    border-bottom: 6px solid #D3D3D3;
+    transition: all ease-in-out 0.05s;
+  }
+`;
+const InnerDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  margin-bottom: 15px;
+`;
+
+const ThumbnailCarouselItem = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  min-width: 90px;
+  min-height: 90px;
+  max-height: 90px;
+  margin-right: 10px;
+  background-image: url(${(props) => props.img || ''});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  transition: all ease-in-out 0.03s;
+  box-sizing: border-box;
+  &:hover {
+    cursor: pointer;
+    transition: all ease-in-out 0.03s;
+    transform: scale(0.96);
+  }
+`;
+
+const PrevDiv = styled.div`
+  margin-right: 3%;
+`;
+const NextDiv = styled.div`
+  margin-left: 3%;
+`;
+
+const UpDownBtns = styled.button`
 `;
 export default ExpandedView;
