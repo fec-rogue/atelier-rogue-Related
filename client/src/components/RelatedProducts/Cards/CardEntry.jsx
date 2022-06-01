@@ -20,46 +20,48 @@ const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  setShowModal,
     setHover(false);
   }
 
-  // const max = imagesArr.length -1;
+  const max = imagesArr.length -1;
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setCurrentIndex((prevIndex) => (prevIndex === max ? 1 : prevIndex + 1));
-  //     console.log('currentIdx', currentIndex);
-  //   }, 1000);
-  //   return () => clearInterval(timer);
-  // }, [])
-
-
-  // const defaultHover = (currentIndex) => {
-  //  if(hover) {
-  //   //  console.log('imagesArr[currentIndex]', imagesArr[currentIndex]);
-  //     return imagesArr[currentIndex].url;
-  //  } else {
-  //     return defaultImage;
-  //  }
-  // }
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex === max ? 1 : prevIndex + 1));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [])
 
 
-
-  const defaultHover = () => {
+  const defaultHover = (currentIndex) => {
     if(hover) {
-     //  console.log('imagesArr[currentIndex]', imagesArr[currentIndex]);
-     if(imagesArr[1] === undefined) {
-       return imageNotFound;
-     } else {
-      return imagesArr[1].url;
-     }
-
-    } else {
-       return defaultImage;
-    }
+      // console.log('imagesArr[currentIndex]',imagesArr[currentIndex]);
+      if(imagesArr[1] === undefined) {
+        return defaultImage;
+      }
+      if(imagesArr[currentIndex]) {
+        return imagesArr[currentIndex].url;
+      }
+   } else {
+      return defaultImage;
    }
+  }
+
+
+  // const defaultHover = () => {
+  //   if(hover) {
+  //    if(imagesArr[1] === undefined) {
+  //      return imageNotFound;
+  //    } else {
+  //     return imagesArr[1].url;
+  //    }
+  //   } else {
+  //      return defaultImage;
+  //   }
+  //  }
 
   return(
       <Carditem  >
         <CardImageBox onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-          <Cardimage src={defaultHover()}/>
+          {/* <Cardimage src={defaultHover()}/> */}
+          <Cardimage src={defaultHover(currentIndex)}/>
         </CardImageBox>
         <StarButton onClick={() => {
           setShowModal(true)
