@@ -80,12 +80,13 @@ const StyleColor = styled.div`
     cursor: pointer;
     transition: all ease-in-out 0.03s;
     transform: scale(0.96);
-    border: 0.5px solid;
+    border: 0.5px solid white;
   }
   &.selected{
-    border: 1px solid black;
+    border: 1px solid white;
     transform: scale(1.2);
     transition: all ease-in-out 0.03s;
+    box-shadow: 0 4px 2px -2px gray;
   }
 
 `;

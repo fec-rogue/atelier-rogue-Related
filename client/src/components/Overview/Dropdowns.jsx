@@ -10,6 +10,7 @@ function Dropdowns () {
   const [sizeAndQty, setSizeAndQty] = useState({});
   const [sizeSelected, setSizeSelected] = useState('');
   const [qtySelected, setQtySelected] = useState('');
+  const [skuSelected, setSku] = useState('');
   const [cartValid, setCartValid] = useState(true);
   const [fave, setFave] = useState([]);
   // going to need a cache/local storage to keep track of which items have already been faved
@@ -26,6 +27,7 @@ function Dropdowns () {
     setSizeAndQty(sizeQty);
     setQtySelected('');
     setSizeSelected('');
+    setSku('');
   }, [displayed]);
 
   // updates size selected by user in size dropdown
@@ -43,7 +45,6 @@ function Dropdowns () {
   If the default ‘Select Size’ is currently selected: Clicking this button should open the size dropdowns
   */
 
-  // adds items to cart when "Add To Cart" is clicked
  const handleCart = () => {
    var elem = '';
    if (sizeSelected === '') {
@@ -51,6 +52,13 @@ function Dropdowns () {
     } else {
       setCartValid(true);
       console.log('added to cart');
+      console.log('displayed:', displayed);
+      console.log('sizeSelected:' ,sizeSelected);
+      console.log('qtySelected: ', qtySelected);
+      /*
+      axios.post('/cart',)
+
+      */
     }
   }
 
@@ -124,10 +132,11 @@ function Dropdowns () {
 
 // export on separate css page
 const FaveBtn = styled.button`
-  background-color: #000;
+  background-color: #8d5535;
   color: #fff;
   font-weight: 400;
-  border: 1px solid #2B2E34;
+  border: 1px solid #8d5535;
+  border-radius: 3px;
   padding: 0;
   line-height: 0;
   font-size: 14px;
@@ -137,10 +146,11 @@ const FaveBtn = styled.button`
   width: 25%;
 `;
 const CartBtn = styled.button`
-  background-color: #000;
+  background-color: #8d5535;
   color: #fff;
   font-weight: 400;
-  border: 1px solid #2B2E34;
+  border: 1px solid #8d5535;
+  border-radius: 3px;
   padding: 0;
   line-height: 0;
   font-size: 14px;

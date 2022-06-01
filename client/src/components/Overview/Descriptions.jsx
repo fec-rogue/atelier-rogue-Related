@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import Dropdowns from './Dropdowns.jsx';
+import DropdownsTest from './DropdownsTest.jsx';
 import StyleSelection from './StyleSelection.jsx'
 import {PropIdContext} from '../App.jsx';
 import {DescriptionsContext} from './Overview.jsx';
@@ -50,7 +50,7 @@ function Descriptions() {
     <SizeAndColor>
       <p><strong>Color: </strong>{displayed.name}</p>
       <StyleSelection/>
-      <Dropdowns/>
+      <DropdownsTest/>
     </SizeAndColor>
     <DescAccordion>
       <div>
@@ -113,7 +113,7 @@ const SocialsBtn = styled.div`
   margin-right: 15px;
 `;
 const DescAccordion = styled.div`
-  border-bottom: 0.5px solid;
+  border-bottom: 0.5px solid #8E918F;
   padding: 15px;
   font-family: "Neuzeit-Grotesk","Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 `;

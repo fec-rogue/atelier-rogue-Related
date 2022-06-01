@@ -109,7 +109,6 @@ const ExitContainer = styled.div`
 
 const FullContainer = styled.div`
   display: flex;
-  background-color: #fafafa;
 `
 const FullItem = styled.img`
   position: relative;
@@ -118,6 +117,7 @@ const FullItem = styled.img`
   transition: all ease-in-out 0.03s;
   margin: 7%;
   margin-top: 0;
+  margin-left: 2%;
   margin-bottom: 3%;
 `;
 const ZoomedImg = styled.div`
@@ -126,9 +126,9 @@ const ZoomedImg = styled.div`
   width: ${(props) => `${props.width}px`};
   opacity: ${props => props.opacity};
   border: 1px solid lightgray;
-  background-color: white;
   background-image: url(${(props) => props.img});
   background-repeat: no-repeat;
+  margin-left: 0;
 `;
 const ImgContainer = styled.div`
   position: relative;
@@ -147,7 +147,6 @@ const ThumbnailCarouselDiv = styled.div`
   align-items: center;
   min-width: 130px;
   max-height: 800px;
-  background-color: #fafafa;
   transition: all ease-in-out 0.05s;
   .selected {
     border-bottom: 6px solid #D3D3D3;

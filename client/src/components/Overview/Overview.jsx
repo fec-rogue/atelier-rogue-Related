@@ -5,10 +5,10 @@ import {PropIdContext} from '../App.jsx';
 import Gallery from './Gallery.jsx';
 import Descriptions from './Descriptions.jsx';
 import ExpandedView from './ExpandedView.jsx';
+import Cart from './Cart.jsx';
 
 export const DescriptionsContext = createContext();
 
-// TODO: Create cart, announcement header, website header
 function Overview() {
 
   const [styles, setProductStyles] = useState([])
@@ -41,7 +41,7 @@ function Overview() {
 
   return(
     <div>
-      <WebsiteHeader>OVERVIEW</WebsiteHeader>
+      <Cart/>
       <AnnouncementHeader>SITE-WIDE ANNOUNCEMENT</AnnouncementHeader>
       <DescriptionsContext.Provider
       value={{displayed, setDisplayed, styles, setProductStyles, expanded, setExpanded, curPhoto, setCurPhoto}}>
