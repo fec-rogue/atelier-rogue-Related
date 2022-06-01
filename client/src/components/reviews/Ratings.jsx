@@ -41,6 +41,8 @@ padding-right: 10px;
 
 const Nstars = styled.div`
   padding-bottom: 12px;
+  text-decoration: underline;
+  cursor: pointer;
 `;
 
 const Bars = styled.div`
@@ -51,22 +53,32 @@ const RatingCount = styled.span`
 
 `;
 
+const Filter = styled.div`
+padding-bottom: 10px;
+`;
+
+const FilterBy = styled.div`
+padding-bototm: 7px;
+`;
 
 
-const Ratings = ({reviews, setReviews, filters, setFilters}) => {
-  const [ratings, setRatings] = useState({});
-  // const [average, setAverage] = useState(0);
+const Ratings = ({reviews, setReviews, filters, setFilters, filterState}) => {
   const {allRatings, setAllAverage} = useContext(PropIdContext);
 
-  // useEffect(() => {
-  //   axios.get('http://localhost:3000/reviews/meta', {params: {product_id: 40344}})
-  //     .then((results) => {
-  //       const recommends = results.data.recommended;
-  //       const percentage = (Number(recommends.true) / (Number(recommends.false) + Number(recommends.true)) * 100)
-  //       setRatings({ratings: results.data.ratings, percentage: Math.round(percentage) + '%'});
-  //       return results.data.ratings
-  //     })
-  // }, []);
+  const average = (ratings) => {
+    let average = 0;
+    let count = 0;
+    const keys = Object.keys(ratings);
+
+    keys.forEach((rating) => {
+      average += Number(rating) * Number(ratings[rating]);
+      count += Number(ratings[rating]);
+    })
+
+    average = (Math.round((average / count) * 4) / 4).toFixed(2);
+
+    return average;
+  }
 
   const click1Star = (e) => {
     let newState = {...filters};
@@ -103,35 +115,36 @@ const Ratings = ({reviews, setReviews, filters, setFilters}) => {
       <div>Loading...</div>
     )
   } else {
-
-    // if (allRatings.ratings['1'] === undefined) {
-    //   return (<div>loading</div>)
-    // } else {
-    // }
-
     return (
-    <RatingsContainer>
-      <Title>Ratings & Reviews</Title>
-      {/* <AverageRating>{average}</AverageRating> */}
-      <AverageStar>
-        {/* {Stars(average)} */}
-        {AverageStars(allRatings.ratings)}
-      </AverageStar>
-      <Recommendations>{ratings.percentage} of reviews recommend this product</Recommendations>
-      <Bars>
-        <StarsContainer>
-          <Nstars onClick={click1Star}>1 stars  </Nstars>
-          <Nstars onClick={click2Star}>2 stars  </Nstars>
-          <Nstars onClick={click3Star}>3 stars  </Nstars>
-          <Nstars onClick={click4Star}>4 stars  </Nstars>
-          <Nstars onClick={click5Star}>5 stars  </Nstars>
-        </StarsContainer>
-        <PercentageBars />
-      </Bars>
-
-    </RatingsContainer>
-  )
-}
+      <RatingsContainer>
+        <Title>Ratings & Reviews</Title>
+        <AverageRating>{average(allRatings.ratings)}</AverageRating>
+        <AverageStar>
+          {AverageStars(allRatings.ratings)}
+        </AverageStar>
+        <Recommendations>{allRatings.percentage} of reviews recommend this product</Recommendations>
+        <Bars>
+          <StarsContainer>
+            <Nstars onClick={click1Star}>1 stars  </Nstars>
+            <Nstars onClick={click2Star}>2 stars  </Nstars>
+            <Nstars onClick={click3Star}>3 stars  </Nstars>
+            <Nstars onClick={click4Star}>4 stars  </Nstars>
+            <Nstars onClick={click5Star}>5 stars  </Nstars>
+          </StarsContainer>
+          <PercentageBars />
+        </Bars>
+        {filterState.filterState ?
+          <div>
+            <Filter>Filtering reviews by :</Filter>
+            {filterState.filterArray.map((value, index) =>
+              <FilterBy key={index}>&nbsp;&nbsp;&nbsp;&nbsp;{value} star reviews</FilterBy>
+            )}
+          </div>
+          : null
+        }
+      </RatingsContainer>
+    )
+  }
 }
 
 
