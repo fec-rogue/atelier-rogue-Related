@@ -5,6 +5,7 @@ import StarDiv from './StarDiv.jsx';
 
 // Expects a number
 const Stars = (rating) => {
+
   return  (
     <StarDiv rating={rating}>★★★★★</StarDiv>
   )

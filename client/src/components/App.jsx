@@ -5,6 +5,7 @@ import Overview from "./Overview/Overview.jsx";
 import axios from 'axios';
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
 import Reviews from "./reviews/Reviews.jsx";
+
 /*
 Example usage of lazy:
 const Detail = lazy(() => import("./Detail.jsx"));
@@ -17,17 +18,22 @@ const FourOhFour = lazy(() => import("./404.jsx"));
 // useContext to set default product_id across all pages
 
 export const PropIdContext = createContext();
+export const FavoriteContext = createContext();
 
 const App = () => {
-  const [id, setId] = useState('40344');
+  const [id, setId] = useState('40351');
   const [allRatings, setAllRatings] = useState(0);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/reviews/meta', {params: {product_id: 40344}})
+    axios.get('/reviews/meta', {params: {product_id: id}})
     .then((results) => {
       const recommends = results.data.recommended;
       const percentage = (Number(recommends.true) / (Number(recommends.false) + Number(recommends.true)) * 100)
-      setAllRatings({ratings: results.data.ratings, percentage: Math.round(percentage) + '%'});
+      let sum = 0;
+      for (var props in results.data.ratings) {
+        sum+= parseInt(results.data.ratings[props]);
+      }
+      setAllRatings({ratings: results.data.ratings, percentage: Math.round(percentage) + '%', avg: sum});
       return results.data.ratings
     })
     }, [id]);
@@ -35,26 +41,28 @@ const App = () => {
 
   //need to grab overview data
   return (
-    <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings}}>
-      <AppStyle>
-      {/* <div>
-        <Overview />
-      </div> */}
-      <div>
-        <RelatedProducts />
-      </div>
-      {/* <div>
-        <Reviews />
-      </div> */}
-      </AppStyle>
-    </PropIdContext.Provider>
+    <AppContainer>
+      <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings}}>
+        <div>
+          <Overview />
+        </div>
+        <div>
+          <RelatedProducts />
+        </div>
+        <div>
+          <Reviews />
+        </div>
+      </PropIdContext.Provider>
+    </AppContainer>
   )
 }
 
-
-const AppStyle = styled.div`
+const AppContainer = styled.div`
+  display: block;
   background-color: #ded3c5;
   font-family: 'Abel', sans-serif;
-`
+  margin: 0;
+`;
+
 export default App;
 

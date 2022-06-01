@@ -1,82 +1,62 @@
 import axios from 'axios';
 import styled from 'styled-components';
-import React, { useEffect, useState, useContext } from 'react';
-import {DisplayedPhotoContext} from './Overview.jsx'
+import React, { useEffect, useState, useContext, createContext } from 'react';
+import {DescriptionsContext} from './Overview.jsx'
 import {PropIdContext} from '../App.jsx';
+import ThumbnailCarousel from './ThumbnailCarousel.jsx';
+import MainCarousel from './MainCarousel.jsx';
+import ExpandedView from './ExpandedView.jsx';
 
 
 function Gallery() {
 
-  const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
-  const [curPhoto, setCurPhoto] = useState([]);
-  const {id, setId} = useContext(PropIdContext);
+  const {displayed, setDisplayed} = useContext(DescriptionsContext);
+  const {curPhoto, setCurPhoto} = useContext(DescriptionsContext);
+
 
   useEffect(() => {
-    // find better conditions for if statement
-    if (!Array.isArray(displayed)) {
-      setCurPhoto(displayed.photos[0])
+    // if displayed contains a product, AND if curPhoto doesn't already have an index, set to first photo in product
+    if (!Array.isArray(displayed) && curPhoto === '') {
+      setCurPhoto(0)
     }
-  }, [displayed])
+  }, [displayed]);
 
-  // conditionally render info if displayed is empty
-  // when there's no data, image/error page should be displayed
-  // show an image placeholder when there's no data
-
-  if (curPhoto.length === 0 || Array.isArray(displayed)) {
-    //console.log('loading')
-    return (
-      <div>
-        <h2>Loading...</h2>
-      </div>
-    )
-  } else {
-    return(
-      <PictureContainer>
-        <CarouselContainer>
-        <SidePic src={curPhoto.thumbnail_url} ></SidePic>
-          {displayed.photos.map((thumbnails, key) => {
-            if (thumbnails !== curPhoto) {
-              return <SidePic key={key} src={thumbnails.thumbnail_url} onClick={() => {setCurPhoto(thumbnails)}}></SidePic>
-            }
-          })}
-        </CarouselContainer>
-        <MainPicture src={curPhoto.url}></MainPicture>
-      </PictureContainer>
-    )
-  }
+  return (curPhoto === '' || Array.isArray(displayed)) ?
+  null :
+  <PictureContainer>
+    <MainPicDiv>
+      <ThumbnailCarousel/>
+      <MainCarousel/>
+    </MainPicDiv>
+  </PictureContainer>
 
 }
 
-// export to a separate style page lol....
 const PictureContainer = styled.div `
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-evenly;
+  width: 100%;
 `;
 
 const CarouselContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 15%;
-  margin-right: -10%;
-`;
-
-const MainPicture = styled.img`
-  display: flex;
-  flex-wrap: wrap;
-  width: 70%;
-  height: 70%;
-  max-height: 700px;
-  max-width: 400px;
-  object-fit: contain;
-  margin-right: 40px;
-`;
-
-const SidePic = styled.img`
-  padding: 3px;
   width: 40%;
-  height: 40%;
-  object-fit: contain;
 `;
+
+const MainPicDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const MainPicture = styled.img`
+  width: 90%;
+  height: 90%;
+  max-height: 580px;
+  max-width: 580px;
+  object-fit: cover;
+`;
+
 
 
 export default Gallery;
