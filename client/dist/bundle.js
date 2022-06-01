@@ -596,11 +596,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-<<<<<<< HEAD
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Stars_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Stars.jsx */ \"./client/src/components/stars/Stars.jsx\");\n\n\n\n // StaticStars expects an object\n// Returns the average ratings of all reviews\n\nvar AverageStars = function AverageStars(ratings) {\n  // console.log('this shoud show')\n  // console.log(ratings)\n  var currentStars = function currentStars(ratings) {\n    var average = 0;\n    var count = 0;\n    var keys = Object.keys(ratings);\n    keys.forEach(function (rating) {\n      average += Number(rating) * Number(ratings[rating]);\n      count += Number(ratings[rating]);\n    });\n    average = (Math.round(average / count * 4) / 4).toFixed(2);\n    return average;\n  };\n\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, (0,_Stars_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(currentStars(ratings)));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AverageStars);\n\n//# sourceURL=webpack://atelier_rogue/./client/src/components/stars/AverageStars.jsx?");
-=======
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Stars_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Stars.jsx */ \"./client/src/components/stars/Stars.jsx\");\n\n\n\n // StaticStars expects an object\n// Returns the average ratings of all reviews\n\nvar AverageStars = function AverageStars(ratings) {\n  var currentStars = function currentStars(ratings) {\n    var average = 0;\n    var count = 0;\n    var keys = Object.keys(ratings);\n    keys.forEach(function (rating) {\n      average += Number(rating) * Number(ratings[rating]);\n      count += Number(ratings[rating]);\n    });\n    average = (Math.round(average / count * 4) / 4).toFixed(2);\n    return average;\n  };\n\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, (0,_Stars_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(currentStars(ratings)));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AverageStars);\n\n//# sourceURL=webpack://atelier_rogue/./client/src/components/stars/AverageStars.jsx?");
->>>>>>> main
 
 /***/ }),
 
@@ -948,7 +944,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/
+/******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -962,17 +958,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/
+/******/ 	
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -985,7 +981,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -997,12 +993,12 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -1013,7 +1009,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/node module decorator */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nmd = (module) => {
@@ -1022,13 +1018,13 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			return module;
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /************************************************************************/
-/******/
+/******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = __webpack_require__("./client/src/index.jsx");
-/******/
+/******/ 	
 /******/ })()
 ;
