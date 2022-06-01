@@ -45,22 +45,9 @@ const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  setShowModal,
   }
 
 
-  // const defaultHover = () => {
-  //   if(hover) {
-  //    if(imagesArr[1] === undefined) {
-  //      return imageNotFound;
-  //    } else {
-  //     return imagesArr[1].url;
-  //    }
-  //   } else {
-  //      return defaultImage;
-  //   }
-  //  }
-
   return(
       <Carditem  >
         <CardImageBox onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-          {/* <Cardimage src={defaultHover()}/> */}
           <Cardimage src={defaultHover(currentIndex)}/>
         </CardImageBox>
         <StarButton onClick={() => {
@@ -87,7 +74,7 @@ const Carditem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 10px;
+  // gap: 10px;
 `
 
 const CardImageBox = styled.div`
@@ -119,6 +106,7 @@ const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
 `
 const Price = styled.p`
 `
@@ -126,6 +114,7 @@ const StarButton = styled.button`
   position:absolute;
   top:10px;
   right: 10px;
+
 `
 const Ratings = styled.div`
   display:inline-block

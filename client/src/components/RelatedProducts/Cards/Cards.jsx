@@ -22,9 +22,8 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
 
     return (
       <CardsWrapper>
-      <Indicators>
+
       { currentIndex !== 0 ? < PrevButton onClick={prevArrow}> <GrCaretPrevious/> </PrevButton> : null }
-    </Indicators>
 
     <Cardscontainer style={{ transform: `translateX(-${currentIndex * 50}%)`}}>
     {display.map((eachProduct, index) => {
@@ -71,10 +70,11 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
         position: relative;
       `
       const Cardscontainer = styled.div`
+        margin-left: 33px;
         display: flex;
         gap: 10px;
         position: relative;
-        transitions: .5s;
+        transition: .5s;
         scroll-behavior: smooth;
       `;
 
@@ -83,33 +83,112 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
         height: 400px;
         box-shadow: 0 0 24px 8px rgba(0,0,0,0.01);
       `
-      const Indicators = styled.div`
-        top:50%;
-        display:flex;
-        justify-content: center;
-        position: absolute;
-        z-index: 500;
-        cursor:pointer;
-        user-select:none;
-      `
-      const PrevButton = styled.button`
-        left:0;
-      `
-      const NextButton = styled.button`
-      right:0;
-      top:50%;
-      display:flex;
-      justify-content: center;
-      position: absolute;
-      z-index: 500;
-      cursor:pointer;
-      user-select:none;
 
+      // const PrevButton = styled.button`
+      //   left:0;
+      //   top:50%;
+      //   display:flex;
+      //   justify-content: center;
+      //   position: absolute;
+      //   z-index: 500;
+      //   cursor:pointer;
+      //   user-select:none;
+      //   width: 30px;
+      //   height: 30px;
+      //   border-radius: 100%;
+      //   border: none;
+      //   box-shadow: 1px 1px 3px rgba(0,0,0,.25);
+      //   font-weight: bold;
+      //   background-color: rgba(255,255,255, 0.75);
+      //   &:hover,
+      //   &:focus {
+      //     background-color: #dee2e6;
+      //     text-decoration: none;
+      //     outline: 0;
+      //     opacity: .7;
+      //   }
+      // `
+
+      const PrevButton = styled.button`
+        position: absolute;
+        z-index: 1;
+        left:0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        border-radius: 100%;
+        border: none;
+        box-shadow: 1px 1px 3px rgba(0,0,0,.25);
+        transition: all .25s ease;
+        font-weight: bold;
+        background-color: rgba(255,255,255, 0.75);
+        backdrop-filter: blur(2px);
+        @media (max-height: 1100px) {
+          height: 36px;
+          width: 36px;
+        }
+        &:hover,
+        &:focus {
+          background-color: #dee2e6;
+          outline: none;
+          opacity: .7;
+        }
       `
+      // const NextButton = styled.button`
+      //   right:0;
+      //   top:50%;
+      //   display:flex;
+      //   justify-content: center;
+      //   position: absolute;
+      //   z-index: 500;
+      //   cursor:pointer;
+      //   user-select:none;
+      //   width: 30px;
+      //   height: 30px;
+      //   border-radius: 100%;
+      //   border: none;
+      //   box-shadow: 1px 1px 3px rgba(0,0,0,.25);
+      //   font-weight: bold;
+      //   background-color: rgba(255,255,255, 0.75);
+      //   &:hover,
+      //   &:focus {
+      //     background-color: #dee2e6;
+      //     text-decoration: none;
+      //     outline: 0;
+      //     opacity: .7;
+      //   }
+      // `
+
+        const NextButton = styled.button`
+          position: absolute;
+          z-index: 1;
+          right:0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 48px;
+          height: 48px;
+          border-radius: 100%;
+          border: none;
+          box-shadow: 1px 1px 3px rgba(0,0,0,.25);
+          transition: all .25s ease;
+          font-weight: bold;
+          background-color: rgba(255,255,255, 0.75);
+          backdrop-filter: blur(2px);
+          @media (max-height: 1100px) {
+            height: 36px;
+            width: 36px;
+          }
+          &:hover,
+          &:focus {
+            background-color: #dee2e6;
+            outline: none;
+          }
+        `
 
       const ComparisonWrapper = styled.div`
         position: fixed;
-        top: 50%;
+        top: 55%;
         left: 50%;
         transform: translate(-50%, -50%);
         backgroundColor: #FFF;

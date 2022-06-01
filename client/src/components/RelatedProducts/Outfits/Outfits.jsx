@@ -5,7 +5,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import AverageStars from '../../stars/AverageStars.jsx';
 import OutfitEntry from './OutfitEntry.jsx';
-import { FcPrevious,  FcNext } from "react-icons/fc";
+import { GrCaretPrevious,  GrCaretNext } from "react-icons/Gr";
 
 const Outfits = () => {
   const {id, setId} = useContext(PropIdContext);
@@ -19,7 +19,7 @@ const Outfits = () => {
   const [current, setCurrent] = useState(0);
   const length = outfit.length;
   const prevArrow = () => {
-    setCurrent(current === 0 ? length -1 : current -1)
+    setCurrent(current === 0 ? max : current -1)
   };
 
   const nextArrow = () => {
@@ -77,13 +77,12 @@ const Outfits = () => {
 
   return (
     <OutfitsWrapper>
-      <Indicators>
-      { current !== 0 ? <FcPrevious onClick={prevArrow}/> : null }
-      { max !== length -1 ?  <FcNext onClick={nextArrow}/> : null }
-      </Indicators>
-      <button onClick={addOutfit}>Add outfit</button>
 
-      <Outfitscontainer>
+      { current !== 0 ? <PrevButton onClick={prevArrow}> <GrCaretPrevious/> </PrevButton>: null }
+
+      <Addoutfit onClick={addOutfit}>Add outfit</Addoutfit>
+
+      <Outfitscontainer style={{ transform: `translateX(-${current * 50}%)`}}>
 
       {outfit.length > 0 && allRatings ?
         outfit.map((item, index) => (
@@ -96,8 +95,8 @@ const Outfits = () => {
           />
          ))
         : ''}
-
       </Outfitscontainer>
+      { max !== length -1 ?  <NextButton onClick={nextArrow}><GrCaretNext /> </NextButton>: null }
     </OutfitsWrapper>
   )
 }
@@ -110,10 +109,11 @@ const OutfitsWrapper = styled.ul`
 `
 
 const Outfitscontainer = styled.div`
+  margin-left: 33px;
   display: flex;
   gap: 60px;
   position: relative;
-  transitions: .5s;
+  transition: .5s;
   scroll-behavior: smooth;
 `;
 
@@ -123,22 +123,83 @@ const IndividualOutfit = styled.div`
   box-shadow: 0 0 24px 8px rgba(0,0,0,0.05);
 `
 
-const Indicators = styled.div`
-  top:50%;
-  display:flex;
-  justify-content: center;
-  position: absolute;
-  z-index: 1;
-  cursor:pointer;
-`
+// const PrevButton = styled.button`
+//   left: 0;
+//   top:50%;
+//   display:flex;
+//   justify-content: center;
+//   position: absolute;
+//   z-index: 1;
+//   cursor:pointer;
+// `
+
+// const NextButton = styled.button`
+//   right: 0;
+//   top:50%;
+//   display:flex;
+//   justify-content: center;
+//   position: absolute;
+//   z-index: 1;
+//   cursor:pointer;
+// `
 
 const PrevButton = styled.button`
-  left: 0;
+  position: absolute;
+  z-index: 1;
+  left:0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  border: none;
+  box-shadow: 1px 1px 3px rgba(0,0,0,.25);
+  transition: all .25s ease;
+  font-weight: bold;
+  background-color: rgba(255,255,255, 0.75);
+  backdrop-filter: blur(2px);
+  @media (max-height: 1100px) {
+    height: 36px;
+    width: 36px;
+  }
+  &:hover,
+  &:focus {
+    background-color: #dee2e6;
+    outline: none;
+    opacity: .7;
+  }
 `
-
 const NextButton = styled.button`
-  right: 0;
+  position: absolute;
+  z-index: 1;
+  right:0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  border: none;
+  box-shadow: 1px 1px 3px rgba(0,0,0,.25);
+  transition: all .25s ease;
+  font-weight: bold;
+  background-color: rgba(255,255,255, 0.75);
+  backdrop-filter: blur(2px);
+  @media (max-height: 1100px) {
+    height: 36px;
+    width: 36px;
+  }
+  &:hover,
+  &:focus {
+    background-color: #dee2e6;
+    outline: none;
+  }
+`
+
+
+const Addoutfit = styled.button`
 
 `
+
+
 
 export default Outfits;

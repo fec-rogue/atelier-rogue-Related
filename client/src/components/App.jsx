@@ -6,6 +6,8 @@ import axios from 'axios';
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
 import Reviews from "./reviews/Reviews.jsx";
 
+
+
 /*
 Example usage of lazy:
 const Detail = lazy(() => import("./Detail.jsx"));
@@ -43,15 +45,15 @@ const App = () => {
   return (
     <AppContainer>
       <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings}}>
-        <div>
+        {/* <div>
           <Overview />
-        </div>
+        </div> */}
         <div>
           <RelatedProducts />
         </div>
-        <div>
+        {/* <div>
           <Reviews />
-        </div>
+        </div> */}
       </PropIdContext.Provider>
     </AppContainer>
   )
