@@ -58,7 +58,6 @@ const Outfits = () => {
         newOutfit.category = overviewData.category;
         newOutfit.default_price = overviewData.default_price
         newOutfit.image = overviewStyles.url || imageNotFound;
-
         if (localStorage.getItem("outfit") === null) {
           let outfit = [];
           outfit.push(newOutfit);

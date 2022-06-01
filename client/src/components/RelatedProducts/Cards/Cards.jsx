@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
 import CardEntry from './CardEntry.jsx';
-import { FcPrevious,  FcNext } from "react-icons/fc";
+import { GrCaretPrevious,  GrCaretNext } from "react-icons/Gr";
 
 const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRatings,
   setShowModal, setSelectedid}) => {
@@ -23,18 +23,15 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
     return (
       <CardsWrapper>
       <Indicators>
-      { currentIndex !== 0 ? < PrevButton onClick={prevArrow}> <FcPrevious/> </PrevButton> : null }
-      { max !== length -1 ?  <NextButton onClick={nextArrow}> <FcNext/> </NextButton>: null }
+      { currentIndex !== 0 ? < PrevButton onClick={prevArrow}> <GrCaretPrevious/> </PrevButton> : null }
     </Indicators>
 
-    <Cardscontainer style={{ transform: `translateX(-${currentIndex * 15}%)`}}>
+    <Cardscontainer style={{ transform: `translateX(-${currentIndex * 50}%)`}}>
     {display.map((eachProduct, index) => {
       const id = Number(eachProduct.product_id);
       const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
       const detailRatings = relatedProductsRatings.find(detail => Number(detail.product_id) === id);
-
       let isDefault = false;
-
       let defaultsStyles = [];
       let stylesResults = eachProduct.results;
       stylesResults.forEach((eachStyle) => {
@@ -61,22 +58,24 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
           )
         })}
         </Cardscontainer>
+
+        { max !== length -1 ?  <NextButton onClick={nextArrow}> <GrCaretNext/> </NextButton>: null }
         </CardsWrapper>
         )
       }
 
       const CardsWrapper = styled.ul`
-      width:1200px;
-      padding: 40px 0;
-      overflow: hidden;
-      position: relative;
+        width:1200px;
+        padding: 40px 0;
+        overflow: hidden;
+        position: relative;
       `
       const Cardscontainer = styled.div`
-      display: flex;
-      gap: 10px;
-      position: relative;
-      transitions: .5s;
-      scroll-behavior: smooth;
+        display: flex;
+        gap: 10px;
+        position: relative;
+        transitions: .5s;
+        scroll-behavior: smooth;
       `;
 
       const Individualcard = styled.div`
@@ -97,7 +96,15 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
         left:0;
       `
       const NextButton = styled.button`
-        right:0
+      right:0;
+      top:50%;
+      display:flex;
+      justify-content: center;
+      position: absolute;
+      z-index: 500;
+      cursor:pointer;
+      user-select:none;
+
       `
 
       const ComparisonWrapper = styled.div`

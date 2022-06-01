@@ -6,47 +6,60 @@ import AverageStars from "../../stars/AverageStars.jsx"
 
 const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  setShowModal, setSelectedid}) => {
   const [hover, setHover] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(1);
   const imageNotFound = "http://placecorgi.com/260/180";
   const imagesArr = defaultsStyles[0].photos;
-  const defaultImage = imagesArr[0].url === null ? imageNotFound : imagesArr[0].url;
-  const defaultHoverImg = (imagesArr[1].url === null || imagesArr[1] === undefined) ? imageNotFound : imagesArr[1].url;
-  // console.log('defaultHoverImg', defaultHoverImg);
 
-  let imgSrc;
+  const defaultImage = imagesArr[0].url === null ? imageNotFound : imagesArr[0].url;
+
   const onMouseEnter = () => {
-    setHover(true)
+    setHover(true);
   }
 
   const onMouseLeave = () => {
-    setHover(false)
+    setHover(false);
   }
 
-  // const changeImages = () => {
+  // const max = imagesArr.length -1;
 
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setCurrentIndex((prevIndex) => (prevIndex === max ? 1 : prevIndex + 1));
+  //     console.log('currentIdx', currentIndex);
+  //   }, 1000);
+  //   return () => clearInterval(timer);
+  // }, [])
+
+
+  // const defaultHover = (currentIndex) => {
+  //  if(hover) {
+  //   //  console.log('imagesArr[currentIndex]', imagesArr[currentIndex]);
+  //     return imagesArr[currentIndex].url;
+  //  } else {
+  //     return defaultImage;
+  //  }
   // }
 
+
+
   const defaultHover = () => {
-   if(hover) {
-    return imagesArr[1].url;
-   } else {
-     return defaultImage;
+    if(hover) {
+     //  console.log('imagesArr[currentIndex]', imagesArr[currentIndex]);
+     if(imagesArr[1] === undefined) {
+       return imageNotFound;
+     } else {
+      return imagesArr[1].url;
+     }
+
+    } else {
+       return defaultImage;
+    }
    }
-  }
 
   return(
       <Carditem  >
         <CardImageBox onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
           <Cardimage src={defaultHover()}/>
-          {/* <Cardimage src={ imagesArr[0].url === null ? imageNotFound : imagesArr[0].url}/> */}
-        {/* <MultiImages >
-        { hover &&
-          imagesArr.slice(1).map((eachImage,index) => (
-            eachImage.url === null ? <MultiImage src={imageNotFound} /> : <MultiImage src = {eachImage.url} />
-          ))
-          }
-        </MultiImages> */}
-
-
         </CardImageBox>
         <StarButton onClick={() => {
           setShowModal(true)
