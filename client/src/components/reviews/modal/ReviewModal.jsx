@@ -5,6 +5,7 @@ import axios from 'axios';
 import DynamicStars from '../../stars/DynamicStars.jsx';
 import DisplayOverallRating from '../DisplayOverallRating.jsx';
 import Characteristics from './Characteristics.jsx';
+import ModalPage2 from './ModalPage2.jsx';
 
 const Modal = styled.div`
   flex: 1;
@@ -120,14 +121,14 @@ const ReviewModal = ({setModal}) => {
   const [summary, setSummary] = useState('');
   const [recommend, setRecommend] = useState('');
   const [reset, setReset] = useState(false);
-  const [allCharacteristics, setAllCharacteristics] = useState({email: '', nickname: ''});
+  const [allCharacteristics, setAllCharacteristics] = useState({email: '', nickname: '', summary: '', body: ''});
   const [size, setSize] = useState(0)
   const [width, setWidth] = useState(0);
   const [comfort, setComfort] = useState(0);
   const [quality, setQuality] = useState(0);
   const [length, setLength] = useState(0);
   const [fit, setFit] = useState(0);
-  const [view, setView] = useState({name: 'page2', props: {}});
+  const [next, setNext] = useState(false);
 
   const renderView = () => {
     switch (view.name) {
@@ -165,63 +166,77 @@ const ReviewModal = ({setModal}) => {
     setAllCharacteristics({ ...allCharacteristics, nickname: e.target.value});
   }
 
+  const handleNextClick = (e) => {
+    setNext(true);
+  }
 
-  return (
-    <Modal>
-      <Exit type="button" onClick={handleClick}>X</Exit>
-      <Title>Write Your Review</Title>
-      <Subtitle>About the {name}</Subtitle>
-      <LineOne>
-        <OverallRatingContainer>
-          <RatingContainer>
-            <OverallRating>Overall Rating</OverallRating>
-            <DynamicStars setReviewStar={setReviewStar} setReset={setReset} />
-          </RatingContainer>
-          {reset === false ? null
-          : reviewStar === 1
-          ? <div>- Poor</div>
-          : reviewStar === 2
-          ? <div>- Fair</div>
-          : reviewStar === 3
-          ? <div>- Average</div>
-          : reviewStar === 4
-          ? <div>- Good</div>
-          : <div>- Great</div>}
-        </OverallRatingContainer>
-        <RecommendContainer>
-          <div>Do you recommend this product?</div>
-          <RecommendValue>
-            <input type="radio" value="false" id="noValue" name="recommend" onClick={handleRecommendClick}></input>
-            <label htmlFor="noValue">No</label>
-            <input type="radio" value="true" id="yesValue" name="recommend" onClick={handleRecommendClick}></input>
-            <label htmlFor="yesValue">Yes</label>
-          </RecommendValue>
-        </RecommendContainer>
-      </LineOne>
-      <LineTwo>
-        <Characteristics allCharacteristics={allCharacteristics} setAllCharacteristics={setAllCharacteristics} />
-      </LineTwo>
-      <LineThree>
-        <EmailContainer>
-          <label>
-            Email :&nbsp;
-            <input type="text" value={allCharacteristics.email} onChange={handleEmailChange} placeholder="Ex: jackson11@email.com"></input>
-          </label>
-          <PrivacyWarning>* Please do not use your real email address</PrivacyWarning>
-        </EmailContainer>
-        <NicknameContainer>
-          <label>
-            Nickname :&nbsp;
-            <input type="text" value={allCharacteristics.nickname} onChange={handleNicknameChange} placeholder="Ex: awesomeName1"></input>
-          </label>
-          <PrivacyWarning>* Please do not use your full name</PrivacyWarning>
-        </NicknameContainer>
-      </LineThree>
-      <LineFour>
-        <NextButton type="button">Next</NextButton>
-      </LineFour>
-    </Modal>
-  )
+  if (next) {
+    return (
+      <Modal>
+        <Exit type="button" onClick={handleClick}>X</Exit>
+        <Title>Write Your Review</Title>
+        <Subtitle>About the {name}</Subtitle>
+        <ModalPage2 allCharacteristics={allCharacteristics} setAllCharacteristics={setAllCharacteristics} setNext={setNext} />
+      </Modal>
+    )
+  } else {
+    return (
+      <Modal>
+        <Exit type="button" onClick={handleClick}>X</Exit>
+        <Title>Write Your Review</Title>
+        <Subtitle>About the {name}</Subtitle>
+        <LineOne>
+          <OverallRatingContainer>
+            <RatingContainer>
+              <OverallRating>Overall Rating</OverallRating>
+              <DynamicStars setReviewStar={setReviewStar} setReset={setReset} />
+            </RatingContainer>
+            {reset === false ? null
+            : reviewStar === 1
+            ? <div>- Poor</div>
+            : reviewStar === 2
+            ? <div>- Fair</div>
+            : reviewStar === 3
+            ? <div>- Average</div>
+            : reviewStar === 4
+            ? <div>- Good</div>
+            : <div>- Great</div>}
+          </OverallRatingContainer>
+          <RecommendContainer>
+            <div>Do you recommend this product?</div>
+            <RecommendValue>
+              <input type="radio" value="false" id="noValue" name="recommend" onClick={handleRecommendClick}></input>
+              <label htmlFor="noValue">No</label>
+              <input type="radio" value="true" id="yesValue" name="recommend" onClick={handleRecommendClick}></input>
+              <label htmlFor="yesValue">Yes</label>
+            </RecommendValue>
+          </RecommendContainer>
+        </LineOne>
+        <LineTwo>
+          <Characteristics allCharacteristics={allCharacteristics} setAllCharacteristics={setAllCharacteristics} />
+        </LineTwo>
+        <LineThree>
+          <EmailContainer>
+            <label>
+              Email :&nbsp;
+              <input type="text" value={allCharacteristics.email} onChange={handleEmailChange} placeholder="Ex: jackson11@email.com"></input>
+            </label>
+            <PrivacyWarning>* Please do not use your real email address</PrivacyWarning>
+          </EmailContainer>
+          <NicknameContainer>
+            <label>
+              Nickname :&nbsp;
+              <input type="text" value={allCharacteristics.nickname} onChange={handleNicknameChange} placeholder="Ex: awesomeName1"></input>
+            </label>
+            <PrivacyWarning>* Please do not use your full name</PrivacyWarning>
+          </NicknameContainer>
+        </LineThree>
+        <LineFour>
+          <NextButton type="button" onClick={handleNextClick}>Next</NextButton>
+        </LineFour>
+      </Modal>
+    )
+  }
 }
 
 export default ReviewModal;

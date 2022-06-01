@@ -124,6 +124,7 @@ const Reviews = () => {
   useEffect(() => {
     axios.get('http://localhost:3000/reviews', {params: {id: 40344, count: count}})
       .then((results) => {
+        console.log(results.data)
         if (sort === "Newest") {
           results.data.results.sort((a, b) => new Date(b.date) - new Date(a.date));
         }

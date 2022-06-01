@@ -60,23 +60,23 @@ const RadioTemplate = ({allCharacteristics, setAllCharacteristics, subject}) => 
     <RadioContainer>
     <Subject>{subject.prop}</Subject>
     <CheckContainer>
-      <Radio type="radio" id="for1" value="1" name={subject} onClick={(e) => {handleClick(e, subject.prop)}}></Radio>
+      <Radio type="radio" id="for1" value="1" name={subject.prop} onClick={(e) => {handleClick(e, subject.prop)}}></Radio>
       <RadioLabel htmlFor="for1">{subject.standard[0]}</RadioLabel>
     </CheckContainer>
     <CheckContainer>
-      <Radio type="radio" id="for2" value="2" name={subject} onClick={(e) => {handleClick(e, subject.prop)}}></Radio>
+      <Radio type="radio" id="for2" value="2" name={subject.prop} onClick={(e) => {handleClick(e, subject.prop)}}></Radio>
       <RadioLabel htmlFor="for2">{subject.standard[1]}</RadioLabel>
     </CheckContainer>
     <CheckContainer>
-      <Radio type="radio" id="for3" value="3" name={subject} onClick={(e) => {handleClick(e, subject.prop)}}></Radio>
+      <Radio type="radio" id="for3" value="3" name={subject.prop} onClick={(e) => {handleClick(e, subject.prop)}}></Radio>
       <RadioLabel htmlFor="for3">{subject.standard[2]}</RadioLabel>
     </CheckContainer>
     <CheckContainer>
-      <Radio type="radio" id="for4" value="4" name={subject} onClick={(e) => {handleClick(e, subject.prop)}}></Radio>
+      <Radio type="radio" id="for4" value="4" name={subject.prop} onClick={(e) => {handleClick(e, subject.prop)}}></Radio>
       <RadioLabel htmlFor="for4">{subject.standard[3]}</RadioLabel>
     </CheckContainer>
     <CheckContainer>
-      <Radio type="radio" id="for5" value="5" name={subject} onClick={(e) => {handleClick(e, subject.prop)}}></Radio>
+      <Radio type="radio" id="for5" value="5" name={subject.prop} onClick={(e) => {handleClick(e, subject.prop)}}></Radio>
       <RadioLabel htmlFor="for5">{subject.standard[4]}</RadioLabel>
     </CheckContainer>
   </RadioContainer>
