@@ -4,6 +4,7 @@ import Overview from "./Overview/Overview.jsx";
 import axios from 'axios';
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
 import Reviews from "./reviews/Reviews.jsx";
+import styled from 'styled-components';
 /*
 Example usage of lazy:
 const Detail = lazy(() => import("./Detail.jsx"));
@@ -38,19 +39,27 @@ const App = () => {
 
 
   return (
-    <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings}}>
-      <div>
-        <Overview />
-      </div>
-      <div>
-        <RelatedProducts />
-      </div>
-      <div>
-        <Reviews />
-      </div>
-    </PropIdContext.Provider>
+    <AppContainer>
+      <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings}}>
+        <div>
+          <Overview />
+        </div>
+        <div>
+          <RelatedProducts />
+        </div>
+        <div>
+          <Reviews />
+        </div>
+      </PropIdContext.Provider>
+    </AppContainer>
   )
 }
+
+const AppContainer = styled.div`
+  display: block;
+  background-color: #fafafa;
+  margin: 0;
+`;
 
 export default App;
 

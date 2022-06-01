@@ -8,8 +8,6 @@ import {DescriptionsContext} from './Overview.jsx';
 import AverageStars from '../stars/AverageStars.jsx'
 import {BsFacebook, BsTwitter, BsPinterest} from 'react-icons/bs';
 
-
-// TODO: Share on social media buttons, description of products (toggle box)
 function Descriptions() {
 
   const {styles, setProductStyles, displayed, setDisplayed} = useContext(DescriptionsContext);
@@ -18,7 +16,6 @@ function Descriptions() {
   const [productInfo, setProductInfo] = useState([]);
   const [sizeAndQty, setSizeAndQty] = useState({});
   const [isCol, setCol] = useState(false);
-
 
   useEffect(() => {
     axios.get('/products/info', {params:{product_id: id}})

@@ -31,12 +31,9 @@ function ExpandedView() {
     const elem = e.currentTarget;
     const { width, height } = elem.getBoundingClientRect();
     setZoomSize([width, height]);
-    setZoom(true);
   };
 
-  const handleMouseLeave = () => {
-    setZoom(false);
-  };
+
 
   const handleMouseMove = (e) => {
     const {top, left} = e.currentTarget.getBoundingClientRect();
@@ -44,6 +41,7 @@ function ExpandedView() {
     const y = e.pageY - top - window.pageYOffset;
     setPosition([x,y]);
   };
+
 
   return (Object.keys(displayed).length === 0) ?
   (null) :
@@ -56,8 +54,9 @@ function ExpandedView() {
           <ImgContainer
             ref={zoomRef}
             onMouseEnter={(e) => handleMouseEnter(e)}
-            onMouseLeave={handleMouseLeave}
-            onMouseMove={(e) => {handleMouseMove(e)}}
+            onMouseMove={(e) => handleMouseMove(e)}
+            onClick={() => setZoom(!isZoomed)}
+            cur={isZoomed ? 'zoom-out' : 'crosshair'}
           >
             {isZoomed ?
             <ZoomedImg
@@ -130,14 +129,14 @@ const ZoomedImg = styled.div`
   background-color: white;
   background-image: url(${(props) => props.img});
   background-repeat: no-repeat;
-  &:hover {
-    cursor: url(${props => props.cursor});
-  }
 `;
 const ImgContainer = styled.div`
   position: relative;
   overflow: hidden;
   display: block;
+  &:hover {
+    cursor: ${props => props.cur};
+  }
 `;
 
 const ThumbnailCarouselDiv = styled.div`
@@ -192,6 +191,7 @@ const PrevDiv = styled.div`
 const NextDiv = styled.div`
   margin-left: 3%;
 `;
+
 
 const UpDownBtns = styled.button`
 `;

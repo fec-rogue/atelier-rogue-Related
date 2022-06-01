@@ -94,7 +94,7 @@ const ZoomedImg = styled.div`
   width: ${(props) => `${props.width}px`};
   opacity: ${props => props.opacity};
   border: 1px solid lightgray;
-  background-color: white;
+  background-color: #fafafa;
   background-image: url(${(props) => props.img});
   background-repeat: no-repeat;
   &:hover {
@@ -105,15 +105,12 @@ const ImgContainer = styled.div`
   position: relative;
   overflow: hidden;
   display: block;
-  :hover {
-    box-shadow: 0 14px 24px rgba(0, 0, 0, 0.55), 0 14px 18px rgba(0, 0, 0, 0.55);
-  }
 `;
 const CarouselDiv = styled.div`
   display: inline-flex;
   max-width: 100%;
   height: auto;
-  background-color: white;
+  background-color: #fafafa;
   transition: all ease-in-out 0.5s;
 `;
 const InnerDiv = styled.div`
