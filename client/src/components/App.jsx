@@ -1,5 +1,6 @@
 import React from 'react';
 import { lazy, Suspense, useState, createContext, useEffect} from "react";
+import styled from 'styled-components';
 import Overview from "./Overview/Overview.jsx";
 import axios from 'axios';
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
@@ -38,6 +39,7 @@ const App = () => {
     }, [id]);
 
 
+  //need to grab overview data
   return (
     <AppContainer>
       <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings}}>
@@ -57,7 +59,8 @@ const App = () => {
 
 const AppContainer = styled.div`
   display: block;
-  background-color: #fafafa;
+  background-color: #ded3c5;
+  font-family: 'Abel', sans-serif;
   margin: 0;
 `;
 

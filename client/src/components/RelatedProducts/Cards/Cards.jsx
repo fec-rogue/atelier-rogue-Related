@@ -2,110 +2,109 @@ import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
 import CardEntry from './CardEntry.jsx';
-import { FcPrevious,  FcNext } from "react-icons/fc";
+import { GrCaretPrevious,  GrCaretNext } from "react-icons/Gr";
 
+const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRatings,
+  setShowModal, setSelectedid}) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const display = relatedProductsStyles.slice(currentIndex, (currentIndex + 4));
+    const length = relatedProductsStyles.length;
+    const max = currentIndex + 3;
+    const min = currentIndex;
 
-const Cards = ({relatedProductsStyles, relatedProductsDetail, defaultInfo}) => {
-  const [current, setCurrent] = useState(0);
-  const length = relatedProductsStyles.length;
-  const [showModal, setShowModal] = useState(false);
+    const prevArrow = () => {
+      setCurrentIndex(currentIndex === 0 ? max : currentIndex -1)
+    };
 
-  const prevArrow = () => {
-    setCurrent(current === 0 ? length -1 : current -1)
-  };
+    const nextArrow = () => {
+      setCurrentIndex(currentIndex === max ? 0 : currentIndex + 1)
+    };
 
-  const nextArrow = () => {
-    setCurrent(current === length - 1 ? 0 : current + 1)
-  };
-  // console.log('current', current)
+    return (
+      <CardsWrapper>
+      <Indicators>
+      { currentIndex !== 0 ? < PrevButton onClick={prevArrow}> <GrCaretPrevious/> </PrevButton> : null }
+    </Indicators>
 
-  const max = current + 3;
-  const min = current;
-
-  return (
-    <div>
-    <CardsWrapper>
-    { current !== 0 ? <FcPrevious onClick={prevArrow}/> : null }
-    { max !== length -1 ?  <FcNext onClick={nextArrow}/> : null }
-
-    {relatedProductsStyles.map((eachProduct, index) => {
-      // console.log('eachProduct', eachProduct);
+    <Cardscontainer style={{ transform: `translateX(-${currentIndex * 50}%)`}}>
+    {display.map((eachProduct, index) => {
       const id = Number(eachProduct.product_id);
       const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
-      // console.log('detailProduct',detailProduct);
-      const category = detailProduct.category;
-      const name = detailProduct.name;
-      const features = detailProduct.features;
-      const defaultsStyles = eachProduct.results.filter((eachStyle) => eachStyle['default?'] === true);
-      // console.log('defaultsStyles', defaultsStyles)
-
-      const defaultPrice = detailProduct.default_price;
-      // console.log('defaultPrice', defaultPrice);
-      const saleprice = defaultsStyles[0] && defaultsStyles[0].sale_price;
-      // console.log('saleprice', saleprice);
-      const price = saleprice === null ? defaultPrice : saleprice;
-      // console.log('price', price )
+      const detailRatings = relatedProductsRatings.find(detail => Number(detail.product_id) === id);
+      let isDefault = false;
+      let defaultsStyles = [];
+      let stylesResults = eachProduct.results;
+      stylesResults.forEach((eachStyle) => {
+        if(eachStyle['default?'] === true) {
+          isDefault = true;
+          defaultsStyles.push(eachStyle);
+        }
+      })
+      if(isDefault === false) {
+        defaultsStyles.push(stylesResults[0])
+      }
 
       return(
-        <Cardscontainer key={id}>
-        {index <= max && index >= min &&
+        <Individualcard key={id}>
+        {index <= max && index >= min && display.length > 0 &&
           <CardEntry
-          defaultsStyles={defaultsStyles}
-          detailProduct = {detailProduct}
-          defaultInfo={defaultInfo}
-          id={id}
-          category={category}
-          name={name}
-          price={price}
-          index={index}
-          current={current}
-          length={length}
+            defaultsStyles={defaultsStyles}
+            detailProduct = {detailProduct}
+            detailRatings={detailRatings}
+            setShowModal={setShowModal}
+            setSelectedid={setSelectedid}
           />}
-          </Cardscontainer>
+          </Individualcard>
           )
         })}
+        </Cardscontainer>
+
+        { max !== length -1 ?  <NextButton onClick={nextArrow}> <GrCaretNext/> </NextButton>: null }
         </CardsWrapper>
-
-
-        </div>
         )
       }
 
-
       const CardsWrapper = styled.ul`
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      overflow: hidden;
-      position: relative;
+        width:1200px;
+        padding: 40px 0;
+        overflow: hidden;
+        position: relative;
       `
       const Cardscontainer = styled.div`
-      position: relative;
-      width: 200px;
-      height: 415px;
-      margin: 0px;
-      padding: 0px;
-      transitions: .5s;
-      scroll-behavior: smooth;
+        display: flex;
+        gap: 10px;
+        position: relative;
+        transitions: .5s;
+        scroll-behavior: smooth;
       `;
 
-      const PrevButton = styled.button`
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      z-index: 1;
-      cursor:pointer;
-      user-select:none;
+      const Individualcard = styled.div`
+        width:300px;
+        height: 400px;
+        box-shadow: 0 0 24px 8px rgba(0,0,0,0.01);
       `
-
-      const NextButton = styled.button`
-        right:32px;
+      const Indicators = styled.div`
+        top:50%;
+        display:flex;
+        justify-content: center;
         position: absolute;
-        top: 50%;
-        bottom: 0;
-        z-index: 1;
+        z-index: 500;
         cursor:pointer;
         user-select:none;
+      `
+      const PrevButton = styled.button`
+        left:0;
+      `
+      const NextButton = styled.button`
+      right:0;
+      top:50%;
+      display:flex;
+      justify-content: center;
+      position: absolute;
+      z-index: 500;
+      cursor:pointer;
+      user-select:none;
+
       `
 
       const ComparisonWrapper = styled.div`
@@ -115,7 +114,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, defaultInfo}) => {
         transform: translate(-50%, -50%);
         backgroundColor: #FFF;
         padding: 50px;
-        zIndex: 1000
+        zIndex: 1000;
       `
 
       export default Cards;
