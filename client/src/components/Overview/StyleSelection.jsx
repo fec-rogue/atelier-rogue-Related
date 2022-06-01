@@ -83,7 +83,9 @@ const StyleColor = styled.div`
     border: 0.5px solid;
   }
   &.selected{
-    border: 2px solid black;
+    border: 1px solid black;
+    transform: scale(1.2);
+    transition: all ease-in-out 0.03s;
   }
 
 `;
