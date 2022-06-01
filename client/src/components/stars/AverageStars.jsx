@@ -9,6 +9,7 @@ import Stars from './Stars.jsx';
 const AverageStars = (ratings) => {
 
 const currentStars = (ratings) => {
+
   let average = 0;
   let count = 0;
   const keys = Object.keys(ratings);
@@ -19,7 +20,6 @@ const currentStars = (ratings) => {
   })
 
   average = (Math.round((average / count) * 4) / 4).toFixed(2);
-
   return average;
 }
 

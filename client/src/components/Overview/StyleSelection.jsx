@@ -1,19 +1,20 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import {StyledProductsContext, DisplayedPhotoContext} from './Overview.jsx'
+import {DescriptionsContext} from './Overview.jsx'
 
+// TODO: checkmark overlaid on selected style, hover function for user readability
 function StyleSelection() {
-  const {styles, setProductStyles} = useContext(StyledProductsContext);
-  const {displayed, setDisplayed} = useContext(DisplayedPhotoContext);
 
-  var handleStyleChange = function(e) {
-    //console.log(styles);
+  const {styles, setProductStyles, displayed, setDisplayed} = useContext(DescriptionsContext);
+
+  // updates style beind displayed
+  const handleStyleChange = (e) => {
     if (e.style_id !== displayed.style_id) {
       setDisplayed(e);
     }
   };
-
+   // react doesn't like that setDisplayed is being set with the "icon" variable from the styles array
   return (
     <Field>
       <Block>
@@ -23,10 +24,19 @@ function StyleSelection() {
               {rows.map((icon, key) => {
               return (
                 <StyleCircle key={key}>
-                  <label data-variant='image-circle' data-type='image'>
-                    {icon.style_id === displayed.style_id ? <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} checked onChange={() => {handleStyleChange(icon)}}/>
-                    : <RadioButtons type='radio' name='color' value={icon.style_id} id={icon.name} onChange={() => {handleStyleChange(icon)}}/>}
-                      <StyleColor src={icon.photos[0].thumbnail_url}></StyleColor>
+                  <label
+                  data-variant='image-circle'
+                  data-type='image'>
+                    <RadioButtons
+                    type='radio'
+                    name='color'
+                    value={icon.style_id}
+                    id={icon.name}
+                    checked={icon.style_id === displayed.style_id}
+                    onChange={() => {handleStyleChange(icon)}}/>
+                      <StyleColor
+                      img={icon.photos[0].thumbnail_url}
+                      className={icon.style_id === displayed.style_id ? 'selected' : 'none'}/>
                     </label>
                 </StyleCircle>
                 )
@@ -41,20 +51,7 @@ function StyleSelection() {
 }
 
 const Block = styled.div`
-  displaye: block;
-`;
-const ProductDetailDiv = styled.div`
-  display: flex;
-`;
-
-const TitleBlock = styled.div`
   display: block;
-  border-bottom: 0.5px solid;
-`;
-
-const SizeAndColor = styled.div`
-  display: block;
-  border-bottom: 0.5px solid;
 `;
 
 const StyleDiv = styled.ul`
@@ -62,20 +59,35 @@ const StyleDiv = styled.ul`
   padding-left: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: flex-start;
 `;
 const StyleCircle = styled.li`
   flex-direction: row;
   margin: 5px;
 `;
 
-const StyleColor = styled.img`
+const StyleColor = styled.div`
   border-radius: 100px;
-  border: 1px solid;
   padding: 3px;
   width: 50px;
   height: 50px;
+  background-image: url(${(props) => props.img || ''});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   object-fit: cover;
+  &:hover {
+    cursor: pointer;
+    transition: all ease-in-out 0.03s;
+    transform: scale(0.96);
+    border: 0.5px solid;
+  }
+  &.selected{
+    border: 1px solid black;
+    transform: scale(1.2);
+    transition: all ease-in-out 0.03s;
+  }
+
 `;
 
 const RadioButtons = styled.input`
