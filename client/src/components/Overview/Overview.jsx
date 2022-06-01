@@ -46,7 +46,9 @@ function Overview() {
       <DescriptionsContext.Provider
       value={{displayed, setDisplayed, styles, setProductStyles, expanded, setExpanded, curPhoto, setCurPhoto}}>
       {expanded ?
-      <ExpandedView/> :
+      <ExpandedContainer>
+          <ExpandedView/>
+      </ExpandedContainer> :
       <OverviewComps>
           <GalleryDiv>
             <Gallery/>
@@ -62,7 +64,10 @@ function Overview() {
 }
 
 export default Overview;
-
+const ExpandedContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 const WebsiteHeader = styled.h1`
   display: flex;
   justify-content: center;
