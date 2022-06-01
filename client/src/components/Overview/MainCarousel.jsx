@@ -72,7 +72,6 @@ const ZoomedImg = styled.div`
   width: ${(props) => `${props.width}px`};
   opacity: ${props => props.opacity};
   border: 1px solid lightgray;
-  background-color: #fafafa;
   background-image: url(${(props) => props.img});
   background-repeat: no-repeat;
   &:hover {
@@ -88,7 +87,6 @@ const CarouselDiv = styled.div`
   display: inline-flex;
   max-width: 100%;
   height: auto;
-  background-color: #fafafa;
   transition: all ease-in-out 0.5s;
 `;
 const InnerDiv = styled.div`
