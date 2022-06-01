@@ -31,18 +31,21 @@ function Descriptions() {
   (<div>
     <TitleBlock>
         <Name>{productInfo.name}</Name>
-      <StarsDiv>
-        {AverageStars(allRatings.ratings)}
-        <AvgBtn onClick={() => document.getElementById('reviews').scrollIntoView()}>   ({allRatings.avg})</AvgBtn>
-      </StarsDiv>
-      <p>{productInfo.category}</p>
-      {(displayed.sale_price) ?
-        <p>
-          <strike>${displayed.original_price}</strike>
-          <strong style={{ color: '#9e3533' }}> ${displayed.sale_price}</strong>
-        </p>:
-        <p>${displayed.original_price}</p>
-       }
+        {allRatings.avg ?
+        <StarsDiv>
+          {AverageStars(allRatings.ratings)}
+          <AvgBtn onClick={() => document.getElementById('reviews').scrollIntoView()}>   ({allRatings.avg})</AvgBtn>
+        </StarsDiv>
+        : null
+        }
+        <p>{productInfo.category}</p>
+        {(displayed.sale_price) ?
+          <p>
+            <strike>${displayed.original_price}</strike>
+            <strong style={{ color: '#9e3533' }}> ${displayed.sale_price}</strong>
+          </p>:
+          <p>${displayed.original_price}</p>
+        }
     </TitleBlock>
     <SizeAndColor>
       <p><strong>Color: </strong>{displayed.name}</p>

@@ -8,52 +8,35 @@ import {DescriptionsContext} from './Overview.jsx';
 // clicking expanding will expand image
 // expanded image will still be able to scroll through image gallery
 
-function MainCarouselC({cur, setCur, expanded, setExpanded}) {
+function MainCarousel() {
 
   const {displayed} = useContext(DescriptionsContext);
-  const [index, setIndex] = useState(cur);
+  const {expanded, setExpanded} = useContext(DescriptionsContext);
+  const {curPhoto, setCurPhoto} = useContext(DescriptionsContext);
+  const [index, setIndex] = useState(0);
 
-  // zoom in zoom out
-  const [isZoomed, setZoom] = useState(false);
-  const [[x, y], setPosition] = useState([0,0]);
-  const [[w, h], setZoomSize] = useState([0,0]);
-  const zoomRef = useRef(null);
+  useEffect(() => {
+    if (curPhoto !== '') {
+      setIndex(curPhoto);
+    }
+  }, [curPhoto])
 
   // buttons should disappear when last img is reached// first img is reached
   // buttons should work with left and right arrow keys
   const updateIndex = (indx) => {
     if (indx < 0) {
       setIndex(displayed.photos.length-1);
-      setCur(displayed.photos.length-1)
+      setCurPhoto(displayed.photos.length-1)
     } else if (indx > displayed.photos.length-1) {
       setIndex(0)
-      setCur(0);
+      setCurPhoto(0);
     } else {
       setIndex(indx);
-      setCur(indx);
+      setCurPhoto(indx);
     }
   };
 
-  const handleMouseEnter = (e) => {
-    const elem = e.currentTarget;
-    const { width, height } = elem.getBoundingClientRect();
-    setZoomSize([width, height]);
-    setZoom(true);
-  };
-
-  const handleMouseLeave = () => {
-    setZoom(false);
-  };
-
-  const handleMouseMove = (e) => {
-    const {top, left} = e.currentTarget.getBoundingClientRect();
-    const x = e.pageX - left - window.pageXOffset;
-    const y = e.pageY - top - window.pageYOffset;
-    setPosition([x,y]);
-  };
-
   const handleExpanded = () => {
-    console.log('clicked expanded');
     setExpanded(!expanded);
   }
 
@@ -66,14 +49,9 @@ function MainCarouselC({cur, setCur, expanded, setExpanded}) {
             <UpDownBtns onClick={() => {updateIndex(index-1)}} >Prev</UpDownBtns>
           </UpDownDiv>
          </div>
-          <ImgContainer
-            ref={zoomRef}
-            onMouseEnter={(e) => handleMouseEnter(e)}
-            onMouseLeave={handleMouseLeave}
-            onMouseMove={(e) => {handleMouseMove(e)}}
-          >
+          <ImgContainer >
             <CarouselItem
-              src={displayed.photos[cur].url}
+              src={displayed.photos[curPhoto].url}
               onClick={handleExpanded}>
             </CarouselItem>
           </ImgContainer>
@@ -143,4 +121,4 @@ const RightImgDiv = styled.div`
 const UpDownBtns = styled.button`
 `;
 
-export default MainCarouselC;
+export default MainCarousel;

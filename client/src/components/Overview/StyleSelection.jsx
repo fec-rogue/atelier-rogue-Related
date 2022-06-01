@@ -27,22 +27,16 @@ function StyleSelection() {
                   <label
                   data-variant='image-circle'
                   data-type='image'>
-                    {icon.style_id === displayed.style_id ?
                     <RadioButtons
                     type='radio'
                     name='color'
                     value={icon.style_id}
                     id={icon.name}
-                    className={'selected'}
-                    checked
-                    onChange={() => {handleStyleChange(icon)}}/> :
-                    <RadioButtons
-                    type='radio'
-                    name='color'
-                    value={icon.style_id}
-                    id={icon.name}
-                    onChange={() => {handleStyleChange(icon)}}/>}
-                      <StyleColor img={icon.photos[0].thumbnail_url}></StyleColor>
+                    checked={icon.style_id === displayed.style_id}
+                    onChange={() => {handleStyleChange(icon)}}/>
+                      <StyleColor
+                      img={icon.photos[0].thumbnail_url}
+                      className={icon.style_id === displayed.style_id ? 'selected' : 'none'}/>
                     </label>
                 </StyleCircle>
                 )
@@ -57,7 +51,7 @@ function StyleSelection() {
 }
 
 const Block = styled.div`
-  displaye: block;
+  display: block;
 `;
 
 const StyleDiv = styled.ul`
@@ -74,7 +68,6 @@ const StyleCircle = styled.li`
 
 const StyleColor = styled.div`
   border-radius: 100px;
-  border: 1px solid;
   padding: 3px;
   width: 50px;
   height: 50px;
@@ -87,8 +80,10 @@ const StyleColor = styled.div`
     cursor: pointer;
     transition: all ease-in-out 0.03s;
     transform: scale(0.96);
+    border: 0.5px solid;
   }
-  .selected {
+  &.selected{
+    border: 2px solid black;
   }
 
 `;

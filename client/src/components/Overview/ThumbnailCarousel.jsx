@@ -5,10 +5,10 @@ import {DescriptionsContext} from './Overview.jsx'
 
 //TODO:
 // thumbnail should scroll to make current selection visible
-function ThumbnailCarousel({cur, setCur}) {
+function ThumbnailCarousel() {
 
   const {displayed} = useContext(DescriptionsContext);
-
+  const {curPhoto, setCurPhoto} = useContext(DescriptionsContext);
   const [range, setRange] = useState({min: 0, max:6});
 
   useEffect(() => {
@@ -40,9 +40,11 @@ function ThumbnailCarousel({cur, setCur}) {
           {displayed.photos.map((img, indx) => {
             return (indx >= range.min && indx <= range.max) ?
             (<ThumbnailCarouselItem
-              className={indx === cur ? 'selected' : ''}
+              className={indx === curPhoto ? 'selected' : ''}
               key={indx}
-              img={img.thumbnail_url} onClick={() => {setCur(indx)}}>
+              img={img.thumbnail_url} onClick={() => {
+                setCurPhoto(indx)
+                }}>
               </ThumbnailCarouselItem>)
             : null
           })}
