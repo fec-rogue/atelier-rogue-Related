@@ -593,14 +593,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /*!******************************************************!*\
   !*** ./client/src/components/stars/AverageStars.jsx ***!
   \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-<<<<<<< HEAD
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Stars_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Stars.jsx */ \"./client/src/components/stars/Stars.jsx\");\n\n\n\n // StaticStars expects an object\n// Returns the average ratings of all reviews\n\nvar AverageStars = function AverageStars(ratings) {\n  // console.log('this shoud show')\n  // console.log(ratings)\n  var currentStars = function currentStars(ratings) {\n    var average = 0;\n    var count = 0;\n    var keys = Object.keys(ratings);\n    keys.forEach(function (rating) {\n      average += Number(rating) * Number(ratings[rating]);\n      count += Number(ratings[rating]);\n    });\n    average = (Math.round(average / count * 4) / 4).toFixed(2);\n    return average;\n  };\n\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, (0,_Stars_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(currentStars(ratings)));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AverageStars);\n\n//# sourceURL=webpack://atelier_rogue/./client/src/components/stars/AverageStars.jsx?");
-=======
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Stars_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Stars.jsx */ \"./client/src/components/stars/Stars.jsx\");\n\n\n\n // StaticStars expects an object\n// Returns the average ratings of all reviews\n\nvar AverageStars = function AverageStars(ratings) {\n  var currentStars = function currentStars(ratings) {\n    var average = 0;\n    var count = 0;\n    var keys = Object.keys(ratings);\n    keys.forEach(function (rating) {\n      average += Number(rating) * Number(ratings[rating]);\n      count += Number(ratings[rating]);\n    });\n    average = (Math.round(average / count * 4) / 4).toFixed(2);\n    return average;\n  };\n\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, (0,_Stars_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(currentStars(ratings)));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AverageStars);\n\n//# sourceURL=webpack://atelier_rogue/./client/src/components/stars/AverageStars.jsx?");
->>>>>>> main
+eval("throw new Error(\"Module build failed (from ./node_modules/babel-loader/lib/index.js):\\nSyntaxError: /Users/kyletran/Desktop/HR/rogue/client/src/components/stars/AverageStars.jsx: Unexpected token (10:1)\\n\\n\\u001b[0m \\u001b[90m  8 |\\u001b[39m \\u001b[90m// Returns the average ratings of all reviews\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m  9 |\\u001b[39m \\u001b[36mconst\\u001b[39m \\u001b[33mAverageStars\\u001b[39m \\u001b[33m=\\u001b[39m (ratings) \\u001b[33m=>\\u001b[39m {\\u001b[0m\\n\\u001b[0m\\u001b[31m\\u001b[1m>\\u001b[22m\\u001b[39m\\u001b[90m 10 |\\u001b[39m \\u001b[33m<<\\u001b[39m\\u001b[33m<<\\u001b[39m\\u001b[33m<<\\u001b[39m\\u001b[33m<\\u001b[39m \\u001b[33mHEAD\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m    |\\u001b[39m  \\u001b[31m\\u001b[1m^\\u001b[22m\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m 11 |\\u001b[39m   \\u001b[90m// console.log('this shoud show')\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m 12 |\\u001b[39m   \\u001b[90m// console.log(ratings)\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m 13 |\\u001b[39m \\u001b[33m===\\u001b[39m\\u001b[33m===\\u001b[39m\\u001b[33m=\\u001b[39m\\u001b[0m\\n    at instantiate (/Users/kyletran/Desktop/HR/rogue/node_modules/@babel/parser/lib/index.js:72:32)\\n    at constructor (/Users/kyletran/Desktop/HR/rogue/node_modules/@babel/parser/lib/index.js:358:12)\\n    at Object.raise (/Users/kyletran/Desktop/HR/rogue/node_modules/@babel/parser/lib/index.js:3334:19)\\n    at Object.unexpected (/Users/kyletran/Desktop/HR/rogue/node_modules/@babel/parser/lib/index.js:3372:16)\\n    at Object.jsxParseIdentifier (/Users/kyletran/Desktop/HR/rogue/node_modules/@babel/parser/lib/index.js:7778:12)\\n    at Object.jsxParseNamespacedName (/Users/kyletran/Desktop/HR/rogue/node_modules/@babel/parser/lib/index.js:7788:23)\\n    at Object.jsxParseElementName (/Users/kyletran/Desktop/HR/rogue/node_modules/@babel/parser/lib/index.js:7799:21)\\n    at Object.jsxParseOpeningElementAt (/Users/kyletran/Desktop/HR/rogue/node_modules/@babel/parser/lib/index.js:7896:22)\\n    at Object.jsxParseElementAt (/Users/kyletran/Desktop/HR/rogue/node_modules/@babel/parser/lib/index.js:7929:33)\\n    at Object.jsxParseElement (/Users/kyletran/Desktop/HR/rogue/node_modules/@babel/parser/lib/index.js:8014:17)\");\n\n//# sourceURL=webpack://atelier_rogue/./client/src/components/stars/AverageStars.jsx?");
 
 /***/ }),
 
@@ -948,7 +943,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/
+/******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -962,17 +957,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/
+/******/ 	
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -985,7 +980,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -997,12 +992,12 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -1013,7 +1008,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/node module decorator */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nmd = (module) => {
@@ -1022,13 +1017,13 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			return module;
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /************************************************************************/
-/******/
+/******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = __webpack_require__("./client/src/index.jsx");
-/******/
+/******/ 	
 /******/ })()
 ;
