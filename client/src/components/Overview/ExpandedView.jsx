@@ -167,7 +167,7 @@ const ThumbnailCarouselDiv = styled.div`
   max-height: 800px;
   transition: all ease-in-out 0.05s;
   .selected {
-    border-bottom: 6px solid white;
+    border-bottom: 6px solid teal;
     transition: all ease-in-out 0.05s;
   }
 `;

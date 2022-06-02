@@ -58,7 +58,7 @@ const App = () => {
         return {
           "display": "block",
           "backgroundColor": "#FCFBF4",
-          "font-family": "'Montserrat', sans-serif",
+          "fontFamily": "'Montserrat', sans-serif",
           "margin": "0"
         }
       }
@@ -68,7 +68,7 @@ const App = () => {
           "body": '#363537',
           "text": '#FAFAFA',
           "toggleBorder": '#6B8096',
-          "font-family": "'Montserrat', sans-serif",
+          "fontFamily": "'Montserrat', sans-serif",
           "backgroundColor": '#999'
         }
       }
@@ -77,7 +77,7 @@ const App = () => {
         return {
           "display": "block",
           "backgroundColor": "#FCFBF4",
-          "font-family": "'Montserrat', sans-serif",
+          "fontFamily": "'Montserrat', sans-serif",
           "margin": "0"
         }
       }
