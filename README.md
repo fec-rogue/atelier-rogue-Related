@@ -1,5 +1,5 @@
-# rogue
-
+# Atelier Rogue
+Atelier Rogue is our front-end capstone project
 - - short video
 
 - Getting Started

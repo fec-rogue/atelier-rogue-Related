@@ -26,6 +26,8 @@ const App = () => {
   const [id, setId] = useState('40351');
   const [allRatings, setAllRatings] = useState(0);
   const [curPhoto, setCurPhoto] = useState('');
+  const [styleIndx, setStyleIndx] = useState(0);
+
 
   const storedTheme = localStorage.getItem('theme');
   if (!storedTheme) {
@@ -86,7 +88,7 @@ const App = () => {
   return (
     <AppContainer style={(themeStyle())}>
 
-      <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings, curPhoto, setCurPhoto}}>
+      <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings, curPhoto, setCurPhoto, styleIndx, setStyleIndx}}>
         <div>
           <Overview />
         </div>
