@@ -5,8 +5,8 @@ import axios from 'axios';
 import Stars from '../stars/Stars.jsx';
 import Ratings from './Ratings.jsx';
 import Relevance from './Relevance.jsx';
-import ReviewModal from './modal/ReviewModal.jsx';
 import YesButton from './YesButton.jsx';
+import ReviewModal from './modal/ReviewModal.jsx';
 
 
 const Test = styled.div`
