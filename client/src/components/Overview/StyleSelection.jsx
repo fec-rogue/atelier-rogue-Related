@@ -8,23 +8,26 @@ import {PropIdContext} from '../App.jsx';
 function StyleSelection() {
 
   const {styles, setProductStyles, displayed, setDisplayed} = useContext(DescriptionsContext);
-  const {setCurPhoto} = useContext(PropIdContext);
+  const {setCurPhoto, styleIndx, setStyleIndx} = useContext(PropIdContext);
 
   // updates style beind displayed
-  const handleStyleChange = (e) => {
+  const handleStyleChange = (e, key, ind) => {
     if (e.style_id !== displayed.style_id) {
       setDisplayed(e);
       setCurPhoto(0);
+      console.log(ind);
+      setStyleIndx(key);
+
     }
   };
    // react doesn't like that setDisplayed is being set with the "icon" variable from the styles array
   return (
     <Field>
       <Block>
-        {styles.map((rows, key) => {
+        {styles.map((rows, ind) => {
           return (
-            <StyleDiv key={key}>
-              {rows.map((icon, key) => {
+            <StyleDiv key={ind}>
+              {rows.map((icon, key, ind) => {
               return (
                 <StyleCircle key={key}>
                   <label
@@ -36,7 +39,7 @@ function StyleSelection() {
                     value={icon.style_id}
                     id={icon.name}
                     checked={icon.style_id === displayed.style_id}
-                    onChange={() => {handleStyleChange(icon)}}/>
+                    onChange={() => {handleStyleChange(icon, key, ind)}}/>
                       <StyleColor
                       img={icon.photos[0].thumbnail_url}
                       className={icon.style_id === displayed.style_id ? 'selected' : 'none'}/>

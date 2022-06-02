@@ -1,4 +1,22 @@
-Project Summary: Related Items & Comparison
+# Atelier Rogue
+
+Atelier Rogue is a front-end e-commerce platform that utilizes HackReactor's legacy API to seed
+Utilizing modern technologies such as React hooks and Styled components, the team was able to create four unique sections of the page fitting the clients requirements as well as some optional additions:
+
+- - short video
+
+- Getting Started
+  (steps such as npm install, set up .env, run webpack, run serve)
+- Technologies Used:
+
+  - Setup and Workflow
+  - Frontend Development
+    React, Axios
+  - Backend Development
+    express
+  - Deployment
+  - Testing
+    Jest
 
 - Overview
   Related Items & Comparison dislays two sets of related products.

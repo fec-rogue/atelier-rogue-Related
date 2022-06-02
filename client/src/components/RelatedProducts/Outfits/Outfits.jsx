@@ -10,6 +10,9 @@ import { GrCaretPrevious,  GrCaretNext } from "react-icons/gr";
 const Outfits = () => {
   const {id, setId} = useContext(PropIdContext);
   const {allRatings, setAllRatings} = useContext(PropIdContext);
+  const {curPhoto, setCurPhoto} = useContext(PropIdContext);
+  const {styleIndx, setStyleIndx} = useContext(PropIdContext);
+
   const [overviewData, setOverviewData] = useState([]);
   const [overviewStyles, setOverviewStyles] = useState([]);
 
@@ -26,7 +29,7 @@ const Outfits = () => {
     setCurrent(current === length - 1 ? 0 : current + 1)
   };
 
-  const max = current + 1;
+  const max = current + 3;
   const min = current;
 
   useEffect(() => {
@@ -42,12 +45,13 @@ const Outfits = () => {
   useEffect(() => {
     axios.get(`products/styles?product_id=${id}`)
       .then((res) => {
-        setOverviewStyles(res.data.results[0].photos[0])
+        console.log(res.data.results[styleIndx].photos[curPhoto]);
+        setOverviewStyles(res.data.results[styleIndx].photos[curPhoto])
       })
       .catch((err) => {
         console.log('error while getting the data', err)
       })
-  }, [])
+  }, [styleIndx, curPhoto])
 
 
   const addOutfit = () => {
@@ -65,7 +69,7 @@ const Outfits = () => {
           setOutfit(outfit);
         }
         let outfit = localStorage.getItem("outfit");
-        if (outfit.indexOf(`"id":${newOutfit.id}`) === -1) {
+        if (outfit.indexOf(`"image":${newOutfit.image}`) === -1) {
           outfit = JSON.parse(outfit);
           outfit.push(newOutfit);
           localStorage.setItem("outfit", JSON.stringify(outfit));
@@ -81,21 +85,25 @@ const Outfits = () => {
 
       <Addoutfit onClick={addOutfit}>Add outfit</Addoutfit>
 
-      <Outfitscontainer style={{ transform: `translateX(-${current * 50}%)`}}>
+      <Outfitscontainer style={{ transform: `translateX(-${current * 25}%)`}}>
 
       {outfit.length > 0 && allRatings ?
-        outfit.map((item, index) => (
-          index <= max && index >= min &&
-          <OutfitEntry
-            key={index}
-            item={item}
-            setOutfit={setOutfit}
-            ratings = {AverageStars(allRatings.ratings)}
-          />
-         ))
+        outfit.map((item, index) => {
+          return (
+            <IndividualOutfit key={index}>
+              {index <= max && index >= min &&
+              <OutfitEntry
+                key={index}
+                item={item}
+                setOutfit={setOutfit}
+                ratings = {AverageStars(allRatings.ratings)}
+              />}
+          </IndividualOutfit >
+          )
+        })
         : ''}
       </Outfitscontainer>
-      { max !== length -1 ?  <NextButton onClick={nextArrow}><GrCaretNext /> </NextButton>: null }
+      { current !== max ?  <NextButton onClick={nextArrow}><GrCaretNext /> </NextButton>: null }
     </OutfitsWrapper>
   )
 }
@@ -117,6 +125,8 @@ const Outfitscontainer = styled.div`
 `;
 
 const IndividualOutfit = styled.div`
+  display: flex;
+  flex-direction: row;
   width:300px;
   height: 400px;
 

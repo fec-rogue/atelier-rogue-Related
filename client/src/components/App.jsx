@@ -20,12 +20,12 @@ const FourOhFour = lazy(() => import("./404.jsx"));
 // useContext to set default product_id across all pages
 
 export const PropIdContext = createContext();
-export const FavoriteContext = createContext();
 
 const App = () => {
   const [id, setId] = useState('40351');
   const [allRatings, setAllRatings] = useState(0);
-    const [curPhoto, setCurPhoto] = useState('');
+  const [curPhoto, setCurPhoto] = useState('');
+  const [styleIndx, setStyleIndx] = useState(0);
 
   const storedTheme = localStorage.getItem('theme');
   if (!storedTheme) {
@@ -76,11 +76,7 @@ const App = () => {
       if(window.localStorage.theme === 'light') {
         return {
           "display": "block",
-<<<<<<< HEAD
-          "backgroundColor": "#FFF",
-=======
           "backgroundColor": "#FCFBF4",
->>>>>>> main
           "fontFamily": "'Montserrat', sans-serif",
           "margin": "0"
         }
@@ -89,8 +85,7 @@ const App = () => {
 
   return (
     <AppContainer style={(themeStyle())}>
-
-      <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings, curPhoto, setCurPhoto}}>
+      <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings, curPhoto, setCurPhoto, styleIndx, setStyleIndx}}>
         <div>
           <Overview />
         </div>
@@ -102,7 +97,7 @@ const App = () => {
         </div>
         <ThemeChanger onClick={handleThemeChange}>
           {currentTheme === 'light' ? <FiMoon style={{color: 'teal'}}/> : <FiSun style={{color: 'teal'}}/>}  Theme
-          </ThemeChanger>
+        </ThemeChanger>
       </PropIdContext.Provider>
     </AppContainer>
   )
