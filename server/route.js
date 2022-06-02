@@ -54,26 +54,27 @@ exports.postReview = (req, res) => {
     rating: req.body.rating,
     summary: req.body.summary,
     body: req.body.body,
-    recommend: req.body.recommend,
     name: req.body.name,
     email: req.body.email,
+    recommend: req.body.recommend,
     photos: req.body.photos,
     characteristics: req.body.characteristics
   };
+  // console.log(data);
   models.postReview(data, (result) => {
     res.json('posted successfully');
   });
 };
 
 exports.helpfulReview = (req, res) => {
-  let id = req.query.product_id;
-  models.helpfulReview(id, data, (result) => {
+  let id = req.query.review_id;
+  models.helpfulReview(id, (result) => {
     res.json('updated successfully');
   });
 };
 
 exports.reportReview = (req, res) => {
-  let id = req.query.product_id;
+  let id = req.query.review_id;
   models.reportReview(data, (result) => {
     res.json('reported successfully');
   });
