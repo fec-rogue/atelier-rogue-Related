@@ -2,20 +2,21 @@ import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import styled from 'styled-components';
-import {PropIdContext} from '../App.jsx';
+import { PropIdContext } from '../App.jsx';
 import Cards from './Cards/Cards.jsx';
-// import Comparison from './Cards/ComparisonModal.jsx';
+import Comparison from './Cards/ComparisonModal.jsx';
 import Outfits from './Outfits/Outfits.jsx';
 
-const RelatedProducts = () => {
 
+const RelatedProducts = () => {
     const {id, setId} = useContext(PropIdContext);
     const [relatedProductsStyles, setRelatedProductsStyles] = useState([]);
     const [relatedProductsDetail, setRelatedProductsDetail] = useState([]);
+    const [relatedProductsRatings, setRelatedProductsRatings] = useState([]);
     const [defaultidinfo, setDefaultIdinfo] = useState([]);
-
-    // const [showModal, setShowModal] = useState(false);
-    // const [twoCardsArray, setTwoCardsArray] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedid, setSelectedid] = useState({});
+    const [twoCardsArray, setTwoCardsArray] = useState([]);
 
     useEffect(() => {
       axios.get(`products/info?product_id=${id}`)
@@ -28,18 +29,6 @@ const RelatedProducts = () => {
         })
     }, [])
 
-    // const handleSelectedOnClick = (e) => {
-    //   e.preventDefault();
-    //   setShowModal(!showModal);
-    //   axios.get(`products/info?product_id={e}`)
-
-    //     .then((res) => {
-    //       console.log('selecting id', res.data)
-    //       setTwoCardsArray([defaultInfo, res.data])
-    //     });
-    // }
-
-
     useEffect(() => {
       //HARD CODE ONE PRODUCT HAS MORE THAN 4 RELATED PRODUCTS TO TEST OUT CAROUSEL
         axios.get(`products/related?product_id=40346`)
@@ -51,6 +40,10 @@ const RelatedProducts = () => {
             let allRelatedRequestInfo= res.data.map((eachRelated) => {
               return axios.get(`products/info?product_id=${eachRelated}`)
             });
+            let allRelatedRequestRatings = res.data.map((eachRelated) => {
+              return axios.get(`reviews/meta/?product_id=${eachRelated}`)
+            });
+
             Promise.all(allRelatedRequestStyles)
               .then(result => {
                 // console.log('resultStyles', result.map((eachProduct) => eachProduct.data));
@@ -61,38 +54,47 @@ const RelatedProducts = () => {
                 // console.log('resultCategory', result.map((eachProduct) => eachProduct.data));
                 setRelatedProductsDetail(result.map((eachProduct) => eachProduct.data));
             })
+            Promise.all(allRelatedRequestRatings)
+            .then(result => {
+              // console.log('resultRatings', result.map((eachProduct) => eachProduct.data));
+              setRelatedProductsRatings(result.map((eachProduct) => eachProduct.data));
+          })
           })
           .catch((err) => {
             console.log('error while getting the data', err)
           })
     }, []);
 
+    useEffect(() => {
+      if(selectedid.features) {
+        setTwoCardsArray([defaultidinfo, selectedid]);
+      }
+    }, [selectedid])
 
   return(
     <RelatedProductsSection>
+
       <RelatedHeader>Related Products</RelatedHeader>
       {
-         relatedProductsStyles.length > 0 && relatedProductsDetail.length > 0 &&
+        relatedProductsStyles.length > 0 && relatedProductsDetail.length > 0
+        && relatedProductsRatings.length > 0 &&
         <Cards
-        relatedProductsStyles={relatedProductsStyles}
-        relatedProductsDetail={relatedProductsDetail}
+          relatedProductsStyles={relatedProductsStyles}
+          relatedProductsDetail={relatedProductsDetail}
+          relatedProductsRatings={relatedProductsRatings}
+          setShowModal={setShowModal}
+          setSelectedid={setSelectedid}
         />
       }
-
-    {/* <ComparisonWrapper>
-      <button onClick={() =>
-        setShowModal(true)
-        }></button>
-
+    <ComparisonWrapper>
     { showModal && twoCardsArray.length > 0 &&
       <Comparison
-        open={showModal}
-        close={()=> setShowModal(false)}
-        twoCards={twoCardsArray} /> }
-    </ComparisonWrapper> */}
+        twoCards={twoCardsArray}
+        close={ setShowModal}
+      /> }
+    </ComparisonWrapper>
 
     <RelatedHeader>Your Outfit</RelatedHeader>
-
     <Outfits />
 
     </ RelatedProductsSection>
@@ -114,12 +116,13 @@ const RelatedProductsSection = styled.section`
 
 const ComparisonWrapper = styled.div`
   position: fixed;
-  top: 50%;
+  width: 300px;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   backgroundColor: #FFF;
   padding: 50px;
-  zIndex: 1000
+  zIndex: 1000;
 `
 
 export default RelatedProducts;

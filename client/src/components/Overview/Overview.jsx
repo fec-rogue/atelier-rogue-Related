@@ -4,30 +4,18 @@ import styled from 'styled-components';
 import {PropIdContext} from '../App.jsx';
 import Gallery from './Gallery.jsx';
 import Descriptions from './Descriptions.jsx';
+import ExpandedView from './ExpandedView.jsx';
+import Cart from './Cart.jsx';
 
-const WebsiteHeader = styled.h1`
-  display: flex;
-  justify-content: center;
-`;
-
-const AnnouncementHeader = styled.h2`
-  display: flex;
-  justify-content: center;
-`;
-
-const OverviewComps = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-export const DisplayedPhotoContext = createContext();
-export const StyledProductsContext = createContext();
+export const DescriptionsContext = createContext();
 
 function Overview() {
 
   const [styles, setProductStyles] = useState([])
   const [displayed, setDisplayed] = useState([])
-  const {id, setId} = useContext(PropIdContext);
+  const [expanded, setExpanded] = useState(false);
+  const [curPhoto, setCurPhoto] = useState('');
+  const {id, setId, allRatings, setAllRatings} = useContext(PropIdContext);
 
   useEffect(() => {
     axios.get('/products/styles', {params:{product_id:id}})
@@ -44,26 +32,67 @@ function Overview() {
         }
         temp.push(response.data.results[i]);
       }
+      if (temp.length > 0) {
+        result.push(temp);
+      }
       setProductStyles(result);
-    })
+    });
   }, [id])
 
   return(
     <div>
-      <WebsiteHeader>OVERVIEW</WebsiteHeader>
-      <AnnouncementHeader>SITE-WIDE ANNOUNCEMENT</AnnouncementHeader>
+      <Cart/>
+      <AnnouncementHeader>FREE SHIPPING ON ORDERS OVER $100</AnnouncementHeader>
+      <DescriptionsContext.Provider
+      value={{displayed, setDisplayed, styles, setProductStyles, expanded, setExpanded, curPhoto, setCurPhoto}}>
+      {expanded ?
+      <ExpandedContainer>
+          <ExpandedView/>
+      </ExpandedContainer> :
       <OverviewComps>
-        <DisplayedPhotoContext.Provider value={{displayed, setDisplayed}}>
-          <Gallery/>
-          <StyledProductsContext.Provider value={{styles, setProductStyles}}>
+          <GalleryDiv>
+            <Gallery/>
+          </GalleryDiv>
+          <DescriptionsDiv>
             <Descriptions/>
-          </StyledProductsContext.Provider>
-        </DisplayedPhotoContext.Provider>
+          </DescriptionsDiv>
       </OverviewComps>
+      }
+      </DescriptionsContext.Provider>
     </div>
   )
 }
 
 export default Overview;
+const ExpandedContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const WebsiteHeader = styled.h1`
+  display: flex;
+  justify-content: center;
+`;
 
+const AnnouncementHeader = styled.h2`
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  margin-bottom: 30px;
+  padding: 5px;
+  background-color: #FCFBF4;
+`;
 
+const OverviewComps = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+`;
+
+const GalleryDiv = styled.div`
+  width: 50%;
+  margin-right: 30px;
+`;
+const DescriptionsDiv = styled.div`
+  width: 20%;
+`;

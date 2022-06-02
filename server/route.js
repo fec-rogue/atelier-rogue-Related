@@ -83,16 +83,15 @@ exports.reportReview = (req, res) => {
 // Cart routes
 
 exports.getCart = (req, res) => {
-  // console.log('getCart data', req.body);
   models.getCart((result) => {
     res.json(result);
   });
 };
 
-exports.createCart = (req, res) => {
+exports.addToCart = (req, res) => {
   console.log('create Cart data', req.body);
-  var query = {'sku_id': req.body.sku_id};
-  models.createCart(query, (err, data) => {
+  var query = parseInt(req.body.sku_id);
+  models.addToCart(query, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {

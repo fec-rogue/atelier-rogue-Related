@@ -8,8 +8,8 @@ import Stars from './Stars.jsx';
 // Returns the average ratings of all reviews
 const AverageStars = (ratings) => {
 
-
 const currentStars = (ratings) => {
+
   let average = 0;
   let count = 0;
   const keys = Object.keys(ratings);
@@ -20,10 +20,8 @@ const currentStars = (ratings) => {
   })
 
   average = (Math.round((average / count) * 4) / 4).toFixed(2);
-
   return average;
 }
-
 
   return (
     <div>

@@ -35,7 +35,7 @@ app.put('/reviews/report', route.reportReview);
 
 // cart routes
 app.get('/cart', route.getCart);
-app.post('/cart', route.createCart);
+app.post('/cart', route.addToCart);
 
 // interaction routes
 app.post('/interations', route.createInterations);

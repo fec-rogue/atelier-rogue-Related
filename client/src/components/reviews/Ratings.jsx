@@ -131,7 +131,7 @@ const Ratings = ({reviews, setReviews, filters, setFilters, filterState}) => {
     )
   } else {
     return (
-      <RatingsContainer>
+      <RatingsContainer id='reviews'>
         <Title>Ratings & Reviews</Title>
         <AverageRating>{displayAverage(allRatings.ratings)}</AverageRating>
         <AverageStar>

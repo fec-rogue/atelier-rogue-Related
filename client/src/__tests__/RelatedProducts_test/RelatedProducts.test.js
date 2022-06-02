@@ -7,17 +7,15 @@ import '@testing-library/jest-dom';
 import * as ReactDOMClient from 'react-dom/client';
 
 
-
-
 it('renders RelatedProducts without crashing', async () => {
-  act(() => {
-    const div = document.createElement('div');
-    ReactDOMClient.createRoot(div).render(<RelatedProducts />);
-  })
-  // try {
+  // act(() => {
   //   const div = document.createElement('div');
   //   ReactDOMClient.createRoot(div).render(<RelatedProducts />);
-  // } catch (e) {
-  //   console.log(e);
-  // }
+  // })
+  try {
+    const div = document.createElement('div');
+    ReactDOMClient.createRoot(div).render(<RelatedProducts />);
+  } catch (e) {
+    console.log(e);
+  }
 })
