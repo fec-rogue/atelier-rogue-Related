@@ -6,6 +6,7 @@ import Gallery from './Gallery.jsx';
 import Descriptions from './Descriptions.jsx';
 import ExpandedView from './ExpandedView.jsx';
 import Cart from './Cart.jsx';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
 export const DescriptionsContext = createContext();
 
@@ -14,8 +15,7 @@ function Overview() {
   const [styles, setProductStyles] = useState([])
   const [displayed, setDisplayed] = useState([])
   const [expanded, setExpanded] = useState(false);
-  const [curPhoto, setCurPhoto] = useState('');
-  const {id, setId, allRatings, setAllRatings} = useContext(PropIdContext);
+  const {id, setId, allRatings, setAllRatings, curPhoto, setCurPhoto} = useContext(PropIdContext);
 
   useEffect(() => {
     axios.get('/products/styles', {params:{product_id:id}})
@@ -37,7 +37,8 @@ function Overview() {
       }
       setProductStyles(result);
     });
-  }, [id])
+  }, [id]);
+
 
   return(
     <div>
@@ -86,9 +87,12 @@ const OverviewComps = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-
 `;
-
+const ThemeChanger = styled.span`
+  display: inline-block;
+  padding: 20px 0 0 20px;
+  cursor: pointer;
+`;
 const GalleryDiv = styled.div`
   width: 50%;
   margin-right: 30px;
