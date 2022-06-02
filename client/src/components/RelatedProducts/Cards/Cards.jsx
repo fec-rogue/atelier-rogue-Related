@@ -138,7 +138,6 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
           };
           & svg {
             transform: translateX(22%);
-
           }
         `
 
