@@ -225,7 +225,7 @@ margin-bottom: 25px;
   }
   &:focus {
   outline: none;
-  border: 2px solid #4285F4;
+  border: 2px solid #008c75;
   }
   &:not(:disabled) {
   box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;

@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
 import CardEntry from './CardEntry.jsx';
-import { GrCaretPrevious,  GrCaretNext } from "react-icons/Gr";
+import { GrCaretPrevious,  GrCaretNext } from "react-icons/gr";
 
 const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRatings,
   setShowModal, setSelectedid}) => {
@@ -57,7 +57,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
           )
         })}
         </Cardscontainer>
-        { max !== length -1 ?  <NextButton onClick={nextArrow}> <GrCaretNext/> </NextButton>: null }
+        { max !== length -1 ?  <NextButton onClick={nextArrow}> <GrCaretNext style={{color:'blue'}}/> </NextButton>: null }
         </CardsWrapper>
         )
       }
