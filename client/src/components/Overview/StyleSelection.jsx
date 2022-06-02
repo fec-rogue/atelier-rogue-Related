@@ -84,10 +84,10 @@ const StyleColor = styled.div`
     cursor: pointer;
     transition: all ease-in-out 0.03s;
     transform: scale(0.96);
-    border: 0.5px solid white;
+    border: 0.5px solid teal;
   }
   &.selected{
-    border: 2px solid white;
+    border: 2px solid teal;
     transform: scale(1.2);
     transition: all ease-in-out 0.03s;
     box-shadow: 0 4px 2px -2px gray;

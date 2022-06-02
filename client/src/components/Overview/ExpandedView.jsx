@@ -82,7 +82,7 @@ function ExpandedView() {
             <UpDownBtns onClick={prev} >
               <FaChevronLeft
                 size={28}
-                style={{color:'white'}}/>
+                style={{color:'teal'}}/>
             </UpDownBtns>
           </PrevDiv>
           <div>
@@ -102,7 +102,7 @@ function ExpandedView() {
             <UpDownBtns onClick={next}>
               <FaChevronRight
                   size={28}
-                  style={{color:'white'}}/>
+                  style={{color:'teal'}}/>
             </UpDownBtns>
           </NextDiv>
         </ThumbnailCarouselDiv>

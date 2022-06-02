@@ -37,7 +37,7 @@ function ThumbnailCarousel() {
         <UpDownBtns onClick={prev} >
           <FaChevronUp
               size={28}
-              style={{color:'white'}}/>
+              style={{color:'teal'}}/>
             </UpDownBtns>
       </UpDownDiv>
       <div>
@@ -59,7 +59,7 @@ function ThumbnailCarousel() {
         <UpDownBtns onClick={next}>
           <FaChevronDown
             size={28}
-            style={{color:'white'}}/>
+            style={{color:'teal'}}/>
             </UpDownBtns>
       </UpDownDiv>
     </ThumbnailCarouselDiv>

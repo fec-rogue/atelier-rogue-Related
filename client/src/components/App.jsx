@@ -25,7 +25,7 @@ export const FavoriteContext = createContext();
 const App = () => {
   const [id, setId] = useState('40351');
   const [allRatings, setAllRatings] = useState(0);
-  const [curPhoto, setCurPhoto] = useState('');
+    const [curPhoto, setCurPhoto] = useState('');
 
   const storedTheme = localStorage.getItem('theme');
   if (!storedTheme) {
@@ -76,7 +76,7 @@ const App = () => {
       if(window.localStorage.theme === 'light') {
         return {
           "display": "block",
-          "backgroundColor": "#FFF",
+          "backgroundColor": "#FCFBF4",
           "font-family": "'Montserrat', sans-serif",
           "margin": "0"
         }

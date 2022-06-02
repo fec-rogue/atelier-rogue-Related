@@ -131,10 +131,10 @@ function Dropdowns () {
 
 // export on separate css page
 const FaveBtn = styled.button`
-  background-color: #8d5535;
+  background-color: #008C75;
   color: #fff;
   font-weight: 400;
-  border: 1px solid #8d5535;
+  border: 1px solid #008C75;
   border-radius: 3px;
   padding: 0;
   line-height: 0;
@@ -149,10 +149,10 @@ const FaveBtn = styled.button`
   }
 `;
 const CartBtn = styled.button`
-  background-color: #8d5535;
+  background-color: #008C75;
   color: #fff;
   font-weight: 400;
-  border: 1px solid #8d5535;
+  border: 1px solid #008C75;
   border-radius: 3px;
   padding: 0;
   line-height: 0;

@@ -77,7 +77,7 @@ const BannerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #8d5535;
+  background-color: #008C75;
 
 `;
 // display: flex;
