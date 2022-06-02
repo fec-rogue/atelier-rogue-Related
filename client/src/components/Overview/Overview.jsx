@@ -15,6 +15,7 @@ function Overview({handleThemeChange, currentTheme}) {
   const [styles, setProductStyles] = useState([])
   const [displayed, setDisplayed] = useState([])
   const [expanded, setExpanded] = useState(false);
+  const [cartItem, setCartItem] = useState(0);
   const {id, setId, allRatings, setAllRatings, curPhoto, setCurPhoto} = useContext(PropIdContext);
 
   useEffect(() => {
@@ -42,10 +43,10 @@ function Overview({handleThemeChange, currentTheme}) {
 
   return(
     <div>
+      <DescriptionsContext.Provider
+      value={{displayed, setDisplayed, styles, setProductStyles, expanded, setExpanded, curPhoto, setCurPhoto, cartItem, setCartItem}}>
       <Cart handleThemeChange={handleThemeChange} currentTheme={currentTheme}/>
       <AnnouncementHeader>FREE SHIPPING ON ORDERS OVER $100</AnnouncementHeader>
-      <DescriptionsContext.Provider
-      value={{displayed, setDisplayed, styles, setProductStyles, expanded, setExpanded, curPhoto, setCurPhoto}}>
       {expanded ?
       <ExpandedContainer>
           <ExpandedView/>

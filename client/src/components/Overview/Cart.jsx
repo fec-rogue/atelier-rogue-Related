@@ -1,12 +1,14 @@
 import axios from 'axios';
 import styled from 'styled-components';
-import React, { useEffect, useState, useContext, createContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {RiShoppingBagLine} from "react-icons/ri";
 import {BsFillPersonFill} from "react-icons/bs";
 import { FiSun, FiMoon } from 'react-icons/fi';
+import {DescriptionsContext} from './Overview.jsx';
+// import rouge from './Logo/rogue.png';
 
 function Cart({handleThemeChange, currentTheme}) {
-  const [qty, setQty] = useState(1);
+  const {cartItem} = useState(0);
   const [items, setItems] = useState([]);
   const [isActive, setActive] = useState(false);
 
@@ -30,7 +32,7 @@ function Cart({handleThemeChange, currentTheme}) {
   return(
     <BannerContainer>
       <WebTitle>
-        <Logo src={'/Logo/roguewhitee.png'}></Logo>
+        <Logo src={'/client/src/components/Overview/Logo/rogue.png'}></Logo>
       </WebTitle>
       <CartContainer>
         <ThemeChanger onClick={handleThemeChange} >
@@ -39,8 +41,8 @@ function Cart({handleThemeChange, currentTheme}) {
         <AccountDiv>
           <BsFillPersonFill size={28} style={{color:'white'}}/>
         </AccountDiv>
-        <CartBtn marg={qty > 0 ? '0' : '25'}><RiShoppingBagLine size={28} style={{color:'white'}}/></CartBtn>
-        {qty > 0 ? <Qty>{qty}</Qty> : null}
+        <CartBtn marg={cartItem > 0 ? '0' : '25'}><RiShoppingBagLine size={28} style={{color:'white'}}/></CartBtn>
+        {cartItem > 0 ? <Qty>{cartItem}</Qty> : null}
       </CartContainer>
     </BannerContainer>
   )

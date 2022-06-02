@@ -45,7 +45,7 @@ const Outfits = () => {
   useEffect(() => {
     axios.get(`products/styles?product_id=${id}`)
       .then((res) => {
-        console.log(res.data.results[styleIndx].photos[curPhoto]);
+        // console.log(res.data.results[styleIndx].photos[curPhoto]);
         setOverviewStyles(res.data.results[styleIndx].photos[curPhoto])
       })
       .catch((err) => {
@@ -53,6 +53,7 @@ const Outfits = () => {
       })
   }, [styleIndx, curPhoto])
 
+  const [urls, setUrls] = useState([]);
 
   const addOutfit = () => {
       const imageNotFound = "http://placecorgi.com/260/180";
@@ -67,14 +68,40 @@ const Outfits = () => {
           outfit.push(newOutfit);
           localStorage.setItem("outfit", JSON.stringify(outfit));
           setOutfit(outfit);
+          let copy = [...urls];
+          copy.push(newOutfit.image);
+          setUrls(copy);
         }
         let outfit = localStorage.getItem("outfit");
-        if (outfit.indexOf(`"image":${newOutfit.image}`) === -1) {
+        // console.log('outfit', outfit);
+        // console.log('newOutfitImg: ',newOutfit.image);
+
+
+        // if (outfit.indexOf(`"images":${newOutfit.image}`) === -1) {
+        //   outfit = JSON.parse(outfit);
+        //   outfit.push(newOutfit);
+        //   localStorage.setItem("outfit", JSON.stringify(outfit));
+        //   setOutfit(outfit);
+        //   return;
+        // }
+
+        let copyExists = false;
+        for (let value of urls) {
+          if (value === newOutfit.image) {
+            copyExists = true;
+            break;
+          }
+        }
+        if (copyExists) {
+          alert('item already added');
+        } else {
           outfit = JSON.parse(outfit);
           outfit.push(newOutfit);
           localStorage.setItem("outfit", JSON.stringify(outfit));
           setOutfit(outfit);
-          return;
+          let copy = [...urls];
+          copy.push(newOutfit.image);
+          setUrls(copy)
         }
   }
 
@@ -89,6 +116,7 @@ const Outfits = () => {
 
       {outfit.length > 0 && allRatings ?
         outfit.map((item, index) => {
+          console.log('url', urls);
           return (
             <IndividualOutfit key={index}>
               {index <= max && index >= min &&

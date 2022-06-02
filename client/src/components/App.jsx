@@ -66,10 +66,10 @@ const App = () => {
       if(window.localStorage.theme === 'dark') {
         return {
           "body": '#363537',
-          "text": '#FAFAFA',
+          "color": '#e3dfd9',
           "toggleBorder": '#6B8096',
           "fontFamily": "'Montserrat', sans-serif",
-          "backgroundColor": '#999'
+          "backgroundColor": '#141617'
         }
       }
 
