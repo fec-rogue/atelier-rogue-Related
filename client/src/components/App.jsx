@@ -1,6 +1,6 @@
 import React from 'react';
 import { lazy, Suspense, useState, createContext, useEffect} from "react";
-import styled from 'styled-components';
+import styled, {createGlobalStyle} from 'styled-components';
 import Overview from "./Overview/Overview.jsx";
 import axios from 'axios';
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
@@ -63,6 +63,7 @@ const AppContainer = styled.div`
   font-family: 'Abel', sans-serif;
   margin: 0;
 `;
+
 
 export default App;
 

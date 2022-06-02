@@ -6,12 +6,13 @@ import {DescriptionsContext} from './Overview.jsx'
 // TODO: checkmark overlaid on selected style, hover function for user readability
 function StyleSelection() {
 
-  const {styles, setProductStyles, displayed, setDisplayed} = useContext(DescriptionsContext);
+  const {styles, setProductStyles, displayed, setDisplayed, setCurPhoto} = useContext(DescriptionsContext);
 
   // updates style beind displayed
   const handleStyleChange = (e) => {
     if (e.style_id !== displayed.style_id) {
       setDisplayed(e);
+      setCurPhoto(0);
     }
   };
    // react doesn't like that setDisplayed is being set with the "icon" variable from the styles array
@@ -68,6 +69,7 @@ const StyleCircle = styled.li`
 
 const StyleColor = styled.div`
   border-radius: 100px;
+  border: 0.5px solid #FCFBF4;
   padding: 3px;
   width: 50px;
   height: 50px;
@@ -80,12 +82,13 @@ const StyleColor = styled.div`
     cursor: pointer;
     transition: all ease-in-out 0.03s;
     transform: scale(0.96);
-    border: 0.5px solid;
+    border: 0.5px solid white;
   }
   &.selected{
-    border: 1px solid black;
+    border: 2px solid white;
     transform: scale(1.2);
     transition: all ease-in-out 0.03s;
+    box-shadow: 0 4px 2px -2px gray;
   }
 
 `;

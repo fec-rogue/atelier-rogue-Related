@@ -10,22 +10,26 @@ function Dropdowns () {
   const [sizeAndQty, setSizeAndQty] = useState({});
   const [sizeSelected, setSizeSelected] = useState('');
   const [qtySelected, setQtySelected] = useState('');
+  const [sku, setSku] = useState([]);
   const [cartValid, setCartValid] = useState(true);
   const [fave, setFave] = useState([]);
   // going to need a cache/local storage to keep track of which items have already been faved
 
   useEffect(() => {
     var sizeQty = {};
+    var skus = [];
     for (var props in displayed.skus) {
       if (sizeQty.hasOwnProperty(displayed.skus[props].size)) {
         sizeQty[displayed.skus[props].size] += displayed.skus[props].quantity;
       } else {
         sizeQty[displayed.skus[props].size] = displayed.skus[props].quantity;
       }
+      skus.push(props);
     };
     setSizeAndQty(sizeQty);
     setQtySelected('');
     setSizeSelected('');
+    setSku(skus);
   }, [displayed]);
 
   // updates size selected by user in size dropdown
@@ -43,20 +47,22 @@ function Dropdowns () {
   If the default ‘Select Size’ is currently selected: Clicking this button should open the size dropdowns
   */
 
-  // adds items to cart when "Add To Cart" is clicked
  const handleCart = () => {
    var elem = '';
    if (sizeSelected === '') {
      setCartValid(false);
     } else {
       setCartValid(true);
-      console.log('added to cart');
+      let skuId = Object.keys(sizeAndQty).indexOf(sizeSelected);
+      /*
+      axios.post('/cart',{sku_id: sku[skuId]})
+      .catch((err) => console.log(err))
+      */
     }
   }
 
   // adds product to saved outfits in RelatedProducts section
   const handleFave = () => {
-    console.log('clicked');
     setFave(displayed);
   }
 
@@ -85,7 +91,8 @@ function Dropdowns () {
       </Selector>)
   }
 
-  return(
+  return (Object.keys(displayed).length === 0) ?
+  null :
     <SizeQtyDiv>
       {cartValid === false ?
       <ErrorDiv>
@@ -117,17 +124,18 @@ function Dropdowns () {
         </FaveBtn>
       </CartDiv>
     </SizeQtyDiv>
-  )
+
 }
 
 
 
 // export on separate css page
 const FaveBtn = styled.button`
-  background-color: #000;
+  background-color: #8d5535;
   color: #fff;
   font-weight: 400;
-  border: 1px solid #2B2E34;
+  border: 1px solid #8d5535;
+  border-radius: 3px;
   padding: 0;
   line-height: 0;
   font-size: 14px;
@@ -135,12 +143,17 @@ const FaveBtn = styled.button`
   text-transform: uppercase;
   text-align: center;
   width: 25%;
+  &:hover {
+    cursor: pointer;
+    opacity: 93%;
+  }
 `;
 const CartBtn = styled.button`
-  background-color: #000;
+  background-color: #8d5535;
   color: #fff;
   font-weight: 400;
-  border: 1px solid #2B2E34;
+  border: 1px solid #8d5535;
+  border-radius: 3px;
   padding: 0;
   line-height: 0;
   font-size: 14px;
@@ -148,6 +161,11 @@ const CartBtn = styled.button`
   text-transform: uppercase;
   text-align: center;
   width: 70%;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 93%;
+  }
 `;
 
 const CartDiv = styled.div`
@@ -168,6 +186,9 @@ const Selector = styled.select`
   margin: 5px;
   margin-top: 0px;
   margin-left: 0px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const ErrorDiv = styled.div`
