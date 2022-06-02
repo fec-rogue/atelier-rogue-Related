@@ -122,13 +122,13 @@ const ReviewModal = ({setModal}) => {
   const [recommend, setRecommend] = useState('');
   const [reset, setReset] = useState(false);
   const [allCharacteristics, setAllCharacteristics] = useState({
-    product_id: 40344,
-    rating: 1,
+    product_id: 40351,
+    rating: -1,
     email: '',
     name: '',
     summary: '',
     body: '',
-    recommend: false,
+    recommend: null,
     photos: [],
     characteristics: {}
   });
@@ -150,7 +150,7 @@ const ReviewModal = ({setModal}) => {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:3000/products/info', {params: {product_id: 40344}})
+    axios.get('http://localhost:3000/products/info', {params: {product_id: 40351}})
       .then((results) => {
         setName(results.data.name)
       })
@@ -179,7 +179,16 @@ const ReviewModal = ({setModal}) => {
   }
 
   const handleNextClick = (e) => {
-    setNext(true);
+    if (
+      allCharacteristics.rating === -1 ||
+      allCharacteristics.recommend === null ||
+      allCharacteristics.email === '' ||
+      allCharacteristics.name === ''
+    ) {
+      alert('one or more fields have not been filled in');
+    } else {
+      setNext(true);
+    }
   }
 
   if (next) {
@@ -188,7 +197,7 @@ const ReviewModal = ({setModal}) => {
         <Exit type="button" onClick={handleClick}>X</Exit>
         <Title>Write Your Review</Title>
         <Subtitle>About the {name}</Subtitle>
-        <ModalPage2 allCharacteristics={allCharacteristics} setAllCharacteristics={setAllCharacteristics} setNext={setNext} />
+        <ModalPage2 allCharacteristics={allCharacteristics} setAllCharacteristics={setAllCharacteristics} setNext={setNext} setModal={setModal}/>
       </Modal>
     )
   } else {
@@ -231,7 +240,7 @@ const ReviewModal = ({setModal}) => {
           <EmailContainer>
             <label>
               Email :&nbsp;
-              <input type="text" value={allCharacteristics.email} onChange={handleEmailChange} placeholder="Ex: jackson11@email.com"></input>
+              <input type="email" value={allCharacteristics.email} onChange={handleEmailChange} placeholder="Ex: jackson11@email.com"></input>
             </label>
             <PrivacyWarning>* Please do not use your real email address</PrivacyWarning>
           </EmailContainer>
