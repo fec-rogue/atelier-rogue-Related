@@ -16,7 +16,6 @@ function StyleSelection() {
       setDisplayed(e);
       setCurPhoto(0);
       let pos = ind*4 + key;
-      console.log(pos);
       setStyleIndx(pos);
 
     }
