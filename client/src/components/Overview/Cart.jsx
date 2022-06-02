@@ -44,7 +44,7 @@ export default Cart;
 const AccountDiv = styled.div`
   margin-right: 15px;
   &:hover{
-    color: gray;
+    opacity: 90%;
     cursor: pointer;
   }
 `;
@@ -53,7 +53,7 @@ const CartBtn = styled.button`
   background-color: transparent;
   border: none;
   &:hover{
-    color: gray;
+    opacity: 90%;
     cursor: pointer;
   }
 `;
