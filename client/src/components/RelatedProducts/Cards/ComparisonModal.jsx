@@ -43,7 +43,6 @@ const Comparison = ({ twoCards, close }) => {
 
   return(
     <TableWrapper>
-       {/* <button onClick={() => close(false)}><AiOutlineClose /></button> */}
     <table>
       <thead>
         <tr>
@@ -80,14 +79,14 @@ const Comparison = ({ twoCards, close }) => {
   )
 }
 const TableWrapper = styled.div`
-  width:300px;
-   height:200px;
-   font-size:12px;
+  width:500px;
+   height:300px;
+   font-size:18px;
    z-index:1;
    y-overflow: hidden;
    border-radius:12px;
    border:3px solid black;
-   background-color:#dee2e6;
+   background-color:#FFF;
    display:flex;
    align-items: center;
    justify-content: center;

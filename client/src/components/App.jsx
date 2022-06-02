@@ -56,8 +56,8 @@ const App = () => {
       if(window.localStorage.theme === undefined) {
         return {
           "display": "block",
-          "backgroundColor": "#ded3c5",
-          "fontFamily": "'Abel', sans-serif",
+          "backgroundColor": "#FFF",
+          "font-family": "'Montserrat', sans-serif",
           "margin": "0"
         }
       }
@@ -67,7 +67,7 @@ const App = () => {
           "body": '#363537',
           "text": '#FAFAFA',
           "toggleBorder": '#6B8096',
-          "fontFamily": "'Abel', sans-serif",
+          "font-family": "'Montserrat', sans-serif",
           "backgroundColor": '#999'
         }
       }
@@ -75,8 +75,8 @@ const App = () => {
       if(window.localStorage.theme === 'light') {
         return {
           "display": "block",
-          "backgroundColor": "#ded3c5",
-          "fontFamily": "'Abel', sans-serif",
+          "backgroundColor": "#FFF",
+          "font-family": "'Montserrat', sans-serif",
           "margin": "0"
         }
       }

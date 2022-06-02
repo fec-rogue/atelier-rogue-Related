@@ -55,9 +55,9 @@ const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  setShowModal,
           setSelectedid(detailProduct)}}>
           <AiFillStar/>
         </StarButton>
-        <CardInfo>
-          <p>{detailProduct.category}</p>
-          <h3><b>{detailProduct.name}</b></h3>
+        <CardInfo >
+          <p style={{margin: 0}}>{detailProduct.category}</p>
+          <h3 style={{margin: 0}}><b>{detailProduct.name}</b></h3>
           <Price>${ defaultsStyles[0].sale_price === null
           ?  defaultsStyles[0].original_price
           :  defaultsStyles[0].sale_price }</Price>
@@ -69,12 +69,16 @@ const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  setShowModal,
 
 const Carditem = styled.div`
   width: 250px;
-  height: 400px;
+  height: 380px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: start;
-  // gap: 10px;
+   gap: 20px;
+  background-color: #FFF;
+  border-radius: 12px;
+  overflow:hidden;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
 `
 
 const CardImageBox = styled.div`
@@ -88,45 +92,33 @@ const Cardimage = styled.img`
   object-fit: cover;
 `
 
-const MultiImages = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  position: relative;
-  transitions: .5s;
-  scroll-behavior: smooth;
-`
-const MultiImage = styled.img`
-  width: 100%;
-  height: 50%;
-  object-fit: cover;
-`
 const CardInfo = styled.div`
-  padding: 0 16px;
+  padding: 10px 16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-
+  gap: 10px;
 `
 const Price = styled.p`
+  margin:0;
+  font-weight: 600;
+  color: #008c75;
 `
 const StarButton = styled.button`
   position:absolute;
   top:10px;
   right: 10px;
-
 `
 const Ratings = styled.div`
   display:inline-block
 `
 const Indicators = styled.div`
-top:50%;
-display:flex;
-justify-content: center;
-position: absolute;
-z-index: 500;
-cursor:pointer;
-user-select:none;
+  top:50%;
+  display:flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 500;
+  cursor:pointer;
+  user-select:none;
 `
 const PrevButton = styled.button`
 left:0;
