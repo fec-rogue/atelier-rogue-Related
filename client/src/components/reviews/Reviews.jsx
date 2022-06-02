@@ -5,6 +5,8 @@ import axios from 'axios';
 import Stars from '../stars/Stars.jsx';
 import Ratings from './Ratings.jsx';
 import Relevance from './Relevance.jsx';
+import ReviewModal from './modal/ReviewModal.jsx';
+import YesButton from './YesButton.jsx';
 
 
 const Test = styled.div`
@@ -69,7 +71,8 @@ const HelpfulTag = styled.span`
 `;
 
 const YesTag = styled.span`
-  text-decoration: underline
+  text-decoration: underline;
+  cursor: pointer;
 `;
 
 const Count = styled.span`
@@ -81,18 +84,15 @@ const AddMore = styled.button`
   width: 100px;
   margin-bottom: 10px;
   `;
-  // margin-left: 690px;
-  // margin-right: 10px;
-  // margin-top: 20px;
 
 const AddReview = styled.button`
   height: 50px;
   width: 100px;
   `;
-  // margin-top: 20px;
 
 const Container = styled.div`
   display: flex;
+  justify-content: center;
   flex-direction: row;
   margin: auto;
   width: 60%;
@@ -119,11 +119,12 @@ const Reviews = () => {
   });
   const [filterState, setFilterState] = useState(false);
   const [sort, setSort] = useState("Helpfulness");
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:3000/reviews', {params: {id: 40344, count: count}})
       .then((results) => {
-        // console.log(results.data.results);
+        console.log(results.data)
         if (sort === "Newest") {
           results.data.results.sort((a, b) => new Date(b.date) - new Date(a.date));
         }
@@ -165,15 +166,35 @@ const Reviews = () => {
     setDisplayCount(displayCount + 2);
   }
 
+  const handleYesClick = (e, id) => {
+    axios.put('http://localhost:3000/reviews/helpful', {}, {params: {review_id: id}})
+      .then((response) => {
+
+      })
+      .catch((error) => {
+        console.log('there was an error at yesclick');
+      })
+    // axios.put('http://localhost:3000/reviews/helpful', {params: {review_id: id}})
+    //   .then(() => {
+    //     console.log(this should work);
+    //   })
+  }
+
+  const handleAdd = (e) => {
+    setModal(true);
+  }
+
 
   return (
     <Container>
+      {modal ? <ReviewModal setModal={setModal} /> : null}
       <Ratings reviews={reviews} setReviews={setReviews} filters={filters} setFilters={setFilters} filterState={filterState} />
       <div>
         <Relevance sort={sort} setSort={setSort} />
         <Test>
           <ReviewContainer>
             {reviews.map((review, index) => {
+              // console.log(review);
               if (index < displayCount) {
                 return (
                   <ReviewBox key={index}>
@@ -192,8 +213,7 @@ const Reviews = () => {
                       : null}
                     <Interactables>
                       <HelpfulTag>Was this review helpful?  </HelpfulTag>
-                      <YesTag>Yes</YesTag>
-                      <Count>  ({review.helpfulness})</Count>
+                      <YesButton id={review.review_id} count={review.helpfulness} />
                     </Interactables>
                   </ReviewBox>
                 )
@@ -204,7 +224,7 @@ const Reviews = () => {
       </div>
       <ButtonContainer>
         <AddMore onClick={handleMore}>See More</AddMore>
-        <AddReview>Add a review</AddReview>
+        <AddReview onClick={handleAdd}>Add a review</AddReview>
       </ButtonContainer>
     </Container>
   )

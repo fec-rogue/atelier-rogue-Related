@@ -1,7 +1,7 @@
 import React  from 'react';
 import { useEffect  } from "react";
 import styled from 'styled-components';
-import {AiOutlineClose} from "react-icons/Ai";
+import {AiOutlineClose} from "react-icons/ai";
 
 const Comparison = ({ twoCards, close }) => {
   // console.log('twocards', twoCards)

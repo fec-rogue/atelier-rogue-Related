@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
-import {AiFillStar} from "react-icons/Ai";
+import {AiFillStar} from "react-icons/ai";
 import AverageStars from "../../stars/AverageStars.jsx"
 
 const CardEntry = ({defaultsStyles, detailProduct, detailRatings,  setShowModal, setSelectedid}) => {
