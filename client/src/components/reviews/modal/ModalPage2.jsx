@@ -94,6 +94,11 @@ const ModalPage2 = ({allCharacteristics, setAllCharacteristics, setNext}) => {
   }
 
   const handleSubmitClick = (e) => {
+    // console.log(allCharacteristics);
+    axios.post('http://localhost:3000/reviews', allCharacteristics)
+      .then((results) => {
+        console.log(results);
+      })
   }
 
   const handleBackClick = (e) => {

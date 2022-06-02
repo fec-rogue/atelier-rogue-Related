@@ -36,24 +36,24 @@ const RadioLabel = styled.label`
 const RadioTemplate = ({allCharacteristics, setAllCharacteristics, subject}) => {
 
   const handleClick = (e, subjectLine) => {
-    if (subjectLine === 'Size') {
-      setAllCharacteristics({ ...allCharacteristics, size: Number(e.target.value)})
-    }
-    if (subjectLine === 'Width') {
-      setAllCharacteristics({ ...allCharacteristics, width: Number(e.target.value)})
-    }
-    if (subjectLine === 'Comfort') {
-      setAllCharacteristics({ ...allCharacteristics, comfort: Number(e.target.value)})
-    }
-    if (subjectLine === 'Quality') {
-      setAllCharacteristics({ ...allCharacteristics, quality: Number(e.target.value)})
-    }
-    if (subjectLine === 'Length') {
-      setAllCharacteristics({ ...allCharacteristics, length: Number(e.target.value)})
-    }
-    if (subjectLine === 'Fit') {
-      setAllCharacteristics({ ...allCharacteristics, fit: Number(e.target.value)})
-    }
+    // if (subjectLine === 'Size') {
+    //   setAllCharacteristics({ ...allCharacteristics, size: Number(e.target.value)})
+    // }
+    // if (subjectLine === 'Width') {
+    //   setAllCharacteristics({ ...allCharacteristics, width: Number(e.target.value)})
+    // }
+    // if (subjectLine === 'Comfort') {
+    //   setAllCharacteristics({ ...allCharacteristics, comfort: Number(e.target.value)})
+    // }
+    // if (subjectLine === 'Quality') {
+    //   setAllCharacteristics({ ...allCharacteristics, quality: Number(e.target.value)})
+    // }
+    // if (subjectLine === 'Length') {
+    //   setAllCharacteristics({ ...allCharacteristics, length: Number(e.target.value)})
+    // }
+    // if (subjectLine === 'Fit') {
+    //   setAllCharacteristics({ ...allCharacteristics, fit: Number(e.target.value)})
+    // }
   }
 
   return (

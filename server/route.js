@@ -54,12 +54,13 @@ exports.postReview = (req, res) => {
     rating: req.body.rating,
     summary: req.body.summary,
     body: req.body.body,
-    recommend: req.body.recommend,
     name: req.body.name,
     email: req.body.email,
+    recommend: req.body.recommend,
     photos: req.body.photos,
     characteristics: req.body.characteristics
   };
+  // console.log(data);
   models.postReview(data, (result) => {
     res.json('posted successfully');
   });

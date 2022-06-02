@@ -121,7 +121,17 @@ const ReviewModal = ({setModal}) => {
   const [summary, setSummary] = useState('');
   const [recommend, setRecommend] = useState('');
   const [reset, setReset] = useState(false);
-  const [allCharacteristics, setAllCharacteristics] = useState({email: '', nickname: '', summary: '', body: ''});
+  const [allCharacteristics, setAllCharacteristics] = useState({
+    product_id: 40344,
+    rating: 1,
+    email: '',
+    name: '',
+    summary: '',
+    body: '',
+    recommend: false,
+    photos: [],
+    characteristics: {}
+  });
   const [size, setSize] = useState(0)
   const [width, setWidth] = useState(0);
   const [comfort, setComfort] = useState(0);
@@ -152,8 +162,10 @@ const ReviewModal = ({setModal}) => {
 
   const handleRecommendClick = (e) => {
     if (e.target.value === 'true') {
+      setAllCharacteristics({...allCharacteristics, recommend: true});
       setRecommend(true);
     } else {
+      setAllCharacteristics({...allCharacteristics, recommend: false});
       setRecommend(false);
     }
   }
@@ -163,7 +175,7 @@ const ReviewModal = ({setModal}) => {
   }
 
   const handleNicknameChange = (e) => {
-    setAllCharacteristics({ ...allCharacteristics, nickname: e.target.value});
+    setAllCharacteristics({ ...allCharacteristics, name: e.target.value});
   }
 
   const handleNextClick = (e) => {
@@ -189,7 +201,7 @@ const ReviewModal = ({setModal}) => {
           <OverallRatingContainer>
             <RatingContainer>
               <OverallRating>Overall Rating</OverallRating>
-              <DynamicStars setReviewStar={setReviewStar} setReset={setReset} />
+              <DynamicStars setReviewStar={setReviewStar} setReset={setReset} allCharacteristics={allCharacteristics} setAllCharacteristics={setAllCharacteristics} />
             </RatingContainer>
             {reset === false ? null
             : reviewStar === 1

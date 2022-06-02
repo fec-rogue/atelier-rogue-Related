@@ -17,7 +17,7 @@ const ResetRating = styled.button`
   margin-right: auto;
 `;
 
-const DynamicStars = ({setReviewStar, setReset}) => {
+const DynamicStars = ({setReviewStar, setReset, allCharacteristics, setAllCharacteristics}) => {
 
   const [ratingClicked, setRatingClicked] = useState(false);
 
@@ -103,6 +103,7 @@ const DynamicStars = ({setReviewStar, setReset}) => {
     setReviewStar(currentStar);
     setRatingClicked(true);
     setReset(true);
+    setAllCharacteristics({...allCharacteristics, rating: currentStar})
   }
 
 
