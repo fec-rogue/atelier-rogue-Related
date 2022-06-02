@@ -2,6 +2,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import React, { useEffect, useState, useContext } from 'react';
 import {DescriptionsContext} from './Overview.jsx'
+import {FaChevronUp, FaChevronDown} from "react-icons/fa";
 
 //TODO:
 // thumbnail should scroll to make current selection visible
@@ -33,7 +34,11 @@ function ThumbnailCarousel() {
   (null) :
   (<ThumbnailCarouselDiv>
       <UpDownDiv>
-        <UpDownBtns onClick={prev} >Prev</UpDownBtns>
+        <UpDownBtns onClick={prev} >
+          <FaChevronUp
+              size={28}
+              style={{color:'white'}}/>
+            </UpDownBtns>
       </UpDownDiv>
       <div>
         <InnerDiv>
@@ -51,7 +56,11 @@ function ThumbnailCarousel() {
         </InnerDiv>
       </div>
       <UpDownDiv>
-        <UpDownBtns onClick={next}>Next</UpDownBtns>
+        <UpDownBtns onClick={next}>
+          <FaChevronDown
+            size={28}
+            style={{color:'white'}}/>
+            </UpDownBtns>
       </UpDownDiv>
     </ThumbnailCarouselDiv>
   )
@@ -69,7 +78,7 @@ const ThumbnailCarouselDiv = styled.div`
   max-height: 800px;
   transition: all ease-in-out 0.05s;
   .selected {
-    border-bottom: 6px solid #D3D3D3;
+    border-bottom: 6px solid white;
     transition: all ease-in-out 0.05s;
   }
 `;
@@ -108,6 +117,12 @@ const UpDownDiv = styled.div`
 `;
 
 const UpDownBtns = styled.button`
+  background-color: transparent;
+  border: none;
+  &:hover {
+    cursor: pointer;
+    opacity: 50%;
+  }
 `;
 
 export default ThumbnailCarousel;

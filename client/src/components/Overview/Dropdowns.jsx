@@ -144,6 +144,10 @@ const FaveBtn = styled.button`
   text-transform: uppercase;
   text-align: center;
   width: 25%;
+  &:hover {
+    cursor: pointer;
+    opacity: 93%;
+  }
 `;
 const CartBtn = styled.button`
   background-color: #8d5535;
@@ -158,6 +162,11 @@ const CartBtn = styled.button`
   text-transform: uppercase;
   text-align: center;
   width: 70%;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 93%;
+  }
 `;
 
 const CartDiv = styled.div`
@@ -178,6 +187,9 @@ const Selector = styled.select`
   margin: 5px;
   margin-top: 0px;
   margin-left: 0px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const ErrorDiv = styled.div`

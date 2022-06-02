@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import {DescriptionsContext} from './Overview.jsx';
 import {AiOutlineClose} from 'react-icons/Ai';
-import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
 
 function ExpandedView() {
 
@@ -48,80 +47,64 @@ function ExpandedView() {
   (null) :
   (<FullContainer>
     <div>
-      <div>
-        <ImgContainer
-          ref={zoomRef}
-          onMouseEnter={(e) => handleMouseEnter(e)}
-          onMouseMove={(e) => handleMouseMove(e)}
-          onClick={() => setZoom(!isZoomed)}
-          cur={isZoomed ? 'zoom-out' : 'crosshair'}
-        >
-          {isZoomed ?
-          <ZoomedImg
-          img={displayed.photos[curPhoto].url}
-          height={h}
-          width={w}
-          style={{
-            backgroundSize: `${w * 2.5}px ${h * 2.5}px`,
-            backgroundPositionX: `${-x * 2.5 / (1.68)}px`,
-            backgroundPositionY: `${-y * 2.5 / (1.68)}px`
-          }}>
-          </ZoomedImg> :
-          <FullItem
-            src={displayed.photos[curPhoto].url}>
-          </FullItem>
-          }
-          <ExitContainer>
-            <ExitBtn onClick={() => {setExpanded(!expanded)}}><AiOutlineClose size={28} style={{color:'white'}}/></ExitBtn>
-        </ExitContainer>
-        </ImgContainer>
+      <ExitContainer>
+        <button onClick={() => {setExpanded(!expanded)}}><AiOutlineClose/></button>
+      </ExitContainer>
+        <div>
+          <ImgContainer
+            ref={zoomRef}
+            onMouseEnter={(e) => handleMouseEnter(e)}
+            onMouseMove={(e) => handleMouseMove(e)}
+            onClick={() => setZoom(!isZoomed)}
+            cur={isZoomed ? 'zoom-out' : 'crosshair'}
+          >
+            {isZoomed ?
+            <ZoomedImg
+            img={displayed.photos[curPhoto].url}
+            height={h}
+            width={w}
+            style={{
+              backgroundSize: `${w * 2.5}px ${h * 2.5}px`,
+              backgroundPositionX: `${-x * 2.5 / (1.68)}px`,
+              backgroundPositionY: `${-y * 2.5 / (1.68)}px`
+            }}>
+            </ZoomedImg> :
+            <FullItem
+              src={displayed.photos[curPhoto].url}>
+            </FullItem>
+            }
+          </ImgContainer>
+        </div>
+          <ThumbnailCarouselDiv>
+            <PrevDiv>
+              <UpDownBtns onClick={prev} >Prev</UpDownBtns>
+            </PrevDiv>
+            <div>
+              <InnerDiv>
+                {displayed.photos.map((img, indx) => {
+                  return (indx >= range.min && indx <= range.max) ?
+                  (<ThumbnailCarouselItem
+                    className={indx === curPhoto ? 'selected' : ''}
+                    key={indx}
+                    img={img.thumbnail_url} onClick={() => {setCurPhoto(indx)}}>
+                    </ThumbnailCarouselItem>)
+                  : null
+                })}
+              </InnerDiv>
+            </div>
+            <NextDiv>
+              <UpDownBtns onClick={next}>Next</UpDownBtns>
+            </NextDiv>
+          </ThumbnailCarouselDiv>
       </div>
-        <ThumbnailCarouselDiv>
-          <PrevDiv>
-            <UpDownBtns onClick={prev} >
-              <FaChevronLeft
-                size={28}
-                style={{color:'white'}}/>
-            </UpDownBtns>
-          </PrevDiv>
-          <div>
-            <InnerDiv>
-              {displayed.photos.map((img, indx) => {
-                return (indx >= range.min && indx <= range.max) ?
-                (<ThumbnailCarouselItem
-                  className={indx === curPhoto ? 'selected' : ''}
-                  key={indx}
-                  img={img.thumbnail_url} onClick={() => {setCurPhoto(indx)}}>
-                  </ThumbnailCarouselItem>)
-                : null
-              })}
-            </InnerDiv>
-          </div>
-          <NextDiv>
-            <UpDownBtns onClick={next}>
-              <FaChevronRight
-                  size={28}
-                  style={{color:'white'}}/>
-            </UpDownBtns>
-          </NextDiv>
-        </ThumbnailCarouselDiv>
-    </div>
   </FullContainer>)
 
 
 }
-const ExitBtn = styled.button`
-  background-color: transparent;
-  border: none;
-  &:hover{
-    cursor: pointer;
-    opacity: 80%;
-  }
-`;
+
 const ExitContainer = styled.div`
-  position: absolute;
-  top: 8px;
-  right: 16px;
+  display: flex;
+  justify-content: flex-end;
 `
 
 const FullContainer = styled.div`
@@ -166,7 +149,7 @@ const ThumbnailCarouselDiv = styled.div`
   max-height: 800px;
   transition: all ease-in-out 0.05s;
   .selected {
-    border-bottom: 6px solid white;
+    border-bottom: 6px solid #D3D3D3;
     transition: all ease-in-out 0.05s;
   }
 `;
@@ -200,19 +183,15 @@ const ThumbnailCarouselItem = styled.div`
     transform: scale(0.96);
   }
 `;
-const PrevDiv = styled.div`
 
+const PrevDiv = styled.div`
+  margin-right: 3%;
 `;
 const NextDiv = styled.div`
-
+  margin-left: 3%;
 `;
 
+
 const UpDownBtns = styled.button`
-  background-color: transparent;
-  border: none;
-  &:hover {
-    cursor: pointer;
-    opacity: 50%
-  }
 `;
 export default ExpandedView;

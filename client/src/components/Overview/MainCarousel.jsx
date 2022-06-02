@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import {DescriptionsContext} from './Overview.jsx';
 import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
-
+import {BsFullscreen} from "react-icons/bs";
 
 //TODO:
 // hovering over item with magnifying glass will magnify image
@@ -46,7 +46,10 @@ function MainCarousel() {
   (<CarouselDiv>
        <InnerDiv>
           <PrevDiv>
-            <UpDownBtns onClick={() => {updateIndex(index-1)}} >Prev</UpDownBtns>
+            <UpDownBtns onClick={() => {updateIndex(index-1)}} ><FaChevronRight
+            size={28}
+            style={{color:'white'}}/>
+            </UpDownBtns>
           </PrevDiv>
           <ImgContainer >
             <CarouselItem
@@ -55,7 +58,10 @@ function MainCarousel() {
             </CarouselItem>
           </ImgContainer>
           <NextDiv>
-            <UpDownBtns onClick={() => {updateIndex(index+1)}}>Next</UpDownBtns>
+            <UpDownBtns onClick={() => {updateIndex(index+1)}}><FaChevronLeft
+            size={28}
+            style={{color:'white'}}/>
+            </UpDownBtns>
           </NextDiv>
         </InnerDiv>
     </CarouselDiv>
@@ -98,7 +104,7 @@ const PrevDiv = styled.div`
   position: absolute;
   top: 50%;
   text-align: center;
-  right: 16px;
+  right: 18px;
 
 `;
 const NextDiv = styled.div`
@@ -110,11 +116,17 @@ const NextDiv = styled.div`
   position: absolute;
   top: 50%;
   text-align: center;
-  left: 16px;
+  left: 18px;
 
 `;
 
 const UpDownBtns = styled.button`
+  background-color: transparent;
+  border: none;
+  &:hover {
+    cursor: pointer;
+    opacity: 50%
+  }
 `;
 
 export default MainCarousel;
