@@ -22,11 +22,10 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
 
     return (
       <CardsWrapper>
-      <Indicators>
-      { currentIndex !== 0 ? < PrevButton onClick={prevArrow}> <GrCaretPrevious/> </PrevButton> : null }
-    </Indicators>
 
-    <Cardscontainer style={{ transform: `translateX(-${currentIndex * 50}%)`}}>
+      { currentIndex !== 0 ? < PrevButton onClick={prevArrow}> <GrCaretPrevious /> </PrevButton> : null }
+
+    <Cardscontainer style={{ transform: `translateX(-${currentIndex * 5}%)`}}>
     {display.map((eachProduct, index) => {
       const id = Number(eachProduct.product_id);
       const detailProduct = relatedProductsDetail.find(detail => detail.id === id);
@@ -58,58 +57,93 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
           )
         })}
         </Cardscontainer>
-
         { max !== length -1 ?  <NextButton onClick={nextArrow}> <GrCaretNext/> </NextButton>: null }
         </CardsWrapper>
         )
       }
 
       const CardsWrapper = styled.ul`
-        width:1200px;
+        width:  1400px;
         padding: 40px 0;
         overflow: hidden;
         position: relative;
       `
       const Cardscontainer = styled.div`
+        margin-left: 33px;
         display: flex;
         gap: 10px;
         position: relative;
-        transitions: .5s;
+        transition: .5s;
         scroll-behavior: smooth;
       `;
 
       const Individualcard = styled.div`
         width:300px;
         height: 400px;
-        box-shadow: 0 0 24px 8px rgba(0,0,0,0.01);
-      `
-      const Indicators = styled.div`
-        top:50%;
-        display:flex;
-        justify-content: center;
-        position: absolute;
-        z-index: 500;
-        cursor:pointer;
-        user-select:none;
-      `
-      const PrevButton = styled.button`
-        left:0;
-      `
-      const NextButton = styled.button`
-      right:0;
-      top:50%;
-      display:flex;
-      justify-content: center;
-      position: absolute;
-      z-index: 500;
-      cursor:pointer;
-      user-select:none;
 
       `
+
+      const PrevButton = styled.button`
+      align-items: center;
+      justify-content: center;
+      display: flex;
+        position: absolute;
+        z-index: 1;
+        left:16px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 45px;
+        height: 45px;
+        border-radius: 100%;
+        border: 1px solid #008c75;
+        box-shadow: 1px 1px 3px rgba(0,0,0,.25);
+        transition: all .25s ease;
+        font-weight: bold;
+        background-color: rgba(255,255,255, 0.75);
+        backdrop-filter: blur(2px);
+        &:hover,
+        &:focus {
+          background-color: #008c75;
+          outline: none;
+          opacity: .7;
+        };
+        & svg {
+          transform: translateX(-22%);
+          stroke: #008c75 !important;
+          fill: #008c75 !important;
+        }
+      `
+        const NextButton = styled.button`
+        align-items: center;
+        justify-content: center;
+        display: flex;
+          position: absolute;
+          z-index: 1;
+          right:16px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 45px;
+          height: 45px;
+          border-radius: 100%;
+          border: 1px solid #008c75;
+          box-shadow: 1px 1px 3px rgba(0,0,0,.25);
+          transition: all .25s ease;
+          font-weight: bold;
+          background-color: rgba(255,255,255, 0.75);
+          backdrop-filter: blur(2px);
+          &:hover,
+          &:focus {
+            background-color: #008c75;
+            outline: none;
+          };
+          & svg {
+            transform: translateX(22%);
+          }
+        `
 
       const ComparisonWrapper = styled.div`
         position: fixed;
-        top: 50%;
+        top: 55%;
         left: 50%;
         transform: translate(-50%, -50%);
         backgroundColor: #FFF;

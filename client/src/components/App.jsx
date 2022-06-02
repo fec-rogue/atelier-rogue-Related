@@ -5,6 +5,8 @@ import Overview from "./Overview/Overview.jsx";
 import axios from 'axios';
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
 import Reviews from "./reviews/Reviews.jsx";
+import { FiSun, FiMoon } from 'react-icons/fi';
+
 
 /*
 Example usage of lazy:
@@ -24,6 +26,18 @@ const App = () => {
   const [id, setId] = useState('40351');
   const [allRatings, setAllRatings] = useState(0);
 
+  const storedTheme = localStorage.getItem('theme');
+  if (!storedTheme) {
+    localStorage.setItem('theme', 'light');
+  }
+  const [currentTheme, setCurrentTheme] = useState(storedTheme || 'light');
+  const handleThemeChange = () => {
+    const newTheme = (currentTheme === 'light') ? 'dark' : 'light';
+    localStorage.setItem('theme', newTheme);
+    setCurrentTheme(newTheme);
+  };
+
+
   useEffect(() => {
     axios.get('/reviews/meta', {params: {product_id: id}})
     .then((results) => {
@@ -38,11 +52,43 @@ const App = () => {
     })
     }, [id]);
 
+    const themeStyle = () => {
+      if(window.localStorage.theme === undefined) {
+        return {
+          "display": "block",
+          "backgroundColor": "#FFF",
+          "font-family": "'Montserrat', sans-serif",
+          "margin": "0"
+        }
+      }
 
-  //need to grab overview data
+      if(window.localStorage.theme === 'dark') {
+        return {
+          "body": '#363537',
+          "text": '#FAFAFA',
+          "toggleBorder": '#6B8096',
+          "font-family": "'Montserrat', sans-serif",
+          "backgroundColor": '#999'
+        }
+      }
+
+      if(window.localStorage.theme === 'light') {
+        return {
+          "display": "block",
+          "backgroundColor": "#FFF",
+          "font-family": "'Montserrat', sans-serif",
+          "margin": "0"
+        }
+      }
+    }
+
   return (
-    <AppContainer>
+    <AppContainer style={(themeStyle())}>
+
       <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings}}>
+      <ThemeChanger onClick={handleThemeChange}>
+      {currentTheme === 'light' ? <FiMoon /> : <FiSun />}  Theme
+      </ThemeChanger>
         <div>
           <Overview />
         </div>
@@ -58,10 +104,11 @@ const App = () => {
 }
 
 const AppContainer = styled.div`
-  display: block;
-  background-color: #ded3c5;
-  font-family: 'Abel', sans-serif;
-  margin: 0;
+`;
+const ThemeChanger = styled.span`
+  display: inline-block;
+  padding: 20px 0 0 20px;
+  cursor: pointer;
 `;
 
 
