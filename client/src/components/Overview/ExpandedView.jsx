@@ -2,7 +2,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import {DescriptionsContext} from './Overview.jsx';
-import {AiOutlineClose} from 'react-icons/Ai';
+import {AiOutlineClose} from 'react-icons/ai';
 import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
 
 function ExpandedView() {
