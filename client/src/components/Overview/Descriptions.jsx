@@ -10,7 +10,7 @@ import {BsFacebook, BsTwitter, BsPinterest} from 'react-icons/bs';
 
 function Descriptions() {
 
-  const {styles, setProductStyles, displayed, setDisplayed} = useContext(DescriptionsContext);
+  const {styles, setProductStyles, displayed, setDisplayed, curPhoto, setCurPhoto} = useContext(DescriptionsContext);
   const {id, setId, allRatings, setallRatings} = useContext(PropIdContext);
   const [price, setPrice] = useState('0');
   const [productInfo, setProductInfo] = useState([]);

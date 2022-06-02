@@ -6,12 +6,13 @@ import {DescriptionsContext} from './Overview.jsx'
 // TODO: checkmark overlaid on selected style, hover function for user readability
 function StyleSelection() {
 
-  const {styles, setProductStyles, displayed, setDisplayed} = useContext(DescriptionsContext);
+  const {styles, setProductStyles, displayed, setDisplayed, setCurPhoto} = useContext(DescriptionsContext);
 
   // updates style beind displayed
   const handleStyleChange = (e) => {
     if (e.style_id !== displayed.style_id) {
       setDisplayed(e);
+      setCurPhoto(0);
     }
   };
    // react doesn't like that setDisplayed is being set with the "icon" variable from the styles array

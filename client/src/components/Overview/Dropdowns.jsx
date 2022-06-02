@@ -63,7 +63,6 @@ function Dropdowns () {
 
   // adds product to saved outfits in RelatedProducts section
   const handleFave = () => {
-    console.log('clicked');
     setFave(displayed);
   }
 
