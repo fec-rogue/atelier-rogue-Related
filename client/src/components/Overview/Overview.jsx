@@ -15,8 +15,7 @@ function Overview() {
   const [styles, setProductStyles] = useState([])
   const [displayed, setDisplayed] = useState([])
   const [expanded, setExpanded] = useState(false);
-  const [curPhoto, setCurPhoto] = useState('');
-  const {id, setId, allRatings, setAllRatings} = useContext(PropIdContext);
+  const {id, setId, allRatings, setAllRatings, curPhoto, setCurPhoto} = useContext(PropIdContext);
 
   useEffect(() => {
     axios.get('/products/styles', {params:{product_id:id}})

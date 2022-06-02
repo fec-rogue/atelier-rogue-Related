@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import {DescriptionsContext} from './Overview.jsx'
+import {DescriptionsContext} from './Overview.jsx';
+import {PropIdContext} from '../App.jsx';
 
 // TODO: checkmark overlaid on selected style, hover function for user readability
 function StyleSelection() {
 
-  const {styles, setProductStyles, displayed, setDisplayed, setCurPhoto} = useContext(DescriptionsContext);
+  const {styles, setProductStyles, displayed, setDisplayed} = useContext(DescriptionsContext);
+  const {setCurPhoto} = useContext(PropIdContext);
 
   // updates style beind displayed
   const handleStyleChange = (e) => {

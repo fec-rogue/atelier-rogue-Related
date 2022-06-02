@@ -4,11 +4,12 @@ import React, { useEffect, useState, useRef, useContext } from 'react';
 import {DescriptionsContext} from './Overview.jsx';
 import {AiOutlineClose} from 'react-icons/ai';
 import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
+import {PropIdContext} from '../App.jsx';
 
 function ExpandedView() {
 
   const {displayed} = useContext(DescriptionsContext);
-  const {curPhoto, setCurPhoto} = useContext(DescriptionsContext);
+  const {curPhoto, setCurPhoto} = useContext(PropIdContext);
   const {expanded, setExpanded} = useContext(DescriptionsContext);
   const [[x, y], setPosition] = useState([0,0]);
   const [[w, h], setZoomSize] = useState([0,0]);

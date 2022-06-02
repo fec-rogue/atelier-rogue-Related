@@ -2,14 +2,14 @@ import axios from 'axios';
 import styled from 'styled-components';
 import React, { useEffect, useState, useContext } from 'react';
 import {DescriptionsContext} from './Overview.jsx'
+import {PropIdContext} from '../App.jsx';
 import {FaChevronUp, FaChevronDown} from "react-icons/fa";
-
 //TODO:
 // thumbnail should scroll to make current selection visible
 function ThumbnailCarousel() {
 
   const {displayed} = useContext(DescriptionsContext);
-  const {curPhoto, setCurPhoto} = useContext(DescriptionsContext);
+  const {curPhoto, setCurPhoto} = useContext(PropIdContext);
   const [range, setRange] = useState({min: 0, max:6});
 
   useEffect(() => {

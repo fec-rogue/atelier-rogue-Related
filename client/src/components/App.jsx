@@ -25,6 +25,7 @@ export const FavoriteContext = createContext();
 const App = () => {
   const [id, setId] = useState('40351');
   const [allRatings, setAllRatings] = useState(0);
+  const [curPhoto, setCurPhoto] = useState('');
 
   const storedTheme = localStorage.getItem('theme');
   if (!storedTheme) {
@@ -85,7 +86,7 @@ const App = () => {
   return (
     <AppContainer style={(themeStyle())}>
 
-      <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings}}>
+      <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings, curPhoto, setCurPhoto}}>
         <div>
           <Overview />
         </div>
