@@ -57,7 +57,7 @@ const App = () => {
       if(window.localStorage.theme === undefined) {
         return {
           "display": "block",
-          "backgroundColor": "#FFF",
+          "backgroundColor": "#FCFBF4",
           "font-family": "'Montserrat', sans-serif",
           "margin": "0"
         }
