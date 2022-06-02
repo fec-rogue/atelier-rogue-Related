@@ -68,7 +68,7 @@ const StyleCircle = styled.li`
 
 const StyleColor = styled.div`
   border-radius: 100px;
-  border: 0.5px solid white;
+  border: 0.5px solid #FCFBF4;
   padding: 3px;
   width: 50px;
   height: 50px;

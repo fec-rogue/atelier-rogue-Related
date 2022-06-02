@@ -45,29 +45,39 @@ function MainCarousel() {
   (null) :
   (<CarouselDiv>
        <InnerDiv>
+         <FullDiv>
+           <ImgButtons onClick={handleExpanded}>
+            <BsFullscreen
+                size={14}
+                style={{color:'white'}}/>
+            </ImgButtons>
+         </FullDiv>
           <PrevDiv>
-            <UpDownBtns onClick={() => {updateIndex(index-1)}} ><FaChevronRight
+            <ImgButtons onClick={() => {updateIndex(index-1)}} ><FaChevronRight
             size={28}
             style={{color:'white'}}/>
-            </UpDownBtns>
+            </ImgButtons>
           </PrevDiv>
           <ImgContainer >
-            <CarouselItem
-              src={displayed.photos[curPhoto].url}
-              onClick={handleExpanded}>
+            <CarouselItem src={displayed.photos[curPhoto].url}>
             </CarouselItem>
           </ImgContainer>
           <NextDiv>
-            <UpDownBtns onClick={() => {updateIndex(index+1)}}><FaChevronLeft
+            <ImgButtons onClick={() => {updateIndex(index+1)}}><FaChevronLeft
             size={28}
             style={{color:'white'}}/>
-            </UpDownBtns>
+            </ImgButtons>
           </NextDiv>
         </InnerDiv>
     </CarouselDiv>
   )
 
 };
+const FullDiv = styled.div`
+  position: absolute;
+  top: 8px;
+  right: 16px;
+`;
 
 const ImgContainer = styled.div`
   overflow: hidden;
@@ -120,7 +130,7 @@ const NextDiv = styled.div`
 
 `;
 
-const UpDownBtns = styled.button`
+const ImgButtons = styled.button`
   background-color: transparent;
   border: none;
   &:hover {

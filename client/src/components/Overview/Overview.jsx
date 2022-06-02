@@ -79,7 +79,7 @@ const AnnouncementHeader = styled.h2`
   margin: 0;
   margin-bottom: 30px;
   padding: 5px;
-  background-color: white;
+  background-color: #FCFBF4;
 `;
 
 const OverviewComps = styled.div`
