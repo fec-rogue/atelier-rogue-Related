@@ -2,14 +2,14 @@ import axios from 'axios';
 import styled from 'styled-components';
 import React, { useEffect, useState, useContext } from 'react';
 import {DescriptionsContext} from './Overview.jsx'
-import {PropIdContext} from '../App.jsx';
 import {FaChevronUp, FaChevronDown} from "react-icons/fa";
+
 //TODO:
 // thumbnail should scroll to make current selection visible
 function ThumbnailCarousel() {
 
   const {displayed} = useContext(DescriptionsContext);
-  const {curPhoto, setCurPhoto} = useContext(PropIdContext);
+  const {curPhoto, setCurPhoto} = useContext(DescriptionsContext);
   const [range, setRange] = useState({min: 0, max:6});
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function ThumbnailCarousel() {
         <UpDownBtns onClick={prev} >
           <FaChevronUp
               size={28}
-              style={{color:'teal'}}/>
+              style={{color:'white'}}/>
             </UpDownBtns>
       </UpDownDiv>
       <div>
@@ -59,7 +59,7 @@ function ThumbnailCarousel() {
         <UpDownBtns onClick={next}>
           <FaChevronDown
             size={28}
-            style={{color:'teal'}}/>
+            style={{color:'white'}}/>
             </UpDownBtns>
       </UpDownDiv>
     </ThumbnailCarouselDiv>
@@ -78,7 +78,7 @@ const ThumbnailCarouselDiv = styled.div`
   max-height: 800px;
   transition: all ease-in-out 0.05s;
   .selected {
-    border-bottom: 6px solid teal;
+    border-bottom: 6px solid white;
     transition: all ease-in-out 0.05s;
   }
 `;

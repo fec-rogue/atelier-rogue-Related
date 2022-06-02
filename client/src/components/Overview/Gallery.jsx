@@ -11,7 +11,7 @@ import ExpandedView from './ExpandedView.jsx';
 function Gallery() {
 
   const {displayed, setDisplayed} = useContext(DescriptionsContext);
-  const {curPhoto, setCurPhoto} = useContext(DescriptionsContext);
+  const {curPhoto, setCurPhoto} = useContext(PropIdContext);
 
 
   useEffect(() => {

@@ -46,6 +46,7 @@ const AccountDiv = styled.div`
   &:hover{
     opacity: 90%;
     cursor: pointer;
+    transform: scale(0.96);
   }
 `;
 const CartBtn = styled.button`
@@ -55,6 +56,7 @@ const CartBtn = styled.button`
   &:hover{
     opacity: 90%;
     cursor: pointer;
+    transform: scale(0.96);
   }
 `;
 const Qty = styled.p`
@@ -75,7 +77,7 @@ const BannerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #8d5535;
+  background-color: #008C75;
 
 `;
 // display: flex;

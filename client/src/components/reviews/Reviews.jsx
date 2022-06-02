@@ -5,8 +5,8 @@ import axios from 'axios';
 import Stars from '../stars/Stars.jsx';
 import Ratings from './Ratings.jsx';
 import Relevance from './Relevance.jsx';
-import ReviewModal from './modal/ReviewModal.jsx';
 import YesButton from './YesButton.jsx';
+import ReviewModal from './modal/ReviewModal.jsx';
 
 
 const Test = styled.div`
@@ -124,7 +124,6 @@ const Reviews = () => {
   useEffect(() => {
     axios.get('http://localhost:3000/reviews', {params: {id: 40344, count: count}})
       .then((results) => {
-        console.log(results.data)
         if (sort === "Newest") {
           results.data.results.sort((a, b) => new Date(b.date) - new Date(a.date));
         }
