@@ -78,8 +78,8 @@ exports.postReview = (data, cb) => {
     });
 };
 
-exports.helpfulReview = (id, data, cb) => {
-  axios.post(options.url + `reviews/${id}/helpful`, data, {headers: options.headers})
+exports.helpfulReview = (id, cb) => {
+  axios.put(options.url + `reviews/${id}/helpful`, {}, {headers: options.headers})
     .then(cb)
     .catch((error) => {
       console.log('error posting at postReview,', error);

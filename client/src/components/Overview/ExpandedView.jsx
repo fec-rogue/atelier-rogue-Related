@@ -2,13 +2,14 @@ import axios from 'axios';
 import styled from 'styled-components';
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import {DescriptionsContext} from './Overview.jsx';
-import {AiOutlineClose} from 'react-icons/Ai';
+import {AiOutlineClose} from 'react-icons/ai';
 import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
+import {PropIdContext} from '../App.jsx';
 
 function ExpandedView() {
 
   const {displayed} = useContext(DescriptionsContext);
-  const {curPhoto, setCurPhoto} = useContext(DescriptionsContext);
+  const {curPhoto, setCurPhoto} = useContext(PropIdContext);
   const {expanded, setExpanded} = useContext(DescriptionsContext);
   const [[x, y], setPosition] = useState([0,0]);
   const [[w, h], setZoomSize] = useState([0,0]);
@@ -81,7 +82,7 @@ function ExpandedView() {
             <UpDownBtns onClick={prev} >
               <FaChevronLeft
                 size={28}
-                style={{color:'white'}}/>
+                style={{color:'teal'}}/>
             </UpDownBtns>
           </PrevDiv>
           <div>
@@ -101,7 +102,7 @@ function ExpandedView() {
             <UpDownBtns onClick={next}>
               <FaChevronRight
                   size={28}
-                  style={{color:'white'}}/>
+                  style={{color:'teal'}}/>
             </UpDownBtns>
           </NextDiv>
         </ThumbnailCarouselDiv>
@@ -166,7 +167,7 @@ const ThumbnailCarouselDiv = styled.div`
   max-height: 800px;
   transition: all ease-in-out 0.05s;
   .selected {
-    border-bottom: 6px solid white;
+    border-bottom: 6px solid teal;
     transition: all ease-in-out 0.05s;
   }
 `;

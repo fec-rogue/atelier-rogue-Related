@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
-import {AiOutlineDelete} from "react-icons/Ai";
+import {AiOutlineDelete} from "react-icons/ai";
 
 const OutfitEntry = ({item, setOutfit, ratings}) => {
   let handleDelete = () => {
@@ -21,8 +21,8 @@ const OutfitEntry = ({item, setOutfit, ratings}) => {
         </DeleteButton>
       <OutfitInfo>
           <p style={{margin: 0}}>{item.category}</p>
-          <p style={{margin: 0, 'font-size': '24px', 'font-weight': '600'}}>{item.name}</p>
-          <p style={{margin: 0, 'font-weight': '600', 'color': '#008c75'}}>${item.default_price}</p>
+          <p style={{margin: 0, 'fontSize': '24px', 'fontWeight': '600'}}>{item.name}</p>
+          <p style={{margin: 0, 'fontWeight': '600', 'color': '#008c75'}}>${item.default_price}</p>
           <Ratings>{ratings}</Ratings>
       </OutfitInfo>
     </Outfititem>

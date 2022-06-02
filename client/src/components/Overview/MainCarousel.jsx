@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import {DescriptionsContext} from './Overview.jsx';
 import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
 import {BsFullscreen} from "react-icons/bs";
+import {PropIdContext} from '../App.jsx';
 
 //TODO:
 // hovering over item with magnifying glass will magnify image
@@ -13,7 +14,7 @@ function MainCarousel() {
 
   const {displayed} = useContext(DescriptionsContext);
   const {expanded, setExpanded} = useContext(DescriptionsContext);
-  const {curPhoto, setCurPhoto} = useContext(DescriptionsContext);
+  const {curPhoto, setCurPhoto} = useContext(PropIdContext);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {

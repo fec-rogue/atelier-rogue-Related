@@ -94,11 +94,6 @@ function Dropdowns () {
   return (Object.keys(displayed).length === 0) ?
   null :
     <SizeQtyDiv>
-      {cartValid === false ?
-      <ErrorDiv>
-        <ErrMsg role='alert'>Please Select A Size</ErrMsg>
-      </ErrorDiv>
-      : null}
       <p><strong>Size: {sizeSelected}</strong></p>
       <Selector
         id ='sizes'
@@ -109,11 +104,16 @@ function Dropdowns () {
         <option value='' disabled hidden>Select Size</option>
         {Object.keys(sizeAndQty).map((size, key) => {
           return (
-              <option value={size} key={key}>{size}</option>
-          )
+            <option value={size} key={key}>{size}</option>
+            )
           })}
       </Selector>
       {renderQty()}
+      {cartValid === false ?
+      <ErrorDiv>
+        <ErrMsg role='alert'>Please Select A Size</ErrMsg>
+      </ErrorDiv>
+      : null}
       <CartDiv>
         {sizeAndQty[sizeSelected] === 0 ?
         <NoStockMsg>The items with the selected options is out of stock.</NoStockMsg>
@@ -131,10 +131,10 @@ function Dropdowns () {
 
 // export on separate css page
 const FaveBtn = styled.button`
-  background-color: #8d5535;
+  background-color: #008C75;
   color: #fff;
   font-weight: 400;
-  border: 1px solid #8d5535;
+  border: 1px solid #008C75;
   border-radius: 3px;
   padding: 0;
   line-height: 0;
@@ -149,10 +149,10 @@ const FaveBtn = styled.button`
   }
 `;
 const CartBtn = styled.button`
-  background-color: #8d5535;
+  background-color: #008C75;
   color: #fff;
   font-weight: 400;
-  border: 1px solid #8d5535;
+  border: 1px solid #008C75;
   border-radius: 3px;
   padding: 0;
   line-height: 0;
@@ -171,9 +171,8 @@ const CartBtn = styled.button`
 const CartDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 5px;
+  margin-top: 15px;
   margin-left: 0px;
-  margin-top: 35px;
   margin-bottom: 15px;
 `;
 const SizeQtyDiv = styled.div`
