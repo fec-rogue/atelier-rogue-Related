@@ -72,7 +72,7 @@ width: 80px;
 
 
 
-const ModalPage2 = ({allCharacteristics, setAllCharacteristics, setNext}) => {
+const ModalPage2 = ({allCharacteristics, setAllCharacteristics, setNext, setModal}) => {
   const [summaryCount, setSummaryCount] = useState(0);
   const [bodyCount, setBodyCount] = useState(0);
 
@@ -96,8 +96,9 @@ const ModalPage2 = ({allCharacteristics, setAllCharacteristics, setNext}) => {
   const handleSubmitClick = (e) => {
     // console.log(allCharacteristics);
     axios.post('http://localhost:3000/reviews', allCharacteristics)
-      .then((results) => {
-        console.log(results);
+      .then(() => {
+        alert('added successfully!')
+        setModal(false);
       })
   }
 
