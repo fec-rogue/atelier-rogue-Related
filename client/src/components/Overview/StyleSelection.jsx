@@ -15,9 +15,8 @@ function StyleSelection() {
     if (e.style_id !== displayed.style_id) {
       setDisplayed(e);
       setCurPhoto(0);
-      console.log(ind);
-      setStyleIndx(key);
-
+      let pos = ind*4 + key;
+      setStyleIndx(pos);
     }
   };
    // react doesn't like that setDisplayed is being set with the "icon" variable from the styles array
@@ -27,7 +26,7 @@ function StyleSelection() {
         {styles.map((rows, ind) => {
           return (
             <StyleDiv key={ind}>
-              {rows.map((icon, key, ind) => {
+              {rows.map((icon, key) => {
               return (
                 <StyleCircle key={key}>
                   <label
@@ -38,6 +37,7 @@ function StyleSelection() {
                     name='color'
                     value={icon.style_id}
                     id={icon.name}
+                    ind={ind}
                     checked={icon.style_id === displayed.style_id}
                     onChange={() => {handleStyleChange(icon, key, ind)}}/>
                       <StyleColor

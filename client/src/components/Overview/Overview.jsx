@@ -10,7 +10,7 @@ import { FiSun, FiMoon } from 'react-icons/fi';
 
 export const DescriptionsContext = createContext();
 
-function Overview() {
+function Overview({handleThemeChange, currentTheme}) {
 
   const [styles, setProductStyles] = useState([])
   const [displayed, setDisplayed] = useState([])
@@ -42,7 +42,7 @@ function Overview() {
 
   return(
     <div>
-      <Cart/>
+      <Cart handleThemeChange={handleThemeChange} currentTheme={currentTheme}/>
       <AnnouncementHeader>FREE SHIPPING ON ORDERS OVER $100</AnnouncementHeader>
       <DescriptionsContext.Provider
       value={{displayed, setDisplayed, styles, setProductStyles, expanded, setExpanded, curPhoto, setCurPhoto}}>

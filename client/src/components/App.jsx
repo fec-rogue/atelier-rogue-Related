@@ -87,7 +87,7 @@ const App = () => {
     <AppContainer style={(themeStyle())}>
       <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings, curPhoto, setCurPhoto, styleIndx, setStyleIndx}}>
         <div>
-          <Overview />
+          <Overview handleThemeChange={handleThemeChange} currentTheme={currentTheme}/>
         </div>
         <div>
           <RelatedProducts />
@@ -95,9 +95,6 @@ const App = () => {
         <div>
           <Reviews />
         </div>
-        <ThemeChanger onClick={handleThemeChange}>
-          {currentTheme === 'light' ? <FiMoon style={{color: 'teal'}}/> : <FiSun style={{color: 'teal'}}/>}  Theme
-        </ThemeChanger>
       </PropIdContext.Provider>
     </AppContainer>
   )
