@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
-import {AiOutlineDelete} from "react-icons/Ai";
+import {AiOutlineDelete} from "react-icons/ai";
 
 const OutfitEntry = ({item, setOutfit, ratings}) => {
   let handleDelete = () => {

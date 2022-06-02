@@ -54,26 +54,27 @@ exports.postReview = (req, res) => {
     rating: req.body.rating,
     summary: req.body.summary,
     body: req.body.body,
-    recommend: req.body.recommend,
     name: req.body.name,
     email: req.body.email,
+    recommend: req.body.recommend,
     photos: req.body.photos,
     characteristics: req.body.characteristics
   };
+  // console.log(data);
   models.postReview(data, (result) => {
     res.json('posted successfully');
   });
 };
 
 exports.helpfulReview = (req, res) => {
-  let id = req.query.product_id;
-  models.helpfulReview(id, data, (result) => {
+  let id = req.query.review_id;
+  models.helpfulReview(id, (result) => {
     res.json('updated successfully');
   });
 };
 
 exports.reportReview = (req, res) => {
-  let id = req.query.product_id;
+  let id = req.query.review_id;
   models.reportReview(data, (result) => {
     res.json('reported successfully');
   });
@@ -82,16 +83,15 @@ exports.reportReview = (req, res) => {
 // Cart routes
 
 exports.getCart = (req, res) => {
-  // console.log('getCart data', req.body);
   models.getCart((result) => {
     res.json(result);
   });
 };
 
-exports.createCart = (req, res) => {
+exports.addToCart = (req, res) => {
   console.log('create Cart data', req.body);
-  var query = {'sku_id': req.body.sku_id};
-  models.createCart(query, (err, data) => {
+  var query = parseInt(req.body.sku_id);
+  models.addToCart(query, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {

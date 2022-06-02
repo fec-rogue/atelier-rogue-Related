@@ -34,14 +34,8 @@ function Gallery() {
 
 const PictureContainer = styled.div `
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   width: 100%;
-`;
-
-const CarouselContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 40%;
 `;
 
 const MainPicDiv = styled.div`
@@ -49,13 +43,7 @@ const MainPicDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const MainPicture = styled.img`
-  width: 90%;
-  height: 90%;
-  max-height: 580px;
-  max-width: 580px;
-  object-fit: cover;
-`;
+
 
 
 

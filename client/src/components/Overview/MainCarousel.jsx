@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import {DescriptionsContext} from './Overview.jsx';
-
+import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
+import {BsFullscreen} from "react-icons/bs";
 
 //TODO:
 // hovering over item with magnifying glass will magnify image
@@ -44,47 +45,46 @@ function MainCarousel() {
   (null) :
   (<CarouselDiv>
        <InnerDiv>
-         <div>
-          <UpDownDiv>
-            <UpDownBtns onClick={() => {updateIndex(index-1)}} >Prev</UpDownBtns>
-          </UpDownDiv>
-         </div>
+         <FullDiv>
+           <ImgButtons onClick={handleExpanded}>
+            <BsFullscreen
+                size={14}
+                style={{color:'white'}}/>
+            </ImgButtons>
+         </FullDiv>
+          <PrevDiv>
+            <ImgButtons onClick={() => {updateIndex(index-1)}} ><FaChevronRight
+            size={28}
+            style={{color:'white'}}/>
+            </ImgButtons>
+          </PrevDiv>
           <ImgContainer >
-            <CarouselItem
-              src={displayed.photos[curPhoto].url}
-              onClick={handleExpanded}>
+            <CarouselItem src={displayed.photos[curPhoto].url}>
             </CarouselItem>
           </ImgContainer>
-         <RightImgDiv>
-          <UpDownDiv>
-            <UpDownBtns onClick={() => {updateIndex(index+1)}}>Next</UpDownBtns>
-          </UpDownDiv>
-         </RightImgDiv>
+          <NextDiv>
+            <ImgButtons onClick={() => {updateIndex(index+1)}}><FaChevronLeft
+            size={28}
+            style={{color:'white'}}/>
+            </ImgButtons>
+          </NextDiv>
         </InnerDiv>
     </CarouselDiv>
   )
 
 };
-
-const ZoomedImg = styled.div`
-  pointerEvents: none;
-  height: ${(props) => `${props.height}px`};
-  width: ${(props) => `${props.width}px`};
-  opacity: ${props => props.opacity};
-  border: 1px solid lightgray;
-  background-image: url(${(props) => props.img});
-  background-repeat: no-repeat;
-  &:hover {
-    cursor: zoom-in;
-  }
+const FullDiv = styled.div`
+  position: absolute;
+  top: 8px;
+  right: 16px;
 `;
+
 const ImgContainer = styled.div`
-  position: relative;
   overflow: hidden;
-  display: block;
+  display: flex;
+  justify-content: center;
 `;
 const CarouselDiv = styled.div`
-  display: inline-flex;
   max-width: 100%;
   height: auto;
   transition: all ease-in-out 0.5s;
@@ -93,30 +93,50 @@ const InnerDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 const CarouselItem = styled.img`
-  position: relative;
   width: 100%;
   height: auto;
+  object-fit: cover;
   transition: all ease-in-out 0.03s;
   &:hover {
     cursor: zoom-in;
   }
 `;
-const UpDownDiv = styled.div`
+
+const PrevDiv = styled.div`
   display: flex;
-  height: 100%;
   align-items: center;
   justify-content: center;
   color: gray;
   transition: all ease-in-out 0.1s;
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  right: 18px;
+
 `;
-const RightImgDiv = styled.div`
+const NextDiv = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: gray;
+  transition: all ease-in-out 0.1s;
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  left: 18px;
+
 `;
 
-const UpDownBtns = styled.button`
+const ImgButtons = styled.button`
+  background-color: transparent;
+  border: none;
+  &:hover {
+    cursor: pointer;
+    opacity: 50%
+  }
 `;
 
 export default MainCarousel;

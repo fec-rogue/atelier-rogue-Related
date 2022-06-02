@@ -78,8 +78,8 @@ exports.postReview = (data, cb) => {
     });
 };
 
-exports.helpfulReview = (id, data, cb) => {
-  axios.post(options.url + `reviews/${id}/helpful`, data, {headers: options.headers})
+exports.helpfulReview = (id, cb) => {
+  axios.put(options.url + `reviews/${id}/helpful`, {}, {headers: options.headers})
     .then(cb)
     .catch((error) => {
       console.log('error posting at postReview,', error);
@@ -95,15 +95,15 @@ exports.reportReview = (id, data, cb) => {
 };
 
 exports.getCart = (cb) => {
-  axios.get(`${options.url}cart`, options.headers)
+  axios.get(`${options.url}cart`, {'Authorization': process.env.TOKEN})
     .then(cb)
     .catch((err) => {
       console.log('error while getting Cart data', err);
     });
 };
 
-exports.createCart = (data, cb) => {
-  axios.post(`${options.url}cart`, data, options.headers)
+exports.addToCart = (data, cb) => {
+  axios.post(`${options.url}cart`, {sku_id: data}, {'Authorization': process.env.TOKEN})
     .then(cb)
     .catch((err) => {
       console.log('error while posting Cart data', err);

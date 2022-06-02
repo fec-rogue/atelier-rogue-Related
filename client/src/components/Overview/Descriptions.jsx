@@ -10,7 +10,7 @@ import {BsFacebook, BsTwitter, BsPinterest} from 'react-icons/bs';
 
 function Descriptions() {
 
-  const {styles, setProductStyles, displayed, setDisplayed} = useContext(DescriptionsContext);
+  const {styles, setProductStyles, displayed, setDisplayed, curPhoto, setCurPhoto} = useContext(DescriptionsContext);
   const {id, setId, allRatings, setallRatings} = useContext(PropIdContext);
   const [price, setPrice] = useState('0');
   const [productInfo, setProductInfo] = useState([]);
@@ -97,7 +97,8 @@ const AvgBtn = styled.button`
   border: none;
   background: none;
   &:hover {
-    color: gray
+    color: gray;
+    cursor: pointer;
   }
 `;
 const Name = styled.h2`
@@ -111,11 +112,19 @@ const SocialsDiv = styled.div`
 
 const SocialsBtn = styled.div`
   margin-right: 15px;
+  &:hover {
+    cursor: pointer;
+    opacity: 90%;
+    transform: scale(0.96);
+  }
 `;
 const DescAccordion = styled.div`
-  border-bottom: 0.5px solid;
+  border-bottom: 0.5px solid #8E918F;
   padding: 15px;
   font-family: "Neuzeit-Grotesk","Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const DescTitle = styled.div`
   display: flex;

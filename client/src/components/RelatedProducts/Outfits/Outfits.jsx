@@ -5,7 +5,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import AverageStars from '../../stars/AverageStars.jsx';
 import OutfitEntry from './OutfitEntry.jsx';
-import { GrCaretPrevious,  GrCaretNext } from "react-icons/Gr";
+import { GrCaretPrevious,  GrCaretNext } from "react-icons/gr";
 
 const Outfits = () => {
   const {id, setId} = useContext(PropIdContext);
