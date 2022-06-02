@@ -10,7 +10,7 @@ padding: 0 0 0 0;
 border: 0 0 0 0;
 margin-bottom: 20px;
 margin-top: 5px;
-background: linear-gradient(90deg, green 0 ${(props) => props.percent}%, grey ${(props) => props.percent}% 100%);
+background: linear-gradient(90deg, #008C75 0 ${(props) => props.percent}%, #E5E6E6 ${(props) => props.percent}% 100%);
 `;
 
 export default ComparisonBar;

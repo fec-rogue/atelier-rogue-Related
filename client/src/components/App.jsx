@@ -25,6 +25,7 @@ export const FavoriteContext = createContext();
 const App = () => {
   const [id, setId] = useState('40351');
   const [allRatings, setAllRatings] = useState(0);
+    const [curPhoto, setCurPhoto] = useState('');
 
   const storedTheme = localStorage.getItem('theme');
   if (!storedTheme) {
@@ -56,7 +57,7 @@ const App = () => {
       if(window.localStorage.theme === undefined) {
         return {
           "display": "block",
-          "backgroundColor": "#FFF",
+          "backgroundColor": "#FCFBF4",
           "fontFamily": "'Montserrat', sans-serif",
           "margin": "0"
         }
@@ -75,7 +76,11 @@ const App = () => {
       if(window.localStorage.theme === 'light') {
         return {
           "display": "block",
+<<<<<<< HEAD
           "backgroundColor": "#FFF",
+=======
+          "backgroundColor": "#FCFBF4",
+>>>>>>> main
           "fontFamily": "'Montserrat', sans-serif",
           "margin": "0"
         }
@@ -85,10 +90,7 @@ const App = () => {
   return (
     <AppContainer style={(themeStyle())}>
 
-      <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings}}>
-      <ThemeChanger onClick={handleThemeChange}>
-      {currentTheme === 'light' ? <FiMoon /> : <FiSun />}  Theme
-      </ThemeChanger>
+      <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings, curPhoto, setCurPhoto}}>
         <div>
           <Overview />
         </div>
@@ -98,6 +100,9 @@ const App = () => {
         <div>
           <Reviews />
         </div>
+        <ThemeChanger onClick={handleThemeChange}>
+          {currentTheme === 'light' ? <FiMoon style={{color: 'teal'}}/> : <FiSun style={{color: 'teal'}}/>}  Theme
+          </ThemeChanger>
       </PropIdContext.Provider>
     </AppContainer>
   )
@@ -109,6 +114,7 @@ const ThemeChanger = styled.span`
   display: inline-block;
   padding: 20px 0 0 20px;
   cursor: pointer;
+  margin: 10px;
 `;
 
 
