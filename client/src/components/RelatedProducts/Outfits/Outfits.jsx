@@ -74,7 +74,6 @@ const Outfits = () => {
         }
   }
 
-
   return (
     <OutfitsWrapper>
 
@@ -123,25 +122,6 @@ const IndividualOutfit = styled.div`
   box-shadow: 0 0 24px 8px rgba(0,0,0,0.05);
 `
 
-// const PrevButton = styled.button`
-//   left: 0;
-//   top:50%;
-//   display:flex;
-//   justify-content: center;
-//   position: absolute;
-//   z-index: 1;
-//   cursor:pointer;
-// `
-
-// const NextButton = styled.button`
-//   right: 0;
-//   top:50%;
-//   display:flex;
-//   justify-content: center;
-//   position: absolute;
-//   z-index: 1;
-//   cursor:pointer;
-// `
 
 const PrevButton = styled.button`
   position: absolute;

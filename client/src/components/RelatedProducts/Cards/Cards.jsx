@@ -84,39 +84,14 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
         box-shadow: 0 0 24px 8px rgba(0,0,0,0.01);
       `
 
-      // const PrevButton = styled.button`
-      //   left:0;
-      //   top:50%;
-      //   display:flex;
-      //   justify-content: center;
-      //   position: absolute;
-      //   z-index: 500;
-      //   cursor:pointer;
-      //   user-select:none;
-      //   width: 30px;
-      //   height: 30px;
-      //   border-radius: 100%;
-      //   border: none;
-      //   box-shadow: 1px 1px 3px rgba(0,0,0,.25);
-      //   font-weight: bold;
-      //   background-color: rgba(255,255,255, 0.75);
-      //   &:hover,
-      //   &:focus {
-      //     background-color: #dee2e6;
-      //     text-decoration: none;
-      //     outline: 0;
-      //     opacity: .7;
-      //   }
-      // `
-
       const PrevButton = styled.button`
         position: absolute;
         z-index: 1;
         left:0;
         top: 50%;
         transform: translateY(-50%);
-        width: 48px;
-        height: 48px;
+        width: 45px;
+        height: 45px;
         border-radius: 100%;
         border: none;
         box-shadow: 1px 1px 3px rgba(0,0,0,.25);
@@ -135,39 +110,14 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
           opacity: .7;
         }
       `
-      // const NextButton = styled.button`
-      //   right:0;
-      //   top:50%;
-      //   display:flex;
-      //   justify-content: center;
-      //   position: absolute;
-      //   z-index: 500;
-      //   cursor:pointer;
-      //   user-select:none;
-      //   width: 30px;
-      //   height: 30px;
-      //   border-radius: 100%;
-      //   border: none;
-      //   box-shadow: 1px 1px 3px rgba(0,0,0,.25);
-      //   font-weight: bold;
-      //   background-color: rgba(255,255,255, 0.75);
-      //   &:hover,
-      //   &:focus {
-      //     background-color: #dee2e6;
-      //     text-decoration: none;
-      //     outline: 0;
-      //     opacity: .7;
-      //   }
-      // `
-
         const NextButton = styled.button`
           position: absolute;
           z-index: 1;
           right:0;
           top: 50%;
           transform: translateY(-50%);
-          width: 48px;
-          height: 48px;
+          width: 45px;
+          height: 45px;
           border-radius: 100%;
           border: none;
           box-shadow: 1px 1px 3px rgba(0,0,0,.25);
