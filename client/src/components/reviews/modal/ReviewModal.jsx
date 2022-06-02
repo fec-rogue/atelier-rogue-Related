@@ -123,12 +123,12 @@ const ReviewModal = ({setModal}) => {
   const [reset, setReset] = useState(false);
   const [allCharacteristics, setAllCharacteristics] = useState({
     product_id: 40351,
-    rating: 1,
+    rating: -1,
     email: '',
     name: '',
     summary: '',
     body: '',
-    recommend: false,
+    recommend: null,
     photos: [],
     characteristics: {}
   });
@@ -179,7 +179,16 @@ const ReviewModal = ({setModal}) => {
   }
 
   const handleNextClick = (e) => {
-    setNext(true);
+    if (
+      allCharacteristics.rating === -1 ||
+      allCharacteristics.recommend === null ||
+      allCharacteristics.email === '' ||
+      allCharacteristics.name === ''
+    ) {
+      alert('one or more fields have not been filled in');
+    } else {
+      setNext(true);
+    }
   }
 
   if (next) {

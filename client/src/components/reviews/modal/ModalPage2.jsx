@@ -94,12 +94,18 @@ const ModalPage2 = ({allCharacteristics, setAllCharacteristics, setNext, setModa
   }
 
   const handleSubmitClick = (e) => {
-    // console.log(allCharacteristics);
-    axios.post('http://localhost:3000/reviews', allCharacteristics)
+    if (
+      allCharacteristics.summary === '' ||
+      allCharacteristics.body === ''
+    ) {
+      alert('please fill out either summary or body before submitting');
+    } else {
+      axios.post('http://localhost:3000/reviews', allCharacteristics)
       .then(() => {
         alert('added successfully!')
         setModal(false);
       })
+    }
   }
 
   const handleBackClick = (e) => {
