@@ -86,7 +86,6 @@ const RelatedProducts = () => {
           setSelectedid={setSelectedid}
         />
       }
-
     <ComparisonWrapper>
     { showModal && twoCardsArray.length > 0 &&
       <Comparison
@@ -95,9 +94,7 @@ const RelatedProducts = () => {
       /> }
     </ComparisonWrapper>
 
-
     <RelatedHeader>Your Outfit</RelatedHeader>
-
     <Outfits />
 
     </ RelatedProductsSection>
@@ -114,20 +111,18 @@ const RelatedProductsSection = styled.section`
   left: 50%;
   position: relative;
   transform: translateX(-50%);
-  // background-color: #ded3c5;
-  // font-family: 'Abel', sans-serif;
 `;
 
 
 const ComparisonWrapper = styled.div`
   position: fixed;
   width: 300px;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   backgroundColor: #FFF;
   padding: 50px;
-  zIndex: 1000
+  zIndex: 1000;
 `
 
 export default RelatedProducts;

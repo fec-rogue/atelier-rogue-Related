@@ -20,9 +20,9 @@ const OutfitEntry = ({item, setOutfit, ratings}) => {
         <AiOutlineDelete/>
         </DeleteButton>
       <OutfitInfo>
-          <p>{item.category}</p>
-          <p><b>{item.name}</b></p>
-          <p>${item.default_price}</p>
+          <p style={{margin: 0}}>{item.category}</p>
+          <p style={{margin: 0, 'font-size': '24px', 'font-weight': '600'}}>{item.name}</p>
+          <p style={{margin: 0, 'font-weight': '600', 'color': '#008c75'}}>${item.default_price}</p>
           <Ratings>{ratings}</Ratings>
       </OutfitInfo>
     </Outfititem>
@@ -32,12 +32,16 @@ const OutfitEntry = ({item, setOutfit, ratings}) => {
 
 const Outfititem = styled.div`
   width: 250px;
-  height: 400px;
+  height: 380px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 20px;
+  background-color: #FFF;
+  border-radius: 12px;
+  overflow:hidden;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
 `
 
 const OutfitImageBox = styled.div`
@@ -50,9 +54,10 @@ const Outfitimage = styled.img`
   object-fit: cover;
 `
 const OutfitInfo = styled.div`
-  padding: 0 16px;
+  padding: 10px 16px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 `
 
 const Ratings = styled.div`
