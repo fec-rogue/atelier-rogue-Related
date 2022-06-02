@@ -11,7 +11,7 @@ import {BsFacebook, BsTwitter, BsPinterest} from 'react-icons/bs';
 function Descriptions() {
 
   const {styles, setProductStyles, displayed, setDisplayed} = useContext(DescriptionsContext);
-  const {id, setId, allRatings, setallRatings, curPhoto, setCurPhoto} = useContext(PropIdContext);
+  const {id, setId, allRatings, curPhoto, setCurPhoto} = useContext(PropIdContext);
   const [price, setPrice] = useState('0');
   const [productInfo, setProductInfo] = useState([]);
   const [sizeAndQty, setSizeAndQty] = useState({});
@@ -119,7 +119,7 @@ const SocialsBtn = styled.div`
   }
 `;
 const DescAccordion = styled.div`
-  border-bottom: 0.5px solid #8E918F;
+  border-bottom: 0.5px solid;
   padding: 15px;
   font-family: "Neuzeit-Grotesk","Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
   &:hover {
