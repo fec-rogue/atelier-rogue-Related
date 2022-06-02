@@ -94,11 +94,6 @@ function Dropdowns () {
   return (Object.keys(displayed).length === 0) ?
   null :
     <SizeQtyDiv>
-      {cartValid === false ?
-      <ErrorDiv>
-        <ErrMsg role='alert'>Please Select A Size</ErrMsg>
-      </ErrorDiv>
-      : null}
       <p><strong>Size: {sizeSelected}</strong></p>
       <Selector
         id ='sizes'
@@ -109,11 +104,16 @@ function Dropdowns () {
         <option value='' disabled hidden>Select Size</option>
         {Object.keys(sizeAndQty).map((size, key) => {
           return (
-              <option value={size} key={key}>{size}</option>
-          )
+            <option value={size} key={key}>{size}</option>
+            )
           })}
       </Selector>
       {renderQty()}
+      {cartValid === false ?
+      <ErrorDiv>
+        <ErrMsg role='alert'>Please Select A Size</ErrMsg>
+      </ErrorDiv>
+      : null}
       <CartDiv>
         {sizeAndQty[sizeSelected] === 0 ?
         <NoStockMsg>The items with the selected options is out of stock.</NoStockMsg>
