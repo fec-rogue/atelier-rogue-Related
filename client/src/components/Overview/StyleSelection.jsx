@@ -68,6 +68,7 @@ const StyleCircle = styled.li`
 
 const StyleColor = styled.div`
   border-radius: 100px;
+  border: 0.5px solid white;
   padding: 3px;
   width: 50px;
   height: 50px;
@@ -83,7 +84,7 @@ const StyleColor = styled.div`
     border: 0.5px solid white;
   }
   &.selected{
-    border: 1px solid white;
+    border: 2px solid white;
     transform: scale(1.2);
     transition: all ease-in-out 0.03s;
     box-shadow: 0 4px 2px -2px gray;

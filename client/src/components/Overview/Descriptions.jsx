@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import DropdownsTest from './DropdownsTest.jsx';
+import Dropdowns from './Dropdowns.jsx';
 import StyleSelection from './StyleSelection.jsx'
 import {PropIdContext} from '../App.jsx';
 import {DescriptionsContext} from './Overview.jsx';
@@ -50,7 +50,7 @@ function Descriptions() {
     <SizeAndColor>
       <p><strong>Color: </strong>{displayed.name}</p>
       <StyleSelection/>
-      <DropdownsTest/>
+      <Dropdowns/>
     </SizeAndColor>
     <DescAccordion>
       <div>
@@ -97,7 +97,8 @@ const AvgBtn = styled.button`
   border: none;
   background: none;
   &:hover {
-    color: gray
+    color: gray;
+    cursor: pointer;
   }
 `;
 const Name = styled.h2`

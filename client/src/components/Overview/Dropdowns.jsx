@@ -10,24 +10,26 @@ function Dropdowns () {
   const [sizeAndQty, setSizeAndQty] = useState({});
   const [sizeSelected, setSizeSelected] = useState('');
   const [qtySelected, setQtySelected] = useState('');
-  const [skuSelected, setSku] = useState('');
+  const [sku, setSku] = useState([]);
   const [cartValid, setCartValid] = useState(true);
   const [fave, setFave] = useState([]);
   // going to need a cache/local storage to keep track of which items have already been faved
 
   useEffect(() => {
     var sizeQty = {};
+    var skus = [];
     for (var props in displayed.skus) {
       if (sizeQty.hasOwnProperty(displayed.skus[props].size)) {
         sizeQty[displayed.skus[props].size] += displayed.skus[props].quantity;
       } else {
         sizeQty[displayed.skus[props].size] = displayed.skus[props].quantity;
       }
+      skus.push(props);
     };
     setSizeAndQty(sizeQty);
     setQtySelected('');
     setSizeSelected('');
-    setSku('');
+    setSku(skus);
   }, [displayed]);
 
   // updates size selected by user in size dropdown
@@ -51,13 +53,10 @@ function Dropdowns () {
      setCartValid(false);
     } else {
       setCartValid(true);
-      console.log('added to cart');
-      console.log('displayed:', displayed);
-      console.log('sizeSelected:' ,sizeSelected);
-      console.log('qtySelected: ', qtySelected);
+      let skuId = Object.keys(sizeAndQty).indexOf(sizeSelected);
       /*
-      axios.post('/cart',)
-
+      axios.post('/cart',{sku_id: sku[skuId]})
+      .catch((err) => console.log(err))
       */
     }
   }
@@ -93,7 +92,8 @@ function Dropdowns () {
       </Selector>)
   }
 
-  return(
+  return (Object.keys(displayed).length === 0) ?
+  null :
     <SizeQtyDiv>
       {cartValid === false ?
       <ErrorDiv>
@@ -125,7 +125,7 @@ function Dropdowns () {
         </FaveBtn>
       </CartDiv>
     </SizeQtyDiv>
-  )
+
 }
 
 

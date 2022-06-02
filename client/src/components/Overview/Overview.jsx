@@ -42,7 +42,7 @@ function Overview() {
   return(
     <div>
       <Cart/>
-      <AnnouncementHeader>SITE-WIDE ANNOUNCEMENT</AnnouncementHeader>
+      <AnnouncementHeader>FREE SHIPPING ON ORDERS OVER $100</AnnouncementHeader>
       <DescriptionsContext.Provider
       value={{displayed, setDisplayed, styles, setProductStyles, expanded, setExpanded, curPhoto, setCurPhoto}}>
       {expanded ?
@@ -76,18 +76,23 @@ const WebsiteHeader = styled.h1`
 const AnnouncementHeader = styled.h2`
   display: flex;
   justify-content: center;
+  margin: 0;
+  margin-bottom: 30px;
+  padding: 5px;
+  background-color: white;
 `;
 
 const OverviewComps = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  margin: 0;
+
 `;
 
 const GalleryDiv = styled.div`
-  width: 60%;
+  width: 50%;
+  margin-right: 30px;
 `;
 const DescriptionsDiv = styled.div`
-  width: 30%;
+  width: 20%;
 `;
