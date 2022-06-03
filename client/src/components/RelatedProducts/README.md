@@ -20,7 +20,7 @@ Atelier Rogue is a front-end e-commerce platform that utilizes HackReactor's leg
 
 Features:
 
-- Dynamically displays current style selected from HR
+- Dynamically render product selected from HackReactor's legacy server API
   Image gallery carousel with the ability to zoom and expand the photo
   Styles Selector dynamically lists out styles based on the item
   Size Selector dynamically fills out based on product
