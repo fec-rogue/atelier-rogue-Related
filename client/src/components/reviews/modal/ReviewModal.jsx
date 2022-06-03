@@ -13,7 +13,7 @@ const Modal = styled.div`
   z-index: 1;
   justifyContent: undefined;
   alignItems: undefined;
-  background-color: #dee2e6;
+  background-color: #FFF;
   border-radius: 12px;
   border: 3px solid black;
   position: absolute;
