@@ -17,7 +17,7 @@ const PercentageBars = () => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/reviews/meta', {params: {product_id: 40351}})
+    axios.get('/reviews/meta', {params: {product_id: 40351}})
          .then((results) => {
            let total = 0;
            let array = [];
