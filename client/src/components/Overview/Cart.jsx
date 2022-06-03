@@ -7,6 +7,7 @@ import { FiSun, FiMoon } from 'react-icons/fi';
 import {DescriptionsContext} from './Overview.jsx';
 // import rouge from './Logo/rogue.png';
 
+
 function Cart({handleThemeChange, currentTheme}) {
   const {cartItem} = useState(0);
   const [items, setItems] = useState([]);
@@ -32,7 +33,7 @@ function Cart({handleThemeChange, currentTheme}) {
   return(
     <BannerContainer>
       <WebTitle>
-        <Logo src={'/client/src/components/Overview/Logo/rogue.png'}></Logo>
+        <Logo src={'https://res.cloudinary.com/datlfgeri/image/upload/v1654214831/rogue_z67mzx.png'}></Logo>
       </WebTitle>
       <CartContainer>
         <ThemeChanger onClick={handleThemeChange} >
@@ -51,7 +52,7 @@ function Cart({handleThemeChange, currentTheme}) {
 export default Cart;
 
 const Logo = styled.img`
-
+  width: 120px;
 `;
 const AccountDiv = styled.div`
   margin-right: 15px;

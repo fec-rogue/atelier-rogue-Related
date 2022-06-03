@@ -101,7 +101,7 @@ const Outfits = () => {
           setOutfit(outfit);
           let copy = [...urls];
           copy.push(newOutfit.image);
-          setUrls(copy)
+          setUrls(copy);
         }
   }
 
@@ -116,7 +116,7 @@ const Outfits = () => {
 
       {outfit.length > 0 && allRatings ?
         outfit.map((item, index) => {
-          console.log('url', urls);
+          // console.log('url', urls);
           return (
             <IndividualOutfit key={index}>
               {index <= max && index >= min &&
