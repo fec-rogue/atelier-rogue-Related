@@ -228,7 +228,7 @@ const Reviews = () => {
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/reviews', {params: {id: 40351, count: count}})
+    axios.get('/reviews', {params: {id: 40351, count: count}})
       .then((results) => {
         if (sort === "Newest") {
           results.data.results.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -272,7 +272,7 @@ const Reviews = () => {
   }
 
   const handleYesClick = (e, id) => {
-    axios.put('http://localhost:3000/reviews/helpful', {}, {params: {review_id: id}})
+    axios.put('/reviews/helpful', {}, {params: {review_id: id}})
       .then((response) => {
 
       })
