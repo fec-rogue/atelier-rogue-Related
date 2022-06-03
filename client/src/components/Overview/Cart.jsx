@@ -9,10 +9,13 @@ import {DescriptionsContext} from './Overview.jsx';
 
 
 function Cart({handleThemeChange, currentTheme}) {
-  const {cartItem} = useState(0);
+  const {cartItem} = useContext(DescriptionsContext);
   const [items, setItems] = useState([]);
   const [isActive, setActive] = useState(false);
 
+  useEffect(() => {
+    console.log(cartItem)
+  }, [cartItem])
   /*
   useEffect(() => {
     axios.get('/cart')

@@ -53,7 +53,9 @@ function Dropdowns () {
     } else {
       setCartValid(true);
       let skuId = Object.keys(sizeAndQty).indexOf(sizeSelected);
-      setCartItem(cartItem+qtySelected);
+      console.log('inCart rn: ', cartItem);
+      console.log('qty selected: ', qtySelected);
+      setCartItem(parseInt(cartItem)+parseInt(qtySelected));
       /*
       axios.post('/cart',{sku_id: sku[skuId]})
       .catch((err) => console.log(err))
