@@ -7,6 +7,7 @@ import Ratings from './Ratings.jsx';
 import Relevance from './Relevance.jsx';
 import YesButton from './YesButton.jsx';
 import ReviewModal from './modal/ReviewModal.jsx';
+import dateFormat from 'dateformat';
 
 
 const Test = styled.div`
@@ -14,8 +15,9 @@ const Test = styled.div`
   flex-direction: row;
   font-size: 16px;
   overflow: auto;
-  max-height: 1000px;
+  max-height: 600px;
   max-width: 1250px;
+  margin-bottom: 200px;
   `;
 
 const ReviewContainer = styled.div`
@@ -32,7 +34,7 @@ const StarDate = styled.div`
 const ReviewBox = styled.div`
   border-bottom: 1px solid;
   width: 600px;
-  max-height: 300px;
+  max-height: 500px;
 `;
 
 const Title = styled.div`
@@ -198,16 +200,23 @@ const AddReview = styled.button`
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  // justify-content: center;
+  justify-content: space-between;
   flex-direction: row;
   margin: auto;
-  width: 60%;
+  width: 1400px;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: left;
   padding-left: 20px;
+`;
+
+const Pictures = styled.img`
+  height: 50px;
+  margin-right: 10px;
 `;
 
 
@@ -230,6 +239,7 @@ const Reviews = () => {
   useEffect(() => {
     axios.get('/reviews', {params: {id: 40351, count: count}})
       .then((results) => {
+        console.log(results.data)
         if (sort === "Newest") {
           results.data.results.sort((a, b) => new Date(b.date) - new Date(a.date));
         }
@@ -305,7 +315,7 @@ const Reviews = () => {
                   <ReviewBox key={index}>
                     <StarDate>
                     {Stars(review.rating)}
-                    <section>{review.reviewer_name}, {review.date}></section>
+                    <section>{review.reviewer_name}&nbsp;&nbsp;{dateFormat(review.date, "mmmm, dS, yyyy")}</section>
                     </StarDate>
                     <Title>{review.summary === '' ? 'No Title' : review.summary}</Title>
                     <Body>{review.body}</Body>
@@ -316,6 +326,9 @@ const Reviews = () => {
                         <Response>{review.response}</Response>
                       </ResponseBlock>
                       : null}
+                      {review.photos.map((photo, index) =>
+                        <Pictures src={review.photos[index].url} key={index}></Pictures>
+                      )}
                     <Interactables>
                       <HelpfulTag>Was this review helpful?  </HelpfulTag>
                       <YesButton id={review.review_id} count={review.helpfulness} />

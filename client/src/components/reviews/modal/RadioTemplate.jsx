@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const RadioContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   flex-direction: row;
   padding: 10px 10px 0 10px;
 `;
@@ -20,16 +20,21 @@ const CheckContainer = styled.span`
 display: flex;
 flex-direction: column;
 justify-content: center;
+width: ${90 / 5}%;
 `;
-// width: ${5 / 90}%;
 
 const Radio = styled.input`
   margin: auto;
+  padding-bottom: 10px;
   width: 100%;
 `;
 
 const RadioLabel = styled.label`
+display: flex;
+justify-content: center;
+ margin: auto;
  font-size: 13px;
+ width: 100%;
  `;
 //  width: ${5 / 90}%;
 
