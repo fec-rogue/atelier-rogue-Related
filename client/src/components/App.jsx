@@ -20,12 +20,12 @@ const FourOhFour = lazy(() => import("./404.jsx"));
 // useContext to set default product_id across all pages
 
 export const PropIdContext = createContext();
-export const FavoriteContext = createContext();
 
 const App = () => {
   const [id, setId] = useState('40351');
   const [allRatings, setAllRatings] = useState(0);
-    const [curPhoto, setCurPhoto] = useState('');
+  const [curPhoto, setCurPhoto] = useState('');
+  const [styleIndx, setStyleIndx] = useState(0);
 
   const storedTheme = localStorage.getItem('theme');
   if (!storedTheme) {
@@ -66,10 +66,10 @@ const App = () => {
       if(window.localStorage.theme === 'dark') {
         return {
           "body": '#363537',
-          "text": '#FAFAFA',
+          "color": '#e3dfd9',
           "toggleBorder": '#6B8096',
           "fontFamily": "'Montserrat', sans-serif",
-          "backgroundColor": '#999'
+          "backgroundColor": '#141617'
         }
       }
 
@@ -85,10 +85,9 @@ const App = () => {
 
   return (
     <AppContainer style={(themeStyle())}>
-
-      <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings, curPhoto, setCurPhoto}}>
+      <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings, curPhoto, setCurPhoto, styleIndx, setStyleIndx}}>
         <div>
-          <Overview />
+          <Overview handleThemeChange={handleThemeChange} currentTheme={currentTheme}/>
         </div>
         <div>
           <RelatedProducts />
@@ -96,9 +95,6 @@ const App = () => {
         <div>
           <Reviews />
         </div>
-        <ThemeChanger onClick={handleThemeChange}>
-          {currentTheme === 'light' ? <FiMoon style={{color: 'teal'}}/> : <FiSun style={{color: 'teal'}}/>}  Theme
-          </ThemeChanger>
       </PropIdContext.Provider>
     </AppContainer>
   )
