@@ -150,7 +150,7 @@ const ReviewModal = ({setModal}) => {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:3000/products/info', {params: {product_id: 40351}})
+    axios.get('/products/info', {params: {product_id: 40351}})
       .then((results) => {
         setName(results.data.name)
       })

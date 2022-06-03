@@ -18,7 +18,7 @@ const YesButton = ({id, count}) => {
 
 
   const handleClick = (e, id) => {
-    axios.put('http://localhost:3000/reviews/helpful', {}, {params: {review_id: id}})
+    axios.put('/reviews/helpful', {}, {params: {review_id: id}})
       .then(() => {
         setClicked(true);
       })
