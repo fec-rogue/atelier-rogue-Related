@@ -22,13 +22,6 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       setCurrentIndex(currentIndex === max ? 0 : currentIndex + 1)
     };
 
-    const handleClick =(e) => {
-
-      console.log('clicked');
-      console.log(e.target.key)
-      // setId(eachProduct.product_id);
-
-    }
 
     return (
       <CardsWrapper>
