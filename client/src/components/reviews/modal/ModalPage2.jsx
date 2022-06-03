@@ -100,7 +100,7 @@ const ModalPage2 = ({allCharacteristics, setAllCharacteristics, setNext, setModa
     ) {
       alert('please fill out either summary or body before submitting');
     } else {
-      axios.post('http://localhost:3000/reviews', allCharacteristics)
+      axios.post('/reviews', allCharacteristics)
       .then(() => {
         alert('added successfully!')
         setModal(false);
