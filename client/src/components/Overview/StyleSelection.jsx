@@ -17,10 +17,6 @@ function StyleSelection() {
       setCurPhoto(0);
       let pos = ind*4 + key;
       setStyleIndx(pos);
-<<<<<<< HEAD
-
-=======
->>>>>>> main
     }
   };
    // react doesn't like that setDisplayed is being set with the "icon" variable from the styles array

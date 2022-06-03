@@ -26,10 +26,6 @@ const App = () => {
   const [allRatings, setAllRatings] = useState(0);
   const [curPhoto, setCurPhoto] = useState('');
   const [styleIndx, setStyleIndx] = useState(0);
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 
   const storedTheme = localStorage.getItem('theme');
   if (!storedTheme) {
@@ -89,10 +85,6 @@ const App = () => {
 
   return (
     <AppContainer style={(themeStyle())}>
-<<<<<<< HEAD
-
-=======
->>>>>>> main
       <PropIdContext.Provider value={{id, setId, allRatings, setAllRatings, curPhoto, setCurPhoto, styleIndx, setStyleIndx}}>
         <div>
           <Overview handleThemeChange={handleThemeChange} currentTheme={currentTheme}/>
