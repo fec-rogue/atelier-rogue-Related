@@ -3,10 +3,12 @@ import { useState, useEffect, useContext } from "react";
 import styled from 'styled-components';
 import CardEntry from './CardEntry.jsx';
 import { GrCaretPrevious,  GrCaretNext } from "react-icons/gr";
+import { PropIdContext } from '../../App.jsx';
 
 const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRatings,
   setShowModal, setSelectedid}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const {setId} = useContext(PropIdContext);
     const display = relatedProductsStyles.slice(currentIndex, (currentIndex + 4));
     const length = relatedProductsStyles.length;
     const max = currentIndex + 3;
@@ -19,6 +21,14 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
     const nextArrow = () => {
       setCurrentIndex(currentIndex === max ? 0 : currentIndex + 1)
     };
+
+    const handleClick =(e) => {
+
+      console.log('clicked');
+      console.log(e.target.key)
+      // setId(eachProduct.product_id);
+
+    }
 
     return (
       <CardsWrapper>
@@ -44,7 +54,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       }
 
       return(
-        <Individualcard key={id}>
+        <Individualcard key={id} onClick={() => {setId(id)}}>
         {index <= max && index >= min && display.length > 0 &&
           <CardEntry
             defaultsStyles={defaultsStyles}
