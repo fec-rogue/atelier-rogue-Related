@@ -29,16 +29,22 @@ function ExpandedView() {
     }
   };
 
+  // get height and width of picture being looked at
   const handleMouseEnter = (e) => {
-    const elem = e.currentTarget;
-    const { width, height } = elem.getBoundingClientRect();
+    const { width, height } = e.currentTarget.getBoundingClientRect();
     setZoomSize([width, height]);
   };
 
 
 
   const handleMouseMove = (e) => {
+    // update cursor position whenever it moves
     const {top, left} = e.currentTarget.getBoundingClientRect();
+
+    // calculate cursor position relative to the image only
+    // e.pageX = horizontal position of mouse in pixels
+    // window.pageXOffset = X coordinate of the left edge of the current viewport. If there is no viewport, the returned value is 0.
+    // left = The returned value is a DOMRect object which is the smallest rectangle which contains the entire element, including its padding and border-width
     const x = e.pageX - left - window.pageXOffset;
     const y = e.pageY - top - window.pageYOffset;
     setPosition([x,y]);
