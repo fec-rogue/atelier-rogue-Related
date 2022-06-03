@@ -13,9 +13,6 @@ function Cart({handleThemeChange, currentTheme}) {
   const [items, setItems] = useState([]);
   const [isActive, setActive] = useState(false);
 
-  useEffect(() => {
-    console.log(cartItem)
-  }, [cartItem])
   /*
   useEffect(() => {
     axios.get('/cart')
