@@ -74,7 +74,7 @@ const RelatedProducts = () => {
   return(
     <RelatedProductsSection>
 
-      <RelatedHeader>Related Products</RelatedHeader>
+      <RelatedHeader >Related Products</RelatedHeader>
       {
         relatedProductsStyles.length > 0 && relatedProductsDetail.length > 0
         && relatedProductsRatings.length > 0 &&
