@@ -6,7 +6,7 @@ import {AiOutlineDelete} from "react-icons/ai";
 const OutfitEntry = ({item, setOutfit, ratings}) => {
   let handleDelete = () => {
     let outfit = JSON.parse(localStorage.getItem('outfit'));
-    let newOutfit = outfit.filter((eachOutfit) => item.id !== eachOutfit.id)
+    let newOutfit = outfit.filter((eachOutfit) => item.image !== eachOutfit.image)
     localStorage.setItem('outfit', JSON.stringify(newOutfit));
     setOutfit(newOutfit);
   }
