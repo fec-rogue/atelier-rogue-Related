@@ -38,6 +38,7 @@ function Overview({handleThemeChange, currentTheme}) {
       }
       setProductStyles(result);
     });
+    setCurPhoto('');
   }, [id]);
 
 

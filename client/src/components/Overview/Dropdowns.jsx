@@ -53,7 +53,7 @@ function Dropdowns () {
     } else {
       setCartValid(true);
       let skuId = Object.keys(sizeAndQty).indexOf(sizeSelected);
-      setCartItem(cartItem+qtySelected);
+      setCartItem(parseInt(cartItem)+parseInt(qtySelected));
       /*
       axios.post('/cart',{sku_id: sku[skuId]})
       .catch((err) => console.log(err))
@@ -206,11 +206,11 @@ const ErrMsg = styled.p`
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   background-color: #9e3533;
-  border-radius: 0;
   color: #fff;
   font-family: DS Trade Gothic,Trade Gothic,sans-serif;
   font-weight: 700;
   padding: 10px 20px;
+  border-radius: 3px;
   font-weight: 400;
 `;
 
