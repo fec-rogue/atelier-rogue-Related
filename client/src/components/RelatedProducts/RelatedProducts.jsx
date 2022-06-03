@@ -27,7 +27,7 @@ const RelatedProducts = () => {
         .catch((err) => {
           console.log('error while getting the data', err)
         })
-    }, [])
+    }, [id])
 
     useEffect(() => {
       //HARD CODE ONE PRODUCT HAS MORE THAN 4 RELATED PRODUCTS TO TEST OUT CAROUSEL
