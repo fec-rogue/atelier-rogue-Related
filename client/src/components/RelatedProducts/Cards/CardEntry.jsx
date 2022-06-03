@@ -74,7 +74,7 @@ const Carditem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-   gap: 20px;
+  gap: 20px;
   background-color: #FFF;
   border-radius: 12px;
   overflow:hidden;

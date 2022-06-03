@@ -6,14 +6,13 @@ import {FavoriteContext} from '../App.jsx';
 import { BsHeartFill } from "react-icons/bs";
 
 function Dropdowns () {
-  const {displayed, setDisplayed} = useContext(DescriptionsContext);
+  const {displayed, cartItem, setCartItem} = useContext(DescriptionsContext);
   const [sizeAndQty, setSizeAndQty] = useState({});
   const [sizeSelected, setSizeSelected] = useState('');
   const [qtySelected, setQtySelected] = useState('');
   const [sku, setSku] = useState([]);
   const [cartValid, setCartValid] = useState(true);
   const [fave, setFave] = useState([]);
-  // going to need a cache/local storage to keep track of which items have already been faved
 
   useEffect(() => {
     var sizeQty = {};
@@ -54,6 +53,7 @@ function Dropdowns () {
     } else {
       setCartValid(true);
       let skuId = Object.keys(sizeAndQty).indexOf(sizeSelected);
+      setCartItem(cartItem+qtySelected);
       /*
       axios.post('/cart',{sku_id: sku[skuId]})
       .catch((err) => console.log(err))

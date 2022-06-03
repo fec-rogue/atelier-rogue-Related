@@ -57,7 +57,7 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
           )
         })}
         </Cardscontainer>
-        { max !== length -1 ?  <NextButton onClick={nextArrow}> <GrCaretNext/> </NextButton>: null }
+        { max !== length -1 ?  <NextButton onClick={nextArrow}> <GrCaretNext style={{color:'blue'}}/> </NextButton>: null }
         </CardsWrapper>
         )
       }
@@ -80,13 +80,12 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       const Individualcard = styled.div`
         width:300px;
         height: 400px;
-
       `
 
       const PrevButton = styled.button`
-      align-items: center;
-      justify-content: center;
-      display: flex;
+        align-items: center;
+        justify-content: center;
+        display: flex;
         position: absolute;
         z-index: 1;
         left:16px;

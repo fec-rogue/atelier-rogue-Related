@@ -10,6 +10,9 @@ import { GrCaretPrevious,  GrCaretNext } from "react-icons/gr";
 const Outfits = () => {
   const {id, setId} = useContext(PropIdContext);
   const {allRatings, setAllRatings} = useContext(PropIdContext);
+  const {curPhoto, setCurPhoto} = useContext(PropIdContext);
+  const {styleIndx, setStyleIndx} = useContext(PropIdContext);
+
   const [overviewData, setOverviewData] = useState([]);
   const [overviewStyles, setOverviewStyles] = useState([]);
 
@@ -26,7 +29,7 @@ const Outfits = () => {
     setCurrent(current === length - 1 ? 0 : current + 1)
   };
 
-  const max = current + 1;
+  const max = current + 3;
   const min = current;
 
   useEffect(() => {
@@ -42,13 +45,15 @@ const Outfits = () => {
   useEffect(() => {
     axios.get(`products/styles?product_id=${id}`)
       .then((res) => {
-        setOverviewStyles(res.data.results[0].photos[0])
+        // console.log(res.data.results[styleIndx].photos[curPhoto]);
+        setOverviewStyles(res.data.results[styleIndx].photos[curPhoto])
       })
       .catch((err) => {
         console.log('error while getting the data', err)
       })
-  }, [])
+  }, [styleIndx, curPhoto])
 
+  const [urls, setUrls] = useState([]);
 
   const addOutfit = () => {
       const imageNotFound = "http://placecorgi.com/260/180";
@@ -63,14 +68,40 @@ const Outfits = () => {
           outfit.push(newOutfit);
           localStorage.setItem("outfit", JSON.stringify(outfit));
           setOutfit(outfit);
+          let copy = [...urls];
+          copy.push(newOutfit.image);
+          setUrls(copy);
         }
         let outfit = localStorage.getItem("outfit");
-        if (outfit.indexOf(`"id":${newOutfit.id}`) === -1) {
+        // console.log('outfit', outfit);
+        // console.log('newOutfitImg: ',newOutfit.image);
+
+
+        // if (outfit.indexOf(`"images":${newOutfit.image}`) === -1) {
+        //   outfit = JSON.parse(outfit);
+        //   outfit.push(newOutfit);
+        //   localStorage.setItem("outfit", JSON.stringify(outfit));
+        //   setOutfit(outfit);
+        //   return;
+        // }
+
+        let copyExists = false;
+        for (let value of urls) {
+          if (value === newOutfit.image) {
+            copyExists = true;
+            break;
+          }
+        }
+        if (copyExists) {
+          alert('item already added');
+        } else {
           outfit = JSON.parse(outfit);
           outfit.push(newOutfit);
           localStorage.setItem("outfit", JSON.stringify(outfit));
           setOutfit(outfit);
-          return;
+          let copy = [...urls];
+          copy.push(newOutfit.image);
+          setUrls(copy);
         }
   }
 
@@ -81,21 +112,26 @@ const Outfits = () => {
 
       <Addoutfit onClick={addOutfit}>Add outfit</Addoutfit>
 
-      <Outfitscontainer style={{ transform: `translateX(-${current * 50}%)`}}>
+      <Outfitscontainer style={{ transform: `translateX(-${current * 25}%)`}}>
 
       {outfit.length > 0 && allRatings ?
-        outfit.map((item, index) => (
-          index <= max && index >= min &&
-          <OutfitEntry
-            key={index}
-            item={item}
-            setOutfit={setOutfit}
-            ratings = {AverageStars(allRatings.ratings)}
-          />
-         ))
+        outfit.map((item, index) => {
+          // console.log('url', urls);
+          return (
+            <IndividualOutfit key={index}>
+              {index <= max && index >= min &&
+              <OutfitEntry
+                key={index}
+                item={item}
+                setOutfit={setOutfit}
+                ratings = {AverageStars(allRatings.ratings)}
+              />}
+          </IndividualOutfit >
+          )
+        })
         : ''}
       </Outfitscontainer>
-      { max !== length -1 ?  <NextButton onClick={nextArrow}><GrCaretNext /> </NextButton>: null }
+      { current !== max ?  <NextButton onClick={nextArrow}><GrCaretNext /> </NextButton>: null }
     </OutfitsWrapper>
   )
 }
@@ -117,6 +153,8 @@ const Outfitscontainer = styled.div`
 `;
 
 const IndividualOutfit = styled.div`
+  display: flex;
+  flex-direction: row;
   width:300px;
   height: 400px;
 
@@ -225,7 +263,7 @@ margin-bottom: 25px;
   }
   &:focus {
   outline: none;
-  border: 2px solid #4285F4;
+  border: 2px solid #008c75;
   }
   &:not(:disabled) {
   box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
