@@ -69,7 +69,7 @@ const RelatedProducts = () => {
       if(selectedid.features) {
         setTwoCardsArray([defaultidinfo, selectedid]);
       }
-    }, [selectedid])
+    }, [selectedid]);
 
   return(
     <RelatedProductsSection>
