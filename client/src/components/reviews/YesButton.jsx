@@ -1,7 +1,10 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { PropIdContext } from '../App.jsx';
+
+
 
 
 const YesTag = styled.span`
@@ -11,6 +14,7 @@ const YesTag = styled.span`
 
 
 const YesButton = ({id, count}) => {
+  // const {id, setId} = useContext(PropIdContext);
   const [clicked, setClicked] = useState(false);
   const reviewId = id;
   let yesCount = count;

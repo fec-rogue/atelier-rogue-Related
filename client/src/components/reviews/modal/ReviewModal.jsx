@@ -1,11 +1,13 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import DynamicStars from '../../stars/DynamicStars.jsx';
 import DisplayOverallRating from '../DisplayOverallRating.jsx';
 import Characteristics from './Characteristics.jsx';
 import ModalPage2 from './ModalPage2.jsx';
+import { PropIdContext } from '../../App.jsx';
+
 
 const Modal = styled.div`
   flex: 1;
@@ -13,7 +15,7 @@ const Modal = styled.div`
   z-index: 1;
   justifyContent: undefined;
   alignItems: undefined;
-  background-color: #dee2e6;
+  background-color: #FFF;
   border-radius: 12px;
   border: 3px solid black;
   position: absolute;
@@ -115,6 +117,7 @@ width: 80px;
 
 const ReviewModal = ({setModal}) => {
 
+  const {id, setId} = useContext(PropIdContext);
   const [name, setName] = useState('');
   const [reviewStar, setReviewStar] = useState(0);
   const [productId, setProductId] = useState(40344);
@@ -122,7 +125,7 @@ const ReviewModal = ({setModal}) => {
   const [recommend, setRecommend] = useState('');
   const [reset, setReset] = useState(false);
   const [allCharacteristics, setAllCharacteristics] = useState({
-    product_id: 40351,
+    product_id: id,
     rating: -1,
     email: '',
     name: '',
