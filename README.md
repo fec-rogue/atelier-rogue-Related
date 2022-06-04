@@ -53,7 +53,8 @@ GIF OF USAGE
       - Price
       - Start Ratings (# of Reviews)
   - A pull up feature of comparison Modal
-
+  
+### Adding Outfits:
 
 - Outfit cards allow users to save and track individual products based on their interest.This component includes:
 
@@ -62,7 +63,6 @@ GIF OF USAGE
     - The list should persist per customer even if they exit the website and return later
   - Remove card icon('X') that removes the product from the list
 
-### Adding Outfits:
 
 // link your git
 
