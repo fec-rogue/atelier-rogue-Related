@@ -1,8 +1,10 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import ComparisonBar from './ComparisonBar.jsx';
+import { PropIdContext } from '../App.jsx';
+
 
 
 const BarContainer = styled.div`
@@ -12,12 +14,13 @@ const BarContainer = styled.div`
 
 const PercentageBars = () => {
 
+  const {id, setId} = useContext(PropIdContext);
   const [ratings, setRatings] = useState([]);
   const [highest, setHighest] = useState(0);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    axios.get('/reviews/meta', {params: {product_id: 40351}})
+    axios.get('/reviews/meta', {params: {product_id: id}})
          .then((results) => {
            let total = 0;
            let array = [];
@@ -32,7 +35,7 @@ const PercentageBars = () => {
          .then((total) => {
            setTotal(total);
          })
-  }, [])
+  }, [id])
 
   return (
     <BarContainer>
