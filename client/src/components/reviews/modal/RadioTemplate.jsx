@@ -25,7 +25,6 @@ width: ${90 / 5}%;
 
 const Radio = styled.input`
   margin: auto;
-  padding-bottom: 10px;
   width: 100%;
 `;
 

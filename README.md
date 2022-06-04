@@ -9,12 +9,12 @@
 
 Atelier Rogue is a front-end e-commerce platform that utilizes HackReactor's legacy API as a server to seed the website with product information. React hooks and styled components were used to render an interactive and responsive platform. The three main features of the website are:
 
-# Overview
+## Overview
 
-## Contributor: Peggy Tran
+### Contributor: Peggy Tran
 
-![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
-![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)]
+[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/pegaatron)
 
 ### Product Overview
 
@@ -32,17 +32,15 @@ Features:
 BLURB
 GIF OF USAGE
 
-# Related Products:
 
-## Contributor: Jessica Yu
+## Related Products:
 
-![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
-![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)
+### Contributor: Jessica Yu
 
-// link your git
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jessicaleyu/)
+[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yulejessica)
 
-# Ratings and Reviews:
-
+### Related Products:
 - Related Products Cards displays product cards of similar related items that the user might like:
   and the components includes features of:
 
@@ -64,17 +62,23 @@ GIF OF USAGE
     - The list should persist per customer even if they exit the website and return later
   - Remove card icon('X') that removes the product from the list
 
+### Adding Outfits:
+
+// link your git
+
+## Ratings and Reviews:
+
 GIF OF USAGE
 
-## Contributor: Joshua Ham
+### Contributor: Joshua Ham
 
-![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
-![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joshua-ham-9433a2234/)
+[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/joshuaju12)
 
 BLURB
 GIF OF USAGE
 
-## Getting Started
+### Getting Started
 
 - - short video
 
@@ -92,9 +96,9 @@ GIF OF USAGE
 ### Frontend Development
 
 ![StyledComponents](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
-React, Axios
 ![css3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
 ### Backend Development
 
