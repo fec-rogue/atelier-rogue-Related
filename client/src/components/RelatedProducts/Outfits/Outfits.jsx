@@ -40,12 +40,11 @@ const Outfits = () => {
       .catch((err) => {
         console.log('error while getting the data', err)
       })
-  }, [])
+  }, [id])
 
   useEffect(() => {
     axios.get(`products/styles?product_id=${id}`)
       .then((res) => {
-        // console.log(res.data.results[styleIndx].photos[curPhoto]);
         setOverviewStyles(res.data.results[styleIndx].photos[curPhoto])
       })
       .catch((err) => {
@@ -73,17 +72,6 @@ const Outfits = () => {
           setUrls(copy);
         }
         let outfit = localStorage.getItem("outfit");
-        // console.log('outfit', outfit);
-        // console.log('newOutfitImg: ',newOutfit.image);
-
-
-        // if (outfit.indexOf(`"images":${newOutfit.image}`) === -1) {
-        //   outfit = JSON.parse(outfit);
-        //   outfit.push(newOutfit);
-        //   localStorage.setItem("outfit", JSON.stringify(outfit));
-        //   setOutfit(outfit);
-        //   return;
-        // }
 
         let copyExists = false;
         for (let value of urls) {
