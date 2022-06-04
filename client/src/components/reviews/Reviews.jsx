@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Stars from '../stars/Stars.jsx';
@@ -8,6 +8,8 @@ import Relevance from './Relevance.jsx';
 import YesButton from './YesButton.jsx';
 import ReviewModal from './modal/ReviewModal.jsx';
 import dateFormat from 'dateformat';
+import { PropIdContext } from '../App.jsx';
+
 
 
 const Test = styled.div`
@@ -222,6 +224,7 @@ const Pictures = styled.img`
 
 const Reviews = () => {
 
+  const {id, setId} = useContext(PropIdContext);
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(1000);
   const [displayCount, setDisplayCount] = useState(2);
@@ -237,9 +240,8 @@ const Reviews = () => {
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    axios.get('/reviews', {params: {id: 40351, count: count}})
+    axios.get('/reviews', {params: {id: id, count: count}})
       .then((results) => {
-        console.log(results.data)
         if (sort === "Newest") {
           results.data.results.sort((a, b) => new Date(b.date) - new Date(a.date));
         }
@@ -275,7 +277,7 @@ const Reviews = () => {
       .then((object) => {
         setFilterState(object);
       })
-  }, [filters, sort]);
+  }, [filters, sort, id]);
 
   const handleMore = (e) => {
     setDisplayCount(displayCount + 2);
