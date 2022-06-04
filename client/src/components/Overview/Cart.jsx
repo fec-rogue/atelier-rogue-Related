@@ -26,9 +26,6 @@ function Cart({handleThemeChange, currentTheme}) {
 
   // onClick open up modal showing items within bag and sub total
   // have non functioning buttons that allow users to checkout
-  const handleBagClick = () => {
-
-  }
 
   return(
     <BannerContainer>
