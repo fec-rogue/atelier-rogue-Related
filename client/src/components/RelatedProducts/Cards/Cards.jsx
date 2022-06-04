@@ -22,7 +22,6 @@ const Cards = ({relatedProductsStyles, relatedProductsDetail, relatedProductsRat
       setCurrentIndex(currentIndex === max ? 0 : currentIndex + 1)
     };
 
-
     return (
       <CardsWrapper>
 
