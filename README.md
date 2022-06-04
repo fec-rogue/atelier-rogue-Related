@@ -53,7 +53,7 @@ GIF OF USAGE
       - Price
       - Start Ratings (# of Reviews)
   - A pull up feature of comparison Modal
-  - Conditionally rendered scroll buttons
+
 
 - Outfit cards allow users to save and track individual products based on their interest.This component includes:
 
