@@ -64,7 +64,6 @@ GIF OF USAGE
   - Remove card icon('X') that removes the product from the list
 
 
-// link your git
 
 ## Ratings and Reviews:
 
